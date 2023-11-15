@@ -1,12 +1,36 @@
 <template>
-  <RouterLink to="/">Beranda</RouterLink>
-  <RouterLink to="/profil-desa">Profil Desa</RouterLink>
-  <RouterLink to="/pemerintah-desa">Pemerintah Desa</RouterLink>
-  <RouterLink to="/informasi">Informasi</RouterLink>
-  <RouterLink to="/media">Media</RouterLink>
-  <RouterLink to="/destinasi">Destinasi</RouterLink>
-  <RouterLink to="/idm">IDM</RouterLink>
-  <RouterLink to="/data-desa">Data Desa</RouterLink>
+  <div class="menu">
+    <Navbar />
+  </div>
 
-  <RouterView />
+  <div class="main">
+    <RouterView />
+  </div>
 </template>
+
+<script>
+import Navbar from './components/Navbar.vue'
+
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+}
+</style>
+
+<style scoped>
+.menu {
+  background-color: #003366;
+  line-height: 2;
+  padding: 10px;
+}
+.main {
+  padding: 10px;
+}
+</style>
