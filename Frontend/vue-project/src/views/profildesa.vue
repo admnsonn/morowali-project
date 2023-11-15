@@ -1,3 +1,3 @@
 <template>
-    <h1>sdssda</h1>
+    <h1>Profil</h1>
 </template>
