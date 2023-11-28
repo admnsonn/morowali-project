@@ -5,6 +5,7 @@ import (
 	servicekreativitas "backendpgx7071/service/serviceKreativitas"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
+	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
 	"log"
 	"os"
@@ -15,8 +16,8 @@ import (
 )
 
 func NewConnect() *pgxpool.Pool {
-	databaseUrl := "postgres://postgres:123123@localhost:5432/morowali"
-	// databaseUrl := "postgres://postgres:boyang123@morodb.cmwu6s1vldt3.ap-southeast-1.rds.amazonaws.com:5432"
+	// databaseUrl := "postgres://postgres:123123@localhost:5432/morowali"
+	databaseUrl := "postgres://postgres:boyang123@morodb.cmwu6s1vldt3.ap-southeast-1.rds.amazonaws.com:5432/morowali"
 
 	config, err := pgxpool.ParseConfig(databaseUrl)
 	if err != nil {
@@ -39,6 +40,7 @@ func NewConnect() *pgxpool.Pool {
 	servicewisata.InitiateDB(db)
 	servicepotensidesa.InitiateDB(db)
 	servicekreativitas.InitiateDB(db)
+	servicewilayahdesa.InitiateDB(db)
 
 	return db
 }

@@ -27,7 +27,7 @@ func SemuaBerita(c *gin.Context) {
 	var id_desa int
 
 	desa := `
-		select id_desa from desa d where nama_desa = 'Morowali'
+		select id_desa from dev.desa d where nama_desa = 'Morowali'
 	`
 
 	err = tx.QueryRow(ctx, desa).Scan(&id_desa)
@@ -51,7 +51,7 @@ func SemuaBerita(c *gin.Context) {
 		a.foto_berita,
 		b.kategori
 	FROM
-		berita a, kategori_berita b
+		dev.berita a, dev.kategori_berita b
 	WHERE
 		a.kategori_id = b.id_kategori_berita
 		AND a.desa_id = $1
