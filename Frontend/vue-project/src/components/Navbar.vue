@@ -32,7 +32,7 @@
                 <router-link to="/sejarah-desa" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
               </li>
               <li>
-                <router-link to="/wilayah-desa" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
+                <router-link to="/wilayah" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
               </li>
               <li>
                 <router-link to="/potensi-desa" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
