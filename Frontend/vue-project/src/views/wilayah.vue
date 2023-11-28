@@ -5,6 +5,7 @@
         <a class="btn btn-primary" href="" role="button">Profil Desa</a>
       </div>
     </div>
+    <div class="di"></div>
   </template>
   
   <style scoped>
