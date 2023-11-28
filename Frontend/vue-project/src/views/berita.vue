@@ -14,24 +14,17 @@
                     :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
                     <!-- Display the data here -->
 
-                    <div class="row">
-                        <!-- INI UNTUK GAMBAR PADA MOBILE -->
-                        <div class="col-12 d-md-none mb-4">
-                            <img src="~@/assets/Artikel.png" alt="Latest Image" class="img-fluid" />
-                        </div>
-
-                        <!-- Kolom untuk teks pada kedua ukuran layar -->
-                        <div class="col-md-6 order-md-1">
-                            <div class="text-center text-md-start">
-                                <!-- Judul untuk tampilan mobile -->
-                                <h2 class="mb-3 d-md-none warna-judul-artikel">
-                                    {{ item.judul_potensi }}
-                                </h2>
-                                <!-- Container untuk judul pada tampilan desktop -->
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Gambar berita -->
+                                <img src="~@/assets/Artikel.png" alt="Gambar Berita" class="img-fluid">
+                            </div>
+                            <div class="col-md-6">
                                 <div class="d-none d-md-block">
-                                    <h1 class="mb-2 warna-judul-artikel">
+                                    <h2 class="mb-2 warna-judul-artikel">
                                         {{ item.judul_potensi }}
-                                    </h1>
+                                    </h2>
                                 </div>
                                 <h5 class="mb-4">{{ item.sub_judul }}</h5>
                                 <h5 class="mb-4">{{ item.date }}</h5>
@@ -41,13 +34,9 @@
                                 </button>
                             </div>
                         </div>
-
-                        <!-- INI UNTUK GAMBAR PADA DESKTOP -->
-                        <div class="col-md-6 order-md-2 d-none d-md-block">
-                            <img src="~@/assets/Artikel.png" alt="Latest Image" class="img-fluid" />
-                        </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Pagination -->
@@ -152,16 +141,16 @@ export default {
                 data: [
                     {
                         id_potensi: 1,
-                        judul_potensi: "Pertanian Organik",
-                        date: "28-04-2001",
+                        judul_potensi: "KKP Tangkap 3 Nelayan Pelaku Bom Ikan di Morowali Sulawesi Tengah",
+                        date: "26-12-2023",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pengembangan pertanian organik di daerah dengan tanah subur.",
                         foto_potensi_desa: "gambar1.jpg",
-                        sub_judul: "Deskripsi tambahan untuk potensi desa 1",
+                        sub_judul: "Deskripsi tambahan untuk berita desa 1",
                     },
                     {
                         id_potensi: 2,
-                        judul_potensi: "Pemberdayaan Wanita",
+                        judul_potensi: "KKP Berhasil Amankan Tiga Pelaku Bom Ikan di Morowali",
                         date: "28-04-2001",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Program pelatihan untuk pemberdayaan ekonomi wanita di desa.",
@@ -170,7 +159,7 @@ export default {
                     },
                     {
                         id_potensi: 3,
-                        judul_potensi: "Usaha Kecil Menengah (UKM)",
+                        judul_potensi: "Polsek Palu Barat, Buru Pelaku Pencurian Sampai di Morowali",
                         date: "28-04-2001",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Dukungan pembinaan UKM di bidang kerajinan tangan.",
@@ -179,7 +168,7 @@ export default {
                     },
                     {
                         id_potensi: 4,
-                        judul_potensi: "Edukasi Anak Muda",
+                        judul_potensi: "Semarak HUT Morowali ke 24, Pemkab Gelar Berbagai Lomba, Turnamen Sepakbola Cup 2023 Dibuka Sekab",
                         date: "28-04-2001",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Program edukasi dan pelatihan keterampilan untuk anak muda.",
@@ -188,7 +177,7 @@ export default {
                     },
                     {
                         id_potensi: 5,
-                        judul_potensi: "Program Lingkungan",
+                        judul_potensi: "Pemkab Morut kolaborasi Kemenkumham Sulteng gali potensi KIK",
                         date: "28-04-2001",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Inisiatif untuk menjaga lingkungan alam sekitar.",
