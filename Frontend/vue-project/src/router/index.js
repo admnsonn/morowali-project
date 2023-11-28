@@ -8,6 +8,7 @@ import IdmView from "../views/idm.vue"
 import InformasiView from "../views/informasi.vue"
 import LoginView from "../views/login.vue"
 import MediaView from "../views/media.vue"
+import PotensiView from "../views/potensi.vue"
 
 const routes = [
     { path: '', component: BerandaView },
@@ -19,6 +20,7 @@ const routes = [
     { path: '/informasi', component: InformasiView },
     { path: '/login', component: LoginView },
     { path: '/media', component: MediaView },
+    { path: '/potensi', component: PotensiView },
 ]
 
 const router = createRouter({
