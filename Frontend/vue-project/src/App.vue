@@ -34,11 +34,11 @@ body {
 .menu {
   background-color: #003366;
   line-height: 2;
-  padding: 10px;
+  
 }
 
 .kaki {
-  margin-bottom: 0;
+  margin-top: auto;
   left: 0;
   width: 100%;
   background-color: #003366;

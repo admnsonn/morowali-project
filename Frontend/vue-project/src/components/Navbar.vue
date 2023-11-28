@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <div class="container">
+    <div className="container">
       <router-link to="/" class="navbar-brand d-flex align-items-center">
         <img src="../assets/logo.png" alt="Logo Desa" height="50" class="me-3" />
         <div>
