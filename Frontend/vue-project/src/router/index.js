@@ -9,6 +9,7 @@ import InformasiView from "../views/informasi.vue"
 import LoginView from "../views/login.vue"
 import MediaView from "../views/media.vue"
 import PotensiView from "../views/potensi.vue"
+import BeritaView from "../views/berita.vue"
 
 const routes = [
     { path: '', component: BerandaView },
@@ -22,7 +23,8 @@ const routes = [
     { path: '/media', component: MediaView },
     { path: '/potensi-desa', component: PotensiView },
     { path: '/sejarah-desa', component: PotensiView },
-    { path: '/wilayah-desa', component: PotensiView },
+    { path: '/potensi-desa', component: PotensiView },
+    { path: '/berita', component: BeritaView },
 ]
 
 const router = createRouter({

@@ -1,16 +1,16 @@
-<template class="template">
-    <div class="centered-form">
-      <div class="form-container">
-        <form class="form">
-          <p class="form-title">Login</p>
-          <div class="input-container">
+<template className="template">
+    <div className="centered-form">
+      <div className="form-container">
+        <form className="form">
+          <p className="form-title">Login</p>
+          <div className="input-container">
             <input type="username" placeholder="Enter Username" />
             <span></span>
           </div>
-          <div class="input-container">
+          <div className="input-container">
             <input type="password" placeholder="Enter password" />
           </div>
-          <button type="submit" class="submit">Login</button>
+          <button type="submit" className="submit">Login</button>
         </form>
       </div>
     </div>
