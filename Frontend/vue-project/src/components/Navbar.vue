@@ -20,8 +20,22 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link router-link-underline white">Beranda</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/profil-desa" class="nav-link router-link-underline white">Profil Desa</router-link>
+          <li class="nav-item dropdown">
+            <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Profil Desa
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <router-link to="/galeri-foto" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
+              </li>
+              <li>
+                <router-link to="/berita" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
+              </li>
+              <li>
+                <router-link to="/artikel" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <router-link to="/berita" class="nav-link router-link-underline white">Pemerintah Desa</router-link>
