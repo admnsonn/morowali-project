@@ -6,14 +6,20 @@
   <div class="main">
     <RouterView />
   </div>
+
+  <div class="kaki">
+    <footerComponent />
+  </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import footerComponent from './components/Footer.vue'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    footerComponent
   }
 }
 </script>
@@ -30,7 +36,11 @@ body {
   line-height: 2;
   padding: 10px;
 }
-.main {
+
+.kaki {
+  background-color: #003366;
+  line-height: 2;
   padding: 10px;
 }
+
 </style>
