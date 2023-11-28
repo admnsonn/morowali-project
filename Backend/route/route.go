@@ -2,6 +2,8 @@ package route
 
 import (
 	serviceberita "backendpgx7071/service/serviceBerita"
+	servicekreativitas "backendpgx7071/service/serviceKreativitas"
+	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	servicewisata "backendpgx7071/service/serviceWisata"
 
@@ -26,6 +28,17 @@ func Routes(router *gin.Engine) {
 	{
 		wisataRoutes.GET("/", servicewisata.Semuawisata)
 		wisataRoutes.GET("/:id", servicewisata.Detailwisata)
+	}
+
+	potensiDesa := router.Group("/potensi_desa")
+	{
+		potensiDesa.GET("/", servicepotensidesa.Semuapotensi_desa)
+		potensiDesa.GET("/:id", servicepotensidesa.Detailpotensi_desa)
+	}
+
+	Kreatifitas := router.Group("/kreatifitas")
+	{
+		Kreatifitas.GET("/", servicekreativitas.Kreatifitas_desa)
 	}
 
 }

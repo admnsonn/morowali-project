@@ -13,20 +13,19 @@ import (
 func Detailwisata(c *gin.Context) {
 
 	type Data_detail_umkm_kontainer struct {
-		ID         int       `json:"id_umkm"`
-		Nama       string    `json:"nama_umkm"`
-		Konten     string    `json:"konten_umkm"`
-		Kategori   string    `json:"kategori_umkm"`
-		KategoriID int       `json:"kategori_umkm_id"`
-		Foto       string    `json:"foto_umkm"`
+		ID         int       `json:"id_wisata"`
+		Nama       string    `json:"nama_wisata"`
+		Konten     string    `json:"konten_wisata"`
+		Kategori   string    `json:"kategori_wisata"`
 		DesaID     int       `json:"desa_id"`
-		NoTelp     string    `json:"no_telp_umkm"`
+		NoTelp     string    `json:"no_telp"`
 		CreatedAt  time.Time `json:"created_at"`
 		CreatedBy  string    `json:"created_by"`
-		UpdatedAt  time.Time `json:"update_at"`
+		UpdatedAt  time.Time `json:"updated_at"`
 		UpdatedBy  string    `json:"updated_by"`
 		LinkLokasi string    `json:"link_lokasi"`
 		Alamat     string    `json:"alamat"`
+		FotoWisata string    `json:"foto_wisata"`
 	}
 
 	id := c.Param("id")
@@ -42,22 +41,21 @@ func Detailwisata(c *gin.Context) {
 
 	query := `
 	select 
-		id_umkm,
-		nama_umkm,
-		konten_umkm,
-		kategori_umkm,
-		kategori_umkm_id,
-		foto_umkm,
-		desa_id,
-		no_telp_umkm,
-		created_at,
-		created_by,
-		update_at,
-		updated_by,
-		link_lokasi,
-		alamat
-	from umkm where id_umkm = $1
-	
+		id_wisata      ,
+		nama_wisata    ,
+		konten_wisata  ,
+		kategori_wisata,
+		desa_id        ,
+		no_telp        ,
+		created_at     ,
+		created_by     ,
+		update_at      ,
+		updated_by     ,
+		link_lokasi    ,
+		alamat         ,
+		foto_wisata    
+	from wisata where id_wisata = $1
+
 	`
 
 	err = tx.QueryRow(ctx, query, id).Scan(
@@ -65,8 +63,6 @@ func Detailwisata(c *gin.Context) {
 		&ambil.Nama,
 		&ambil.Konten,
 		&ambil.Kategori,
-		&ambil.KategoriID,
-		&ambil.Foto,
 		&ambil.DesaID,
 		&ambil.NoTelp,
 		&ambil.CreatedAt,
@@ -75,6 +71,7 @@ func Detailwisata(c *gin.Context) {
 		&ambil.UpdatedBy,
 		&ambil.LinkLokasi,
 		&ambil.Alamat,
+		&ambil.FotoWisata,
 	)
 
 	if err != nil {
