@@ -10,6 +10,7 @@ import LoginView from "../views/login.vue"
 import MediaView from "../views/media.vue"
 import PotensiView from "../views/potensi.vue"
 import WilayahView from "../views/wilayah.vue"
+import BeritaView from "../views/berita.vue"
 
 
 const routes = [
@@ -25,6 +26,7 @@ const routes = [
     { path: '/potensi-desa', component: PotensiView },
     { path: '/sejarah-desa', component: PotensiView },
     { path: '/wilayah', component: WilayahView },
+    { path: '/berita', component: BeritaView },
 ]
 
 const router = createRouter({

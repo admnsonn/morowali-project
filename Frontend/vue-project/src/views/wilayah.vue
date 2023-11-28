@@ -36,7 +36,5 @@
         font-size: 14px; 
         cursor: pointer; 
         border-radius: 30px; 
-
-
     }
   </style>
