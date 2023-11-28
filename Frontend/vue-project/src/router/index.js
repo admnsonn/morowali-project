@@ -11,7 +11,7 @@ import MediaView from "../views/media.vue"
 import PotensiView from "../views/potensi.vue"
 import WilayahView from "../views/wilayah.vue"
 import BeritaView from "../views/berita.vue"
-
+import SejarahView from "../views/sejarah.vue"
 
 const routes = [
     { path: '', component: BerandaView },
@@ -27,6 +27,8 @@ const routes = [
     { path: '/sejarah-desa', component: PotensiView },
     { path: '/wilayah', component: WilayahView },
     { path: '/berita', component: BeritaView },
+    { path: '/sejarah', component: SejarahView },
+
 ]
 
 const router = createRouter({

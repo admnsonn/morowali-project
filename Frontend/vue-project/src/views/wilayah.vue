@@ -99,9 +99,9 @@
       ).addTo(this.map);
         // Edit Marker
         const customIcon = L.icon({
-            iconUrl:'~@/assets/marker.png',
-            iconSize: [16, 16],
-            iconAnchor: [8, 16],
+            iconUrl:'src/assets/marker.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
             popupAnchor: [0, -32],
      }
      );

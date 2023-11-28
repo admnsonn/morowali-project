@@ -29,7 +29,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <router-link to="/sejarah-desa" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
+                <router-link to="/sejarah" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
               </li>
               <li>
                 <router-link to="/wilayah" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
