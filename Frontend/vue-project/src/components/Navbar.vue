@@ -33,7 +33,7 @@
                 <router-link to="/berita" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
               </li>
               <li>
-                <router-link to="/artikel" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
+                <router-link to="/potensi" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
               </li>
             </ul>
           </li>
