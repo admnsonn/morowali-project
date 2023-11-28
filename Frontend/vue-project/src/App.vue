@@ -38,8 +38,7 @@ body {
 }
 
 .kaki {
-  position: fixed;
-  bottom: 0;
+  margin-bottom: 0;
   left: 0;
   width: 100%;
   background-color: #003366;
