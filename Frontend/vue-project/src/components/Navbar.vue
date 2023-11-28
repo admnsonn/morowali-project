@@ -17,9 +17,11 @@
       <div class="collapse navbar-collapse"></div>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <router-link to="/" class="nav-link router-link-underline white">Beranda</router-link>
           </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,22 +29,25 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <router-link to="/galeri-foto" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
+                <router-link to="/sejarah-desa" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
               </li>
               <li>
-                <router-link to="/berita" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
+                <router-link to="/wilayah-desa" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
               </li>
               <li>
-                <router-link to="/potensi" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
+                <router-link to="/potensi-desa" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
               </li>
             </ul>
           </li>
+
           <li class="nav-item">
             <router-link to="/berita" class="nav-link router-link-underline white">Pemerintah Desa</router-link>
           </li>
+
           <li class="nav-item">
             <router-link to="/informasi" class="nav-link router-link-underline white">Informasi</router-link>
           </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,12 +65,26 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <router-link to="/destinasi" class="nav-link router-link-underline white">Destinasi</router-link>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Destinasi
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <router-link to="/umkm" class="dropdown-item router-link-underline white">UMKM</router-link>
+              </li>
+              <li>
+                <router-link to="/wisata" class="dropdown-item router-link-underline white">Wisata</router-link>
+              </li>
+            </ul>
           </li>
+
           <li class="nav-item">
             <router-link to="/idm" class="nav-link router-link-underline white">IDM</router-link>
           </li>
+
           <li class="nav-item">
             <router-link to="/data-desa" class="nav-link router-link-underline white">Data Desa</router-link>
           </li>

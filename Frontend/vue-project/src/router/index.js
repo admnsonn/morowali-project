@@ -20,7 +20,9 @@ const routes = [
     { path: '/informasi', component: InformasiView },
     { path: '/login', component: LoginView },
     { path: '/media', component: MediaView },
-    { path: '/potensi', component: PotensiView },
+    { path: '/potensi-desa', component: PotensiView },
+    { path: '/sejarah-desa', component: PotensiView },
+    { path: '/wilayah-desa', component: PotensiView },
 ]
 
 const router = createRouter({
