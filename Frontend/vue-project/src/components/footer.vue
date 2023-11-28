@@ -1,21 +1,21 @@
 <template>
-    <footer className="footer bg-transparent mt-5">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4 mb-4">
-            <img src="../assets/logo.png" alt="Logo Desa" height="50" className="me-3" />
+    <footer class="footer bg-transparent mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <img src="../assets/logo.png" alt="Logo Desa" height="50" class="me-3" />
             <div>
-              <span className="fw-bold nama-desa text-white">Desa Bahomoleo</span>
-              <span className="sub-text text-white-50">Kab. Morowali</span>
+              <span class="fw-bold nama-desa text-white">Desa Bahomoleo</span>
+              <span class="sub-text text-white-50">Kab. Morowali</span>
             </div>
           </div>
-          <div className="col-lg-8 mb-4">
-            <ul className="nav justify-content-end">
-              <li className="nav-item">
-                <h5 className="nav-link text-white tulisan">Alamat Kantor</h5>
+          <div class="col-lg-8 mb-4">
+            <ul class="nav justify-content-end">
+              <li class="nav-item">
+                <h5 class="nav-link text-white tulisan">Alamat Kantor</h5>
               </li>
-              <li className="nav-item">
-                <h5 className="nav-link text-white tulisan">Profil Desa</h5>
+              <li class="nav-item">
+                <h5 class="nav-link text-white tulisan">Profil Desa</h5>
               </li>
               <!-- Tambahkan menu lainnya sesuai kebutuhan -->
             </ul>

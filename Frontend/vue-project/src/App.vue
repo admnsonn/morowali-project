@@ -1,17 +1,15 @@
-
 <template>
-  <div classNameName="menu">
+  <div class="menu">
     <Navbar />
   </div>
 
-  <div className="main">
+  <div class="main">
     <RouterView />
   </div>
 
-  <div className="kaki">
+  <div class="kaki">
     <footerComponent />
   </div>
-  
 </template>
 
 <script>

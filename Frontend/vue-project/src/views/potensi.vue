@@ -1,65 +1,65 @@
 <template>
   <section>
-    <div className="p-5 text-center bg-adit">
-      <h1 className="mb-3">POTENSI DESA</h1>
+    <div class="p-5 text-center bg-adit">
+      <h1 class="mb-3">POTENSI DESA</h1>
       <button
-        className="btn panjang-tombol-login btn-light me-2 text-tombol"
+        class="btn panjang-tombol-login btn-light me-2 text-tombol"
         @click="fetchData"
       >
         Lihat Terbaru
       </button>
     </div>
 
-    <section v-if="showLatestData" className="py-5 bg-light">
-      <div className="container">
+    <section v-if="showLatestData" class="py-5 bg-light">
+      <div class="container">
         <div
           v-for="item in paginatedData"
           :key="item.id_potensi"
-          className="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow"
-          :className="{ 'with-shadow': isHovered }"
+          class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow"
+          :class="{ 'with-shadow': isHovered }"
           @mouseenter="addShadow"
           @mouseleave="removeShadow"
         >
           <!-- Display the data here -->
 
-          <div className="row">
+          <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
-            <div className="col-12 d-md-none mb-4">
+            <div class="col-12 d-md-none mb-4">
               <img
                 src="~@/assets/Artikel.png"
                 alt="Latest Image"
-                className="img-fluid"
+                class="img-fluid"
               />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
-            <div className="col-md-6 order-md-1">
-              <div className="text-center text-md-start">
+            <div class="col-md-6 order-md-1">
+              <div class="text-center text-md-start">
                 <!-- Judul untuk tampilan mobile -->
-                <h2 className="mb-3 d-md-none warna-judul-artikel">
+                <h2 class="mb-3 d-md-none warna-judul-artikel">
                   {{ item.judul_potensi }}
                 </h2>
                 <!-- Container untuk judul pada tampilan desktop -->
-                <div className="d-none d-md-block">
-                  <h1 className="mb-2 warna-judul-artikel">
+                <div class="d-none d-md-block">
+                  <h1 class="mb-2 warna-judul-artikel">
                     {{ item.judul_potensi }}
                   </h1>
                 </div>
-                <h5 className="mb-4">{{ item.sub_judul }}</h5>
-                <h5 className="mb-4">{{ item.date }}</h5>
-                <p className="mb-4">{{ item.deskripsi }}</p>
-                <button className="btn btn-primary" @click="showDetail(item)">
+                <h5 class="mb-4">{{ item.sub_judul }}</h5>
+                <h5 class="mb-4">{{ item.date }}</h5>
+                <p class="mb-4">{{ item.deskripsi }}</p>
+                <button class="btn btn-primary" @click="showDetail(item)">
                   Lihat Selengkapnya
                 </button>
               </div>
             </div>
 
             <!-- INI UNTUK GAMBAR PADA DESKTOP -->
-            <div className="col-md-6 order-md-2 d-none d-md-block">
+            <div class="col-md-6 order-md-2 d-none d-md-block">
               <img
                 src="~@/assets/Artikel.png"
                 alt="Latest Image"
-                className="img-fluid"
+                class="img-fluid"
               />
             </div>
           </div>
@@ -71,23 +71,23 @@
 
     <section>
       <!-- Pagination -->
-      <div className="text-center mt-4">
+      <div class="text-center mt-4">
         <nav aria-label="Page navigation example">
-          <ul className="pagination justify-content-center">
+          <ul class="pagination justify-content-center">
             <!-- Tombol Previous -->
-            <li className="page-item" :className="{ disabled: currentPage === 1 }">
-              <button className="page-link" @click="prevPage" aria-label="Previous">
+            <li class="page-item" :class="{ disabled: currentPage === 1 }">
+              <button class="page-link" @click="prevPage" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-                <span className="visually-hidden">Previous</span>
+                <span class="visually-hidden">Previous</span>
               </button>
             </li>
 
             <!-- Tampilan Nomor Halaman -->
             <li v-for="pageNumber in totalPages" :key="pageNumber">
               <button
-                className="page-link"
+                class="page-link"
                 @click="goToPage(pageNumber)"
-                :className="{ active: currentPage === pageNumber }"
+                :class="{ active: currentPage === pageNumber }"
                 :style="{
                   backgroundColor: currentPage === pageNumber ? '#003366' : '',
                   color: currentPage === pageNumber ? 'white' : '',
@@ -99,12 +99,12 @@
 
             <!-- Tombol Next -->
             <li
-              className="page-item"
-              :className="{ disabled: currentPage === totalPages }"
+              class="page-item"
+              :class="{ disabled: currentPage === totalPages }"
             >
-              <button className="page-link" @click="nextPage" aria-label="Next">
+              <button class="page-link" @click="nextPage" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
-                <span className="visually-hidden">Next</span>
+                <span class="visually-hidden">Next</span>
               </button>
             </li>
           </ul>
