@@ -38,6 +38,10 @@ body {
 }
 
 .kaki {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #003366;
   line-height: 2;
   padding: 10px;
