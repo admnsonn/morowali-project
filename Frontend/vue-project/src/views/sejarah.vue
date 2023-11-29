@@ -19,8 +19,21 @@
         </div>
       </div>
       <div class="container-lg mt-5 silsilah-kepala-desa">
-      <h2 class="text-blue mb-3 judul-sejarah">Silsilah Kepala Desa</h2>
-      
+      <h2 class="text-blue mb-3 silsilah-kepdes">Silsilah Kepala Desa</h2>
+
+      <!-- Grid 2 baris 3 kolom untuk foto kepala desa dan periode tahunnya -->
+      <div class="row">
+        <div v-for="(head, index) in kepalaDesa" :key="index" class="col-md-4 mb-4">
+          <!-- Foto Kepala Desa -->
+          <img :src="head.imageUrl" :alt="head.name" class="img-fluidv foto-kepdes" />
+
+          <!-- Periode Tahun -->
+          <div class="text-center mt-2">
+            <p class="font-weight-bold nama-kepdes">{{ head.name }}</p>
+            <p class="periode-kepdes">{{ head.periode }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +57,15 @@
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In felis urna, vehicula ut felis non, venenatis lacinia urna. Nullam eget nibh ante. Phasellus sed mi id turpis luctus congue ut sed neque. Pellentesque quis pretium justo, convallis imperdiet felis. Proin porttitor tristique varius.",
               "Integer non convallis dui, ac cursus neque. Curabitur facilisis scelerisque lacus quis bibendum. Mauris placerat dolor sem, sit amet vestibulum magna venenatis eu. Aliquam consectetur metus sapien, in gravida enim elementum id. Nulla et purus magna. Vestibulum porta vitae ipsum nec facilisis. Phasellus efficitur luctus enim vitae condimentum. Curabitur commodo purus ac mi luctus, vitae lobortis ante semper. Duis quam orci, rhoncus vitae ullamcorper quis, tincidunt non erat. Maecenas dui ante, eleifend gravida sagittis quis, congue vestibulum enim.",
               ],
+              kepalaDesa: [
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+        // ... tambahkan kepala desa lainnya jika diperlukan
+      ],
             },
         };
   
@@ -51,6 +73,7 @@
         this.imageUrl = apiResponse.data.imageUrl;
         this.title = apiResponse.data.title;
         this.paragraphs = apiResponse.data.paragraphs;
+        this.kepalaDesa = apiResponse.data.kepalaDesa;
       },
     },
     mounted() {
@@ -104,5 +127,30 @@
         color: black; 
         font-family: 'Poppins', sans-serif;
         
+    }
+    .silsilah-kepdes{
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #003366; 
+      font-family: 'Poppins', sans-serif;
+    }
+    .foto-kepdes{
+      margin-left: 60px;
+    }
+    .nama-kepdes{
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      color: black; 
+      font-family: 'Poppins', sans-serif;
+    }
+    .periode-kepdes{
+      text-align: center;
+      font-size: 20px;
+      font-weight: 400;
+      color: black; 
+      font-family: 'Poppins', sans-serif;
+      
     }
   </style>

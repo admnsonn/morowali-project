@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="p-5 text-center bg-hero mt-0 pb-10">
-        <h1 class="mb-3 text-white">WILAYAH DESA</h1>
+        <h1 class="mb-3 text-white">Wilayah Desa</h1>
         <a class="btn btn-primary" href="" role="button">Profil Desa</a>
       </div>
       <div class="container mt-5">
