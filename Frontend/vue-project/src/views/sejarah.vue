@@ -58,12 +58,12 @@
               "Integer non convallis dui, ac cursus neque. Curabitur facilisis scelerisque lacus quis bibendum. Mauris placerat dolor sem, sit amet vestibulum magna venenatis eu. Aliquam consectetur metus sapien, in gravida enim elementum id. Nulla et purus magna. Vestibulum porta vitae ipsum nec facilisis. Phasellus efficitur luctus enim vitae condimentum. Curabitur commodo purus ac mi luctus, vitae lobortis ante semper. Duis quam orci, rhoncus vitae ullamcorper quis, tincidunt non erat. Maecenas dui ante, eleifend gravida sagittis quis, congue vestibulum enim.",
               ],
               kepalaDesa: [
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-                { imageUrl: 'src/assets/kepdes.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+                { imageUrl: 'src/assets/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
         // ... tambahkan kepala desa lainnya jika diperlukan
       ],
             },
@@ -135,9 +135,7 @@
       color: #003366; 
       font-family: 'Poppins', sans-serif;
     }
-    .foto-kepdes{
-      margin-left: 60px;
-    }
+    
     .nama-kepdes{
       text-align: center;
       font-size: 20px;
