@@ -159,7 +159,7 @@ func Login(c *gin.Context) {
 func generateToken(userID int) (string, error) {
 	privateKey := []byte("secretKey")
 
-	expirationTime := time.Now().Add(8 * time.Hour)
+	expirationTime := time.Now().Add(1 * time.Hour)
 
 	claims := &jwt.StandardClaims{
 		ExpiresAt: expirationTime.Unix(),
