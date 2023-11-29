@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 mb-4">
-            <img src="../assets/logo.png" alt="Logo Desa" height="50" class="me-3" />
+            <img src="../assets/Logo.png" alt="Logo Desa" height="50" class="me-3" />
             <div>
               <span class="fw-bold nama-desa text-white">Desa Bahomoleo</span>
               <span class="sub-text text-white-50">Kab. Morowali</span>
