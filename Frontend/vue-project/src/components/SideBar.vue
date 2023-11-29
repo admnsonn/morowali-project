@@ -1,0 +1,29 @@
+<template>
+    <div class="sidebar" role="cdb-sidebar" color="white">
+  <div class="sidebar-container">
+    <div class="sidebar-header">
+      <a class="sidebar-brand">Multi Level</a>
+      <a class="sidebar-toggler"><i class="fa fa-bars"></i></a>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidenav">
+        <a class="sidebar-item">
+          <div class="sidebar-item-content">
+            <i class="fa fa-th-large sidebar-icon sidebar-icon-lg"></i>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a class="sidebar-item">
+          <div class="sidebar-item-content">
+            <i class="fa fa-sticky-note sidebar-icon"></i>
+            <span>Components</span>
+          </div>
+        </a>
+      </div>
+      <div class="sidebar-footer">
+        Sidebar Footer
+      </div>
+    </div>
+  </div>
+</div>
+</template>

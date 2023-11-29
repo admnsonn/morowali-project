@@ -6,11 +6,14 @@ import (
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	servicewisata "backendpgx7071/service/serviceWisata"
+	"backendpgx7071/service/servicelogin"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Routes(router *gin.Engine) {
+
+	router.POST("/login", servicelogin.Login)
 
 	beritaRoutes := router.Group("/berita")
 	{
