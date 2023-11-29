@@ -14,6 +14,7 @@ import (
 func Routes(router *gin.Engine) {
 
 	router.POST("/login", servicelogin.Login)
+	router.POST("/validasi", servicelogin.ValidasiToken)
 
 	beritaRoutes := router.Group("/berita")
 	{

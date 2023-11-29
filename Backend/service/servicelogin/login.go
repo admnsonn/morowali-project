@@ -4,9 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"time"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
 )
@@ -154,51 +152,4 @@ func Login(c *gin.Context) {
 
 	}
 
-}
-
-func generateToken(userID int) (string, error) {
-	privateKey := []byte("secretKey")
-
-	expirationTime := time.Now().Add(1 * time.Hour)
-
-	claims := &jwt.StandardClaims{
-		ExpiresAt: expirationTime.Unix(),
-		IssuedAt:  time.Now().Unix(),
-		Subject:   fmt.Sprintf("%d", userID),
-	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(privateKey)
-	if err != nil {
-		return "", err
-	}
-
-	return tokenString, nil
-}
-
-func updateTokenInDatabase(userID int, newToken string) error {
-	ctx := context.Background()
-	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
-	if err != nil {
-		return err
-	}
-	defer tx.Rollback(ctx)
-
-	updateQuery := `
-        UPDATE dev.pengguna
-        SET token = $1
-        WHERE id_pengguna = $2
-    `
-
-	_, err = tx.Exec(ctx, updateQuery, newToken, userID)
-	if err != nil {
-		return err
-	}
-
-	err = tx.Commit(ctx)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
