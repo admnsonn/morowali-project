@@ -143,7 +143,7 @@ func Login(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
-			"message": "Berita tersedia",
+			"message": "Berhasil Login!",
 			"data":    Tampung_pengguna,
 		})
 		err = tx.Commit(ctx)
