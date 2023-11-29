@@ -11,7 +11,12 @@ import MediaView from "../views/media.vue"
 import PotensiView from "../views/potensi.vue"
 import WilayahView from "../views/wilayah.vue"
 import BeritaView from "../views/berita.vue"
+<<<<<<< Updated upstream
 import SejarahView from "../views/sejarah.vue"
+=======
+import ContentView from "../views/contentberita.vue"
+
+>>>>>>> Stashed changes
 
 const routes = [
     { path: '', component: BerandaView },
@@ -27,8 +32,12 @@ const routes = [
     { path: '/sejarah-desa', component: PotensiView },
     { path: '/wilayah', component: WilayahView },
     { path: '/berita', component: BeritaView },
+<<<<<<< Updated upstream
     { path: '/sejarah', component: SejarahView },
 
+=======
+    { path: '/contentberita', component: ContentView },
+>>>>>>> Stashed changes
 ]
 
 const router = createRouter({
