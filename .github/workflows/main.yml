@@ -27,10 +27,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: test list files
-        run: ls
+
 
       - name: Install Dependencies and Build
         run: |
           npm install
           npm run build
+          working-directory: frontend/vue-project  
