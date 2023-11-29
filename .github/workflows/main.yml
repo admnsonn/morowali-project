@@ -20,7 +20,7 @@ jobs:
 
       - name: Navigate to Vue Project Directory
         run: cd Frontend/vue-project
-        run: ls
+
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
