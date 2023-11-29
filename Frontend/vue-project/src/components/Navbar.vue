@@ -16,79 +16,10 @@
 
       <div class="collapse navbar-collapse"></div>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-
-          <li class="nav-item">
-            <router-link to="/" class="nav-link router-link-underline white">Beranda</router-link>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Profil Desa
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <router-link to="/sejarah" class="dropdown-item router-link-underline white">Sejarah Desa</router-link>
-              </li>
-              <li>
-                <router-link to="/wilayah" class="dropdown-item router-link-underline white">Wilayah Desa</router-link>
-              </li>
-              <li>
-                <router-link to="/potensi-desa" class="dropdown-item router-link-underline white">Potensi Desa</router-link>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/berita" class="nav-link router-link-underline white">Pemerintah Desa</router-link>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/informasi" class="nav-link router-link-underline white">Informasi</router-link>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Media
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <router-link to="/galeri-foto" class="dropdown-item router-link-underline white">Galeri Foto</router-link>
-              </li>
-              <li>
-                <router-link to="/berita" class="dropdown-item router-link-underline white">Berita</router-link>
-              </li>
-              <li>
-                <router-link to="/artikel" class="dropdown-item router-link-underline white">Artikel</router-link>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link router-link-underline white dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Destinasi
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <router-link to="/umkm" class="dropdown-item router-link-underline white">UMKM</router-link>
-              </li>
-              <li>
-                <router-link to="/wisata" class="dropdown-item router-link-underline white">Wisata</router-link>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/idm" class="nav-link router-link-underline white">IDM</router-link>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/data-desa" class="nav-link router-link-underline white">Data Desa</router-link>
-          </li>
-        </ul>
+        <div class="menu-item"><a href="#">Beranda</a></div>
+        <div class="menu-item"><a href="#">Pemerintah Desa</a></div>
+        <div class="menu-item"><a href="#">IDM</a></div>
+        <div class="menu-item"><a href="#">Data Desa</a></div>
       </div>
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -103,22 +34,54 @@
 </template>
 
 <script>
+import Dropdown from './Dropdown.vue';
 export default {
   data() {
     return {
-      isDropdownVisible: false, // Menyimpan status tampilan dropdown
+      name: 'navbar',
+      data() {
+        return {
+          profil: [
+            {
+              title: 'Sejarah Desa',
+              link: '#'
+            },
+            {
+              title: 'Wilayah Desa',
+              link: '#'
+            },
+            {
+              title: 'Potensi Desa',
+              link: '#'
+            }
+          ],
+          media: [
+            {
+              title: 'Galeri Foto',
+              link: '#'
+            },
+            {
+              title: 'Berita',
+              link: '#'
+            },
+            {
+              title: 'Artikel',
+              link: '#'
+            },
+          ],
+          destinasi: [
+            {
+              title: 'UMKM',
+              link: '#'
+            },
+            {
+              title: 'Wisata',
+              link: '#'
+            },
+          ]
+        }
+      }
     };
-  },
-  methods: {
-    showDropdown() {
-      this.isDropdownVisible = true; // Menampilkan dropdown saat kursor masuk
-    },
-    keepDropdown() {
-      this.isDropdownVisible = true; // Tetapkan dropdown terbuka saat kursor berada di dalamnya
-    },
-    hideDropdown() {
-      this.isDropdownVisible = false; // Menyembunyikan dropdown saat kursor keluar
-    },
   },
 };
 </script>
@@ -126,21 +89,6 @@ export default {
 <style scoped>
 * {
   font-family: "Poppins", sans-serif !important;
-}
-
-.dropdown-menu {
-  background-color: #003366;
-  /* Atur warna latar belakang menjadi biru */
-}
-
-.dropdown-menu.show a:hover {
-  color: black !important;
-  /* Atur warna teks menjadi hitam saat dihover */
-}
-
-nav {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Ubah nilai sesuai preferensi Anda */
 }
 
 .sub-text {
@@ -166,30 +114,30 @@ nav {
   width: 100px;
 }
 
-.router-link-underline {
+.menu-item {
+  color: #fff;
+  padding: 10px 15px;
   position: relative;
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  transition: 0.4s;
+}
+
+.menu-item a {
+  color: inherit;
   text-decoration: none;
-  transition: all 0.3s ease;
 }
 
-.router-link-underline::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: -0.5px;
-  left: 0;
-  background-color: transparent;
-  transition: all 0.3s ease;
-}
-
-.router-link-underline:hover::after {
+.menu-item.active,
+.menu-item:hover {
   background-color: white;
-  /* Ganti dengan warna garis bawah yang diinginkan */
+  border-bottom-color: #003366;
+  border-radius: 20px;
 }
 
-.white {
-  color: white !important;
-  /* Atur warna teks menjadi putih */
+.menu-item.active a,
+.menu-item:hover a {
+  color: #003366;
 }
 </style>
