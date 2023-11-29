@@ -30,6 +30,7 @@ jobs:
 
 
       - name: Install Dependencies and Build
+        working-directory: frontend/vue-project  
         run: |
           npm install
           npm run build
