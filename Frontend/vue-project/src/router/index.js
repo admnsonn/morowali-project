@@ -11,6 +11,7 @@ import MediaView from "../views/media.vue";
 import PotensiView from "../views/potensi.vue";
 import WilayahView from "../views/wilayah.vue";
 import BeritaView from "../views/berita.vue";
+import ContentView from "../views/contentberita.vue";
 import SejarahView from "../views/sejarah.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
 
@@ -40,11 +41,11 @@ const routes = [
   { path: '/informasi', component: InformasiView },
   { path: '/login', component: LoginView },
   { path: '/media', component: MediaView },
-  { path: '/potensi-desa', component: PotensiView },
-  { path: '/sejarah-desa', component: SejarahView },
+  { path: '/potensi', component: PotensiView },
+  { path: '/sejarah', component: SejarahView },
   { path: '/wilayah', component: WilayahView },
   { path: '/berita', component: BeritaView },
-  { path: '/sejarah', component: SejarahView },
+  { path: '/contentberita', component: ContentView },
   { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin }
 ];
 

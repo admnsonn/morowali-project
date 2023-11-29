@@ -17,7 +17,11 @@
       <div class="collapse navbar-collapse"></div>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <div class="menu-item"><a href="#">Beranda</a></div>
+        <Dropdown title="Profil Desa" :items="profil" />
         <div class="menu-item"><a href="#">Pemerintah Desa</a></div>
+        <div class="menu-item"><a href="#">Informasi</a></div>
+        <Dropdown title="Media" :items="media" />
+        <Dropdown title="Destinasi" :items="destinasi" />
         <div class="menu-item"><a href="#">IDM</a></div>
         <div class="menu-item"><a href="#">Data Desa</a></div>
       </div>
@@ -35,58 +39,59 @@
 
 <script>
 import Dropdown from './Dropdown.vue';
+
 export default {
-  data() {
-    return {
-      name: 'navbar',
-      data() {
-        return {
-          profil: [
-            {
-              title: 'Sejarah Desa',
-              link: '#'
-            },
-            {
-              title: 'Wilayah Desa',
-              link: '#'
-            },
-            {
-              title: 'Potensi Desa',
-              link: '#'
-            }
-          ],
-          media: [
-            {
-              title: 'Galeri Foto',
-              link: '#'
-            },
-            {
-              title: 'Berita',
-              link: '#'
-            },
-            {
-              title: 'Artikel',
-              link: '#'
-            },
-          ],
-          destinasi: [
-            {
-              title: 'UMKM',
-              link: '#'
-            },
-            {
-              title: 'Wisata',
-              link: '#'
-            },
-          ]
-        }
+    name: 'navbar',
+    components: {
+      Dropdown
+    },
+    data() {
+      return {
+        profil: [
+          {
+            title: 'Sejarah Desa',
+            link: '/sejarah'
+          },
+          {
+            title: 'Wilayah Desa',
+            link: '/wilayah'
+          },
+          {
+            title: 'Potensi Desa',
+            link: '/potensi'
+          }
+        ],
+        media: [
+          {
+            title: 'Galeri Foto',
+            link: '#'
+          },
+          {
+            title: 'Berita',
+            link: '/berita'
+          },
+          {
+            title: 'Artikel',
+            link: '#'
+          },
+        ],
+        destinasi: [
+          {
+            title: 'UMKM',
+            link: '#'
+          },
+          {
+            title: 'Wisata',
+            link: '#'
+          },
+        ]
       }
-    };
-  },
-};
+    }
+  }
+
 </script>
 
-<style scoped>
+<style>
 * {
   font-family: "Poppins", sans-serif !important;
 }
