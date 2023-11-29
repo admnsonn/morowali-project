@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
     <div className="container">
       <router-link to="/" class="navbar-brand d-flex align-items-center">
-        <img src="../assets/logo.png" alt="Logo Desa" height="50" class="me-3" />
+        <img src="../assets/Logo.png" alt="Logo Desa" height="50" class="me-3" />
         <div>
           <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
           <span class="sub-text">Kab. Morowali</span>
