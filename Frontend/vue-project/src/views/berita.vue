@@ -29,9 +29,10 @@
                                 <h5 class="mb-4">{{ item.sub_judul }}</h5>
                                 <h5 class="mb-4">{{ item.date }}</h5>
                                 <p class="mb-4">{{ item.deskripsi }}</p>
+                                <a href="/contentberita">
                                 <button class="btn btn-primary" @click="showDetail(item)">
                                     Lihat Selengkapnya
-                                </button>
+                                </button></a>
                             </div>
                         </div>
                     </div>
@@ -141,7 +142,7 @@ export default {
                 data: [
                     {
                         id_potensi: 1,
-                        judul_potensi: "KKP Tangkap 3 Nelayan Pelaku Bom Ikan di Morowali Sulawesi Tengah",
+                        judul_potensi: "Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP",
                         date: "26-12-2023",
                         deskripsi:
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pengembangan pertanian organik di daerah dengan tanah subur.",

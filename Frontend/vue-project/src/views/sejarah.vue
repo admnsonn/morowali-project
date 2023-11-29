@@ -25,7 +25,7 @@
       <div class="row">
         <div v-for="(head, index) in kepalaDesa" :key="index" class="col-md-4 mb-4">
           <!-- Foto Kepala Desa -->
-          <img :src="head.imageUrl" :alt="head.name" class="img-fluidv foto-kepdes" />
+          <img :src="head.imageUrl" :alt="head.name" class="img-fluid foto-kepdes" />
 
           <!-- Periode Tahun -->
           <div class="text-center mt-2">
