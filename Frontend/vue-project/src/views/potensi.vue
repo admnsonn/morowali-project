@@ -1,30 +1,21 @@
 <template>
   <section>
-      <div class="p-5 text-center bg-hero mt-0 pb-10">
-        <h1 class="mb-3 text-white">Potensi Desa</h1>
-        <a class="btn btn-primary" href="" role="button">Profil Desa</a>
-      </div>
+    <div class="p-5 text-center bg-hero mt-0 pb-10">
+      <h1 class="mb-3 tulisan_judul">Potensi Desa</h1>
+      <a class="btn btn-primary" href="" role="button">Profil Desa</a>
+    </div>
 
     <section v-if="showLatestData" class="py-5 bg-light">
       <div class="container">
-        <div
-          v-for="item in paginatedData"
-          :key="item.id_potensi"
-          class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow"
-          :class="{ 'with-shadow': isHovered }"
-          @mouseenter="addShadow"
-          @mouseleave="removeShadow"
-        >
+        <div v-for="item in paginatedData" :key="item.id_potensi"
+          class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
+          @mouseenter="addShadow" @mouseleave="removeShadow">
           <!-- Display the data here -->
 
           <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
             <div class="col-12 d-md-none mb-4">
-              <img
-                src="~@/assets/Artikel.png"
-                alt="Latest Image"
-                class="img-fluid"
-              />
+              <img src="~@/assets/Artikel.png" alt="Latest Image" class="img-fluid" />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
@@ -36,26 +27,23 @@
                 </h2>
                 <!-- Container untuk judul pada tampilan desktop -->
                 <div class="d-none d-md-block">
-                  <h1 class="mb-2 warna-judul-artikel">
+                  <h2 class="mb-2 warna-judul-artikel">
                     {{ item.judul_potensi }}
-                  </h1>
+                  </h2>
+                  <br>
                 </div>
-                <h5 class="mb-4">{{ item.sub_judul }}</h5>
-                <h5 class="mb-4">{{ item.date }}</h5>
+                <h5 class="mb-4 sub-potensi">{{ item.sub_judul }}</h5>
+                <h5 class="mb-4 item-potensi">{{ item.date }}</h5>
                 <p class="mb-4">{{ item.deskripsi }}</p>
-                <button class="btn btn-primary" @click="showDetail(item)">
-                  Lihat Selengkapnya
+                <button class="btn btn-secondary" @click="showDetail(item)">
+                  Selengkapnya
                 </button>
               </div>
             </div>
 
             <!-- INI UNTUK GAMBAR PADA DESKTOP -->
             <div class="col-md-6 order-md-2 d-none d-md-block">
-              <img
-                src="~@/assets/Artikel.png"
-                alt="Latest Image"
-                class="img-fluid"
-              />
+              <img src="~@/assets/Artikel.png" alt="Latest Image" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -79,24 +67,17 @@
 
             <!-- Tampilan Nomor Halaman -->
             <li v-for="pageNumber in totalPages" :key="pageNumber">
-              <button
-                class="page-link"
-                @click="goToPage(pageNumber)"
-                :class="{ active: currentPage === pageNumber }"
+              <button class="page-link" @click="goToPage(pageNumber)" :class="{ active: currentPage === pageNumber }"
                 :style="{
                   backgroundColor: currentPage === pageNumber ? '#003366' : '',
                   color: currentPage === pageNumber ? 'white' : '',
-                }"
-              >
+                }">
                 {{ pageNumber }}
               </button>
             </li>
 
             <!-- Tombol Next -->
-            <li
-              class="page-item"
-              :class="{ disabled: currentPage === totalPages }"
-            >
+            <li class="page-item" :class="{ disabled: currentPage === totalPages }">
               <button class="page-link" @click="nextPage" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="visually-hidden">Next</span>
@@ -291,40 +272,59 @@ export default {
 </script>
 
 <style scoped>
-
 .bg-hero {
-      background-color: #003366;
-    }
-  
-    /* Remove margin-top */
-    .mt-0 {
-      margin-top: 0;
-    }
-  
-    /* Set text color to white */
-    .text-white {
-      color: white;
-    }
-    .text-blue {
-      color: #003366 !important;
-    }
-    
-    .btn-primary{
-        background-color: white;
-        color: #003366;
-        font-weight: bold;
-        border: none; 
-        padding: 10px 30px; 
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700  ;
-        font-size: 14px; 
-        cursor: pointer; 
-        border-radius: 30px; 
-    }
+  background-color: #003366;
+}
+
+/* Remove margin-top */
+.mt-0 {
+  margin-top: 0;
+}
+
+.tulisan_judul {
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 2px 2px #252525;
+}
+
+.item-potensi{
+  color: #003366;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #003366;
+  font-weight: bold;
+  border: none;
+  padding: 10px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.btn-secondary{
+  background-color:#003366;
+  border: none;
+  padding: 10px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
+}
 
 .warna-judul-artikel {
+  font-weight: bold;
   color: #003366 !important;
   /* Warna biru (#003366) dengan menggunakan !important */
+}
+
+.sub-potensi {
+  font-weight: bold;
 }
 
 .with-shadow {

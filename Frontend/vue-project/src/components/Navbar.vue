@@ -16,14 +16,14 @@
 
       <div class="collapse navbar-collapse"></div>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <div class="menu-item"><a href="#">Beranda</a></div>
+        <div class="menu-item"><a href="/">Beranda</a></div>
         <Dropdown title="Profil Desa" :items="profil" />
-        <div class="menu-item"><a href="#">Pemerintah Desa</a></div>
-        <div class="menu-item"><a href="#">Informasi</a></div>
+        <div class="menu-item"><a href="/pemerintah-desa">Pemerintah Desa</a></div>
+        <div class="menu-item"><a href="/informasi">Informasi</a></div>
         <Dropdown title="Media" :items="media" />
         <Dropdown title="Destinasi" :items="destinasi" />
-        <div class="menu-item"><a href="#">IDM</a></div>
-        <div class="menu-item"><a href="#">Data Desa</a></div>
+        <div class="menu-item"><a href="/idm">IDM</a></div>
+        <div class="menu-item"><a href="/data-desa">Data Desa</a></div>
       </div>
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">

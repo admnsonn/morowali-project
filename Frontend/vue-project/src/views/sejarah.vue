@@ -119,7 +119,7 @@
         border-radius: 30px; 
     }
     .sejarah-desa{
-        margin-bottom: 20px;
+        margin-bottom: 60px;
     }
     .judul-sejarah{
         font-size: 32px;
