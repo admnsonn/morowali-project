@@ -41,13 +41,14 @@
     <div class="container py-5">
         <div class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 ">
                     <img src="~@/assets/Artikel.png" alt="Gambar Berita" class="img-fluid">
                 </div>
-
-                <div class="col-md-6 order-md-8">
+                <div class="col-md-6 order-md-1">
                     <div class="text-center text-md-start">
-                        <br>
+                        <h2 class="mb-3 d-md-none judul-artikel">
+                            {{ title_artikel }}
+                        </h2>
                         <div class="d-none d-md-block">
                             <h2 class="mb-2 judul-artikel">
                                 {{ title_artikel }}
@@ -55,9 +56,9 @@
                         </div>
                         <br>
                         <h5 class="mb-4 subjudul-artikel">{{ subtitle_artikel }}</h5>
-                            <button class="btn btn-secondary" @click="showDetail(item)">
-                                Selengkapnya
-                            </button>
+                        <button class="btn btn-secondary" @click="showDetail(item)">
+                            Selengkapnya
+                        </button>
                     </div>
                 </div>
             </div>
