@@ -37,8 +37,8 @@ export default {
 
 .menu-item .sub-menu {
     position: absolute;
-    background-color: #003366;
-    box-shadow: inset 0px 6px 11px 0px rgba(0, 0, 0, 0.8);
+    background-color: grey;
+    box-shadow: inset 0px 6px 11px 0px rgba(0, 0, 0, 0.2);
     top: calc(100% + 18px);
     left: 1%;
     transform: translateX(-50);

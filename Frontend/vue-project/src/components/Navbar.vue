@@ -143,6 +143,6 @@ export default {
 
 .menu-item.active a,
 .menu-item:hover a {
-  color: black;
+  color: #003366;
 }
 </style>
