@@ -51,6 +51,8 @@
   
               // Redirect ke halaman setelah login
               this.$router.push('/beranda-admin'); // Ganti '/dashboard' dengan rute yang sesuai
+
+              window.location.reload()
             } else {
               alert('Token not found in response.'); // Pesan jika token tidak ada di respons
             }
