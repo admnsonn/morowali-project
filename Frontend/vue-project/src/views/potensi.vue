@@ -1,14 +1,9 @@
 <template>
   <section>
-    <div class="p-5 text-center bg-adit">
-      <h1 class="mb-3">POTENSI DESA</h1>
-      <button
-        class="btn panjang-tombol-login btn-light me-2 text-tombol"
-        @click="fetchData"
-      >
-        Lihat Terbaru
-      </button>
-    </div>
+      <div class="p-5 text-center bg-hero mt-0 pb-10">
+        <h1 class="mb-3 text-white">Potensi Desa</h1>
+        <a class="btn btn-primary" href="" role="button">Profil Desa</a>
+      </div>
 
     <section v-if="showLatestData" class="py-5 bg-light">
       <div class="container">
@@ -115,6 +110,7 @@
 </template>
 
 <script>
+import App from '../App.vue'
 export default {
   data() {
     return {
@@ -295,32 +291,36 @@ export default {
 </script>
 
 <style scoped>
-.bg-adit {
-  background-color: #003366;
-  color: white;
-}
 
-.bg-adit:hover,
-.bg-adit:focus {
-  background-color: #003366;
-  color: white;
-}
-
-.btn {
-  font-weight: 500;
-}
-
-/* Gaya CSS tambahan untuk komponen */
-.bg-light {
-  background-color: #f8f9fa;
-  /* Warna latar belakang */
-}
-
-/* (Opsi) Gaya CSS khusus untuk tombol */
-.btn-primary {
-  background-color: #003366;
-  border-color: #003366;
-}
+.bg-hero {
+      background-color: #003366;
+    }
+  
+    /* Remove margin-top */
+    .mt-0 {
+      margin-top: 0;
+    }
+  
+    /* Set text color to white */
+    .text-white {
+      color: white;
+    }
+    .text-blue {
+      color: #003366 !important;
+    }
+    
+    .btn-primary{
+        background-color: white;
+        color: #003366;
+        font-weight: bold;
+        border: none; 
+        padding: 10px 30px; 
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700  ;
+        font-size: 14px; 
+        cursor: pointer; 
+        border-radius: 30px; 
+    }
 
 .warna-judul-artikel {
   color: #003366 !important;

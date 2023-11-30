@@ -126,7 +126,7 @@ export default {
   text-align: center;
   border-bottom: 3px solid transparent;
   display: flex;
-  transition: 0.4s;
+  transition: all 0.3s ease;
 }
 
 .menu-item a {

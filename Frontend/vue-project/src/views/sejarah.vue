@@ -4,6 +4,7 @@
         <h1 class="mb-3 text-white">Sejarah Desa</h1>
         <a class="btn btn-primary" href="" role="button">Profil Desa</a>
       </div>
+
       <div class="container-lg mt-5 sejarah-desa">
         <div class="row">
           <div class="col-md-6">
@@ -18,6 +19,7 @@
           </div>
         </div>
       </div>
+
       <div class="container-lg mt-5 silsilah-kepala-desa">
       <h2 class="text-blue mb-3 silsilah-kepdes">Silsilah Kepala Desa</h2>
 
@@ -82,6 +84,10 @@
     },
   };
   </script>
+
+<script>
+
+</script>
 <style scoped>
     .bg-hero {
       background-color: #003366;
