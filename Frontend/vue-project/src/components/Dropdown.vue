@@ -35,18 +35,15 @@ export default {
     margin-left: 10px;
 }
 
-.menu-item.active svg {
-    color: #003366;
-}
-
 .menu-item .sub-menu {
     position: absolute;
-    background-color: white;
+    background-color: #003366;
+    box-shadow: inset 0px 6px 11px 0px rgba(0, 0, 0, 0.8);
     top: calc(100% + 18px);
     left: 1%;
     transform: translateX(-50);
     width: max-content;
-    border-radius: 0px 0px 16px 16px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .fade-enter-active,

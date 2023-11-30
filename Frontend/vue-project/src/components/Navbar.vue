@@ -120,7 +120,7 @@ export default {
 }
 
 .menu-item {
-  color: #fff;
+  color: white;
   padding: 10px 15px;
   position: relative;
   text-align: center;
@@ -143,6 +143,6 @@ export default {
 
 .menu-item.active a,
 .menu-item:hover a {
-  color: #003366;
+  color: black;
 }
 </style>
