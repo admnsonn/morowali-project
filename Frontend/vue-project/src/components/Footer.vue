@@ -75,9 +75,12 @@ export default {
 <style scoped>
 /* Gaya untuk footer */
 .footer {
-  padding: 50px 0;
-  background-color: transparent; /* Sesuaikan dengan preferensi warna latar belakang Anda */
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Ubah nilai sesuai preferensi Anda */
+  
+  left: 0;
+  width: 100%;
+  background-color: #003366 !important;
+  line-height: 2;
+  padding: 140px;
 }
 
 /* Gaya untuk elemen-elemen dalam footer */

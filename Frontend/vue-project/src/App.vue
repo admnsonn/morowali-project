@@ -27,22 +27,3 @@ export default {
 }
 </script>
 
-<style>
-body {
-  margin: 0;
-}
-</style>
-
-<style scoped>
-
-
-.kaki {
-  margin-top: auto;
-  left: 0;
-  width: 100%;
-  background-color: #003366;
-  line-height: 2;
-  padding: 10px;
-}
-
-</style>
