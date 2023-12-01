@@ -50,7 +50,6 @@
               localStorage.setItem('isLoggedIn', 'true')
   
               // Redirect ke halaman setelah login
-              this.$router.push('/beranda-admin'); // Ganti '/dashboard' dengan rute yang sesuai
 
               window.location.reload()
             } else {

@@ -1,9 +1,23 @@
 <template>
+  <div v-if="userRole === 'Admin'">
+    <h1>Footer Buat Admin Desa</h1>
+  </div>
+
+  <div v-else-if="userRole === 'Warga'" >
+    <h1 >Footer untuk warga desa (Layanan Desa)</h1>
+  </div>
+
+  <div v-else>
     <footer class="footer bg-transparent mt-5">
       <div class="container">
         <div class="row">
           <div class="col-lg-4 mb-4">
-            <img src="../assets/Logo.png" alt="Logo Desa" height="50" class="me-3" />
+            <img
+              src="../assets/Logo.png"
+              alt="Logo Desa"
+              height="50"
+              class="me-3"
+            />
             <div>
               <span class="fw-bold nama-desa text-white">Desa Bahomoleo</span>
               <span class="sub-text text-white-50">Kab. Morowali</span>
@@ -23,48 +37,74 @@
         </div>
       </div>
     </footer>
-  </template>
-  
-  <script>
-  export default {
-    // Tambahkan logika atau data yang diperlukan di sini jika diperlukan
-  };
-  </script>
-  
-  <style scoped>
-  /* Gaya untuk footer */
-  .footer {
-    padding: 50px 0;
-    background-color: transparent; /* Sesuaikan dengan preferensi warna latar belakang Anda */
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Ubah nilai sesuai preferensi Anda */
-  }
-  
-  /* Gaya untuk elemen-elemen dalam footer */
-  .nama-desa {
-    font-weight: bold;
-  }
-  
-  .sub-text {
-    font-size: 0.7em;
-    opacity: 0.7;
-    display: block;
-    margin-top: -10px;
-  }
-  
-  .jarak {
-    margin-right: 400px; /* Jika diperlukan */
-  }
-  
-  .tulisan {
-    font-weight: bold;
-  }
-  
-  .text-white {
-    color: #fff !important;
-  }
-  
-  .text-white-50 {
-    color: rgba(255, 255, 255, 0.5) !important;
-  }
-  </style>
-  
+  </div>
+</template>
+
+<script>
+export default {
+  created() {
+    this.checkUserRole();
+    window.addEventListener("storage", this.handleStorageChange);
+  },
+
+  destroyed() {
+    window.removeEventListener("storage", this.handleStorageChange);
+  },
+
+  methods: {
+    checkUserRole() {
+      this.userRole = localStorage.getItem("role_pengguna");
+      if (this.userRole === "Admin") {
+        this.$router.push("/beranda-admin");
+      }
+
+      if (this.userRole === "Warga") {
+        this.$router.push("/beranda-warga");
+      }
+    },
+
+    handleStorageChange(event) {
+      if (event.key === "role_pengguna") {
+        this.checkUserRole();
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Gaya untuk footer */
+.footer {
+  padding: 50px 0;
+  background-color: transparent; /* Sesuaikan dengan preferensi warna latar belakang Anda */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Ubah nilai sesuai preferensi Anda */
+}
+
+/* Gaya untuk elemen-elemen dalam footer */
+.nama-desa {
+  font-weight: bold;
+}
+
+.sub-text {
+  font-size: 0.7em;
+  opacity: 0.7;
+  display: block;
+  margin-top: -10px;
+}
+
+.jarak {
+  margin-right: 400px; /* Jika diperlukan */
+}
+
+.tulisan {
+  font-weight: bold;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+</style>

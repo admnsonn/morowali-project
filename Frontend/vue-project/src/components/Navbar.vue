@@ -1,76 +1,79 @@
 <template>
-   <div v-if="userRole === 'Admin'">
+  <div v-if="userRole === 'Admin'">
     <nav class="sidebar-admin">
-
       <h1>INI JADI SIDE BAR</h1>
-
     </nav>
-    </div>
+  </div>
 
-  <div  v-else>
+  <div v-else-if="userRole === 'Warga'">
+    <nav class="sidebar-admin">
+      <h1>INI JADI SIDEBAR WARGA</h1>
+    </nav>
+  </div>
+
+  <div v-else>
     <nav class="menu">
       <div class="navbar navbar-expand-lg navbar-dark bg-transparent">
-      <div className="container">
-        <router-link to="/" class="navbar-brand d-flex align-items-center">
-          <img
-            src="../assets/Logo.png"
-            alt="Logo Desa"
-            height="50"
-            class="me-3"
-          />
-          <div>
-            <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
-            <span class="sub-text">Kab. Morowali</span>
+        <div className="container">
+          <router-link to="/" class="navbar-brand d-flex align-items-center">
+            <img
+              src="../assets/Logo.png"
+              alt="Logo Desa"
+              height="50"
+              class="me-3"
+            />
+            <div>
+              <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
+              <span class="sub-text">Kab. Morowali</span>
+            </div>
+          </router-link>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse"></div>
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarNav"
+          >
+            <div class="menu-item"><a href="/">Beranda</a></div>
+            <Dropdown title="Profil Desa" :items="profil" />
+            <div class="menu-item">
+              <a href="/pemerintah-desa">Pemerintah Desa</a>
+            </div>
+            <div class="menu-item"><a href="/informasi">Informasi</a></div>
+            <Dropdown title="Media" :items="media" />
+            <Dropdown title="Destinasi" :items="destinasi" />
+            <div class="menu-item"><a href="/idm">IDM</a></div>
+            <div class="menu-item"><a href="/data-desa">Data Desa</a></div>
           </div>
-        </router-link>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse"></div>
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav"
-        >
-          <div class="menu-item"><a href="/">Beranda</a></div>
-          <Dropdown title="Profil Desa" :items="profil" />
-          <div class="menu-item">
-            <a href="/pemerintah-desa">Pemerintah Desa</a>
-          </div>
-          <div class="menu-item"><a href="/informasi">Informasi</a></div>
-          <Dropdown title="Media" :items="media" />
-          <Dropdown title="Destinasi" :items="destinasi" />
-          <div class="menu-item"><a href="/idm">IDM</a></div>
-          <div class="menu-item"><a href="/data-desa">Data Desa</a></div>
-        </div>
-
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
-          <div class="d-flex">
-            <button class="btn panjang-tombol-login btn-light me-2 text-tombol">
-              <router-link to="/login" class="nav-link router-link-underline"
-                >Login</router-link
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <div class="d-flex">
+              <button
+                class="btn panjang-tombol-login btn-light me-2 text-tombol"
               >
-            </button>
+                <router-link to="/login" class="nav-link router-link-underline"
+                  >Login</router-link
+                >
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </nav>
-    
-
-   
   </div>
 </template>
 
@@ -127,31 +130,38 @@ export default {
 
   created() {
     this.checkUserRole();
-    window.addEventListener('storage', this.handleStorageChange);
+    window.addEventListener("storage", this.handleStorageChange);
   },
   destroyed() {
-    window.removeEventListener('storage', this.handleStorageChange);
+    window.removeEventListener("storage", this.handleStorageChange);
   },
   methods: {
     checkUserRole() {
-      this.userRole = localStorage.getItem('role_pengguna');
-      if (this.userRole === 'Admin') {
-        this.$router.push('/beranda-admin');
+      this.userRole = localStorage.getItem("role_pengguna");
+      if (this.userRole === "Admin") {
+        this.$router.push("/beranda-admin");
+      }
+
+      if (this.userRole === "Warga") {
+        this.$router.push("/beranda-warga");
       }
     },
     handleStorageChange(event) {
-      if (event.key === 'role_pengguna') {
+      if (event.key === "role_pengguna") {
         this.checkUserRole();
       }
-    }
+    },
   },
   watch: {
     userRole(newRole) {
-      if (newRole === 'Admin') {
-        this.$router.push('/beranda-admin');
+      if (newRole === "Admin") {
+        this.$router.push("/beranda-admin");
       }
-    }
-    // ... watch lainnya ...
+
+      if (newRole === "Warga") {
+        this.$router.push("/beranda-warga");
+      }
+    },
   },
 };
 </script>
@@ -171,7 +181,6 @@ export default {
   background-color: #003366;
   line-height: 2;
   box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  
 }
 
 .sub-text {

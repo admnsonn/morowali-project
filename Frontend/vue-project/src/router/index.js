@@ -14,6 +14,7 @@ import BeritaView from "../views/berita.vue";
 import ContentView from "../views/contentberita.vue";
 import SejarahView from "../views/sejarah.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
+import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -25,6 +26,23 @@ const isAdmin = () => {
 
 const authGuardAdmin = (to, from, next) => {
   if (!isAdmin()) {
+    next('/');
+  } else {
+    next();
+  }
+};
+
+// Adit  Tambah Kondisi Warga
+const isWarga = () => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const userRole = localStorage.getItem('role_pengguna');
+  
+    // ADIT UBAH 
+  return isLoggedIn === 'true' && userRole === 'Warga';
+};
+
+const authGuardWarga = (to, from, next) => {
+  if (!isWarga()) {
     next('/');
   } else {
     next();
@@ -46,7 +64,10 @@ const routes = [
   { path: '/wilayah', component: WilayahView },
   { path: '/berita', component: BeritaView },
   { path: '/contentberita', component: ContentView },
-  { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin }
+  // Buat Admin
+  { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // Buar Warga
+  { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }
 ];
 
 const router = createRouter({
