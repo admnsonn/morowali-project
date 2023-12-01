@@ -111,3 +111,157 @@ func Wilayah_Perkebunan(c *gin.Context) {
 		return
 	}
 }
+
+func Total_warga(c *gin.Context) {
+	type Wilayah_Perkebunan_container struct {
+		TotalWarga int `json:"total_warga"`
+	}
+
+	ctx := context.Background()
+	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
+	if err != nil {
+		panic(err.Error())
+	}
+
+	query := `
+		SELECT COUNT(*) AS total_warga
+		FROM dev.pengguna
+		WHERE desa_id  = 1 and role_pengguna = 'Warga';
+	`
+
+	row, err := tx.Query(ctx, query)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+		err = tx.Commit(ctx)
+		if err != nil {
+			panic(err.Error())
+		}
+		return
+	}
+
+	defer row.Close()
+
+	var Tampung_data []Wilayah_Perkebunan_container
+
+	for row.Next() {
+		var ambil Wilayah_Perkebunan_container
+		err := row.Scan(
+			&ambil.TotalWarga,
+		)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
+			if err != nil {
+				panic(err.Error())
+			}
+			return
+		}
+
+		Tampung_data = append(Tampung_data, ambil)
+	}
+
+	if len(Tampung_data) != 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "Data Luas Perkebunan Tidak Ada!",
+			"data":    Tampung_data,
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "Data Luas Perkebunan Tidak Ada!",
+			"data":    []Wilayah_Perkebunan_container{},
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+	}
+}
+
+func Luas_desa(c *gin.Context) {
+	type Wilayah_Perkebunan_container struct {
+		LuasDesa string `json:"luas_wilayah"`
+		Longi    string `json:"longitude"`
+		Lati     string `json:"latitude"`
+	}
+
+	ctx := context.Background()
+	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
+	if err != nil {
+		panic(err.Error())
+	}
+
+	query := `
+		select luas_wilayah, longitude, latitude from dev.desa where id_desa = 1
+	`
+
+	row, err := tx.Query(ctx, query)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+		err = tx.Commit(ctx)
+		if err != nil {
+			panic(err.Error())
+		}
+		return
+	}
+
+	defer row.Close()
+
+	var Tampung_data []Wilayah_Perkebunan_container
+
+	for row.Next() {
+		var ambil Wilayah_Perkebunan_container
+		err := row.Scan(
+			&ambil.LuasDesa,
+			&ambil.Longi,
+			&ambil.Lati,
+		)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
+			if err != nil {
+				panic(err.Error())
+			}
+			return
+		}
+
+		Tampung_data = append(Tampung_data, ambil)
+	}
+
+	if len(Tampung_data) != 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "Data Luas Desa Tidak Ada!",
+			"data":    Tampung_data,
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "Data Luas Desa Tidak Ada!",
+			"data":    []Wilayah_Perkebunan_container{},
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+	}
+}

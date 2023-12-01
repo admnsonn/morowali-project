@@ -55,6 +55,8 @@ func Routes(router *gin.Engine) {
 	Wilayah_desa := router.Group("/Wilayah_desa")
 	{
 		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
+		Wilayah_desa.GET("/warga", servicewilayahdesa.Total_warga)
+		Wilayah_desa.GET("/desa", servicewilayahdesa.Luas_desa)
 	}
 
 }
