@@ -5,6 +5,8 @@ import (
 	servicekreativitas "backendpgx7071/service/serviceKreativitas"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
+	servicevisi "backendpgx7071/service/serviceVisi"
+	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
 	"backendpgx7071/service/servicelogin"
 
@@ -43,6 +45,16 @@ func Routes(router *gin.Engine) {
 	Kreatifitas := router.Group("/kreatifitas")
 	{
 		Kreatifitas.GET("/", servicekreativitas.Kreatifitas_desa)
+	}
+
+	Visi := router.Group("/visi")
+	{
+		Visi.GET("/", servicevisi.Visi_desa)
+	}
+
+	Wilayah_desa := router.Group("/Wilayah_desa")
+	{
+		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
 	}
 
 }
