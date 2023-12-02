@@ -35,11 +35,11 @@ export default {
         return {
             pendidikanData: [],
             chartData: {
-                labels: ['SDN 04 Bungku', 'SDN 15 Bungku', 'SDN 1 Bahomoleo', 'SDN BAHOMANTE'],
+                labels: ['SDN 04 Bungku', 'SDN 15 Bungku', 'SDN 1 Bahomoleo'],
                 datasets: [
                     {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                        data: [40, 20, 80, 10]
+                        backgroundColor: ['#CD8924', '#4F0F13', '#4C0266'],
+                        data: [40, 20, 80]
                     }
                 ]
             },
@@ -144,17 +144,17 @@ export default {
 }
 
 .color-1 {
-    color: #F25555;
+    color: #4C0266;
     /* Ubah warna sesuai keinginan Anda */
 }
 
 .color-2 {
-    color: #003366;
+    color: #4F0F13;
     /* Ubah warna sesuai keinginan Anda */
 }
 
 .color-3 {
-    color: #C0D442;
+    color: #CD8924;
     /* Ubah warna sesuai keinginan Anda */
 }
 
