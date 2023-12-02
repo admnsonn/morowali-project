@@ -22,7 +22,7 @@ import footerComponent from './components/Footer.vue'
 export default {
   components: {
     Navbar,
-    footerComponent
+    footerComponent,
   }
 }
 </script>

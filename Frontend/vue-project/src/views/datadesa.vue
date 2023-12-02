@@ -8,19 +8,19 @@
         <div class="mt-4">
             <ol>
                 <li>
-                    <a href="/beranda"> {{ text1 }}</a>
+                    <a href="#"> {{ text1 }}</a>
                 </li>
                 <li>
-                    <a href="/beranda"> {{ text2 }}</a>
+                    <a href="#"> {{ text2 }}</a>
                 </li>
                 <li>
-                    <a href="/beranda"> {{ text3 }}</a>
+                    <a href="/data-pendidikan"> {{ text3 }}</a>
                 </li>
                 <li>
-                    <a href="/beranda"> {{ text4 }}</a>
+                    <a href="#"> {{ text4 }}</a>
                 </li>
                 <li>
-                    <a href="/beranda"> {{ text5 }}</a>
+                    <a href="#"> {{ text5 }}</a>
                 </li>
             </ol>
         </div>

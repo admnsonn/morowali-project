@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import App from '../App.vue'
 export default {
   data() {
     return {
