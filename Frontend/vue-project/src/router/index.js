@@ -14,6 +14,7 @@ import BeritaView from "../views/berita.vue";
 import ContentView from "../views/contentberita.vue";
 import LembagaView from "../views/lembaga.vue";
 import SejarahView from "../views/sejarah.vue";
+import GaleriView from "../views/galeri.vue";
 import PendidikanView from "../views/datapendidikan.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
@@ -65,6 +66,7 @@ const routes = [
   { path: '/sejarah', component: SejarahView },
   { path: '/wilayah', component: WilayahView },
   { path: '/berita', component: BeritaView },
+  { path: '/galeri-foto', component: GaleriView },
   { path: '/lembaga', component: LembagaView },
   { path: '/data-pendidikan', component: PendidikanView },
   { path: '/contentberita', component: ContentView },

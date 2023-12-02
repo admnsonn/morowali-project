@@ -104,7 +104,7 @@ export default {
       media: [
         {
           title: "Galeri Foto",
-          link: "#",
+          link: "/galeri-foto",
         },
         {
           title: "Berita",
