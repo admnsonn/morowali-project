@@ -276,11 +276,6 @@ export default {
   background-color: #003366;
 }
 
-/* Remove margin-top */
-.mt-0 {
-  margin-top: 0;
-}
-
 .tulisan_judul {
   color: #fff;
   font-weight: bold;

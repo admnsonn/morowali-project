@@ -10,7 +10,7 @@
         <section v-if="showLatestData" class="py-5 bg-light">
             <div class="container">
                 <div v-for="item in paginatedData" :key="item.id_potensi"
-                    class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow"
+                    class="border rounded row align-items-center pt-3 pb-3 mb-3 with-shadow"
                     :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
                     <!-- Display the data here -->
 

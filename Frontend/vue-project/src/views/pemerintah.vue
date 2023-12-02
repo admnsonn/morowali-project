@@ -39,12 +39,10 @@
     </div>
 
     <div class="container py-5">
-        <div class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow">
+        <div class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
+            @mouseenter="addShadow" @mouseleave="removeShadow">
             <div class="row">
-                <div class="col-md-6 ">
-                    <img src="~@/assets/Artikel.png" alt="Gambar Berita" class="img-fluid">
-                </div>
-                <div class="col-md-6 order-md-1">
+                <div class="col-md-12 order-md-1">
                     <div class="text-center text-md-start">
                         <h2 class="mb-3 d-md-none judul-artikel">
                             {{ title_artikel }}
@@ -56,9 +54,11 @@
                         </div>
                         <br>
                         <h5 class="mb-4 subjudul-artikel">{{ subtitle_artikel }}</h5>
-                        <button class="btn btn-secondary" @click="showDetail(item)">
-                            Selengkapnya
-                        </button>
+                        <a href="/lembaga">
+                            <button class="btn btn-secondary" @click="showDetail(item)">
+                                Selengkapnya
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -70,6 +70,7 @@
 export default {
     data() {
         return {
+            isHovered: false,
             imageUrl: "",
             paragraphs: "",
             visi_misi: "",
@@ -78,6 +79,13 @@ export default {
         };
     },
     methods: {
+        addShadow() {
+            this.isHovered = true;
+        },
+        removeShadow() {
+            this.isHovered = false;
+        },
+
         fetchData() {
             const apiResponse = {
                 data: {
@@ -105,6 +113,11 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
 .bg-utama {
     background-image: linear-gradient(#003366, white);
 }
@@ -158,7 +171,6 @@ export default {
 }
 
 .subjudul-artikel {
-    font-weight: bold;
     font-size: 100%;
 }
 
