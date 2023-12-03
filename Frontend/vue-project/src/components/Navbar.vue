@@ -118,7 +118,7 @@ export default {
       destinasi: [
         {
           title: "UMKM",
-          link: "#",
+          link: "/umkm",
         },
         {
           title: "Wisata",
