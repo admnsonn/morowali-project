@@ -108,5 +108,10 @@ img {
 ol {
     text-decoration: underline;
     color: #003366;
+    font-size: 17px;
+}
+
+p{
+    font-size: 17px;
 }
 </style>
