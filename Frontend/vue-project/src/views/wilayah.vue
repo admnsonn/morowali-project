@@ -117,14 +117,10 @@
       background-color: #003366;
     }
   
-    /* Remove margin-top */
-    .mt-0 {
-      margin-top: 0;
-    }
-  
-    /* Set text color to white */
     .text-white {
       color: white;
+      font-weight: bold;
+      text-shadow: 2px 2px #252525;
     }
     .text-blue {
       color: #003366 !important;

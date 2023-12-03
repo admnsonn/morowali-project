@@ -22,17 +22,18 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="d-none d-md-block">
-                                    <h2 class="mb-2 warna-judul-artikel">
+                                    <h2 class="mb-2 warna-judul-berita">
                                         {{ item.judul_potensi }}
                                     </h2>
+                                    <br>
                                 </div>
-                                <h5 class="mb-4">{{ item.sub_judul }}</h5>
-                                <h5 class="mb-4">{{ item.date }}</h5>
+                                <h5 class="mb-4 sub-berita">{{ item.sub_judul }}</h5>
+                                <h5 class="mb-4 item-berita">{{ item.date }}</h5>
                                 <p class="mb-4">{{ item.deskripsi }}</p>
                                 <a href="/contentberita">
-                                <button class="btn btn-primary" @click="showDetail(item)">
-                                    Lihat Selengkapnya
-                                </button></a>
+                                    <button class="btn btn-secondary" @click="showDetail(item)">
+                                        Lihat Selengkapnya
+                                    </button></a>
                             </div>
                         </div>
                     </div>
@@ -266,14 +267,10 @@ export default {
     background-color: #003366;
 }
 
-/* Remove margin-top */
-.mt-0 {
-    margin-top: 0;
-}
-
-/* Set text color to white */
 .text-white {
     color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px #252525;
 }
 
 .text-blue {
@@ -291,5 +288,31 @@ export default {
     font-size: 14px;
     cursor: pointer;
     border-radius: 30px;
+}
+
+.btn-secondary {
+    background-color: #003366;
+    border: none;
+    padding: 10px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.sub-berita {
+    font-weight: bold;
+}
+
+.item-berita {
+    color: #003366;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.warna-judul-berita {
+    font-weight: bold;
+    color: #003366 !important;
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <div>
       <div class="p-5 text-center bg-hero mt-0 pb-10">
-        <h1 class="mb-3 text-white">Informasi Perencanaan</h1>
-        <a class="btn btn-primary" href="/informasi" role="button">Informasi</a>
+        <h1 class="mb-3 text-white">Informasi</h1>
       </div>
       <div>
         <h2 class="text-blue mb-3 perdes-judul">{{ title }}</h2>
@@ -114,15 +113,11 @@
       background-color: #003366;
     }
   
-    /* Remove margin-top */
-    .mt-0 {
-      margin-top: 0;
-    }
-  
     /* Set text color to white */
     .text-white {
       color: white;
-      
+      font-weight: bold;
+      text-shadow: 2px 2px #252525;
     }
     .text-blue {
       color: #003366 !important;
