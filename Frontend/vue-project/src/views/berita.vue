@@ -315,4 +315,15 @@ export default {
     font-weight: bold;
     color: #003366 !important;
 }
+
+.with-shadow {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: none;
+}
+
+.with-shadow:hover,
+.with-shadow.active {
+  box-shadow: 0 0 10px 0 rgba(0, 51, 102, 0.5);
+}
+
 </style>

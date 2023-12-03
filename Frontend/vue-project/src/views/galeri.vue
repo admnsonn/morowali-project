@@ -6,9 +6,10 @@
 
     <div class="container mt-4">
         <div class="row justify-content-between">
-            <div v-for="(head, index) in galeri" :key="index" class="col-4 mb-4 ml-2 border rounded ">
+            <div v-for="(head, index) in galeri" :key="index" class="col-4 mb-4 ml-2 border rounded with-shadow "
+                :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
                 <div class="mb-4 mt-2 gambar-orang">
-                    <img src="~@/assets/artikel.png" alt="Latest Image" class="img-fluid" />
+                    <img src="~@/assets/Artikel.png" alt="Latest Image" class="img-fluid" />
                 </div>
                 <p class=" mb-2 mt-2 text-center galeri-description">{{ head.nama }}</p>
             </div>
@@ -24,6 +25,13 @@ export default {
         };
     },
     methods: {
+        addShadow() {
+            this.isHovered = true;
+        },
+        removeShadow() {
+            this.isHovered = false;
+        },
+
         fetchdata() {
             const apiResponse = {
                 data:
@@ -91,7 +99,17 @@ export default {
     margin-left: -2%;
 }
 
-.galeri-description{
+.galeri-description {
     font-weight: bold;
+}
+
+.with-shadow {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: none;
+}
+
+.with-shadow:hover,
+.with-shadow.active {
+  box-shadow: 0 0 10px 0 rgba(0, 51, 102, 0.5);
 }
 </style>
