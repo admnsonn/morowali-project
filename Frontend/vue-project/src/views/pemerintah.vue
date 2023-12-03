@@ -41,7 +41,7 @@
     <div class="container py-5">
         <div class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
             @mouseenter="addShadow" @mouseleave="removeShadow">
-            <div class="row">
+            <div class="row mt-4 mb-4">
                 <div class="col-md-12 order-md-1 text-center">
                     <h3 class="mb-3 d-md-none judul-artikel">
                         {{ title_artikel }}
