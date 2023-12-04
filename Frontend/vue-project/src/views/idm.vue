@@ -7,7 +7,6 @@
     <div class="container py-5">
       <div class="row">
         <div class="col">
-
           <div class="row row-cols-4 mb-4">
             <div class="col text-white">
               <div class="gradient-skor-saat-ini p-2 pb-4 rounded">
@@ -188,10 +187,6 @@ export default {
   font-size: 14px;
   cursor: pointer;
   border-radius: 10px;
-}
-
-.text-blue {
-  color: #003366 !important;
 }
 
 .gradient-skor-saat-ini {
