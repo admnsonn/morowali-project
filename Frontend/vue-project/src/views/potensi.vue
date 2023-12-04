@@ -15,7 +15,7 @@
           <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
             <div class="col-12 d-md-none mb-4">
-              <img src="/src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img src="src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
@@ -43,7 +43,7 @@
 
             <!-- INI UNTUK GAMBAR PADA DESKTOP -->
             <div class="col-md-6 order-md-2 d-none d-md-block">
-              <img src="src/assets/img//Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img src="src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
             </div>
           </div>
         </div>
