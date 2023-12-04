@@ -3,6 +3,7 @@ package route
 import (
 	serviceberita "backendpgx7071/service/serviceBerita"
 	servicekreativitas "backendpgx7071/service/serviceKreativitas"
+	servicemisidesa "backendpgx7071/service/serviceMisidesa"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	servicevisi "backendpgx7071/service/serviceVisi"
@@ -51,7 +52,10 @@ func Routes(router *gin.Engine) {
 	{
 		Visi.GET("/", servicevisi.Visi_desa)
 	}
-
+	Misi := router.Group("/misi")
+	{
+		Misi.GET("/", servicemisidesa.Misi_desa)
+	}
 	Wilayah_desa := router.Group("/Wilayah_desa")
 	{
 		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
