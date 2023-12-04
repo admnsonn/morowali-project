@@ -313,4 +313,11 @@ export default {
 .galeri-description {
   font-weight: bold;
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}
 </style>
