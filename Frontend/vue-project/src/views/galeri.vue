@@ -9,7 +9,7 @@
             <div v-for="(head, index) in galeri" :key="index" class="col-4 mb-4 ml-2 border rounded with-shadow "
                 :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
                 <div class="mb-4 mt-2 gambar-orang">
-                    <img src="img/Artikel.png" alt="Latest Image" class="img-fluid" />
+                    <img src="src/assets/img//Artikel.png" alt="Latest Image" class="img-fluid" />
                 </div>
                 <p class=" mb-2 mt-2 text-center galeri-description">{{ head.nama }}</p>
             </div>

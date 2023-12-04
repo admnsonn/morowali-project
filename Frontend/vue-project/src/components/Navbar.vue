@@ -17,10 +17,10 @@
         <div className="container">
           <router-link to="/" class="navbar-brand d-flex align-items-center">
             <img
-              src="img/Logo.png"
+              src="../assets/../assets/img/Logo.png"
               alt="Logo Desa"
               height="50"
-              class="me-3"
+              class="me-3"  
             />
             <div>
               <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>

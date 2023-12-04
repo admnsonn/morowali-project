@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-lg-4 mb-4">
             <img
-              src="img/Logo.png"
+              src="../assets/img/Logo.png"
               alt="Logo Desa"
               height="50"
               class="me-3"

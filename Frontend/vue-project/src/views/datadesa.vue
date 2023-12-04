@@ -48,7 +48,7 @@ export default {
         fetchData() {
             const apiResponse = {
                 data: {
-                    imageUrl: "img/desa.png",
+                    imageUrl: "src/assets/img//desa.png",
                     text_pertama:
                         ["Halaman ini berisi tautan menuju informasi mengenai Basis Data Desa. Ada dua jenis data yang dimuat dalam sistem ini, yakni basis data kependudukan dan basis data sumber daya desa. Silahkan klik pada tautan berikut untuk mendapatkan tampilan data statistik per kategori :"],
                     text1: 'Data Wilayah Administratif ',
