@@ -1,63 +1,65 @@
 <template>
   <!-- Hero Section -->
-  <div class="p-5 text-center bg-hero mt-0 pb-10">
+  <div class="p-3 text-center bg-hero mt-0 pb-5">
     <h1 class="mb-3 text-white">UMKM</h1>
     <a class="btn btn-primary" href="" role="button">Destinasi</a>
   </div>
   <div>
     <div>
       <!-- Filter Section -->
-      <div class="filter-section p-4 filter-umkm">
-    <!-- Add your icon for filtering here -->
-    <div class="row align-items-center">
-      <div class="col-md-1 mb-2">
-        <img src="img/filter.png" alt="Filter Icon" class="filter-icon">
+      <div class="filter-section p-3 filter-umkm" @click="toggleFilters">
+        <div class="row align-items-center">
+          <div class="col-md-1 mb-2">
+            <img src="img/filter.png" alt="Filter Icon" class="filter-icon">
+          </div>
+          <div class="col-md-11 d-flex flex-wrap align-items-center">
+            <!-- Four Dropdown Boxes -->
+            <div class="mb-2" v-show="showFilters">
+              <!-- Dropdown 1 -->
+              <select class="dropdown" v-model="dropdown1">
+                <option value="" disabled selected>Select Option 1</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </select>
+            </div>
+
+            <div class="mb-2" v-show="showFilters">
+              <!-- Dropdown 2 -->
+              <select class="dropdown" v-model="dropdown2">
+                <option value="" disabled selected>Select Option 2</option>
+                <option value="optionA">Option A</option>
+                <option value="optionB">Option B</option>
+                <option value="optionC">Option C</option>
+              </select>
+            </div>
+
+            <div class="mb-2" v-show="showFilters">
+              <!-- Dropdown 3 -->
+              <select class="dropdown" v-model="dropdown3">
+                <option value="" disabled selected>Select Option 3</option>
+                <option value="valueX">Value X</option>
+                <option value="valueY">Value Y</option>
+                <option value="valueZ">Value Z</option>
+              </select>
+            </div>
+
+            <div class="mb-2" v-show="showFilters">
+              <!-- Dropdown 4 -->
+              <select class="dropdown" v-model="dropdown4">
+                <option value="" disabled selected>Select Option 4</option>
+                <option value="alpha">Alpha</option>
+                <option value="beta">Beta</option>
+                <option value="gamma">Gamma</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-11 d-flex flex-wrap align-items-center">
-        <!-- Four Dropdown Boxes -->
-        <div class="mb-2">
-          <select class="dropdown" v-model="dropdown1">
-            <option value="" disabled selected>Select Option 1</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
-        </div>
-
-        <div class="mb-2">
-          <select class="dropdown" v-model="dropdown2">
-            <option value="" disabled selected>Select Option 2</option>
-            <option value="optionA">Option A</option>
-            <option value="optionB">Option B</option>
-            <option value="optionC">Option C</option>
-          </select>
-        </div>
-
-        <div class="mb-2">
-          <select class="dropdown" v-model="dropdown3">
-            <option value="" disabled selected>Select Option 3</option>
-            <option value="valueX">Value X</option>
-            <option value="valueY">Value Y</option>
-            <option value="valueZ">Value Z</option>
-          </select>
-        </div>
-
-        <div class="mb-2">
-          <select class="dropdown" v-model="dropdown4">
-            <option value="" disabled selected>Select Option 4</option>
-            <option value="alpha">Alpha</option>
-            <option value="beta">Beta</option>
-            <option value="gamma">Gamma</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
 
       <!-- UMKM Cards Section -->
-      <div class="umkm-cards-section row">
-        <!-- UMKM Cards using Bootstrap grid system -->
-        <div v-for="umkm in umkms" :key="umkm.id" class="col-md-6 mb-4">
+      <div class="umkm-cards-section row mx-0">
+        <div v-for="umkm in pagedUmkms" :key="umkm.id" class="col-md-6 mb-4">
           <div class="umkm-card">
             <img :src="umkm.imageUrl" alt="umkm image" class="img-fluid" />
             <h2 class="umkm-title">{{ umkm.title }}</h2>
@@ -65,8 +67,11 @@
             <p class="umkm-phone">{{ umkm.phoneNumber }}</p>
           </div>
         </div>
-
-        
+      </div>
+      <div class="pagination-controls text-center mt-4">
+        <button @click="prevPage" :disabled="currentPage === 1">Previous Page</button>
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+        <button @click="nextPage" :disabled="currentPage === totalPages">Next Page</button>
       </div>
     </div>
   </div>
@@ -83,7 +88,39 @@ export default {
       dropdown2: '',
       dropdown3: '',
       dropdown4: '',
+      showFilters: false,
+      currentPage: 1,
+      perPage: 6,
     };
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.umkms.length / this.perPage);
+    },
+    startIndex() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    endIndex() {
+      return this.currentPage * this.perPage;
+    },
+    pagedUmkms() {
+      return this.umkms.slice(this.startIndex, this.endIndex);
+    },
+  },
+  methods: {
+    toggleFilters() {
+      this.showFilters = !this.showFilters;
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
   },
   mounted() {
 
@@ -97,7 +134,7 @@ export default {
         { id: 6, name: 'UMKM 6', imageUrl: 'img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
         { id: 7, name: 'UMKM 7', imageUrl: 'img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
       ];
-    }, 1000);
+    }, 100);
 
   },
 };
@@ -211,6 +248,78 @@ export default {
   flex: 0 0 50%;
   max-width: 50%;
   padding: 0 15px;
+}
+.pagination-controls {
+    margin-top: 20px;
+  }
+
+  .pagination-controls button {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .pagination-controls span {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #003366;
+  }
+@media (max-width: 768px) {
+  .bg-hero {
+    padding: 3rem 1rem;
+  }
+
+  .btn-primary {
+    margin-top: 1rem;
+  }
+
+  .filter-section {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .filter-icon {
+    font-size: 16px;
+  }
+
+  .dropdown {
+    margin: 0 5px;
+  }
+
+  .umkm-cards-section {
+    margin-left: 5px;
+    margin-right: 5px;
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .umkm-card {
+    margin-top: 20px;
+  }
+  
+  .umkm-title {
+    font-size: 20px;
+  }
+
+  .umkm-address,
+  .umkm-phone {
+    font-size: 13px;
+  }
+
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 5px;
+  }
 }
 </style>
 

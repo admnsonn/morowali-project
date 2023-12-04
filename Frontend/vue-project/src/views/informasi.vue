@@ -8,6 +8,7 @@
         <p v-for="(paragraph, index) in paragraphs" :key="index" class="perdes-paragraph">{{ paragraph }}</p>
   
         <!-- Tabel -->
+        <div class="table-container">
         <table class="table">
           <thead>
             <tr>
@@ -41,6 +42,8 @@
         </div>
       </div>
     </div>
+    </div>
+
   </template>
   
   <script>
@@ -185,15 +188,57 @@
     }
 
     .pagination button {
-        margin: 0 10px;
-        padding: 8px;
-        cursor: pointer;
-        border: 1px solid #ddd;
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      cursor: pointer;
+      border-radius: 5px;
     }
 
     .pagination button:disabled {
-        cursor: not-allowed;
-        color: #aaa;
-        border: 1px solid #ccc;
+      background-color: #ccc;
+    cursor: not-allowed;
     }
-  </style>
+    .pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #003366;
+  }
+  .table-container {
+    overflow-x: auto;
+  }
+
+  @media (max-width: 768px) {
+    .bg-hero {
+      padding: 3rem 1rem;
+    }
+
+    .perdes-judul {
+      font-size: 24px;
+      margin-top: 30px;
+    }
+
+    .perdes-paragraph {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .table {
+      width: 100%;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .pagination {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .pagination button,
+    .pagination span {
+      font-size: 12px;
+    }
+  }
+</style>
