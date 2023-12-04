@@ -53,7 +53,7 @@
       fetchData() {
         const apiResponse = {
           data: {
-            imageUrl: "src/assets/sdesa.png",
+            imageUrl: "~@/assets/sdesa.png",
             title: "Desa Lamberea",
             paragraphs :[
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In felis urna, vehicula ut felis non, venenatis lacinia urna. Nullam eget nibh ante. Phasellus sed mi id turpis luctus congue ut sed neque. Pellentesque quis pretium justo, convallis imperdiet felis. Proin porttitor tristique varius.",
