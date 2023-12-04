@@ -3,12 +3,14 @@ package route
 import (
 	serviceberita "backendpgx7071/service/serviceBerita"
 	servicekreativitas "backendpgx7071/service/serviceKreativitas"
-	servicemisidesa "backendpgx7071/service/serviceMisidesa"
+	servicemisidesa "backendpgx7071/service/serviceMisiDesa"
+	serviceperaturandesa "backendpgx7071/service/servicePeraturanDesa"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	servicevisi "backendpgx7071/service/serviceVisi"
 	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
+
 	"backendpgx7071/service/servicelogin"
 
 	"github.com/gin-gonic/gin"
@@ -52,10 +54,17 @@ func Routes(router *gin.Engine) {
 	{
 		Visi.GET("/", servicevisi.Visi_desa)
 	}
+
 	Misi := router.Group("/misi")
 	{
 		Misi.GET("/", servicemisidesa.Misi_desa)
 	}
+
+	Peraturan := router.Group("/peraturan")
+	{
+		Peraturan.GET("/", serviceperaturandesa.Peraturan_desa)
+	}
+
 	Wilayah_desa := router.Group("/Wilayah_desa")
 	{
 		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
