@@ -122,7 +122,7 @@ export default {
         },
         {
           title: "Wisata",
-          link: "#",
+          link: "/wisata",
         },
       ],
     };
