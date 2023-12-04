@@ -34,7 +34,7 @@ export default {
             const apiResponse = {
                 data: {
                     title: "Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP",
-                    imageurl: "src/assets/berita-terkini.png",
+                    imageurl: "img/berita-terkini.png",
                     subtitle: "PENYERAHAN BANTUAN ALKES KE RS SARKIES AISYIAH KUDUS.",
                     kategori: "berita",
                     date: "08-09-2019",
