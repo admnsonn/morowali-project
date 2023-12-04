@@ -19,6 +19,8 @@ import PendidikanView from "../views/datapendidikan.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
 import UmkmView from "../views/umkm.vue";
+import ArtikelView from "../views/artikel.vue";
+
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -67,6 +69,7 @@ const routes = [
   { path: '/sejarah', component: SejarahView },
   { path: '/wilayah', component: WilayahView },
   { path: '/berita', component: BeritaView },
+  { path: '/artikel', component: ArtikelView },
   { path: '/galeri-foto', component: GaleriView },
   { path: '/umkm', component: UmkmView },
   { path: '/lembaga', component: LembagaView },

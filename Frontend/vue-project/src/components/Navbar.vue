@@ -112,7 +112,7 @@ export default {
         },
         {
           title: "Artikel",
-          link: "#",
+          link: "/artikel",
         },
       ],
       destinasi: [
