@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-md-6">
             <!-- Gambar Sejarah Desa -->
-            <img :src="imageUrl" alt="Desa Lamberea" class="img-fluid" />
+            <img v-bind:src="imageUrl" alt="Desa Lamberea" class="img-fluid" />
           </div>
           <div class="col-md-6">
             <!-- Judul Sejarah Desa -->
@@ -27,7 +27,7 @@
       <div class="row">
         <div v-for="(head, index) in kepalaDesa" :key="index" class="col-md-4 mb-4">
           <!-- Foto Kepala Desa -->
-          <img :src="head.imageUrl" :alt="head.name" class="img-fluid foto-kepdes" />
+          <img v-bind:src="head.imageUrl" :alt="head.name" class="img-fluid foto-kepdes" />
 
           <!-- Periode Tahun -->
           <div class="text-center mt-2">
