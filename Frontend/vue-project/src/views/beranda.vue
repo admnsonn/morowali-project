@@ -207,14 +207,14 @@ export default {
 
 <style scoped>
 .gambar {
-  position: relative;
   text-align: center;
+  margin: auto;
 }
 
 .text_tt {
   color: aliceblue;
   position: absolute;
-  margin-left: 20%;
+  left: 20%;
   top: 40%;
   transform: translate(-40%, -50%);
   font-weight: bold;
@@ -320,4 +320,59 @@ export default {
     width: 100%;
   }
 }
+
+
+@media only screen and (max-width: 1200px) {
+  /* For medium-sized screens: */
+  .text_tt {
+    left: 10%;
+    top: 40%;
+    transform: translate(-10%, -50%);
+  }
+
+  .text_st {
+    margin-left: 10%;
+    top: 50%;
+    transform: translate(-11%, -50%);
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  /* For small-sized screens: */
+  .text_tt {
+    left: 5%;
+    top: 40%;
+    transform: translate(-5%, -50%);
+  }
+
+  .text_st {
+    margin-left: 5%;
+    top: 50%;
+    transform: translate(-6%, -50%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .text_tt {
+    position: absolute;
+    left: 40%;
+    font-size: 27px;
+    top: 11%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    margin: 0;
+  }
+
+  .text_st {
+    position: absolute;
+    font-size: 15px;
+    left: 40%;
+    top: 19%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    margin: 0;
+  }
+}
+
 </style>
