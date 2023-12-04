@@ -3,7 +3,7 @@ import BerandaView from "../views/beranda.vue";
 import PemerintahView from "../views/pemerintah.vue";
 import ProfilView from "../views/profildesa.vue";
 import DatadesaView from "../views/datadesa.vue";
-import DestinasiView from "../views/destinasi.vue";
+import WisataView from "../views/wisata.vue";
 import IdmView from "../views/idm.vue";
 import InformasiView from "../views/informasi.vue";
 import LoginView from "../views/login.vue";
@@ -58,7 +58,7 @@ const routes = [
   { path: '/profil-desa', component: ProfilView },
   { path: '/pemerintah-desa', component: PemerintahView },
   { path: '/data-desa', component: DatadesaView },
-  { path: '/destinasi', component: DestinasiView },
+  { path: '/wisata', component: WisataView },
   { path: '/idm', component: IdmView },
   { path: '/informasi', component: InformasiView },
   { path: '/login', component: LoginView },

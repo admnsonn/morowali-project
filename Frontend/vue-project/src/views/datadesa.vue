@@ -11,10 +11,10 @@
                     <a href="#"> {{ text1 }}</a>
                 </li>
                 <li>
-                    <a href="#"> {{ text2 }}</a>
+                    <a href="/data-pendidikan"> {{ text2 }}</a>
                 </li>
                 <li>
-                    <a href="/data-pendidikan"> {{ text3 }}</a>
+                    <a href="#"> {{ text3 }}</a>
                 </li>
                 <li>
                     <a href="#"> {{ text4 }}</a>

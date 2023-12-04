@@ -8,64 +8,65 @@
     <div>
       <!-- Filter Section -->
       <div class="filter-section p-4 filter-umkm">
-        <!-- Add your icon for filtering here -->
+    <!-- Add your icon for filtering here -->
+    <div class="row align-items-center">
+      <div class="col-md-1 mb-2">
         <img src="@/assets/filter.png" alt="Filter Icon" class="filter-icon">
-
-        <!-- Four Dropdown Boxes -->
-        <select class="dropdown" v-model="dropdown1">
-          <option value="" disabled selected>Select Option 1</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-
-        <select class="dropdown" v-model="dropdown2">
-          <option value="" disabled selected>Select Option 2</option>
-          <option value="optionA">Option A</option>
-          <option value="optionB">Option B</option>
-          <option value="optionC">Option C</option>
-        </select>
-
-        <select class="dropdown" v-model="dropdown3">
-          <option value="" disabled selected>Select Option 3</option>
-          <option value="valueX">Value X</option>
-          <option value="valueY">Value Y</option>
-          <option value="valueZ">Value Z</option>
-        </select>
-
-        <select class="dropdown" v-model="dropdown4">
-          <option value="" disabled selected>Select Option 4</option>
-          <option value="alpha">Alpha</option>
-          <option value="beta">Beta</option>
-          <option value="gamma">Gamma</option>
-        </select>
       </div>
+      <div class="col-md-11 d-flex flex-wrap align-items-center">
+        <!-- Four Dropdown Boxes -->
+        <div class="mb-2">
+          <select class="dropdown" v-model="dropdown1">
+            <option value="" disabled selected>Select Option 1</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <select class="dropdown" v-model="dropdown2">
+            <option value="" disabled selected>Select Option 2</option>
+            <option value="optionA">Option A</option>
+            <option value="optionB">Option B</option>
+            <option value="optionC">Option C</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <select class="dropdown" v-model="dropdown3">
+            <option value="" disabled selected>Select Option 3</option>
+            <option value="valueX">Value X</option>
+            <option value="valueY">Value Y</option>
+            <option value="valueZ">Value Z</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <select class="dropdown" v-model="dropdown4">
+            <option value="" disabled selected>Select Option 4</option>
+            <option value="alpha">Alpha</option>
+            <option value="beta">Beta</option>
+            <option value="gamma">Gamma</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
       <!-- UMKM Cards Section -->
-      <div class="umkm-cards-section ">
-        <!-- First Column -->
-        <div class="umkm-column">
-          <!-- UMKM Card 1 -->
-          <div v-for="umkm in umkms" :key="umkm.id" class="umkm-card">
+      <div class="umkm-cards-section row">
+        <!-- UMKM Cards using Bootstrap grid system -->
+        <div v-for="umkm in umkms" :key="umkm.id" class="col-md-6 mb-4">
+          <div class="umkm-card">
             <img :src="umkm.imageUrl" alt="umkm image" class="img-fluid" />
             <h2 class="umkm-title">{{ umkm.title }}</h2>
             <p class="umkm-address">{{ umkm.address }}</p>
             <p class="umkm-phone">{{ umkm.phoneNumber }}</p>
-
           </div>
         </div>
 
-        <!-- Second Column -->
-        <div class="umkm-column">
-          <!-- UMKM Card 5 -->
-          <div v-for="umkm in secondColumnUmkms" :key="umkm.id" class="umkm-card">
-            <img :src="umkm.imageUrl" alt="umkm image" class="img-fluid" />
-            <h2 class="umkm-title">{{ umkm.title }}</h2>
-            <p class="umkm-address">{{ umkm.address }}</p>
-            <p class="umkm-phone">{{ umkm.phoneNumber }}</p>
-
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -94,20 +95,10 @@ export default {
         { id: 4, name: 'UMKM 4', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
         { id: 5, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
         { id: 6, name: 'UMKM 6', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        // Add more simulated data as needed
+        { id: 7, name: 'UMKM 7', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
       ];
-    }, 1000); // Simulating a delay of 1000 milliseconds (1 second)
-    setTimeout(() => {
-      this.secondColumnUmkms = [
-        { id: 7, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 8, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 9, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 10, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 5', phoneNumber: '+123456789' },
-        { id: 11, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 12, name: 'UMKM 5', imageUrl: 'src/assets/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+    }, 1000);
 
-      ];
-    }, 2000); // Simulating a delay of 2000 milliseconds (2 seconds)
   },
 };
 </script>
@@ -117,7 +108,7 @@ export default {
   background-color: #003366;
 }
 
-/* Set text color to white */
+
 .text-white {
   color: white;
   font-weight: bold;
@@ -142,24 +133,15 @@ export default {
 }
 
 .filter-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  margin-left: 150px;
-  margin-right: 150px;
-  padding: 15px;
+  margin-left: 5px;
+  margin-right: 15px;
 }
 
-/* Style for the filter icon */
 .filter-icon {
   font-size: 20px;
-  margin-right: 10px;
 }
 
-/* Style for the dropdown boxes */
 .dropdown {
-  /* Add your styling for the dropdown boxes */
   margin: 0 10px;
   padding: 8px;
   border: 1px solid #ccc;
@@ -176,13 +158,6 @@ export default {
   margin-right: 150px;
 }
 
-/* Style for the UMKM Columns */
-.umkm-column {
-  flex: 0 0 48%;
-  /* Adjust the width of the columns as needed */
-}
-
-/* Style for UMKM Cards */
 .umkm-card {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -226,6 +201,16 @@ export default {
   align-items: center;
   color: #555;
   /* Adjust the color as needed */
+}
+.row {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 15px;
 }
 </style>
 
