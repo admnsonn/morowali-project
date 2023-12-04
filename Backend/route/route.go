@@ -6,11 +6,11 @@ import (
 	servicemisidesa "backendpgx7071/service/serviceMisiDesa"
 	serviceperaturandesa "backendpgx7071/service/servicePeraturanDesa"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
+	servicesambutandesa "backendpgx7071/service/serviceSambutanDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	servicevisi "backendpgx7071/service/serviceVisi"
 	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
-
 	"backendpgx7071/service/servicelogin"
 
 	"github.com/gin-gonic/gin"
@@ -63,6 +63,11 @@ func Routes(router *gin.Engine) {
 	Peraturan := router.Group("/peraturan")
 	{
 		Peraturan.GET("/", serviceperaturandesa.Peraturan_desa)
+	}
+
+	Sambutan := router.Group("/sambutan")
+	{
+		Sambutan.GET("/", servicesambutandesa.Sambutan_desa)
 	}
 
 	Wilayah_desa := router.Group("/Wilayah_desa")
