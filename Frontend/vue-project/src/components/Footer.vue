@@ -14,6 +14,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 mb-4">
+            <br>
             <img src="../assets/img/Logo.png" alt="Logo Desa" height="50" class="me-3" />
             <div>
               <span class="fw-bold nama-desa text-white">Desa Bahomoleo</span>
@@ -22,6 +23,7 @@
           </div>
 
           <div class="col-md-4 mb-4">
+            <br>
             <ul class="nav justify-content-start">
               <li class="nav-item">
                 <h2 class="nav-link text-white tulisan">Alamat Kantor</h2>
@@ -33,6 +35,7 @@
           </div>
 
           <div class="col-md-4 mb-4">
+            <br>
             <ul class="nav justify-content-end">
               <li class="nav-item">
                 <h2 class="nav-link text-white tulisan">Kontak Person</h2>
