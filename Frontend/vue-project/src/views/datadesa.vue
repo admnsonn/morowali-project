@@ -52,7 +52,7 @@ export default {
                     text_pertama:
                         ["Halaman ini berisi tautan menuju informasi mengenai Basis Data Desa. Ada dua jenis data yang dimuat dalam sistem ini, yakni basis data kependudukan dan basis data sumber daya desa. Silahkan klik pada tautan berikut untuk mendapatkan tampilan data statistik per kategori :"],
                     text1: 'Data Wilayah Administratif ',
-                    text2: 'Data Pendidikan Dalam KK',
+                    text2: 'Data Pendidikan',
                     text3: 'Data Pekerjaan ',
                     text4: 'Data Pendidikan Ditempuh ',
                     text5: 'Data Agama ',
