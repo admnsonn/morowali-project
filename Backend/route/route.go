@@ -8,6 +8,7 @@ import (
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	servicesambutandesa "backendpgx7071/service/serviceSambutanDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
+	serviceumum "backendpgx7071/service/serviceUmum"
 	servicevisi "backendpgx7071/service/serviceVisi"
 	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
@@ -20,6 +21,7 @@ func Routes(router *gin.Engine) {
 
 	router.POST("/login", servicelogin.Login)
 	router.POST("/validasi", servicelogin.ValidasiToken)
+	router.POST("/link_url", serviceumum.Cek_URL)
 
 	beritaRoutes := router.Group("/berita")
 	{

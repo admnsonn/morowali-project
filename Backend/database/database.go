@@ -8,6 +8,7 @@ import (
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	servicesambutandesa "backendpgx7071/service/serviceSambutanDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
+	serviceumum "backendpgx7071/service/serviceUmum"
 	servicevisi "backendpgx7071/service/serviceVisi"
 	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
@@ -52,5 +53,7 @@ func NewConnect() *pgxpool.Pool {
 	servicemisidesa.InitiateDB(db)
 	serviceperaturandesa.InitiateDB(db)
 	servicesambutandesa.InitiateDB(db)
+	serviceumum.InitiateDB(db)
+
 	return db
 }
