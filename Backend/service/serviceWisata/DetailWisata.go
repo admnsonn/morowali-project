@@ -54,7 +54,7 @@ func Detailwisata(c *gin.Context) {
 		link_lokasi    ,
 		alamat         ,
 		foto_wisata    
-	from wisata where id_wisata = $1
+	from dev.wisata where id_wisata = $1
 
 	`
 

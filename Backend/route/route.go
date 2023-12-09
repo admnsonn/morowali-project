@@ -13,6 +13,7 @@ import (
 	servicewilayahdesa "backendpgx7071/service/serviceWilayahDesa"
 	servicewisata "backendpgx7071/service/serviceWisata"
 	"backendpgx7071/service/servicelogin"
+	sevicewargadesabyamin "backendpgx7071/service/seviceWargaDesabyAmin"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,7 +38,7 @@ func Routes(router *gin.Engine) {
 
 	wisataRoutes := router.Group("/wisata")
 	{
-		wisataRoutes.GET("/", servicewisata.Semuawisata)
+		wisataRoutes.GET("/list/:id", servicewisata.Semuawisata)
 		wisataRoutes.GET("/:id", servicewisata.Detailwisata)
 	}
 
@@ -77,6 +78,13 @@ func Routes(router *gin.Engine) {
 		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
 		Wilayah_desa.GET("/warga", servicewilayahdesa.Total_warga)
 		Wilayah_desa.GET("/desa", servicewilayahdesa.Luas_desa)
+	}
+
+	warga := router.Group("/admin") // Menambahkan grup "/warga" di dalam grup "/admin"
+	{
+		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
+		warga.GET("/warga/list/:id", sevicewargadesabyamin.Warga_desa_by_admin)
+		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
 	}
 
 }

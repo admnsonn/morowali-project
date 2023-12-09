@@ -18,6 +18,8 @@ func Semuawisata(c *gin.Context) {
 		ID     int    `json:"id_wisata"`
 	}
 
+	id := c.Param("id")
+
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
@@ -31,12 +33,12 @@ func Semuawisata(c *gin.Context) {
 		a.foto_wisata ,
 		a.no_telp ,
 		a.id_wisata 
-	from wisata a, desa d  
+	from dev.wisata a, dev.desa d  
 	where a.desa_id  = d.id_desa 
-	and d.nama_desa = 'Morowali'
+	and d.id_desa = $1
 	`
 
-	row, err := tx.Query(ctx, wisata)
+	row, err := tx.Query(ctx, wisata, id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
