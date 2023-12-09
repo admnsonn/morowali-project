@@ -15,7 +15,6 @@ func Warga_desa_by_admin(c *gin.Context) {
 		NIK            int    `json:"nik"`
 		NamaLengkap    string `json:"nama_lengkap"`
 		AlamatPengguna string `json:"alamat_pengguna"`
-		KodePos        string `json:"kode_pos"`
 		NoTelp         string `json:"no_telp"`
 	}
 
@@ -56,7 +55,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 	defer row.Close()
 
 	var Tampung_list_warga []Data_list_warga_kontainer
-	var rt, rw string
+	var rt, rw, kode_pos string
 
 	for row.Next() {
 		var ambil Data_list_warga_kontainer
@@ -68,7 +67,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil.AlamatPengguna,
 			&rt,
 			&rw,
-			&ambil.KodePos,
+			&kode_pos,
 			&ambil.NoTelp,
 		)
 
@@ -86,7 +85,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 	if len(Tampung_list_warga) > 0 {
 
-		Tampung_list_warga[0].AlamatPengguna = Tampung_list_warga[0].AlamatPengguna + ", RT: " + rt + ", RW: " + rw + ", Kode Post: " + Tampung_list_warga[0].KodePos
+		Tampung_list_warga[0].AlamatPengguna = Tampung_list_warga[0].AlamatPengguna + ", RT: " + rt + ", RW: " + rw + ", Kode Post: " + kode_pos
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
