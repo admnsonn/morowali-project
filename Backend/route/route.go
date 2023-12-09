@@ -25,7 +25,7 @@ func Routes(router *gin.Engine) {
 
 	beritaRoutes := router.Group("/berita")
 	{
-		beritaRoutes.GET("/", serviceberita.SemuaBerita)
+		beritaRoutes.GET("/list/:id", serviceberita.SemuaBerita)
 		beritaRoutes.GET("/:id", serviceberita.DetailBerita)
 	}
 

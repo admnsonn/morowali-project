@@ -18,6 +18,8 @@ func SemuaBerita(c *gin.Context) {
 		Kategori   string `json:"kategori"`
 	}
 
+	id := c.Param("id")
+
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
@@ -27,10 +29,10 @@ func SemuaBerita(c *gin.Context) {
 	var id_desa int
 
 	desa := `
-		select id_desa from dev.desa d where nama_desa = 'Morowali'
+		select id_desa from dev.desa d where id_desa = $1
 	`
 
-	err = tx.QueryRow(ctx, desa).Scan(&id_desa)
+	err = tx.QueryRow(ctx, desa, id).Scan(&id_desa)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
