@@ -31,7 +31,7 @@ func Routes(router *gin.Engine) {
 
 	umkmRoutes := router.Group("/umkm")
 	{
-		umkmRoutes.GET("/", serviceumkm.Semuaumkm)
+		umkmRoutes.GET("/list/:id", serviceumkm.Semuaumkm)
 		umkmRoutes.GET("/:id", serviceumkm.Detailumkm)
 	}
 
@@ -43,13 +43,13 @@ func Routes(router *gin.Engine) {
 
 	potensiDesa := router.Group("/potensi_desa")
 	{
-		potensiDesa.GET("/", servicepotensidesa.Semuapotensi_desa)
+		potensiDesa.GET("/list/:id", servicepotensidesa.Semuapotensi_desa)
 		potensiDesa.GET("/:id", servicepotensidesa.Detailpotensi_desa)
 	}
 
 	Kreatifitas := router.Group("/kreatifitas")
 	{
-		Kreatifitas.GET("/", servicekreativitas.Kreatifitas_desa)
+		Kreatifitas.GET("/list/:id", servicekreativitas.Kreatifitas_desa)
 	}
 
 	Visi := router.Group("/visi")

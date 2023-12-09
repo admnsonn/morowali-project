@@ -46,9 +46,8 @@ func Detailpotensi_desa(c *gin.Context) {
 		created_at       ,
 		created_by       ,
 		update_at        ,
-		updated_by       ,
-		sub_judul        
-	from potensi_desa where id_potensi = $1
+		updated_by       
+	from dev.potensi_desa where id_potensi = $1
 	
 	`
 
@@ -62,7 +61,6 @@ func Detailpotensi_desa(c *gin.Context) {
 		&ambil.CreatedBy,
 		&ambil.UpdatedAt,
 		&ambil.UpdatedBy,
-		&ambil.SubJudul,
 	)
 
 	if err != nil {

@@ -54,9 +54,8 @@ func Detailumkm(c *gin.Context) {
 		created_by,
 		update_at,
 		updated_by,
-		link_lokasi,
 		alamat
-	from umkm where id_umkm = $1
+	from dev.umkm where id_umkm = $1
 	
 	`
 
@@ -73,7 +72,6 @@ func Detailumkm(c *gin.Context) {
 		&ambil.CreatedBy,
 		&ambil.UpdatedAt,
 		&ambil.UpdatedBy,
-		&ambil.LinkLokasi,
 		&ambil.Alamat,
 	)
 

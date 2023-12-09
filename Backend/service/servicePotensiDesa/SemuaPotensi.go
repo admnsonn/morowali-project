@@ -18,30 +18,13 @@ func Semuapotensi_desa(c *gin.Context) {
 		SubJudul  string `json:"sub_judul"`
 	}
 
+	id := c.Param("id")
+
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
 	}
-
-	var id_desa int
-
-	desa := `
-		select id_desa from desa d where nama_desa = 'Morowali'
-	`
-
-	err = tx.QueryRow(ctx, desa).Scan(&id_desa)
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		err = tx.Commit(ctx)
-		if err != nil {
-			panic(err.Error())
-		}
-		return
-	}
-
-	fmt.Print(id_desa)
 
 	potensi_desa := `
 	select 
@@ -49,15 +32,14 @@ func Semuapotensi_desa(c *gin.Context) {
 	a.id_potensi       ,
 	a.judul_potensi    ,
 	a.deskripsi        ,
-	a.foto_potensi_desa,
-	a.sub_judul
+	a.foto_potensi_desa
 		
-	from potensi_desa a , desa b
+	from dev.potensi_desa a , dev.desa b
 	where a.desa_id = $1
 	and a.desa_id = B.id_desa
 	`
 
-	row, err := tx.Query(ctx, potensi_desa, id_desa)
+	row, err := tx.Query(ctx, potensi_desa, id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
@@ -79,7 +61,6 @@ func Semuapotensi_desa(c *gin.Context) {
 			&ambil.Judul,
 			&ambil.Deskripsi,
 			&ambil.Foto,
-			&ambil.SubJudul,
 		)
 
 		if err != nil {

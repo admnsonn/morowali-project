@@ -17,6 +17,8 @@ func Kreatifitas_desa(c *gin.Context) {
 		TotalPengunjung  string `json:"total_pengunjung"`
 	}
 
+	id := c.Param("id")
+
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
@@ -28,16 +30,15 @@ func Kreatifitas_desa(c *gin.Context) {
 
 	a.judul_kreatifitas,
 	a.deskripsi        ,
-	a.foto_kreatifitas ,
-	a.total_pengunjung 
-	
-	from kreatifitas a, desa b
+	a.foto_kreatifitas 
+
+	from dev.kreatifitas a, dev.desa b
 	where a.desa_id = b.id_desa
-	and b.nama_desa = 'Morowali'
+	and b.id_desa = $1
 	
 	`
 
-	row, err := tx.Query(ctx, query)
+	row, err := tx.Query(ctx, query, id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
@@ -59,7 +60,6 @@ func Kreatifitas_desa(c *gin.Context) {
 			&ambil.JudulKreatifitas,
 			&ambil.Deskripsi,
 			&ambil.FotoKreatifitas,
-			&ambil.TotalPengunjung,
 		)
 
 		if err != nil {

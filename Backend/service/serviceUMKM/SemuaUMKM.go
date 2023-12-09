@@ -19,30 +19,13 @@ func Semuaumkm(c *gin.Context) {
 		Alamat   string `json:"alamat"`
 	}
 
+	id := c.Param("id")
+
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
 	}
-
-	var id_desa int
-
-	desa := `
-		select id_desa from desa d where nama_desa = 'Morowali'
-	`
-
-	err = tx.QueryRow(ctx, desa).Scan(&id_desa)
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		err = tx.Commit(ctx)
-		if err != nil {
-			panic(err.Error())
-		}
-		return
-	}
-
-	fmt.Print(id_desa)
 
 	umkm := `
 	select 
@@ -52,12 +35,12 @@ func Semuaumkm(c *gin.Context) {
 		a.foto_umkm , 
 		a.no_telp_umkm , 
 		a.alamat 
-	from umkm a, desa b 
+	from dev.umkm a, dev.desa b 
 	where a.desa_id = b.id_desa 
 	and b.id_desa = $1
 	`
 
-	row, err := tx.Query(ctx, umkm, id_desa)
+	row, err := tx.Query(ctx, umkm, id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
