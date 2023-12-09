@@ -19,9 +19,10 @@ func Warga_desa_by_admin(c *gin.Context) {
 	}
 
 	type Request struct {
-		IDPengguna int    `json:"id_pengguna"`
-		RTPengguna string `json:"rt"`
-		RWPengguna string `json:"rw"`
+		IDPengguna       int    `json:"id_pengguna"`
+		RTPengguna       string `json:"rt"`
+		RWPengguna       string `json:"rw"`
+		TingkatPedidikan string `json:"tingkat_pendidikan"`
 	}
 
 	var input Request
@@ -44,6 +45,32 @@ func Warga_desa_by_admin(c *gin.Context) {
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
+	}
+
+	where := `coba tambah
+
+		hehe
+
+		coba dulu kaliyah
+	`
+
+	where = where + ` ` + `Aditya`
+
+	fmt.Println(where)
+
+	if input.TingkatPedidikan != "" {
+		if input.RWPengguna != "" {
+			if input.RTPengguna != "" {
+
+				// bedasarkan pendidikan, rw, rt
+				fmt.Println(where)
+
+			}
+
+			// bedasarkan pendidikan, rw
+		}
+
+		// hanya pendidikan
 	}
 
 	query := `
