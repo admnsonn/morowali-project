@@ -50,7 +50,7 @@ func DetailBerita(c *gin.Context) {
 		created_by,
 		update_at,
 		updated_by
-	from berita where id_berita = $1
+	from dev.berita where id_berita = $1
 	
 	`
 
