@@ -83,7 +83,7 @@ func Routes(router *gin.Engine) {
 	warga := router.Group("/warga") // Menambahkan grup "/warga" di dalam grup "/admin"
 	{
 		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
-		warga.GET("/list/:id", sevicewargadesabyamin.Warga_desa_by_admin)
+		warga.POST("/list", sevicewargadesabyamin.Warga_desa_by_admin)
 		warga.DELETE("/delete/:id", sevicewargadesabyamin.Delete_warga_desa)
 		warga.GET("/detail/:id", sevicewargadesabyamin.Get_detail_warga_by_admin)
 		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)

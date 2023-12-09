@@ -18,7 +18,27 @@ func Warga_desa_by_admin(c *gin.Context) {
 		NoTelp         string `json:"no_telp"`
 	}
 
-	id := c.Param("id")
+	type Request struct {
+		IDPengguna int    `json:"id_pengguna"`
+		RTPengguna string `json:"rt"`
+		RWPengguna string `json:"rw"`
+	}
+
+	var input Request
+
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&input); err != nil {
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&input); err != nil {
+			return
+		}
+
+	}
 
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
@@ -41,7 +61,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 		and role_id = 2
 	`
 
-	row, err := tx.Query(ctx, query, id)
+	row, err := tx.Query(ctx, query, input.IDPengguna)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
