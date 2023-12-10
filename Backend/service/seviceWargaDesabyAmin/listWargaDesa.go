@@ -96,7 +96,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 			c.JSON(http.StatusOK, gin.H{
 				"status":  true,
-				"message": "Wisata tersedia",
+				"message": "Data Warga Desa tersedia",
 				"data":    Tampung_list_warga,
 			})
 			err = tx.Commit(ctx)
@@ -108,7 +108,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 			c.JSON(http.StatusOK, gin.H{
 				"status":  true,
-				"message": "Wisata tidak tersedia !",
+				"message": "Data Warga Desa tidak tersedia !",
 				"data":    []Data_list_warga_kontainer{},
 			})
 			err = tx.Commit(ctx)
@@ -587,7 +587,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
-			"message": "Wisata tersedia",
+			"message": "Data Warga Desa tersedia",
 			"data":    Tampung_list_warga,
 		})
 		err = tx.Commit(ctx)
@@ -599,7 +599,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
-			"message": "Wisata tidak tersedia !",
+			"message": "Data Warga Desa tidak tersedia !",
 			"data":    []Data_list_warga_kontainer{},
 		})
 		err = tx.Commit(ctx)
