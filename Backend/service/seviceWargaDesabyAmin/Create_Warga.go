@@ -1,9 +1,12 @@
 package sevicewargadesabyamin
 
 import (
+	servicecheck "backendpgx7071/service/serviceCheck"
 	"bytes"
 	"context"
+	"crypto/md5"
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"image"
 	"image/jpeg"
@@ -15,19 +18,32 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
 	"github.com/rwcarlsen/goexif/exif"
-	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/image/draw"
 )
 
 func Create_warga(c *gin.Context) {
 	type Request struct {
-		Username     string `json:"username"`
-		Password     string `json:"password"`
-		NIK          string `json:"nik"`
-		NoTelp       string `json:"no_telp"`
-		FotoProfile  string `json:"foto_pengguna"`
-		TanggalLahir string `json:"tanggal_lahir"`
-		TempatLahir  string `json:"tempat_lahir"`
+		Username        string `json:"username"`
+		Password        string `json:"password"`
+		NIK             string `json:"nik"`
+		NoTelp          string `json:"no_telp"`
+		FotoProfile     string `json:"foto_pengguna"`
+		TanggalLahir    string `json:"tanggal_lahir"`
+		TempatLahir     string `json:"tempat_lahir"`
+		JenisKelamin    string `json:"jenis_kelamin"`
+		StatusPenikahan string `json:"status_perkawinan"`
+		Profesi         string `json:"profesi"`
+		KK              string `json:"kk"`
+		Umur            string `json:"umur"`
+		FinancialID     string `json:"kategori_financial_id"`
+		Agama           string `json:"agama"`
+		Desa            string `json:"desa"`
+		DesaID          int    `json:"id_desa"`
+		NamaLengkap     string `json:"nama_lengkap"`
+		Alamat          string `json:"alamat_pengguna"`
+		RT              string `json:"rt"`
+		RW              string `json:"rw"`
+		KodePos         string `json:"kode_pos"`
 	}
 
 	var input Request
@@ -51,75 +67,57 @@ func Create_warga(c *gin.Context) {
 	if err != nil {
 		panic(err.Error())
 	}
+	defer tx.Rollback(context.Background())
 
-	var hitung int
+	var hitung1, hitung2 int
 
-	if input.Username != "" {
-		cek_usename := `
+	cek_usename := `
 			SELECT COUNT(*)
 			FROM dev.pengguna
 			WHERE UPPER(username) = UPPER($1);
 		`
-		err = tx.QueryRow(ctx, cek_usename, input.Username).Scan(&hitung)
-
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-			err = tx.Commit(ctx)
-			if err != nil {
-				panic(err.Error())
-			}
-			return
-		}
-
-		if hitung != 0 {
-			c.JSON(http.StatusOK, gin.H{
-				"status":  true,
-				"message": "Username Sudah Terdaftar !",
-			})
-			err = tx.Commit(ctx)
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-			return
-		}
+	err = tx.QueryRow(ctx, cek_usename, input.Username).Scan(&hitung1)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	if input.NIK != "" {
-		cek_usename := `
+	if hitung1 != 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  true,
+			"message": "Username Sudah Terdaftar !",
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	cek_nik := `
 		SELECT COUNT(*)
 		FROM dev.pengguna
 		WHERE nik = $1;
 		`
-		err = tx.QueryRow(ctx, cek_usename, input.NIK).Scan(&hitung)
-
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-			err = tx.Commit(ctx)
-			if err != nil {
-				panic(err.Error())
-			}
-			return
-		}
-
-		if hitung != 0 {
-			c.JSON(http.StatusOK, gin.H{
-				"status":  true,
-				"message": "NIK Sudah Terdaftar !",
-			})
-			err = tx.Commit(ctx)
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-			return
-		}
+	err = tx.QueryRow(ctx, cek_nik, input.NIK).Scan(&hitung2)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	costFactor := 10
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), costFactor)
-	if err != nil {
-		fmt.Println("Error:", err)
+	if hitung2 != 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  true,
+			"message": "NIK Sudah Terdaftar !",
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 		return
 	}
+
+	hasher := md5.New()
+	hasher.Write([]byte(input.Password))
+	hashedPassword := hex.EncodeToString(hasher.Sum(nil))
 
 	if input.FotoProfile != "" {
 
@@ -128,6 +126,7 @@ func Create_warga(c *gin.Context) {
 		match := strings.HasPrefix(input.FotoProfile, "data:image/")
 
 		if match {
+
 			dataParts := strings.Split(input.FotoProfile, ",")
 			if len(dataParts) != 2 {
 				fmt.Println("Invalid base64 image format.")
@@ -195,61 +194,61 @@ func Create_warga(c *gin.Context) {
 		fmt.Println("FotoProfile is empty.")
 	}
 
+	var jk_id, nikah_id, agama_id int
+
+	jk_id = servicecheck.CheckGender(input.JenisKelamin)
+
+	nikah_id = servicecheck.CheckGender(input.StatusPenikahan)
+
+	agama_id = servicecheck.CheckGender(input.Agama)
+
+	// Query INSERT
 	query := `
-	INSERT INTO dev.pengguna (
-		username, 1
-		password, 2
-		role_pengguna, 3
-		role_id, 4
-		created_at, 5
-		created_by, 6
-		update_at, 7
-		updated_by, 8
-		tanggal_lahir, 9
-		tempat_lahir, 10
-		jk_id, 11
-		jenis_kelamin, 12
-		status_perkawinan_id, 13
-		status_perkawinan, 14 
-		profesi, 15 
-		nik, 16
-		kk, 17
-		umur, 18
-		kategori_financial_id, 19
-		agama, 20
-		agama_id, 21
-		desa, 22
-		desa_id, 23
-		nama_lengkap, 24
-		foto_pengguna, 25
-		alamat_id, 26
-		alamat_pengguna, 27
-		rt, 28
-		rw, 29
-		kode_pos,  30
-		no_telp 31
-	) VALUES (
-		$1, $2, $3, $4, $5, 
-		$6, $7, $8, $9, $10,
-		$11, $12, $13, $14, $15, 
-		$16, $17, $18, $19, $20,
-		$21, $22, $23, $24, $25, 
-		$26, $27, $28, $29, $30,
-		$31
-	)
+		INSERT INTO dev.pengguna (
+			username, 
+			password,
+			role_pengguna, 
+			role_id,
+			created_at, 
+			created_by, 
+			update_at, 
+			updated_by,
+			tanggal_lahir, 
+			tempat_lahir, 
+			jk_id, 
+			jenis_kelamin,
+			status_perkawinan_id, 
+			status_perkawinan, 
+			profesi, 
+			nik, 
+			kk,
+			umur, 
+			kategori_financial_id, 
+			agama,
+			agama_id, 
+			desa, 
+			desa_id,
+			nama_lengkap, 
+			foto_pengguna, 
+			alamat_pengguna, 
+			rt, 
+			rw,
+			kode_pos,  
+			no_telp
+		) VALUES (
+			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30
+		)
 	`
 
+	// Execute query dengan parameter input
 	_, err = tx.Exec(ctx, query,
-		input.Username, hashedPassword, "Warga", 2, time.Now(),
-		"Admin", time.Now(), "Admin", input.NIK, input.FotoProfile,
+		input.Username, hashedPassword, "Warga", 2, time.Now(), "Admin Sistem", time.Now(), "Admin Sistem",
+		input.TanggalLahir, input.TempatLahir, jk_id, input.JenisKelamin, nikah_id, input.StatusPenikahan,
+		input.Profesi, input.NIK, input.KK, input.Umur, input.FinancialID, input.Agama, agama_id, input.Desa, input.DesaID,
+		input.NamaLengkap, input.FotoProfile, input.Alamat, input.RT, input.RW, input.KodePos, input.NoTelp,
 	)
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  false,
-			"message": err.Error(),
-		})
-		fmt.Println(err.Error())
-		fmt.Println("ERROR DI QUERY = Pada kondisi foto kosong")
+		fmt.Println("Gagal melakukan INSERT:", err)
 		return
 	}
 
