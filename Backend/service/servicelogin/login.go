@@ -2,7 +2,10 @@ package servicelogin
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -69,15 +72,41 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	var validasi_pass string
+
+	cek_password := `
+		select password from dev.pengguna where UPPER(username) = UPPER($1)
+	`
+	err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	hasher := md5.New()
+	hasher.Write([]byte(input.Password))
+	hashedInputPassword := hex.EncodeToString(hasher.Sum(nil))
+
+	if hashedInputPassword != validasi_pass {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "Password Salah, Login Gagal",
+		})
+		err = tx.Commit(ctx)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
 	query_pengguna := `
 		select 
 			id_pengguna,
 			role_pengguna,
 			role_id,
 			desa_id,
-			token
+			COALESCE(token, '') AS token
 		from dev.pengguna
-		where username = $1
+		where UPPER(username) = UPPER($1)
 	`
 	row1, err := tx.Query(ctx, query_pengguna, input.Username)
 
