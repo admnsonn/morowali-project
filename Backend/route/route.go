@@ -7,6 +7,7 @@ import (
 	serviceperaturandesa "backendpgx7071/service/servicePeraturanDesa"
 	servicepotensidesa "backendpgx7071/service/servicePotensiDesa"
 	servicesambutandesa "backendpgx7071/service/serviceSambutanDesa"
+	servicesejarahdesa "backendpgx7071/service/serviceSejarahDesa"
 	serviceumkm "backendpgx7071/service/serviceUMKM"
 	serviceumum "backendpgx7071/service/serviceUmum"
 	servicevisi "backendpgx7071/service/serviceVisi"
@@ -87,6 +88,16 @@ func Routes(router *gin.Engine) {
 		warga.DELETE("/delete/:id", sevicewargadesabyamin.Delete_warga_desa)
 		warga.GET("/detail/:id", sevicewargadesabyamin.Get_detail_warga_by_admin)
 		warga.POST("/tambah", sevicewargadesabyamin.Create_warga)
+		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
+	}
+
+	//sejarahdesa/kepaladesa
+
+	sejarahdesa := router.Group("/sejarahdesa") // Menambahkan grup "/warga" di dalam grup "/admin"
+	{
+		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
+		sejarahdesa.GET("/kepaladesa/:id", servicesejarahdesa.Kepaladesa)
+		sejarahdesa.GET("/sejarahdesa/:id", servicesejarahdesa.Sejarahdesa)
 		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
 	}
 
