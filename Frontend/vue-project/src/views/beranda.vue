@@ -208,7 +208,7 @@ export default {
       this.currentHost = window.location.host;
       console.log("Ini adalah nilainya :", this.currentHost);
 
-      axios.post('http://localhost:7071/link_url', {
+      axios.post('http://54.169.247.84/link_url', {
         cari_link_url: this.currentHost
       })
       .then(response => {

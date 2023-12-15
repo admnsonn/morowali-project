@@ -33,7 +33,7 @@
 
     methods: {
       submitForm() {
-        axios.post('http://localhost:7071/login', {
+        axios.post('http://54.169.247.84/login', {
           username: this.formData.username,
           password: this.formData.password
         })
