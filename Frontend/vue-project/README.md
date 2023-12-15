@@ -14,6 +14,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ```sh
 npm install
+npm install leaflet
+npm install chart.js
+npm install vue-chartjs
 ```
 
 ### Compile and Hot-Reload for Development
