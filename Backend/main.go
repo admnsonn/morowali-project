@@ -55,14 +55,14 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 
 	server := &http.Server{
-		Addr:         ":7071",
+		Addr:         ":8080",
 		Handler:      router,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  30 * time.Second, // Ini adalah timeout untuk koneksi terjaga.
 	}
 
-	fmt.Println("Dijalankn pada port :7071")
+	fmt.Println("Dijalankn pada port :8080")
 
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
