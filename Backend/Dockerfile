@@ -6,6 +6,6 @@ WORKDIR /app
 COPY . .
 
 RUN go build -o main .
-EXPOSE 7071
+EXPOSE 8080
 
 CMD ["./main"]
