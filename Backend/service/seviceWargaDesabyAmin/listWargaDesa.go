@@ -16,6 +16,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 		NamaLengkap    string `json:"nama_lengkap"`
 		AlamatPengguna string `json:"alamat_pengguna"`
 		NoTelp         string `json:"no_telp"`
+		KK             int    `json:"kk"`
+		JenisKelamin   string `json:"jenis_kelamin"`
 	}
 
 	type Request struct {
@@ -59,18 +61,22 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 			id_pengguna          ,
 			nik                  ,
+			kk					 ,
+			jenis_kelamin		 ,
 			nama_lengkap         ,
 			alamat_pengguna      ,
 			rt                   ,
 			rw                   ,
 			kode_pos             ,
-			no_telp              
+			no_telp 
 			from dev.pengguna where nik = $1
 		`
 
 		err = tx.QueryRow(ctx, query_pencarian, input.NIK).Scan(
 			&ambil3.IDPengguna,
 			&ambil3.NIK,
+			&ambil3.KK,
+			&ambil3.JenisKelamin,
 			&ambil3.NamaLengkap,
 			&ambil3.AlamatPengguna,
 			&rt,
@@ -127,14 +133,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		if input.TingkatPedidikan == "SD" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -152,14 +160,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "SMP" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -177,14 +187,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "SMK" || input.TingkatPedidikan == "SMA" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -202,14 +214,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "D1" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -227,14 +241,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "D2" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -252,14 +268,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "D3" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -279,14 +297,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 			query = query + `
 			SELECT
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -304,14 +324,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else if input.TingkatPedidikan == "S2" {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -329,14 +351,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 		} else {
 			query = query + `
 			SELECT 
-						c.id_pengguna          ,
-						c.nik                  ,
-						c.nama_lengkap         ,
-						c.alamat_pengguna      ,
-						c.rt                   ,
-						c.rw                   ,
-						c.kode_pos             ,
-						c.no_telp              
+			c.id_pengguna          ,
+			c.nik                  ,
+			c.kk					 ,
+			c.jenis_kelamin		 ,
+			c.nama_lengkap         ,
+			c.alamat_pengguna      ,
+			c.rt                   ,
+			c.rw                   ,
+			c.kode_pos             ,
+			c.no_telp
 			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
 			WHERE 
 			c.id_pengguna = b.pengguna_id_pengguna 
@@ -378,6 +402,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 					err := row.Scan(
 						&ambil.IDPengguna,
 						&ambil.NIK,
+						&ambil.KK,
+						&ambil.JenisKelamin,
 						&ambil.NamaLengkap,
 						&ambil.AlamatPengguna,
 						&rt,
@@ -409,14 +435,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 			if input.RTPengguna != "" {
 				query = `
 				select
-					id_pengguna          ,
-					nik                  ,
-					nama_lengkap         ,
-					alamat_pengguna      ,
-					rt                   ,
-					rw                   ,
-					kode_pos             ,
-					no_telp
+				id_pengguna          ,
+				nik                  ,
+				kk					 ,
+				jenis_kelamin		 ,
+				nama_lengkap         ,
+				alamat_pengguna      ,
+				rt                   ,
+				rw                   ,
+				kode_pos             ,
+				no_telp
 				from dev.pengguna
 				where desa_id = $1
 				and role_id = 2
@@ -443,6 +471,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 					err := row.Scan(
 						&ambil.IDPengguna,
 						&ambil.NIK,
+						&ambil.KK,
+						&ambil.JenisKelamin,
 						&ambil.NamaLengkap,
 						&ambil.AlamatPengguna,
 						&rt,
@@ -467,14 +497,16 @@ func Warga_desa_by_admin(c *gin.Context) {
 			} else {
 				query = `
 				select
-					id_pengguna          ,
-					nik                  ,
-					nama_lengkap         ,
-					alamat_pengguna      ,
-					rt                   ,
-					rw                   ,
-					kode_pos             ,
-					no_telp
+				id_pengguna          ,
+				nik                  ,
+				kk					 ,
+				jenis_kelamin		 ,
+				nama_lengkap         ,
+				alamat_pengguna      ,
+				rt                   ,
+				rw                   ,
+				kode_pos             ,
+				no_telp
 				from dev.pengguna
 				where desa_id = $1
 				and role_id = 2
@@ -501,6 +533,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 					err := row.Scan(
 						&ambil.IDPengguna,
 						&ambil.NIK,
+						&ambil.KK,
+						&ambil.JenisKelamin,
 						&ambil.NamaLengkap,
 						&ambil.AlamatPengguna,
 						&rt,
@@ -528,6 +562,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 				select
 					id_pengguna          ,
 					nik                  ,
+					kk					 ,
+					jenis_kelamin		 ,
 					nama_lengkap         ,
 					alamat_pengguna      ,
 					rt                   ,
@@ -558,6 +594,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 				err := row.Scan(
 					&ambil.IDPengguna,
 					&ambil.NIK,
+					&ambil.KK,
+					&ambil.JenisKelamin,
 					&ambil.NamaLengkap,
 					&ambil.AlamatPengguna,
 					&rt,
