@@ -1,6 +1,6 @@
 <template>
   <div v-if="userRole === 'Admin'">
-    <h1>Footer Buat Admin Desa</h1>
+    <!-- <h1>Footer Buat Admin Desa</h1> -->
   </div>
 
   <div v-else-if="userRole === 'Warga'">

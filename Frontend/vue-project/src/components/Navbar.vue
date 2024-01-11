@@ -1,7 +1,21 @@
 <template>
   <div v-if="userRole === 'Admin'">
     <nav class="sidebar-admin">
-      <h1>INI JADI SIDE BAR</h1>
+      <button class="toggle-btn">
+        &#9776; Toggle Sidebar
+      </button>
+      <div class="sidebar-content">
+        <router-link to="/beranda-admin" class="sidebar-item"
+          >Dashboard</router-link
+        >
+        <router-link to="/user-by-admin" class="sidebar-item"
+          >Warga</router-link
+        >
+      </div>
+
+      <div>
+        <button @click="clearLocalStorage"> LOG OUT</button>
+      </div>
     </nav>
   </div>
 
@@ -20,7 +34,7 @@
               src="../assets/../assets/img/Logo.png"
               alt="Logo Desa"
               height="50"
-              class="me-3"  
+              class="me-3"
             />
             <div>
               <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
@@ -136,6 +150,13 @@ export default {
     window.removeEventListener("storage", this.handleStorageChange);
   },
   methods: {
+    clearLocalStorage() {
+      localStorage.clear();
+      console.log('Localstorage dibersihin!');
+      this.userRole = ""
+      location.reload();
+    },
+
     checkUserRole() {
       this.userRole = localStorage.getItem("role_pengguna");
       if (this.userRole === "Admin") {
@@ -171,12 +192,6 @@ export default {
   font-family: "Poppins", sans-serif !important;
 }
 
-.sidebar-admin {
-  background-color: red;
-  line-height: 2;
-  box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-}
-
 .menu {
   background-color: #003366;
   line-height: 2;
@@ -185,13 +200,9 @@ export default {
 
 .sub-text {
   font-size: 0.7em;
-  /* Ukuran font yang lebih besar untuk sub-tulisan */
   opacity: 0.7;
-  /* Opasitas untuk menampilkan sub-tulisan dengan lebih ringan */
   display: block;
-  /* Menjadikan sub-tulisan sebagai blok terpisah */
   margin-top: -10px;
-  /* Jarak antara teks utama dan sub-tulisan */
 }
 
 .nama-desa {
@@ -231,5 +242,39 @@ export default {
 .menu-item.active a,
 .menu-item:hover a {
   color: #003366;
+}
+
+.sidebar-admin {
+  background-color: #343a40; 
+  padding-top: 56px; 
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+}
+
+.toggle-btn {
+  background-color: #343a40;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  width: 100%;
+}
+
+.sidebar-item {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #555;
 }
 </style>
