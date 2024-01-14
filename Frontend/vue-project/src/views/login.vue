@@ -43,8 +43,8 @@
             if (userData.token) {
               // Simpan token ke local storage atau cookie
               this.setToken(userData.token);
-              this.setRole_id(userData.desa_id);
-              this.setDesa_id(userData.role_id);
+              this.setRole_id(userData.role_id);
+              this.setDesa_id(userData.desa_id);
               this.setRole_pengguna(userData.role_pengguna);
               this.setID_pengguna(userData.id_pengguna);
               localStorage.setItem('isLoggedIn', 'true')
