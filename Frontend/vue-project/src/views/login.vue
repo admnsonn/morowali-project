@@ -41,27 +41,25 @@
           if (response.data.status === true && response.data.data.length > 0) {
             const userData = response.data.data[0];
             if (userData.token) {
-              // Simpan token ke local storage atau cookie
+
               this.setToken(userData.token);
               this.setRole_id(userData.role_id);
               this.setDesa_id(userData.desa_id);
               this.setRole_pengguna(userData.role_pengguna);
               this.setID_pengguna(userData.id_pengguna);
               localStorage.setItem('isLoggedIn', 'true')
-  
-              // Redirect ke halaman setelah login
 
               window.location.reload()
             } else {
-              alert('Token not found in response.'); // Pesan jika token tidak ada di respons
+              alert('Token not found in response.'); 
             }
           } else {
-            alert('Login failed. Invalid credentials.'); // Pesan jika login gagal
+            alert('Login failed. Invalid credentials.'); 
           }
         })
         .catch(error => {
           console.error('Error occurred while logging in:', error);
-          alert('Login failed! Please try again.'); // Pesan jika terjadi kesalahan saat login
+          alert('Login failed! Please try again.'); 
         });
       },
       setToken(token) {
@@ -95,12 +93,11 @@
 }
 
 .template {
-    /* padding: 3%; */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /* Memastikan form berada di tengah vertikal di seluruh layar */
+
 }
 
 .centered-form {
@@ -111,7 +108,6 @@
 .form-container {
     display: inline-block;
     background-color: #fff;
-    /* padding: 1rem; */
     max-width: 350px;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
