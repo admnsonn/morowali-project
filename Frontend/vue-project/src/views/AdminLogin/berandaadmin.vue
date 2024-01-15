@@ -8,4 +8,7 @@
 
 
 <style scoped>
+.kontainer-admin{
+  border: 22%;
+}
 </style>

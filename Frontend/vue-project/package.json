@@ -19,6 +19,7 @@
     "vue": "^3.3.4",
     "vue-chart.js": "^0.2.0",
     "vue-chartjs": "^5.2.0",
+    "vue-feather": "^2.0.0",
     "vue-jwt-decode": "^0.1.0",
     "vue-router": "^4.2.5"
   },
