@@ -47,8 +47,8 @@
         </ul>
 
         <div class="sidebar-bottom">
-          <button @click="clearLocalStorage" class="btn panjang-tombol-login btn-light text-tombol">
-            Logout
+          <button @click="clearLocalStorage" class="btn panjang-tombol-login1 btn-light text-tombol text-start">
+            <span class="tulisan"><v-icon name="ai-academiaSquare" />Logout</span>
           </button>
         </div>
       </div>
@@ -334,5 +334,9 @@ ul {
 .sidebar-buttom.active span,
 .sidebar-buttom:hover span {
   color: #003366;
+}
+
+.panjang-tombol-login1 {
+  width: 250px;
 }
 </style>

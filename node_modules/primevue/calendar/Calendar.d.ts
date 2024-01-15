@@ -38,6 +38,10 @@ export interface CalendarPassThroughMethodOptions {
      */
     context: CalendarContext;
     /**
+     * Defines valid attributes.
+     */
+    attrs: any;
+    /**
      * Defines parent options.
      */
     parent: any;
@@ -326,6 +330,10 @@ export interface CalendarPassThroughOptions {
      * Used to pass attributes to the aria year's DOM element.
      */
     hiddenYear?: CalendarPassThroughOptionType;
+    /**
+     * Used to pass attributes to the datepicker mask's DOM element.
+     */
+    datepickerMask?: CalendarPassThroughOptionType;
     /**
      * Used to manage all lifecycle hooks.
      * @see {@link BaseComponent.ComponentHooks}

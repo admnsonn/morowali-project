@@ -10,6 +10,10 @@ export default {
             type: null,
             default: null
         },
+        dataKey: {
+            type: [String, Function],
+            default: 'key'
+        },
         expandedKeys: {
             type: null,
             default: null
@@ -24,7 +28,7 @@ export default {
         },
         metaKeySelection: {
             type: Boolean,
-            default: true
+            default: false
         },
         rows: {
             type: Number,
