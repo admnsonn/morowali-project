@@ -19,7 +19,7 @@
               <router-link to="/aa" class="tulisan">Beranda</router-link>
             </div>
             <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Warga Desa</router-link>
+              <router-link to="/user-by-admin" class="tulisan">Warga Desa</router-link>
             </div>
             <div class="menu-item">
               <router-link to="/sas" class="tulisan">Berita Desa</router-link>
