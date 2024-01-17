@@ -171,7 +171,6 @@ h3 {
 .pagination span {
   margin: 0 10px;
   font-weight: bold;
-  color: #003366;
 }
 
 .table-container {
