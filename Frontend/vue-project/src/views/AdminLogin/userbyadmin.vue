@@ -118,6 +118,8 @@ h3 {
   width: calc(100% - 70px);
   border-collapse: collapse;
   margin-top: 32px;
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 .table th,
