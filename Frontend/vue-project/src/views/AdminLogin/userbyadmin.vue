@@ -1,18 +1,20 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col"><h3>Data Warga Desa</h3></div>
-      <div class="col"><button type="button" class="btn btn-secondary">Import Excel</button></div>
+      <div class="col">
+        <h3>Data Warga Desa</h3>
+        <p>Management Content dan Layanan Warga</p>
+      </div>
+      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
     </div>
 
     <div class="row">
-      <div class="col"><p>Management Content dan Layanan Warga</p></div>
-    </div>
-
-    <div class="row">
-      <div class="col"><button type="button" class="btn btn-light">Cari Berdasarkan:</button></div>
-      <div class="col"><button type="button" class="btn btn-light">Search</button></div>
-      <div class="col"><button type="button" class="btn btn-success">+ Tambah Data</button></div>
+      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Cari Berdasarkan: Nama</button></div>
+      <div class="col">
+        <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
+          Search...</button>
+      </div>
+      <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button></div>
     </div>
 
     <!-- Tabel -->
@@ -110,21 +112,21 @@ h3 {
 }
 
 .container {
-  margin-top: 32px;
-  margin-bottom: 32px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: calc(100% - 100px);
 }
 
 .table {
-  width: calc(100% - 70px);
   border-collapse: collapse;
   margin-top: 32px;
-  border-radius: 10px; 
-  overflow: hidden; 
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .table th,
 .table td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #EEF1F3;
   padding: 20px;
   text-align: center;
 }
@@ -138,7 +140,7 @@ h3 {
 }
 
 .pagination {
-  margin-right: 80px;
+  margin-right: 30px;
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
@@ -175,5 +177,24 @@ h3 {
 
 .table-container {
   overflow-x: auto;
+}
+
+.btn-blue {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+}
+
+.btn-grey {
+  background-color: #EEF1F3;
+  color: #000;
+  border: none;
+}
+
+.search, .search:hover {
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 8px;
 }
 </style>
