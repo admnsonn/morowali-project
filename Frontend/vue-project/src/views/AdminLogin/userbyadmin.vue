@@ -1,16 +1,17 @@
 <template>
   <div class="kontainer-admin">
-    <h1>Beranda Data Warga</h1>
+    <h3>Data Warga Desa</h3>
+    <p>Management Content dan Layanan Warga</p>
 
     <!-- Tabel -->
     <div class="table-container">
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>NIK</th>
-            <th>Nama</th>
-            <th>KK</th>
+            <th>ID <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+            <th>NIK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+            <th>Nama <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+            <th>KK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
             <th>Jenis Kelamin</th>
             <th>Action</th>
           </tr>
@@ -22,7 +23,11 @@
             <td>{{ item.nama_lengkap }}</td>
             <td>{{ item.kk }}</td>
             <td>{{ item.jenis_kelamin }}</td>
-            <td>CRUD</td>
+            <td>
+              <button type="button" class="btn btn-primary m-1"><img src="src/assets/img/view.svg" /></button>
+              <button type="button" class="btn btn-warning"><img src="src/assets/img/edit.svg" /></button>
+              <button type="button" class="btn btn-danger m-1"><img src="src/assets/img/delete.svg" /></button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -61,7 +66,7 @@ export default {
   methods: {
     fetchData() {
       const payload = { id_desa: parseInt(localStorage.getItem('desa_id')) };
-      
+
       axios.post('http://localhost:8080/warga/list', payload)
         .then(({ data }) => {
           this.tableData = data.data;
@@ -88,26 +93,29 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+h3 {
   font-weight: 700;
+}
+
+.kontainer-admin {
+  margin-top: 32px;
 }
 
 .table {
   width: calc(100% - 70px);
   border-collapse: collapse;
-  margin-top: 108px;
+  margin-top: 32px;
 }
 
 .table th,
 .table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
 }
 
 .table th {
-  background-color: #003366;
-  color: white;
+  background-color: #EEF1F3;
 }
 
 .table tbody tr:nth-child(even) {
