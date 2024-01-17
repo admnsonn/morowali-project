@@ -1,7 +1,19 @@
 <template>
-  <div class="kontainer-admin">
-    <h3>Data Warga Desa</h3>
-    <p>Management Content dan Layanan Warga</p>
+  <div class="container">
+    <div class="row">
+      <div class="col"><h3>Data Warga Desa</h3></div>
+      <div class="col"><button type="button" class="btn btn-secondary">Import Excel</button></div>
+    </div>
+
+    <div class="row">
+      <div class="col"><p>Management Content dan Layanan Warga</p></div>
+    </div>
+
+    <div class="row">
+      <div class="col"><button type="button" class="btn btn-light">Cari Berdasarkan:</button></div>
+      <div class="col"><button type="button" class="btn btn-light">Search</button></div>
+      <div class="col"><button type="button" class="btn btn-success">+ Tambah Data</button></div>
+    </div>
 
     <!-- Tabel -->
     <div class="table-container">
@@ -97,8 +109,9 @@ h3 {
   font-weight: 700;
 }
 
-.kontainer-admin {
+.container {
   margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .table {
