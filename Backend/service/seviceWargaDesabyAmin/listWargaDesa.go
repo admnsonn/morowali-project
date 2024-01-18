@@ -3,6 +3,7 @@ package sevicewargadesabyamin
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -57,16 +58,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-			Select 
-
-			id_pengguna          ,
-			nik                  ,
-			kk					 ,
-			jenis_kelamin		 ,
-			alamat_pengguna      ,
-			CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
-			no_telp 
-			from dev.pengguna where nik = $1
+		Select 
+		a.id_pengguna          ,
+		a.nik                  ,
+		a.kk					 ,
+		b.jenis_kelamin		 ,
+		a.alamat_pengguna      ,
+		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+		a.no_telp 
+	FROM
+		dev.pengguna a, dev.jenis_kelamin b
+	where 
+		a.jk_id = b.id_jk and nik = $1
 		`
 
 		err = tx.QueryRow(ctx, query_pencarian, input.NIK).Scan(
@@ -126,16 +129,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-			Select 
-
-			id_pengguna          ,
-			nik                  ,
-			kk					 ,
-			jenis_kelamin		 ,
-			alamat_pengguna      ,
-			CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
-			no_telp 
-			from dev.pengguna where kk = $1
+		Select 
+			a.id_pengguna          ,
+			a.nik                  ,
+			a.kk					 ,
+			b.jenis_kelamin		 ,
+			a.alamat_pengguna      ,
+			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+			a.no_telp 
+		FROM
+			dev.pengguna a, dev.jenis_kelamin b
+		where 
+			a.jk_id = b.id_jk and kk = $1
 		`
 
 		err = tx.QueryRow(ctx, query_pencarian, input.KK).Scan(
@@ -158,27 +163,25 @@ func Warga_desa_by_admin(c *gin.Context) {
 		}
 
 		Tampung_list_warga = append(Tampung_list_warga, ambil3)
-	}
-
-	if input.Umur != "" {
+	} else if input.Umur != "" {
 
 		fmt.Println("INI KK NYA :", input.KK)
 
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-			Select 
-
-				id_pengguna          ,
-				nik                  ,
-				kk					 ,
-				jenis_kelamin		 ,
-				alamat_pengguna      ,
-				CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
-				no_telp 
-			FROM
-				dev.pengguna
-			WHERE
+		Select 
+		a.id_pengguna          ,
+		a.nik                  ,
+		a.kk					 ,
+		b.jenis_kelamin		 ,
+		a.alamat_pengguna      ,
+		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+		a.no_telp 
+	FROM
+		dev.pengguna a, dev.jenis_kelamin b
+	where 
+		a.jk_id = b.id_jk and
 				DATE_PART('year', AGE(NOW(), tanggal_lahir)) = $1;
 		`
 
@@ -202,27 +205,25 @@ func Warga_desa_by_admin(c *gin.Context) {
 		}
 
 		Tampung_list_warga = append(Tampung_list_warga, ambil3)
-	}
-
-	if input.Fullname != "" {
+	} else if input.Fullname != "" {
 
 		// fmt.Println("INI KK NYA :", input.KK)
 
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-			Select 
-
-				id_pengguna          ,
-				nik                  ,
-				kk					 ,
-				jenis_kelamin		 ,
-				alamat_pengguna      ,
-				CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
-				no_telp 
-			FROM
-				dev.pengguna
-			WHERE
+		Select 
+			a.id_pengguna          ,
+			a.nik                  ,
+			a.kk					 ,
+			b.jenis_kelamin		 ,
+			a.alamat_pengguna      ,
+			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+			a.no_telp 
+		FROM
+			dev.pengguna a, dev.jenis_kelamin b
+		where 
+			a.jk_id = b.id_jk and
 				UPPER(nama_lengkap) = UPPER($1);
 		`
 
@@ -246,6 +247,60 @@ func Warga_desa_by_admin(c *gin.Context) {
 		}
 
 		Tampung_list_warga = append(Tampung_list_warga, ambil3)
+	} else {
+		var ambil4 Data_list_warga_kontainer
+
+		query_pencarian := `
+		Select a.id_pengguna,
+				a.niK,
+				a.kk,
+				b.jenis_kelamin,
+				a.alamat_pengguna,
+				CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+				a.no_telp 
+			FROM
+				dev.pengguna a, dev.jenis_kelamin b
+			where 
+				a.jk_id = b.id_jk 
+				and a.desa_id = $1;
+		`
+
+		rowwarga, err := tx.Query(ctx, query_pencarian, input.IDdesa)
+
+		if err != nil {
+			log.Println("Error executing query:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
+			if err != nil {
+				panic(err.Error())
+			}
+			return
+		}
+
+		defer rowwarga.Close()
+
+		for rowwarga.Next() {
+			err := rowwarga.Scan(
+				&ambil4.IDPengguna,
+				&ambil4.NIK,
+				&ambil4.KK,
+				&ambil4.JenisKelamin,
+				&ambil4.NamaLengkap,
+				&ambil4.Umur,
+				&ambil4.NoTelp,
+			)
+
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+				err = tx.Commit(ctx)
+				if err != nil {
+					panic(err.Error())
+				}
+				return
+			}
+
+			Tampung_list_warga = append(Tampung_list_warga, ambil4)
+		}
 	}
 
 	if len(Tampung_list_warga) > 0 {

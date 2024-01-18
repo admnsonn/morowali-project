@@ -18,29 +18,23 @@ import (
 
 func Update_data_warga(c *gin.Context) {
 	type Request struct {
-		IDPengguna          string `json:"id_pengguna"`
-		NIK                 string `json:"nik"`
-		NoTelp              string `json:"no_telp"`
-		TanggalLahir        string `json:"tanggal_lahir"`
-		TempatLahir         string `json:"tempat_lahir"`
-		JenisKelamin        string `json:"jenis_kelamin"`
-		StatusPenikahan     string `json:"status_perkawinan"`
-		Profesi             string `json:"profesi"`
-		KK                  string `json:"kk"`
-		Umur                string `json:"umur"`
-		Agama               string `json:"agama"`
-		Desa                string `json:"desa"`
-		DesaID              int    `json:"id_desa"`
-		NamaLengkap         string `json:"nama_lengkap"`
-		Alamat              string `json:"alamat_pengguna"`
-		RT                  string `json:"rt"`
-		RW                  string `json:"rw"`
-		KodePos             string `json:"kode_pos"`
-		FotoProfile         string `json:"foto_pengguna"`
-		KategoriFinancialID string `json:"kategori_financial_id"`
+		IDPengguna      string `json:"id_pengguna"`
+		NIK             string `json:"nik"`
+		KK              string `json:"kk"`
+		TempatLahir     string `json:"tempat_lahir"`
+		TanggalLahir    string `json:"tanggal_lahir"`
+		JenisKelamin    string `json:"jenis_kelamin"`
+		Alamat          string `json:"alamat_pengguna"`
+		Agama           string `json:"agama"`
+		StatusPenikahan string `json:"status_perkawinan"`
+		Profesi         string `json:"profesi"`
+		NoTelp          string `json:"no_telp"`
+		PendidikanLast  string `json:"pendidikan_terakhir"`
+		FotoProfile     string `json:"foto_profile"`
 	}
 
 	var input Request
+	// var id_pendidikan int
 
 	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
 
@@ -138,49 +132,43 @@ func Update_data_warga(c *gin.Context) {
 		fmt.Println("FotoProfile is empty.")
 	}
 
-	// Lakukan Update
-
-	updateQuery := `
-		UPDATE dev.pengguna
+	query_update_pendidikan := `
+		UPDATE dev.pendidikan
 		SET
-			nik = $2,
-			no_telp = $3,
-			tanggal_lahir = $4,
-			tempat_lahir = $5,
-			jenis_kelamin = $6,
-			status_perkawinan= $7,
-			profesi= $8,
-			kk= $9,
-			umur= $10,
-			agama = $11,
-			desa = $12,
-			id_desa = $13,
-			nama_lengkap = $14,
-			alamat_pengguna = $15,
-			rt = $16,
-			rw = $17,
-			kode_pos = $18,
-			foto_pengguna = $19,
-			kategori_financial_id = $20
+			tingkat_pendidikan = $1
 		WHERE
-			id_pengguna = $1
+			id_pendidikan = $2;
 	`
 
-	// Execute update query with input parameters
-	_, err = tx.Exec(ctx, updateQuery)
+	_, err = tx.Exec(ctx, query_update_pendidikan, input.PendidikanLast, input.IDPengguna)
+
 	if err != nil {
-		fmt.Println("Gagal melakukan UPDATE:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+		err = tx.Commit(ctx)
+		if err != nil {
+			panic(err.Error())
+		}
 		return
 	}
 
-	err = tx.Commit(ctx)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
+	// query_update_pengguna := `
+	// 	UPDATE dev.pengguna
+	// 	SET
+	// 		nik = $1,
+	// 		kk = $2,
+	// 		tempat_lahir = $3,
+	// 		tanggal_lahir = $4,
+	// 		jenis_kelamin = $5',
+	// 		alamat_pengguna = $6,
+	// 		agama = 'Islam',
+	// 		status_perkawinan = $7,
+	// 		profesi = $8,
+	// 		no_telp = $9,
+	// 		pendidikan_terakhir = $10,
+	// 		foto_profile = $11
+	// 	WHERE
+	// 		id_pengguna = $12;
 
-	c.JSON(http.StatusOK, gin.H{
-		"status":  true,
-		"message": "Berhasil Update",
-	})
+	// `
 
 }
