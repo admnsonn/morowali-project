@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     fetchData() {
-      const payload = { id_desa: parseInt(localStorage.getItem('desa_id')) };
+      const payload = { id_desa: (localStorage.getItem('desa_id')) };
 
       axios.post('http://localhost:8080/warga/list', payload)
         .then(({ data }) => {
