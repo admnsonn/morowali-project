@@ -1,14 +1,4 @@
 <template>
-  <div class="kontainer-admin">
-    <div class="kontainer">
-      <div class="bartipis" />
-      <div class="">
-        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
-        <p class="teks-kabupaten">Kabupaten, Morowali</p>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
     <div class="row">
       <div class="col">
@@ -134,10 +124,9 @@ export default {
   },
   methods: {
     fetchData() {
-      const payload = { id_desa: localStorage.getItem("desa_id") };
+      const payload = { id_desa: localStorage.getItem('desa_id') };
 
-      axios
-        .post("http://localhost:8080/warga/list", payload)
+      axios.post('http://localhost:8080/warga/list', payload)
         .then(({ data }) => {
           this.tableData = data.data;
         })
@@ -168,7 +157,7 @@ h3 {
 }
 
 .container {
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 50px;
   width: calc(100% - 100px);
 }
@@ -248,14 +237,6 @@ h3 {
   font-size: small;
 }
 
-.btn-import{
-  background-color: #33B949;
-}
-
-.btn-import:hover{
-  background-color: #33B949;
-}
-
 .search,
 .search:hover {
   text-align: left;
@@ -276,7 +257,7 @@ h3 {
   font-size: 20px;
 }
 
-.subtitle-warga {
+.subtitle-warga{
   font-size: 15px;
   color: #5e5e5e;
 }

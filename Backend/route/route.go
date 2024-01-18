@@ -36,7 +36,7 @@ func Routes(router *gin.Engine) {
 
 	umkmRoutes := router.Group("/umkm")
 	{
-		umkmRoutes.GET("/list/:id", serviceumkm.Semuaumkm)
+		umkmRoutes.POST("/list", serviceumkm.Semuaumkm)
 		umkmRoutes.GET("/:id", serviceumkm.Detailumkm)
 	}
 
