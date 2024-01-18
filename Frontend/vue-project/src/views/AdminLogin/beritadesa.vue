@@ -42,39 +42,46 @@
             <tr>
               <th>
                 ID
-                <button type="button" class="btn btn-link">
+                <button type="button" class="btn btn-link" @click="sortById()">
+                  <img src="src/assets/img/sort.svg" />
+                </button>
+              </th>
+
+              <th>
+                Judul
+                <button
+                  type="button"
+                  class="btn btn-link"
+                  @click="sortByJudul()"
+                >
                   <img src="src/assets/img/sort.svg" />
                 </button>
               </th>
               <th>
-                NIK
-                <button type="button" class="btn btn-link">
+                Sub-Judul
+                <!-- <button type="button" class="btn btn-link">
                   <img src="src/assets/img/sort.svg" />
-                </button>
+                </button> -->
               </th>
               <th>
-                Nama
-                <button type="button" class="btn btn-link">
+                Deskripsi
+                <!-- <button type="button" class="btn btn-link">
                   <img src="src/assets/img/sort.svg" />
-                </button>
+                </button> -->
               </th>
-              <th>
-                KK
-                <button type="button" class="btn btn-link">
-                  <img src="src/assets/img/sort.svg" />
-                </button>
-              </th>
-              <th>Jenis Kelamin</th>
+              <th>Foto Berita</th>
+              <th>Kategori</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in displayedData" :key="index">
-              <td>{{ item.id_pengguna }}</td>
-              <td>{{ item.nik }}</td>
-              <td>{{ item.nama_lengkap }}</td>
-              <td>{{ item.kk }}</td>
-              <td>{{ item.jenis_kelamin }}</td>
+              <td>{{ item.id_berita }}</td>
+              <td>{{ item.judul }}</td>
+              <td>{{ item.sub_judul }}</td>
+              <td>{{ item.deskripsi }}</td>
+              <td>{{ item.foto_berita }}</td>
+              <td>{{ item.kategori }}</td>
               <td>
                 <button type="button" class="btn btn-primary m-1">
                   <img src="src/assets/img/view.svg" />
@@ -92,11 +99,11 @@
 
         <!-- Pagination -->
         <div class="pagination">
-          <button @click="prevPage" :disabled="currentPage === 1">
+          <button @click="prevPage()" :disabled="currentPage === 1">
             Previous
           </button>
           <span> {{ currentPage }} dari {{ totalPages }}</span>
-          <button @click="nextPage" :disabled="currentPage === totalPages">
+          <button @click="nextPage()" :disabled="currentPage === totalPages">
             Next
           </button>
         </div>
@@ -113,6 +120,7 @@ export default {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
+      sortDirection: "asc",
     };
   },
   computed: {
@@ -138,6 +146,31 @@ export default {
           console.error("Error in Axios POST request:", error);
         });
     },
+    sortById() {
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
+      this.tableData.sort((a, b) => {
+        const multiplier = this.sortDirection === "asc" ? 1 : -1;
+        return multiplier * (a.id_berita - b.id_berita);
+      });
+    },
+    sortByJudul() {
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
+      this.tableData.sort((a, b) => {
+        const multiplier = this.sortDirection === "asc" ? 1 : -1;
+        return multiplier * a.judul.localeCompare(b.judul); // Sort by judul
+      });
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        // Fetch data for the next page if needed
+      }
+    },
+    prevPage() {
+      if (this.currentPage >= this.totalPages) {
+        this.currentPage--;
+      }
+    },
   },
   created() {
     this.fetchData();
@@ -146,6 +179,23 @@ export default {
 </script>
 
 <style scoped>
+th {
+  vertical-align: middle;
+}
+
+.teks-admin {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}
+
+.teks-kabupaten {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
 .kontainer-data {
   height: auto;
   display: flex;
@@ -153,7 +203,16 @@ export default {
   margin-left: 80px;
   margin-top: 32px;
   margin-bottom: 46px;
-  border: solid;
+  margin-right: 79px;
+}
+.bartipis {
+  background-color: black;
+  height: 100%;
+  width: 3px;
+  grid-row: span 2;
+  top: 0;
+  left: 0;
+  align-self: center;
 }
 
 .pagination {
