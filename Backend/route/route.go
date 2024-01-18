@@ -32,7 +32,6 @@ func Routes(router *gin.Engine) {
 		beritaRoutes.DELETE("/delete/:id", serviceberita.DeleteBerita)
 		beritaRoutes.GET("/categori", serviceberita.Kategori_berita)
 		beritaRoutes.POST("/list", serviceberita.SemuaBerita)
-		beritaRoutes.PUT("/update", serviceberita.Update_Berita_Desa)
 	}
 
 	umkmRoutes := router.Group("/umkm")
