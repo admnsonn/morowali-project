@@ -17,7 +17,7 @@ import SejarahView from "../views/sejarah.vue";
 import GaleriView from "../views/galeri.vue";
 import PendidikanView from "../views/datapendidikan.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
-import Wargadesa from "../views/AdminLogin/wargadesa.vue";
+import Wargadesa from "../views/AdminLogin/warga/wargadesa.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
 import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
