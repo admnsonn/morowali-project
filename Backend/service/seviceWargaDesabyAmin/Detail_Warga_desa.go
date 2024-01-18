@@ -33,9 +33,9 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 		JenisKelamin      string            `json:"jenis_kelamin"`
 		StatusPerkawinan  string            `json:"status_perkawinan"`
 		Profesi           string            `json:"profesi"`
-		NIK               int               `json:"nik"`
-		KK                int               `json:"kk"`
-		Umur              int               `json:"umur"`
+		NIK               string            `json:"nik"`
+		KK                string            `json:"kk"`
+		Umur              string            `json:"umur"`
 		KategoriFinancial string            `json:"kategori_financial"`
 		Agama             string            `json:"agama"`
 		Desa              string            `json:"desa"`
@@ -46,6 +46,7 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 		RW                string            `json:"rw"`
 		KodePos           string            `json:"kode_pos"`
 		NoTelp            string            `json:"no_telp"`
+		Kewarganegaraan   string            `json:"kewarganegaraan"`
 		DataPendidikan    []Data_pendidikan `json:"data_pendidikan"`
 	}
 
@@ -58,7 +59,6 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 	}
 
 	query := `
-
 		Select 
 			a.id_pengguna,
 			a.role_pengguna,
@@ -69,7 +69,8 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 			a.profesi,
 			a.nik,
 			a.kk,
-			a.umur,
+			a.kewarganegaraan,
+			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
 			b.kategori_financial,
 			a.agama,
 			a.desa,
@@ -99,6 +100,7 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 		&ambil.Profesi,
 		&ambil.NIK,
 		&ambil.KK,
+		&ambil.Kewarganegaraan,
 		&ambil.Umur,
 		&ambil.KategoriFinancial,
 		&ambil.Agama,

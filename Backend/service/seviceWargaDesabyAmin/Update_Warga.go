@@ -38,8 +38,6 @@ func Update_data_warga(c *gin.Context) {
 		KodePos             string `json:"kode_pos"`
 		FotoProfile         string `json:"foto_pengguna"`
 		KategoriFinancialID string `json:"kategori_financial_id"`
-		// Kewarganegaraan
-		// NIP
 	}
 
 	var input Request

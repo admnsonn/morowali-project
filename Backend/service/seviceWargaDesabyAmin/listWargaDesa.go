@@ -11,36 +11,36 @@ import (
 
 func Warga_desa_by_admin(c *gin.Context) {
 	type Data_list_warga_kontainer struct {
-		IDPengguna     int    `json:"id_pengguna"`
-		NIK            int    `json:"nik"`
-		NamaLengkap    string `json:"nama_lengkap"`
-		AlamatPengguna string `json:"alamat_pengguna"`
-		NoTelp         string `json:"no_telp"`
-		KK             int    `json:"kk"`
-		JenisKelamin   string `json:"jenis_kelamin"`
+		IDPengguna   int    `json:"id_pengguna"`
+		NIK          string `json:"nik"`
+		NamaLengkap  string `json:"nama_lengkap"`
+		NoTelp       string `json:"no_telp"`
+		KK           string `json:"kk"`
+		JenisKelamin string `json:"jenis_kelamin"`
+		Umur         string `json:"umur"`
 	}
 
 	type Request struct {
-		IDdesa           int    `json:"id_desa"`
-		RTPengguna       string `json:"rt"`
-		RWPengguna       string `json:"rw"`
-		TingkatPedidikan string `json:"tingkat_pendidikan"`
-		NIK              string `json:"nik"`
+		IDdesa   string `json:"id_desa"`
+		NIK      string `json:"nik"`
+		KK       string `json:"kk"`
+		Umur     string `json:"umur"`
+		Fullname string `json:"nama_lengkap"`
 	}
 
 	var input Request
 	var Tampung_list_warga []Data_list_warga_kontainer
-	var rt, rw, kode_pos string
-
 	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
 
 		if err := c.Bind(&input); err != nil {
+			fmt.Println("MASUK SINI")
 			return
 		}
 
 	} else {
 
 		if err := c.BindJSON(&input); err != nil {
+			fmt.Println("MASUK SINI")
 			return
 		}
 
@@ -63,11 +63,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 			nik                  ,
 			kk					 ,
 			jenis_kelamin		 ,
-			nama_lengkap         ,
 			alamat_pengguna      ,
-			rt                   ,
-			rw                   ,
-			kode_pos             ,
+			CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
 			no_telp 
 			from dev.pengguna where nik = $1
 		`
@@ -78,10 +75,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil3.KK,
 			&ambil3.JenisKelamin,
 			&ambil3.NamaLengkap,
-			&ambil3.AlamatPengguna,
-			&rt,
-			&rw,
-			&kode_pos,
+			&ambil3.Umur,
 			&ambil3.NoTelp,
 		)
 
@@ -97,8 +91,6 @@ func Warga_desa_by_admin(c *gin.Context) {
 		Tampung_list_warga = append(Tampung_list_warga, ambil3)
 
 		if len(Tampung_list_warga) > 0 {
-
-			Tampung_list_warga[0].AlamatPengguna = Tampung_list_warga[0].AlamatPengguna + ", RT: " + rt + ", RW: " + rw + ", Kode Post: " + kode_pos
 
 			c.JSON(http.StatusOK, gin.H{
 				"status":  true,
@@ -127,501 +119,136 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 	}
 
-	query := ``
+	if input.KK != "" {
 
-	if input.TingkatPedidikan != "" {
-		if input.TingkatPedidikan == "SD" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'SD')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('SMP', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
+		fmt.Println("INI KK NYA :", input.KK)
 
-		} else if input.TingkatPedidikan == "SMP" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'SMP')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('SMK', 'SMA', 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
+		var ambil3 Data_list_warga_kontainer
+		// Filter pecarian NIK
+		query_pencarian := `
+			Select 
 
-		} else if input.TingkatPedidikan == "SMK" || input.TingkatPedidikan == "SMA" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'SMK' or tingkat_pendidikan = 'SMA')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ( 'D1', 'D2', 'D3', 'D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
+			id_pengguna          ,
+			nik                  ,
+			kk					 ,
+			jenis_kelamin		 ,
+			alamat_pengguna      ,
+			CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
+			no_telp 
+			from dev.pengguna where kk = $1
+		`
 
-		} else if input.TingkatPedidikan == "D1" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'D1')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('D2', 'D3', 'D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
+		err = tx.QueryRow(ctx, query_pencarian, input.KK).Scan(
+			&ambil3.IDPengguna,
+			&ambil3.NIK,
+			&ambil3.KK,
+			&ambil3.JenisKelamin,
+			&ambil3.NamaLengkap,
+			&ambil3.Umur,
+			&ambil3.NoTelp,
+		)
 
-		} else if input.TingkatPedidikan == "D2" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'D2')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('D3', 'D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
-
-		} else if input.TingkatPedidikan == "D3" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'D3')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('D4', 'S1', 'S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
-
-		} else if input.TingkatPedidikan == "S1" || input.TingkatPedidikan == "D4" {
-			fmt.Println("Masuk ke bagian S1 ATAU D3")
-
-			query = query + `
-			SELECT
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'D4' or tingkat_pendidikan = 'S1')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('S2', 'S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
-
-		} else if input.TingkatPedidikan == "S2" {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'S2')
-			AND pengguna_id NOT IN (
-				SELECT pengguna_id
-				FROM dev.pendidikan
-				WHERE tingkat_pendidikan IN ('S3')
-			)
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
-
-		} else {
-			query = query + `
-			SELECT 
-			c.id_pengguna          ,
-			c.nik                  ,
-			c.kk					 ,
-			c.jenis_kelamin		 ,
-			c.nama_lengkap         ,
-			c.alamat_pengguna      ,
-			c.rt                   ,
-			c.rw                   ,
-			c.kode_pos             ,
-			c.no_telp
-			FROM dev.pendidikan a, dev.pengguna_pendidikan b, dev.pengguna c
-			WHERE 
-			c.id_pengguna = b.pengguna_id_pengguna 
-			and a.id_pendidikan  = b.pendidikan_pengguna_id 
-			and (tingkat_pendidikan = 'S3')
-			and c.desa_id = $1
-			and c.role_id = 2
-			`
-
-		}
-
-		if input.RWPengguna != "" {
-			if input.RTPengguna != "" {
-
-			} else {
-
-				query = query + `
-					and c.rw = $2 
-				`
-
-				fmt.Println(query)
-
-				row, err := tx.Query(ctx, query, input.IDdesa, input.RWPengguna)
-
-				if err != nil {
-					c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-					err = tx.Commit(ctx)
-					if err != nil {
-						panic(err.Error())
-					}
-					return
-				}
-
-				defer row.Close()
-
-				for row.Next() {
-					var ambil Data_list_warga_kontainer
-
-					err := row.Scan(
-						&ambil.IDPengguna,
-						&ambil.NIK,
-						&ambil.KK,
-						&ambil.JenisKelamin,
-						&ambil.NamaLengkap,
-						&ambil.AlamatPengguna,
-						&rt,
-						&rw,
-						&kode_pos,
-						&ambil.NoTelp,
-					)
-
-					if err != nil {
-						c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-						err = tx.Commit(ctx)
-						if err != nil {
-							panic(err.Error())
-						}
-						return
-					}
-
-					Tampung_list_warga = append(Tampung_list_warga, ambil)
-				}
-
-			}
-
-			// bedasarkan pendidikan, rw
-
-		}
-
-	} else {
-		if input.RWPengguna != "" {
-			if input.RTPengguna != "" {
-				query = `
-				select
-				id_pengguna          ,
-				nik                  ,
-				kk					 ,
-				jenis_kelamin		 ,
-				nama_lengkap         ,
-				alamat_pengguna      ,
-				rt                   ,
-				rw                   ,
-				kode_pos             ,
-				no_telp
-				from dev.pengguna
-				where desa_id = $1
-				and role_id = 2
-				and rw = $2 
-				and rt = $3 
-				`
-
-				row, err := tx.Query(ctx, query, input.IDdesa, input.RWPengguna, input.RTPengguna)
-
-				if err != nil {
-					c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-					err = tx.Commit(ctx)
-					if err != nil {
-						panic(err.Error())
-					}
-					return
-				}
-
-				defer row.Close()
-
-				for row.Next() {
-					var ambil Data_list_warga_kontainer
-
-					err := row.Scan(
-						&ambil.IDPengguna,
-						&ambil.NIK,
-						&ambil.KK,
-						&ambil.JenisKelamin,
-						&ambil.NamaLengkap,
-						&ambil.AlamatPengguna,
-						&rt,
-						&rw,
-						&kode_pos,
-						&ambil.NoTelp,
-					)
-
-					if err != nil {
-						c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-						err = tx.Commit(ctx)
-						if err != nil {
-							panic(err.Error())
-						}
-						return
-					}
-
-					Tampung_list_warga = append(Tampung_list_warga, ambil)
-				}
-
-				// Bedasarkan RT DAN RW
-			} else {
-				query = `
-				select
-				id_pengguna          ,
-				nik                  ,
-				kk					 ,
-				jenis_kelamin		 ,
-				nama_lengkap         ,
-				alamat_pengguna      ,
-				rt                   ,
-				rw                   ,
-				kode_pos             ,
-				no_telp
-				from dev.pengguna
-				where desa_id = $1
-				and role_id = 2
-				and rw = $2 
-
-				`
-
-				row, err := tx.Query(ctx, query, input.IDdesa, input.RWPengguna)
-
-				if err != nil {
-					c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-					err = tx.Commit(ctx)
-					if err != nil {
-						panic(err.Error())
-					}
-					return
-				}
-
-				defer row.Close()
-
-				for row.Next() {
-					var ambil Data_list_warga_kontainer
-
-					err := row.Scan(
-						&ambil.IDPengguna,
-						&ambil.NIK,
-						&ambil.KK,
-						&ambil.JenisKelamin,
-						&ambil.NamaLengkap,
-						&ambil.AlamatPengguna,
-						&rt,
-						&rw,
-						&kode_pos,
-						&ambil.NoTelp,
-					)
-
-					if err != nil {
-						c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-						err = tx.Commit(ctx)
-						if err != nil {
-							panic(err.Error())
-						}
-						return
-					}
-
-					Tampung_list_warga = append(Tampung_list_warga, ambil)
-				}
-			}
-
-			// Bedasarkan RW
-		} else {
-			query = `
-				select
-					id_pengguna          ,
-					nik                  ,
-					kk					 ,
-					jenis_kelamin		 ,
-					nama_lengkap         ,
-					alamat_pengguna      ,
-					rt                   ,
-					rw                   ,
-					kode_pos             ,
-					no_telp
-				from dev.pengguna
-				where desa_id = $1
-				and role_id = 2
-			`
-
-			row, err := tx.Query(ctx, query, input.IDdesa)
-
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
 			if err != nil {
-				c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-				err = tx.Commit(ctx)
-				if err != nil {
-					panic(err.Error())
-				}
-				return
+				panic(err.Error())
 			}
-
-			defer row.Close()
-
-			for row.Next() {
-				var ambil Data_list_warga_kontainer
-
-				err := row.Scan(
-					&ambil.IDPengguna,
-					&ambil.NIK,
-					&ambil.KK,
-					&ambil.JenisKelamin,
-					&ambil.NamaLengkap,
-					&ambil.AlamatPengguna,
-					&rt,
-					&rw,
-					&kode_pos,
-					&ambil.NoTelp,
-				)
-
-				if err != nil {
-					c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-					err = tx.Commit(ctx)
-					if err != nil {
-						panic(err.Error())
-					}
-					return
-				}
-
-				Tampung_list_warga = append(Tampung_list_warga, ambil)
-			}
+			return
 		}
 
+		Tampung_list_warga = append(Tampung_list_warga, ambil3)
+	}
+
+	if input.Umur != "" {
+
+		fmt.Println("INI KK NYA :", input.KK)
+
+		var ambil3 Data_list_warga_kontainer
+		// Filter pecarian NIK
+		query_pencarian := `
+			Select 
+
+				id_pengguna          ,
+				nik                  ,
+				kk					 ,
+				jenis_kelamin		 ,
+				alamat_pengguna      ,
+				CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
+				no_telp 
+			FROM
+				dev.pengguna
+			WHERE
+				DATE_PART('year', AGE(NOW(), tanggal_lahir)) = $1;
+		`
+
+		err = tx.QueryRow(ctx, query_pencarian, input.Umur).Scan(
+			&ambil3.IDPengguna,
+			&ambil3.NIK,
+			&ambil3.KK,
+			&ambil3.JenisKelamin,
+			&ambil3.NamaLengkap,
+			&ambil3.Umur,
+			&ambil3.NoTelp,
+		)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
+			if err != nil {
+				panic(err.Error())
+			}
+			return
+		}
+
+		Tampung_list_warga = append(Tampung_list_warga, ambil3)
+	}
+
+	if input.Fullname != "" {
+
+		// fmt.Println("INI KK NYA :", input.KK)
+
+		var ambil3 Data_list_warga_kontainer
+		// Filter pecarian NIK
+		query_pencarian := `
+			Select 
+
+				id_pengguna          ,
+				nik                  ,
+				kk					 ,
+				jenis_kelamin		 ,
+				alamat_pengguna      ,
+				CAST(DATE_PART('year', AGE(NOW(), tanggal_lahir)) AS VARCHAR) AS umur,
+				no_telp 
+			FROM
+				dev.pengguna
+			WHERE
+				UPPER(nama_lengkap) = UPPER($1);
+		`
+
+		err = tx.QueryRow(ctx, query_pencarian, input.Fullname).Scan(
+			&ambil3.IDPengguna,
+			&ambil3.NIK,
+			&ambil3.KK,
+			&ambil3.JenisKelamin,
+			&ambil3.NamaLengkap,
+			&ambil3.Umur,
+			&ambil3.NoTelp,
+		)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+			err = tx.Commit(ctx)
+			if err != nil {
+				panic(err.Error())
+			}
+			return
+		}
+
+		Tampung_list_warga = append(Tampung_list_warga, ambil3)
 	}
 
 	if len(Tampung_list_warga) > 0 {
-
-		Tampung_list_warga[0].AlamatPengguna = Tampung_list_warga[0].AlamatPengguna + ", RT: " + rt + ", RW: " + rw + ", Kode Post: " + kode_pos
 
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
