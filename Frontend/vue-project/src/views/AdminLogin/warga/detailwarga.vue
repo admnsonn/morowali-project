@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h3 class="title-warga">Detail Warga Desa</h3>
+          <h3 class="title-warga">Dsaetail Warga Desa</h3>
           <p class="subtitle-warga">Management Content dan Layanan Warga</p>
         </div>
       </div>

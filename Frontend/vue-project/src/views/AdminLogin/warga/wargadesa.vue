@@ -1,11 +1,21 @@
 <template>
+    <div class="kontainer-admin">
+    <div class="kontainer">
+      <div class="bartipis" />
+      <div class="">
+        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
+        <p class="teks-kabupaten">Kabupaten, Morowali</p>
+      </div>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="row">
       <div class="col">
         <h3 class="title-warga">Data Warga Desa</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
-      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
+      <div class="col-auto"><button type="button" class="btn btn-light btn-excel p-3 my-2">Import Excel</button></div>
     </div>
 
     <div class="content-warga">
@@ -16,7 +26,8 @@
           <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
             Search...</button>
         </div>
-        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button>
+        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2"><router-link to="/detail-warga"
+              class="nav-link router-link-underline">+ Tambah Data</router-link></button>
         </div>
       </div>
 
@@ -116,7 +127,7 @@ h3 {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   width: calc(100% - 100px);
 }
@@ -189,10 +200,24 @@ h3 {
   border: none;
 }
 
+.btn-blue:hover {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+}
+
 .btn-grey {
   background-color: #ffffff;
   color: #000;
   border: none;
+}
+
+.btn-excel{
+  background-color: #33B949;
+}
+
+.btn-excel:hover{
+  background-color: #33B949;
 }
 
 .search,
@@ -215,7 +240,7 @@ h3 {
   font-size: 20px;
 }
 
-.subtitle-warga{
+.subtitle-warga {
   font-size: 15px;
   color: #5E5E5E;
 }
