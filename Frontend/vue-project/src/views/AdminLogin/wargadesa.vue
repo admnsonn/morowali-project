@@ -2,55 +2,59 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3>Data Warga Desa</h3>
-        <p>Management Content dan Layanan Warga</p>
+        <h3 class="title-warga">Data Warga Desa</h3>
+        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
       <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
     </div>
 
-    <div class="row">
-      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Cari Berdasarkan: Nama</button></div>
-      <div class="col">
-        <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
-          Search...</button>
+    <div class="content-warga">
+      <div class="row">
+        <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Cari Berdasarkan:
+            Nama</button></div>
+        <div class="col">
+          <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
+            Search...</button>
+        </div>
+        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button>
+        </div>
       </div>
-      <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button></div>
-    </div>
 
-    <!-- Tabel -->
-    <div class="table-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-            <th>NIK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-            <th>Nama <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-            <th>KK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-            <th>Jenis Kelamin</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in displayedData" :key="index">
-            <td>{{ item.id_pengguna }}</td>
-            <td>{{ item.nik }}</td>
-            <td>{{ item.nama_lengkap }}</td>
-            <td>{{ item.kk }}</td>
-            <td>{{ item.jenis_kelamin }}</td>
-            <td>
-              <button type="button" class="btn btn-primary m-1"><img src="src/assets/img/view.svg" /></button>
-              <button type="button" class="btn btn-warning"><img src="src/assets/img/edit.svg" /></button>
-              <button type="button" class="btn btn-danger m-1"><img src="src/assets/img/delete.svg" /></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Tabel -->
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+              <th>NIK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+              <th>Nama <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+              <th>KK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+              <th>Jenis Kelamin</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in displayedData" :key="index">
+              <td>{{ item.id_pengguna }}</td>
+              <td>{{ item.nik }}</td>
+              <td>{{ item.nama_lengkap }}</td>
+              <td>{{ item.kk }}</td>
+              <td>{{ item.jenis_kelamin }}</td>
+              <td>
+                <button type="button" class="btn btn-primary m-1"><img src="src/assets/img/view.svg" /></button>
+                <button type="button" class="btn btn-warning"><img src="src/assets/img/edit.svg" /></button>
+                <button type="button" class="btn btn-danger m-1"><img src="src/assets/img/delete.svg" /></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <!-- Pagination -->
-      <div class="pagination">
-        <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
-        <span> {{ currentPage }} dari {{ totalPages }}</span>
-        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+        <!-- Pagination -->
+        <div class="pagination">
+          <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+          <span> {{ currentPage }} dari {{ totalPages }}</span>
+          <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+        </div>
       </div>
     </div>
   </div>
@@ -186,15 +190,33 @@ h3 {
 }
 
 .btn-grey {
-  background-color: #EEF1F3;
+  background-color: #ffffff;
   color: #000;
   border: none;
 }
 
-.search, .search:hover {
+.search,
+.search:hover {
   text-align: left;
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 8px;
+  padding: 10%;
+}
+
+.content-warga {
+  background-color: #EEF1F3;
+  padding: 20px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.title-warga {
+  font-size: 20px;
+}
+
+.subtitle-warga{
+  font-size: 15px;
+  color: #5E5E5E;
 }
 </style>
