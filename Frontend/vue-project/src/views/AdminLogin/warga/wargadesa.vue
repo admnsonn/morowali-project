@@ -1,5 +1,5 @@
 <template>
-  <div class="kontainer-admin">
+    <div class="kontainer-admin">
     <div class="kontainer">
       <div class="bartipis" />
       <div class="">
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-
+  
   <div class="container">
     <div class="row">
       <div class="col">
@@ -168,7 +168,7 @@ h3 {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   width: calc(100% - 100px);
 }
@@ -241,11 +241,25 @@ h3 {
   border: none;
 }
 
+.btn-blue:hover {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+}
+
 .btn-grey {
   background-color: #ffffff;
   color: #000;
   border: none;
   font-size: small;
+}
+
+.btn-excel{
+  background-color: #33B949;
+}
+
+.btn-excel:hover{
+  background-color: #33B949;
 }
 
 .search,

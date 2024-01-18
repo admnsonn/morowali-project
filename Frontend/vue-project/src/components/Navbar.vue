@@ -265,7 +265,7 @@ export default {
 
 .kontainer-admin {
   border: 22%;
-  background-color: white;
+  background-color: #EEF1F3;
   height: 131px;
   display: flex;
   align-items: center;
