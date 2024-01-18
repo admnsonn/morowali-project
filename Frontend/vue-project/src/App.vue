@@ -3,7 +3,7 @@
     <Navbar />
   </div>
 
-  <div class="main" :style="{ marginLeft: posisi !== 0 ? '350px' : '0' }">
+  <div class="main" :style="{ marginLeft: posisi !== 0 ? '260px' : '0' }">
     <RouterView />
   </div>
 
