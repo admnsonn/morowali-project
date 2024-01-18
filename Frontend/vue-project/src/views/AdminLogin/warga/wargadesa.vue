@@ -1,11 +1,21 @@
 <template>
+  <div class="kontainer-admin">
+    <div class="kontainer">
+      <div class="bartipis" />
+      <div class="">
+        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
+        <p class="teks-kabupaten">Kabupaten, Morowali</p>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="row">
       <div class="col">
         <h3 class="title-warga">Data Warga Desa</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
-      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
+      <div class="col-auto"><button type="button" class="btn btn-light btn-import p-3 my-2 font-weight-bold">Import Excel</button></div>
     </div>
 
     <div class="content-warga">
@@ -116,7 +126,7 @@ h3 {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   width: calc(100% - 100px);
 }
@@ -195,6 +205,14 @@ h3 {
   border: none;
 }
 
+.btn-import{
+  background-color: #33B949;
+}
+
+.btn-import:hover{
+  background-color: #33B949;
+}
+
 .search,
 .search:hover {
   text-align: left;
@@ -215,7 +233,7 @@ h3 {
   font-size: 20px;
 }
 
-.subtitle-warga{
+.subtitle-warga {
   font-size: 15px;
   color: #5E5E5E;
 }
