@@ -1,0 +1,6 @@
+root = "." # Direktori utama proyek
+build = "go build -o ./tmp/main.exe" # Perintah untuk membangun aplikasi
+
+[[watcher]]
+paths = ["./"]
+build_delay = "1000ms" # Jeda sebelum membangun ulang setelah deteksi perubahan
