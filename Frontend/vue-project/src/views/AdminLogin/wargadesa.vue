@@ -5,18 +5,29 @@
         <h3 class="title-warga">Data Warga Desa</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
-      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
+      <div class="col-auto">
+        <button type="button" class="btn btn-light btn-grey p-3 my-2">
+          Import Excel
+        </button>
+      </div>
     </div>
 
     <div class="content-warga">
       <div class="row">
-        <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Cari Berdasarkan:
-            Nama</button></div>
-        <div class="col">
-          <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
-            Search...</button>
+        <div class="col-auto">
+          <button type="button" class="btn btn-light btn-grey p-3 my-2">
+            Cari Berdasarkan: Nama
+          </button>
         </div>
-        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button>
+        <div class="col">
+          <button type="button" class="btn search w-100 p-2 my-2">
+            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+          </button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-success btn-blue p-3 my-2">
+            + Tambah Data
+          </button>
         </div>
       </div>
 
@@ -25,10 +36,30 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-              <th>NIK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-              <th>Nama <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
-              <th>KK <button type="button" class="btn btn-link"><img src="src/assets/img/sort.svg" /></button></th>
+              <th>
+                ID
+                <button type="button" class="btn btn-link">
+                  <img src="src/assets/img/sort.svg" />
+                </button>
+              </th>
+              <th>
+                NIK
+                <button type="button" class="btn btn-link">
+                  <img src="src/assets/img/sort.svg" />
+                </button>
+              </th>
+              <th>
+                Nama
+                <button type="button" class="btn btn-link">
+                  <img src="src/assets/img/sort.svg" />
+                </button>
+              </th>
+              <th>
+                KK
+                <button type="button" class="btn btn-link">
+                  <img src="src/assets/img/sort.svg" />
+                </button>
+              </th>
               <th>Jenis Kelamin</th>
               <th>Action</th>
             </tr>
@@ -41,9 +72,15 @@
               <td>{{ item.kk }}</td>
               <td>{{ item.jenis_kelamin }}</td>
               <td>
-                <button type="button" class="btn btn-primary m-1"><img src="src/assets/img/view.svg" /></button>
-                <button type="button" class="btn btn-warning"><img src="src/assets/img/edit.svg" /></button>
-                <button type="button" class="btn btn-danger m-1"><img src="src/assets/img/delete.svg" /></button>
+                <button type="button" class="btn btn-primary m-1">
+                  <img src="src/assets/img/view.svg" />
+                </button>
+                <button type="button" class="btn btn-warning">
+                  <img src="src/assets/img/edit.svg" />
+                </button>
+                <button type="button" class="btn btn-danger m-1">
+                  <img src="src/assets/img/delete.svg" />
+                </button>
               </td>
             </tr>
           </tbody>
@@ -51,9 +88,13 @@
 
         <!-- Pagination -->
         <div class="pagination">
-          <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+          <button @click="prevPage" :disabled="currentPage === 1">
+            Previous
+          </button>
           <span> {{ currentPage }} dari {{ totalPages }}</span>
-          <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+          <button @click="nextPage" :disabled="currentPage === totalPages">
+            Next
+          </button>
         </div>
       </div>
     </div>
@@ -61,7 +102,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   data() {
@@ -83,14 +124,15 @@ export default {
   },
   methods: {
     fetchData() {
-      const payload = { id_desa: parseInt(localStorage.getItem('desa_id')) };
+      const payload = { id_desa: localStorage.getItem("desa_id") };
 
-      axios.post('http://localhost:8080/warga/list', payload)
+      axios
+        .post("http://localhost:8080/warga/list", payload)
         .then(({ data }) => {
           this.tableData = data.data;
         })
-        .catch(error => {
-          console.error('Error in Axios POST request:', error);
+        .catch((error) => {
+          console.error("Error in Axios POST request:", error);
         });
     },
     prevPage() {
@@ -130,13 +172,13 @@ h3 {
 
 .table th,
 .table td {
-  border-bottom: 1px solid #EEF1F3;
+  border-bottom: 1px solid #eef1f3;
   padding: 20px;
   text-align: center;
 }
 
 .table th {
-  background-color: #EEF1F3;
+  background-color: #eef1f3;
 }
 
 .table tbody tr:nth-child(even) {
@@ -193,6 +235,7 @@ h3 {
   background-color: #ffffff;
   color: #000;
   border: none;
+  font-size: small;
 }
 
 .search,
@@ -205,7 +248,7 @@ h3 {
 }
 
 .content-warga {
-  background-color: #EEF1F3;
+  background-color: #eef1f3;
   padding: 20px;
   width: 100%;
   border-radius: 5px;
@@ -215,8 +258,8 @@ h3 {
   font-size: 20px;
 }
 
-.subtitle-warga{
+.subtitle-warga {
   font-size: 15px;
-  color: #5E5E5E;
+  color: #5e5e5e;
 }
 </style>

@@ -130,7 +130,7 @@ export default {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
       axios
-        .post("http://localhost:8080/berita/list", payload)
+        .post("http://localhost:8080/warga/list", payload)
         .then(({ data }) => {
           this.tableData = data.data;
         })
@@ -143,6 +143,56 @@ export default {
     this.fetchData();
   },
 };
+
+// export default {
+//   data() {
+//     return {
+//       tableData: [],
+//       currentPage: 1,
+//       itemsPerPage: 7, // Sesuaikan item table perhalaman
+//     };
+//   },
+//   computed: {
+//     totalPages() {
+//       return Math.ceil(this.tableData.length / this.itemsPerPage);
+//     },
+//     displayedData() {
+//       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+//       const endIndex = startIndex + this.itemsPerPage;
+//       return this.tableData.slice(startIndex, endIndex);
+//     },
+//   },
+//   methods: {
+//     fetchData() {
+//       const payload = { id_desa: "1" }; // Replace with the desired id_desa value
+
+//       axios
+//         .get("http://localhost:8080/berita/list", {
+//           data: JSON.stringify(payload), // Send raw JSON body
+//           headers: { "Content-Type": "application/json" },
+//         })
+//         .then(({ data }) => {
+//           this.tableData = data.data;
+//         })
+//         .catch((error) => {
+//           console.error("Error in Axios GET request:", error);
+//         });
+//     },
+//     prevPage() {
+//       if (this.currentPage > 1) {
+//         this.currentPage--;
+//       }
+//     },
+//     nextPage() {
+//       if (this.currentPage < this.totalPages) {
+//         this.currentPage++;
+//       }
+//     },
+//   },
+//   mounted() {
+//     this.fetchData();
+//   },
+// };
 </script>
 
 <style scoped>

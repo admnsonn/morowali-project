@@ -22,6 +22,7 @@ import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
 import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
 import BeritaDesa from '../views/AdminLogin/beritadesa.vue'
+import UMKMDesa from '../views/AdminLogin/umkmdesa.vue'
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -80,6 +81,7 @@ const routes = [
   { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buar Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }

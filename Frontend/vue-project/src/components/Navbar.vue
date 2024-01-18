@@ -34,7 +34,9 @@
               >
             </div>
             <div class="menu-item">
-              <router-link to="/sas" class="tulisan">UMKM Desa</router-link>
+              <router-link to="/umkm-desa" class="tulisan"
+                >UMKM Desa</router-link
+              >
             </div>
             <div class="menu-item">
               <router-link to="/sas" class="tulisan">Wisata Desa</router-link>
