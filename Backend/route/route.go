@@ -27,11 +27,11 @@ func Routes(router *gin.Engine) {
 
 	beritaRoutes := router.Group("/berita")
 	{
-		beritaRoutes.GET("/list/:id", serviceberita.SemuaBerita)
 		beritaRoutes.GET("/:id", serviceberita.DetailBerita)
 		beritaRoutes.POST("/create", serviceberita.Tulis_Berita)
 		beritaRoutes.DELETE("/delete/:id", serviceberita.DeleteBerita)
 		beritaRoutes.GET("/categori", serviceberita.Kategori_berita)
+		beritaRoutes.GET("/list", serviceberita.SemuaBerita)
 	}
 
 	umkmRoutes := router.Group("/umkm")
