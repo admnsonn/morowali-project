@@ -25,14 +25,14 @@
         <div class="field1">
           <div class="form-group">
             <label for="NamaLengkap">Nama Lengkap</label>
-            <input type="text" class="form-control" id="NamaLengkap" aria-label="nama" placeholder="masukan nama">
+            <input v-model="nambahData.nama_lengkap" type="text" class="form-control" id="NamaLengkap" aria-label="nama" placeholder="masukan nama">
           </div>
         </div>
 
         <div class="field2">
           <div class="form-group">
             <label for="JenisKelamin">Jenis Kelamin</label>
-            <input type="text" class="form-control" id="JenisKelamin" aria-label="kelamin"
+            <input v-model="nambahData.jenis_kelamin" type="text" class="form-control" id="JenisKelamin" aria-label="kelamin"
               placeholder="masukan jenis kelamin">
           </div>
         </div>
@@ -40,28 +40,28 @@
         <div class="field3">
           <div class="form-group">
             <label for="NomorTelpon">Nomer Telepon</label>
-            <input type="text" class="form-control" id="NomorTelpon" aria-label="hp" placeholder="masukan no hp">
+            <input v-model="nambahData.no_telp" type="text" class="form-control" id="NomorTelpon" aria-label="hp" placeholder="masukan no hp">
           </div>
         </div>
 
         <div class="field4">
           <div class="form-group">
             <label for="NIK">Nomor Induk Kependudukan (NIK)</label>
-            <input type="text" class="form-control" id="NIK" aria-label="nik" placeholder="masukan nik">
+            <input v-model="nambahData.nik" type="text" class="form-control" id="NIK" aria-label="nik" placeholder="masukan nik">
           </div>
         </div>
 
         <div class="field6">
           <div class="form-group">
             <label for="Alamat">Alamat</label>
-            <input type="text" class="form-control" id="Alamat" aria-label="alamat" placeholder="masukan alamat">
+            <input v-model="nambahData.alamat_pengguna" type="text" class="form-control" id="Alamat" aria-label="alamat" placeholder="masukan alamat">
           </div>
         </div>
 
         <div class="field7">
           <div class="form-group">
             <label for="Pendidikan">Pendidikan Terahir</label>
-            <input type="text" class="form-control" id="Pendidikan" aria-label="pendidikan"
+            <input v-model="nambahData.profesi" type="text" class="form-control" id="Pendidikan" aria-label="pendidikan"
               placeholder="masukan pendidikan">
           </div>
         </div>
@@ -69,40 +69,40 @@
         <div class="field8">
           <div class="form-group">
             <label for="KK">Nomor Kartu Keluarga (KK)</label>
-            <input type="text" class="form-control" id="KK" aria-label="kk" placeholder="masukan kartu keluarga">
+            <input v-model="nambahData.kk" type="text" class="form-control" id="KK" aria-label="kk" placeholder="masukan kartu keluarga">
           </div>
         </div>
 
         <div class="field9">
           <div class="form-group">
             <label for="Agama">Agama</label>
-            <input type="text" class="form-control" id="Agama" aria-label="agama" placeholder="masukan agama">
+            <input v-model="agama" type="text" class="form-control" id="Agama" aria-label="agama" placeholder="masukan agama">
           </div>
         </div>
 
         <div class="field10">
           <div class="form-group">
             <label for="formFile" class="form-label">Foto Warga</label>
-            <input class="form-control" type="file" id="formFile">
+            <input v-on="nambahData.foto_pengguna" class="form-control" type="file" id="formFile">
           </div>
         </div>
 
         <div class="field11">
           <div class="form-group">
             <label for="TTL">Tempat Lahir</label>
-            <input type="text" class="form-control" id="TTL" aria-label="ttl" placeholder="masukan tempat lahir">
+            <input v-model="nambahData.tempat_lahir" type="text" class="form-control" id="TTL" aria-label="ttl" placeholder="masukan tempat lahir">
           </div>
         </div>
 
         <div class="field12">
           <div class="form-group">
             <label for="Status">Status Perkawinan</label>
-            <input type="text" class="form-control" id="Status" aria-label="ttl" placeholder="masukan status">
+            <input v-model="nambahData.status_pernikahan" type="text" class="form-control" id="Status" aria-label="ttl" placeholder="masukan status">
           </div>
         </div>
 
         <div class="field13">
-          <button type="button" class="btn btn-success btn-simpan p-2 my-2" @click="tambahData">
+          <button type="button" class="btn btn-success btn-simpan p-2 my-2" @click="addNewData">
             <div class="nav-link router-link-underline teks-tambah">+ Tambah Data</div>
           </button>
         </div>
@@ -110,17 +110,9 @@
         <div class="field14">
           <div class="form-group">
             <label for="Tanggal">Tanggal Lahir</label>
-            <input type="text" class="form-control" id="Tanggal" aria-label="tanggal" placeholder="masukan tanggal lahir">
+            <input v-model="nambahData.tanggal_lahir" type="text" class="form-control" id="Tanggal" aria-label="tanggal" placeholder="masukan tanggal lahir">
           </div>
         </div>
-
-        <div class="field15">
-          <div class="form-group">
-            <label for="Pekerjaan">Pekerjaan</label>
-            <input type="text" class="form-control" id="Pekerjaan" aria-label="pekerjaan" placeholder="masukan pekerjaan">
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -132,7 +124,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      formData: {
+      nambahData: {
         nama_lengkap: '',
         jenis_kelamin: '',
         no_telp: '',
@@ -141,28 +133,68 @@ export default {
         profesi: '',
         kk: '',
         agama: '',
-        tanggal_lahir: '',
         foto_pengguna: '',
-        TTL: '',
-        Status: '',
+        tanggal_lahir: '',
+        tempat_lahir: '',
+        status_pernikahan: '',
       },
     };
   },
   methods: {
-    fetchData() {
-      const payload = { id_desa: (localStorage.getItem('desa_id')) };
+    addNewData() {
+      // Create the payload for the POST request
+      const payload = {
+        id_desa: localStorage.getItem("desa_id"),
 
-      axios.post('http://localhost:8080/warga/tambah', payload)
-        .then(({ data }) => {
-          this.tableData = data.data;
+        no_telp: this.nambahData.no_telp,
+        alamat_pengguna: this.nambahData.alamat_pengguna,
+        profesi: this.nambahData.profesi,
+        nik: this.nambahData.nik,
+        agama: this.nambahData.kk,
+        nama_lengkap: this.nambahData.nama_lengkap,
+        kk: this.nambahData.kk,
+        foto_pengguna: this.nambahData.foto_pengguna,
+        tanggal_lahir: this.nambahData.tanggal_lahir,
+        status_pernikahan: this.nambahData.status_pernikahan,
+        tempat_lahir: this.nambahData.tempat_lahir,
+        jenis_kelamin: this.nambahData.jenis_kelamin,
+      };
+
+      // Make a POST request to add new data
+      axios
+        .post("http://localhost:8080/warga/list", payload)
+        .then((response) => {
+          // Handle success, for example, refresh the data or show a success message
+          console.log("Data added successfully:", response.data);
+          // Refresh the data by calling fetchData or any other appropriate method
+          this.fetchData();
+          this.$router.push('/warga-desa')
+          // Clear the form fields
+          this.clearForm();
         })
-        .catch(error => {
-          console.error('Error in Axios POST request:', error);
+        .catch((error) => {
+          // Handle errors, for example, show an error message
+          console.error("Error in Axios POST request:", error);
         });
     },
-  },
-  mounted() {
-    this.fetchData();
+
+    clearForm() {
+      // Reset the form fields
+      this.newData = {
+        nama_lengkap: "",
+        jenis_kelamin: "",
+        no_telp: "",
+        nik: "",
+        alamat_pengguna: "",
+        profesi: "",
+        kk: "",
+        agama: "",
+        foto_pengguna: "",
+        tanggal_lahir: "",
+        tempat_lahir: "",
+        status_pernikahan: "",
+      };
+    },
   },
 };
 </script>
