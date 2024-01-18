@@ -21,13 +21,13 @@ import Wargadesa from "../views/AdminLogin/wargadesa.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
 import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
-
+import BeritaDesa from '../views/AdminLogin/beritadesa.vue'
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const userRole = localStorage.getItem('role_pengguna');
-  
-    // ADIT UBAH 
+
+  // ADIT UBAH 
   return isLoggedIn === 'true' && userRole === 'Admin';
 };
 
@@ -43,8 +43,8 @@ const authGuardAdmin = (to, from, next) => {
 const isWarga = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const userRole = localStorage.getItem('role_pengguna');
-  
-    // ADIT UBAH 
+
+  // ADIT UBAH 
   return isLoggedIn === 'true' && userRole === 'Warga';
 };
 
@@ -79,6 +79,7 @@ const routes = [
   // Buat Admin
   { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buar Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }
