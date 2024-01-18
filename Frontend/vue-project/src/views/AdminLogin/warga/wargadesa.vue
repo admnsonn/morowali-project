@@ -1,5 +1,5 @@
 <template>
-    <div class="kontainer-admin">
+  <div class="kontainer-admin">
     <div class="kontainer">
       <div class="bartipis" />
       <div class="">
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="container">
     <div class="row">
       <div class="col">
@@ -36,7 +36,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            + Tambah Data
+            <router-link to="/detail-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -254,11 +254,11 @@ h3 {
   font-size: small;
 }
 
-.btn-excel{
+.btn-excel {
   background-color: #33B949;
 }
 
-.btn-excel:hover{
+.btn-excel:hover {
   background-color: #33B949;
 }
 

@@ -19,6 +19,7 @@ import PendidikanView from "../views/datapendidikan.vue";
 import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
 import Wargadesa from "../views/AdminLogin/warga/wargadesa.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
+import DetailWarga from "../views/AdminLogin/warga/detailwarga.vue";
 import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
 import BeritaDesa from '../views/AdminLogin/beritadesa.vue'
@@ -82,6 +83,7 @@ const routes = [
   { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-warga', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buar Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }
