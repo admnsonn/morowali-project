@@ -3,18 +3,24 @@
     <Navbar />
   </div>
 
-  <div class="main" :style="{ marginLeft: posisi !== 0 ? '260px' : '0' }">
+  <div
+    class="main"
+    :style="{
+      backgroundColor: 'aliceblue',
+      marginLeft: posisi !== 0 ? '260px' : '0',
+    }"
+  >
     <RouterView />
   </div>
 
-  <div class="kaki">
+  <!-- <div class="kaki">
     <footerComponent />
-  </div>
+  </div> -->
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import footerComponent from './components/Footer.vue'
+import Navbar from "./components/Navbar.vue";
+import footerComponent from "./components/Footer.vue";
 
 export default {
   components: {
@@ -44,5 +50,5 @@ export default {
       }
     },
   },
-}
+};
 </script>

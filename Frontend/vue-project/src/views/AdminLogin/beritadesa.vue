@@ -153,6 +153,7 @@ export default {
   margin-left: 80px;
   margin-top: 32px;
   margin-bottom: 46px;
+  border: solid;
 }
 
 .pagination {

@@ -274,24 +274,13 @@ export default {
   padding-bottom: 10px;
 }
 
-.bartipis {
-  background-color: black;
-  height: 100%;
-  width: 3px;
-  grid-row: span 2;
-  top: 0;
-  left: 0;
-  align-self: center;
-}
-
-
 .tulisan {
   font-size: 15px;
 }
 
 .sidebar {
   width: 285px;
-  height: 110%;
+  height: 100vh;
   position: fixed;
   justify-content: center;
   top: 0;
