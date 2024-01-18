@@ -82,7 +82,7 @@
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button type="button" class="btn btn-danger m-1">
+                <button type="button" @click.prevent="formDelete(item.id_berita)" class="btn btn-danger m-1">
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -143,6 +143,21 @@ export default {
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
         });
+    },
+    formDelete(id) {
+      if (confirm("Apakah anda yakin ingin menghapus data ini?")) {
+        axios
+          .delete(`http://localhost:8080/berita/delete/${id}`)
+          .then(res => {
+              alert("Data berhasil dihapus");
+              window.location.href = window.location.href;
+          })
+          .catch(error => {
+            console.error("Error in Axios DELETE request:", error);
+          });
+      } else {
+        return false;
+      }
     },
     sortById() {
       this.filteredData.sort((a, b) => a.id_berita - b.id_berita); // Sort by ID ascending
