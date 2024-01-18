@@ -15,7 +15,7 @@
         <h3 class="title-warga">Data Warga Desa</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
-      <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Import Excel</button></div>
+      <div class="col-auto"><button type="button" class="btn btn-light btn-excel p-3 my-2">Import Excel</button></div>
     </div>
 
     <div class="content-warga">
@@ -200,10 +200,24 @@ h3 {
   border: none;
 }
 
+.btn-blue:hover {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+}
+
 .btn-grey {
   background-color: #ffffff;
   color: #000;
   border: none;
+}
+
+.btn-excel{
+  background-color: #33B949;
+}
+
+.btn-excel:hover{
+  background-color: #33B949;
 }
 
 .search,
