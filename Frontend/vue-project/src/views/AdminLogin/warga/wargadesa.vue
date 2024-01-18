@@ -83,11 +83,7 @@ export default {
   },
   methods: {
     fetchData() {
-<<<<<<< HEAD:Frontend/vue-project/src/views/AdminLogin/wargadesa.vue
       const payload = { id_desa: localStorage.getItem('desa_id') };
-=======
-      const payload = { id_desa: (localStorage.getItem('desa_id')) };
->>>>>>> 22f1d85d52cd6a41d55499ccc5117521ce1b0dcb:Frontend/vue-project/src/views/AdminLogin/warga/wargadesa.vue
 
       axios.post('http://localhost:8080/warga/list', payload)
         .then(({ data }) => {

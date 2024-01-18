@@ -19,13 +19,34 @@ func Semuaumkm(c *gin.Context) {
 		Alamat   string `json:"alamat"`
 	}
 
-	id := c.Param("id")
+	type Request struct {
+		IDDesa string `json:"id_desa"`
+	}
+
+	var input Request
+
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&input); err != nil {
+			fmt.Print("masuk sini")
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&input); err != nil {
+			fmt.Print("masuk sini")
+			return
+		}
+
+	}
 
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
 	}
+	defer tx.Rollback(context.Background())
 
 	umkm := `
 	select 
@@ -40,7 +61,7 @@ func Semuaumkm(c *gin.Context) {
 	and b.id_desa = $1
 	`
 
-	row, err := tx.Query(ctx, umkm, id)
+	row, err := tx.Query(ctx, umkm, input.IDDesa)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
