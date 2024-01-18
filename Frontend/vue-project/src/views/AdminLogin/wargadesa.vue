@@ -13,7 +13,7 @@
         <div class="col-auto"><button type="button" class="btn btn-light btn-grey p-3 my-2">Cari Berdasarkan:
             Nama</button></div>
         <div class="col">
-          <button type="button" class="btn search w-100 p-2 my-2"><img src="src/assets/img/search.svg" class="me-2" />
+          <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
             Search...</button>
         </div>
         <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button>
@@ -193,7 +193,6 @@ h3 {
   background-color: #ffffff;
   color: #000;
   border: none;
-  font-size:small;
 }
 
 .search,
