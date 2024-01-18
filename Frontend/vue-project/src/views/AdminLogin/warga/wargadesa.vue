@@ -1,4 +1,14 @@
 <template>
+    <div class="kontainer-admin">
+    <div class="kontainer">
+      <div class="bartipis" />
+      <div class="">
+        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
+        <p class="teks-kabupaten">Kabupaten, Morowali</p>
+      </div>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="row">
       <div class="col">
@@ -16,7 +26,8 @@
           <button type="button" class="btn search w-100 p-3 my-2"><img src="src/assets/img/search.svg" class="me-2" />
             Search...</button>
         </div>
-        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2">+ Tambah Data</button>
+        <div class="col-auto"><button type="button" class="btn btn-success btn-blue p-3 my-2"><router-link to="/detail-warga"
+              class="nav-link router-link-underline">+ Tambah Data</router-link></button>
         </div>
       </div>
 
@@ -116,7 +127,7 @@ h3 {
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   width: calc(100% - 100px);
 }
@@ -215,7 +226,7 @@ h3 {
   font-size: 20px;
 }
 
-.subtitle-warga{
+.subtitle-warga {
   font-size: 15px;
   color: #5E5E5E;
 }
