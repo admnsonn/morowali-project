@@ -28,12 +28,14 @@ func SemuaBerita(c *gin.Context) {
 	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
 
 		if err := c.Bind(&input); err != nil {
+			fmt.Print("masuk sini")
 			return
 		}
 
 	} else {
 
 		if err := c.BindJSON(&input); err != nil {
+			fmt.Print("masuk sini")
 			return
 		}
 
