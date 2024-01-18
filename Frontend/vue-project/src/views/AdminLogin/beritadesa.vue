@@ -11,18 +11,13 @@
 
   <div class="kontainer-data">
     <div>
-      <h3>Data Berita Desa</h3>
-      <p>Management Content dan Layanan warga</p>
+      <h3 class="teks-h3">Data Berita Desa</h3>
+      <p class="teks-p">Management Content dan Layanan warga</p>
     </div>
 
     <!-- tabel -->
     <div class="content-berita">
       <div class="row">
-        <div class="col-auto">
-          <button type="button" class="btn btn-light btn-grey p-3 my-2">
-            Cari Berdasarkan: Nama
-          </button>
-        </div>
         <div class="col">
           <button type="button" class="btn search w-100 p-2 my-2">
             <img src="src/assets/img/search.svg" class="me-2" /> Search...
@@ -57,20 +52,18 @@
                   <img src="src/assets/img/sort.svg" />
                 </button>
               </th>
-              <th>
-                Sub-Judul
-                <!-- <button type="button" class="btn btn-link">
-                  <img src="src/assets/img/sort.svg" />
-                </button> -->
-              </th>
-              <th>
-                Deskripsi
-                <!-- <button type="button" class="btn btn-link">
-                  <img src="src/assets/img/sort.svg" />
-                </button> -->
-              </th>
+              <th>Sub-Judul</th>
+              <th>Deskripsi</th>
               <th>Foto Berita</th>
-              <th>Kategori</th>
+              <th>
+                Kategori
+                <select v-model="selectedKategori" @change="filterByKategori">
+                  <option value="">All</option>
+                  <option value="Politik">Politik</option>
+                  <option value="Teknologi">Teknologi</option>
+                  <option value="Ekonomi">Ekonomi</option>
+                </select>
+              </th>
               <th>Action</th>
             </tr>
           </thead>
@@ -120,17 +113,20 @@ export default {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
+      selectedKategori: "",
       sortDirection: "asc",
+      filteredData: [],
     };
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.tableData.length / this.itemsPerPage);
+      return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     displayedData() {
+      // Start with filteredData
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
-      return this.tableData.slice(startIndex, endIndex);
+      return this.filteredData.slice(startIndex, endIndex);
     },
   },
   methods: {
@@ -141,24 +137,39 @@ export default {
         .post("http://localhost:8080/berita/list", payload)
         .then(({ data }) => {
           this.tableData = data.data;
+          this.filteredData = this.tableData; // Initialize filteredData
+          this.filterByKategori(); // Apply initial filter
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
         });
     },
     sortById() {
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
-      this.tableData.sort((a, b) => {
-        const multiplier = this.sortDirection === "asc" ? 1 : -1;
-        return multiplier * (a.id_berita - b.id_berita);
-      });
+      this.filteredData.sort((a, b) => a.id_berita - b.id_berita); // Sort by ID ascending
+      // If you want to toggle ascending/descending order:
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.id_berita - b.id_berita
+          : b.id_berita - a.id_berita
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
+
     sortByJudul() {
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
-      this.tableData.sort((a, b) => {
-        const multiplier = this.sortDirection === "asc" ? 1 : -1;
-        return multiplier * a.judul.localeCompare(b.judul); // Sort by judul
-      });
+      this.filteredData.sort((a, b) => a.judul.localeCompare(b.judul)); // Sort by judul alphabetically
+      // Toggle ascending/descending (optional):
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.judul.localeCompare(b.judul)
+          : b.judul.localeCompare(a.judul)
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
     nextPage() {
       if (this.currentPage < this.totalPages) {
@@ -171,9 +182,20 @@ export default {
         this.currentPage--;
       }
     },
+    filterByKategori() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.kategori === this.selectedKategori ||
+          this.selectedKategori === ""
+      );
+      this.displayedData = this.filteredData.slice(
+        (this.currentPage - 1) * this.itemsPerPage,
+        this.currentPage * this.itemsPerPage
+      );
+    },
   },
   created() {
-    this.fetchData();
+    this.fetchData(); // Get original data
   },
 };
 </script>
@@ -181,6 +203,15 @@ export default {
 <style scoped>
 th {
   vertical-align: middle;
+}
+
+.teks-h3 {
+  font-weight: bold;
+  font-size: large;
+}
+
+.teks-p {
+  font-size: medium;
 }
 
 .teks-admin {
