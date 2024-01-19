@@ -53,15 +53,15 @@ func Get_detail_warga_by_admin(c *gin.Context) {
 		e.status_perkawinan ,
 		a.profesi ,
 		a.no_telp ,
-		c.tingkat_pendidikan ,
+		c.category_name as pendidikan_terakhir  ,
 		a.foto_pengguna ,
 		a.alamat_pengguna ,
 		a.rt ,
 		a.rw ,
 		f.nama_desa ,
 		g.nama_kecamatan 
-	from dev.pengguna a, dev.jenis_kelamin b, dev.pendidikan c, dev.agama d, dev.status_perkawinan e, dev.desa f, dev.kecamatan g
-	where a.id_pengguna = c.pengguna_id 
+	from dev.pengguna a, dev.jenis_kelamin b, dev.kategori_pendidikan c, dev.agama d, dev.status_perkawinan e, dev.desa f, dev.kecamatan g
+	where a.pendidikan_id = c.id 
 	and a.jk_id = b.id_jk 
 	and a.agama_id  = d.id_agama  
 	and a.status_perkawinan_id  = e.id_status  
