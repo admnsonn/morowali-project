@@ -9,10 +9,12 @@
     </div>
   </div>
 
-  <div class="kontainer-data">
-    <div>
-      <h3 class="teks-h3">Data Berita Desa</h3>
-      <p class="teks-p">Management Content dan Layanan warga</p>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3 class="title-warga">Data Berita Desa</h3>
+        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
+      </div>
     </div>
 
     <!-- tabel -->
@@ -229,13 +231,8 @@ th {
   vertical-align: middle;
 }
 
-.teks-h3 {
-  font-weight: bold;
-  font-size: large;
-}
-
-.teks-p {
-  font-size: medium;
+h3 {
+  font-weight: 700;
 }
 
 .teks-admin {
@@ -249,6 +246,11 @@ th {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   margin: 0;
+}
+.container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  width: calc(100% - 100px);
 }
 
 .kontainer-data {
@@ -360,5 +362,14 @@ th {
   padding: 20px;
   width: 100%;
   border-radius: 5px;
+}
+
+.title-warga {
+  font-size: 20px;
+}
+
+.subtitle-warga {
+  font-size: 15px;
+  color: #5e5e5e;
 }
 </style>
