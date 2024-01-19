@@ -12,13 +12,14 @@ import (
 
 func Warga_desa_by_admin(c *gin.Context) {
 	type Data_list_warga_kontainer struct {
-		IDPengguna   int    `json:"id_pengguna"`
-		NIK          string `json:"nik"`
-		NamaLengkap  string `json:"nama_lengkap"`
-		NoTelp       string `json:"no_telp"`
-		KK           string `json:"kk"`
-		JenisKelamin string `json:"jenis_kelamin"`
-		Umur         string `json:"umur"`
+		IDPengguna     int    `json:"id_pengguna"`
+		NIK            string `json:"nik"`
+		AlamatPengguna string `json:"alamat_pengguna"`
+		NamaLengkap    string `json:"nama_lengkap"`
+		NoTelp         string `json:"no_telp"`
+		KK             string `json:"kk"`
+		JenisKelamin   string `json:"jenis_kelamin"`
+		Umur           string `json:"umur"`
 	}
 
 	type Request struct {
@@ -58,18 +59,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-		Select 
-		a.id_pengguna          ,
-		a.nik                  ,
-		a.kk					 ,
-		b.jenis_kelamin		 ,
-		a.alamat_pengguna      ,
+		Select a.id_pengguna,
+		a.niK,
+		a.kk,
+		b.jenis_kelamin,
+		a.alamat_pengguna,
+		a.nama_lengkap,
 		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
 		a.no_telp 
 	FROM
 		dev.pengguna a, dev.jenis_kelamin b
 	where 
-		a.jk_id = b.id_jk and nik = $1
+		a.jk_id = b.id_jk and a.role_id  = 2 and nik = $1
 		`
 
 		err = tx.QueryRow(ctx, query_pencarian, input.NIK).Scan(
@@ -77,6 +78,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil3.NIK,
 			&ambil3.KK,
 			&ambil3.JenisKelamin,
+			&ambil3.AlamatPengguna,
 			&ambil3.NamaLengkap,
 			&ambil3.Umur,
 			&ambil3.NoTelp,
@@ -129,18 +131,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-		Select 
-			a.id_pengguna          ,
-			a.nik                  ,
-			a.kk					 ,
-			b.jenis_kelamin		 ,
-			a.alamat_pengguna      ,
-			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
-			a.no_telp 
-		FROM
-			dev.pengguna a, dev.jenis_kelamin b
+		Select a.id_pengguna,
+		a.niK,
+		a.kk,
+		b.jenis_kelamin,
+		a.alamat_pengguna,
+		a.nama_lengkap,
+		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+		a.no_telp 
+	FROM
+		dev.pengguna a, dev.jenis_kelamin b
 		where 
-			a.jk_id = b.id_jk and kk = $1
+			a.jk_id = b.id_jk and a.role_id  = 2 and kk = $1
 		`
 
 		err = tx.QueryRow(ctx, query_pencarian, input.KK).Scan(
@@ -148,6 +150,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil3.NIK,
 			&ambil3.KK,
 			&ambil3.JenisKelamin,
+			&ambil3.AlamatPengguna,
 			&ambil3.NamaLengkap,
 			&ambil3.Umur,
 			&ambil3.NoTelp,
@@ -170,18 +173,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-		Select 
-		a.id_pengguna          ,
-		a.nik                  ,
-		a.kk					 ,
-		b.jenis_kelamin		 ,
-		a.alamat_pengguna      ,
+		Select a.id_pengguna,
+		a.niK,
+		a.kk,
+		b.jenis_kelamin,
+		a.alamat_pengguna,
+		a.nama_lengkap,
 		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
 		a.no_telp 
 	FROM
 		dev.pengguna a, dev.jenis_kelamin b
 	where 
-		a.jk_id = b.id_jk and
+		a.jk_id = b.id_jk and a.role_id  = 2 and
 				DATE_PART('year', AGE(NOW(), tanggal_lahir)) = $1;
 		`
 
@@ -190,6 +193,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil3.NIK,
 			&ambil3.KK,
 			&ambil3.JenisKelamin,
+			&ambil3.AlamatPengguna,
 			&ambil3.NamaLengkap,
 			&ambil3.Umur,
 			&ambil3.NoTelp,
@@ -212,18 +216,19 @@ func Warga_desa_by_admin(c *gin.Context) {
 		var ambil3 Data_list_warga_kontainer
 		// Filter pecarian NIK
 		query_pencarian := `
-		Select 
-			a.id_pengguna          ,
-			a.nik                  ,
-			a.kk					 ,
-			b.jenis_kelamin		 ,
-			a.alamat_pengguna      ,
-			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
-			a.no_telp 
-		FROM
-			dev.pengguna a, dev.jenis_kelamin b
+		Select a.id_pengguna,
+		a.niK,
+		a.kk,
+		b.jenis_kelamin,
+		a.alamat_pengguna,
+		a.nama_lengkap,
+		CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+		a.no_telp 
+	FROM
+		dev.pengguna a, dev.jenis_kelamin b
 		where 
-			a.jk_id = b.id_jk and
+			a.jk_id = b.id_jk 
+			and a.role_id  = 2 and
 				UPPER(nama_lengkap) = UPPER($1);
 		`
 
@@ -232,6 +237,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil3.NIK,
 			&ambil3.KK,
 			&ambil3.JenisKelamin,
+			&ambil3.AlamatPengguna,
 			&ambil3.NamaLengkap,
 			&ambil3.Umur,
 			&ambil3.NoTelp,
@@ -252,16 +258,18 @@ func Warga_desa_by_admin(c *gin.Context) {
 
 		query_pencarian := `
 		Select a.id_pengguna,
-				a.niK,
-				a.kk,
-				b.jenis_kelamin,
-				a.alamat_pengguna,
-				CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
-				a.no_telp 
-			FROM
-				dev.pengguna a, dev.jenis_kelamin b
+			a.niK,
+			a.kk,
+			b.jenis_kelamin,
+			a.alamat_pengguna,
+			a.nama_lengkap,
+			CAST(DATE_PART('year', AGE(NOW(), a.tanggal_lahir)) AS VARCHAR) AS umur,
+			a.no_telp 
+		FROM
+			dev.pengguna a, dev.jenis_kelamin b
 			where 
 				a.jk_id = b.id_jk 
+				and a.role_id  = 2
 				and a.desa_id = $1;
 		`
 
@@ -285,6 +293,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 				&ambil4.NIK,
 				&ambil4.KK,
 				&ambil4.JenisKelamin,
+				&ambil4.AlamatPengguna,
 				&ambil4.NamaLengkap,
 				&ambil4.Umur,
 				&ambil4.NoTelp,
