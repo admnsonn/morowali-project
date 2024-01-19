@@ -88,7 +88,8 @@
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button type="button" @click.prevent="formDelete(item.id_pengguna)" class="btn btn-danger m-1">
+                <button type="button" @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
+                  class="btn btn-danger m-1">
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -113,6 +114,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -145,19 +147,30 @@ export default {
           console.error("Error in Axios POST request:", error);
         });
     },
-    formDelete(id) {
-      if (confirm("Apakah anda yakin ingin menghapus data ini?")) {
-        axios
-          .delete(`http://localhost:8080/warga/delete/${id}`)
-          .then(res => {
-            alert("Data berhasil dihapus");
-            window.location.href = window.location.href;
-          })
-          .catch(error => {
-            console.error("Error in Axios DELETE request:", error);
-          });
-      } else {
-        return false;
+    async deleteData(id, nama) {
+      try {
+        const result = await Swal.fire({
+          title: `Hapus data ${nama}?`,
+          text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#C03221",
+          cancelButtonColor: "#4F4F4F",
+          confirmButtonText: "Hapus",
+          cancelButtonText: "Batal"
+        });
+
+        if (result.isConfirmed) {
+          const response = await axios.delete(`http://localhost:8080/warga/delete/${id}`);
+          if (response.data.status) {
+            await Swal.fire("Data berhasil dihapus!", response.data.message, "success");
+            this.fetchData();
+          } else {
+            await Swal.fire("Data gagal dihapus.", response.data.message, "error");
+          }
+        }
+      } catch (error) {
+        console.error("Error in Axios DELETE request:", error);
       }
     },
     prevPage() {
