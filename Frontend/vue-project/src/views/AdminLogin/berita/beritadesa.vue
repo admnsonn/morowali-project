@@ -63,7 +63,11 @@
               <th>Foto Berita</th>
               <th>
                 Kategori
-                <select v-model="selectedKategori" @change="filterByKategori">
+                <select
+                  v-model="selectedKategori"
+                  @change="filterByKategori"
+                  class="btn btn-light btn-grey p-3 my-2"
+                >
                   <option value="">All</option>
                   <option value="Politik">Politik</option>
                   <option value="Teknologi">Teknologi</option>
@@ -82,13 +86,17 @@
               <td>{{ item.foto_berita }}</td>
               <td>{{ item.kategori }}</td>
               <td>
-                <button type="button" class="btn btn-primary m-1">
+                <!-- <button type="button" class="btn btn-primary m-1">
                   <img src="src/assets/img/view.svg" />
-                </button>
+                </button> -->
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button type="button" @click.prevent="deleteData(item.id_berita, item.judul)" class="btn btn-danger m-1">
+                <button
+                  type="button"
+                  @click.prevent="deleteData(item.id_berita, item.judul)"
+                  class="btn btn-danger m-1"
+                >
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -162,16 +170,26 @@ export default {
           confirmButtonColor: "#C03221",
           cancelButtonColor: "#4F4F4F",
           confirmButtonText: "Hapus",
-          cancelButtonText: "Batal"
+          cancelButtonText: "Batal",
         });
 
         if (result.isConfirmed) {
-          const response = await axios.delete(`http://localhost:8080/berita/delete/${id}`);
+          const response = await axios.delete(
+            `http://localhost:8080/berita/delete/${id}`
+          );
           if (response.data.status) {
-            await Swal.fire("Data berhasil dihapus!", response.data.message, "success");
+            await Swal.fire(
+              "Data berhasil dihapus!",
+              response.data.message,
+              "success"
+            );
             this.fetchData();
           } else {
-            await Swal.fire("Data gagal dihapus.", response.data.message, "error");
+            await Swal.fire(
+              "Data gagal dihapus.",
+              response.data.message,
+              "error"
+            );
           }
         }
       } catch (error) {
@@ -378,6 +396,7 @@ th {
 
 .title-warga {
   font-size: 20px;
+  font-weight: bold;
 }
 
 .subtitle-warga {

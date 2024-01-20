@@ -21,7 +21,9 @@
         <ul class="sidebar-list">
           <li class="sidebar-link">
             <div class="menu-item">
-              <router-link to="/aa" class="tulisan">Beranda</router-link>
+              <router-link to="/beranda-admin" class="tulisan"
+                >Beranda</router-link
+              >
             </div>
             <div class="menu-item">
               <router-link to="/warga-desa" class="tulisan"
@@ -265,7 +267,7 @@ export default {
 
 .kontainer-admin {
   border: 22%;
-  background-color: #EEF1F3;
+  background-color: #eef1f3;
   height: 131px;
   display: flex;
   align-items: center;
