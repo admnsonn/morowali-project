@@ -19,6 +19,7 @@ import (
 func Update_data_warga(c *gin.Context) {
 	type Request struct {
 		IDPengguna      string `json:"id_pengguna"`
+		Fullname        string `json:"nama_lengkap"`
 		NIK             string `json:"nik"`
 		KK              string `json:"kk"`
 		TempatLahir     string `json:"tempat_lahir"`

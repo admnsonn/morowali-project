@@ -1,12 +1,9 @@
 package sevicewargadesabyamin
 
 import (
-	servicecheck "backendpgx7071/service/serviceCheck"
 	"bytes"
 	"context"
-	"crypto/md5"
 	"encoding/base64"
-	"encoding/hex"
 	"fmt"
 	"image"
 	"image/jpeg"
@@ -23,27 +20,25 @@ import (
 
 func Create_warga(c *gin.Context) {
 	type Request struct {
-		Username        string `json:"username"`
-		Password        string `json:"password"`
+		Fullname        string `json:"nama_lengkap"`
 		NIK             string `json:"nik"`
-		NoTelp          string `json:"no_telp"`
-		FotoProfile     string `json:"foto_pengguna"`
-		TanggalLahir    string `json:"tanggal_lahir"`
-		TempatLahir     string `json:"tempat_lahir"`
-		JenisKelamin    string `json:"jenis_kelamin"`
-		StatusPenikahan string `json:"status_perkawinan"`
-		Profesi         string `json:"profesi"`
 		KK              string `json:"kk"`
-		Umur            string `json:"umur"`
-		FinancialID     string `json:"kategori_financial_id"`
-		Agama           string `json:"agama"`
-		Desa            string `json:"desa"`
-		DesaID          int    `json:"id_desa"`
-		NamaLengkap     string `json:"nama_lengkap"`
+		TempatLahir     string `json:"tempat_lahir"`
+		TanggalLahir    string `json:"tanggal_lahir"`
+		JenisKelamin    string `json:"jenis_kelamin_id"`
 		Alamat          string `json:"alamat_pengguna"`
-		RT              string `json:"rt"`
+		Agama           string `json:"agama_id"`
+		StatusPenikahan string `json:"status_perkawinan_id"`
+		Profesi         string `json:"profesi"`
+		NoTelp          string `json:"no_telp"`
+		PendidikanLast  string `json:"pendidikan_terakhir_id"`
+		FotoProfile     string `json:"foto_profile"`
 		RW              string `json:"rw"`
+		RT              string `json:"rt"`
+		DesaID          string `json:"id_desa"`
+		Financial       string `json:"kategori_financial_id"`
 		KodePos         string `json:"kode_pos"`
+		Kewarganegaraan string `json:"kewarganegaraan"`
 	}
 
 	var input Request
@@ -69,29 +64,7 @@ func Create_warga(c *gin.Context) {
 	}
 	defer tx.Rollback(context.Background())
 
-	var hitung1, hitung2 int
-
-	cek_usename := `
-			SELECT COUNT(*)
-			FROM dev.pengguna
-			WHERE UPPER(username) = UPPER($1);
-		`
-	err = tx.QueryRow(ctx, cek_usename, input.Username).Scan(&hitung1)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if hitung1 != 0 {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  true,
-			"message": "Username Sudah Terdaftar !",
-		})
-		err = tx.Commit(ctx)
-		if err != nil {
-			fmt.Println(err.Error())
-		}
-		return
-	}
+	var hitung2 int
 
 	cek_nik := `
 		SELECT COUNT(*)
@@ -114,10 +87,6 @@ func Create_warga(c *gin.Context) {
 		}
 		return
 	}
-
-	hasher := md5.New()
-	hasher.Write([]byte(input.Password))
-	hashedPassword := hex.EncodeToString(hasher.Sum(nil))
 
 	if input.FotoProfile != "" {
 
@@ -194,72 +163,91 @@ func Create_warga(c *gin.Context) {
 		fmt.Println("FotoProfile is empty.")
 	}
 
-	var jk_id, nikah_id, agama_id int
-
-	jk_id = servicecheck.CheckGender(input.JenisKelamin)
-
-	nikah_id = servicecheck.CheckGender(input.StatusPenikahan)
-
-	agama_id = servicecheck.CheckGender(input.Agama)
-
 	// Query INSERT
+
 	query := `
 		INSERT INTO dev.pengguna (
-			username, 
-			password,
-			role_pengguna, 
-			role_id,
-			created_at, 
-			created_by, 
-			update_at, 
-			updated_by,
-			tanggal_lahir, 
-			tempat_lahir, 
-			jk_id, 
-			jenis_kelamin,
-			status_perkawinan_id, 
-			status_perkawinan, 
-			profesi, 
-			nik, 
+			nama_lengkap,
+			nik,
 			kk,
-			umur, 
-			kategori_financial_id, 
-			agama,
-			agama_id, 
-			desa, 
-			desa_id,
-			nama_lengkap, 
-			foto_pengguna, 
-			alamat_pengguna, 
-			rt, 
+			tempat_lahir,
+			tanggal_lahir,
+			jk_id ,
+			alamat_pengguna,
+			agama_id ,
+			status_perkawinan_id ,
+			profesi,
+			no_telp,
+			pendidikan_id ,
+			foto_pengguna ,
 			rw,
-			kode_pos,  
-			no_telp
+			rt,
+			desa_id,
+			kategori_financial_id ,
+			role_id,
+			kode_pos ,
+			kewarganegaraan,
+			created_at ,
+			created_by ,
+			update_at ,
+			updated_by 
 		) VALUES (
-			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30
+			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24
 		)
-	`
+		RETURNING id_pengguna;
+		`
 
-	// Execute query dengan parameter input
-	_, err = tx.Exec(ctx, query,
-		input.Username, hashedPassword, "Warga", 2, time.Now(), "Admin Sistem", time.Now(), "Admin Sistem",
-		input.TanggalLahir, input.TempatLahir, jk_id, input.JenisKelamin, nikah_id, input.StatusPenikahan,
-		input.Profesi, input.NIK, input.KK, input.Umur, input.FinancialID, input.Agama, agama_id, input.Desa, input.DesaID,
-		input.NamaLengkap, input.FotoProfile, input.Alamat, input.RT, input.RW, input.KodePos, input.NoTelp,
-	)
+	var newID int
+
+	err = tx.QueryRow(ctx, query,
+		input.Fullname,
+		input.NIK,
+		input.KK,
+		input.TempatLahir,
+		input.TanggalLahir,
+		input.JenisKelamin,
+		input.Alamat,
+		input.Agama,
+		input.StatusPenikahan,
+		input.Profesi,
+		input.NoTelp,
+		input.PendidikanLast,
+		input.FotoProfile,
+		input.RW,
+		input.RT,
+		input.DesaID,
+		input.Financial,
+		"2",
+		input.KodePos,
+		input.Kewarganegaraan,
+		time.Now(),
+		"Admin",
+		time.Now(),
+		"Admin",
+	).Scan(&newID)
+
 	if err != nil {
-		fmt.Println("Gagal melakukan INSERT:", err)
-		return
+		// log.Fatal(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  false,
+			"message": "Query Insert Bermasalah",
+		})
 	}
 
+	// Commit the transaction
 	err = tx.Commit(ctx)
 	if err != nil {
-		fmt.Println(err.Error())
+		// log.Fatal(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  false,
+			"message": "Data Gagal Ditambahkan",
+		})
 	}
 
+	// Return success response
 	c.JSON(http.StatusOK, gin.H{
 		"status":  true,
-		"message": "Berhasil Input",
+		"message": "Data Berhasil Di Tambahkan",
 	})
 
 }
