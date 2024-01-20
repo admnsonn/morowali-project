@@ -17,6 +17,6 @@ COPY --from=build /app/main .
 # Debugging: Print the contents of the /app directory
 RUN ls -la
 
-EXPOSE 7071
+EXPOSE 8080
 
 CMD ["./main"]
