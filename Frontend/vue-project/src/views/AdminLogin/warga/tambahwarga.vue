@@ -89,8 +89,8 @@
         <div class="field6">
           <div class="form-group">
             <label for="Alamat">Alamat</label>
-            <textarea type="text" v-model="model.warga.alamat_pengguna" class="form-control" id="Alamat" aria-label="alamat"
-              placeholder="masukan alamat" rows="3"></textarea>
+            <textarea type="text" v-model="model.warga.alamat_pengguna" class="form-control" id="Alamat"
+              aria-label="alamat" placeholder="masukan alamat" rows="3"></textarea>
           </div>
         </div>
 
@@ -125,12 +125,7 @@
         <div class="field10">
           <div class="form-group">
             <label for="formFile" class="form-label">Foto Warga</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-            />
+            <input class="form-control" @change="handleFileUpload($event)" type="file" id="formFile">
           </div>
         </div>
 
@@ -215,16 +210,16 @@ export default {
           status_pernikahan: "",
         },
       },
-      tableData: [],
     };
   },
   methods: {
     addNewData() {
-      axios
-        .post("http://localhost:8080/warga/tambah", this.model.warga)
-        .then((res) => {
-          console.log(res.data);
+      // console.log(this.model.warga);
+      axios.post("http://localhost:8080/warga/tambah", this.model.warga)
+        .then(res => {
+          console.log(res.data)
           alert(res.data.message);
+          document.getElementById('formFile').value = '';
 
           this.model.warga = {
             nama_lengkap: "",
@@ -242,14 +237,19 @@ export default {
           };
         })
         .catch((error) => {
-          console.error(error);
-          // Handle error, e.g., show an error message
+          console.error("Error in Axios POST request:", error);
         });
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+    handleFileUpload(event) {
+      console.log('Event:', event);
+
+      // Check if event.target and event.target.files exist
+      if (event && event.target && event.target.files) {
+        this.model.warga.foto_pengguna = event.target.files[0];
+        console.log('Selected file:', this.model.warga.foto_pengguna);
+      } else {
+        console.error('Invalid event or file selection.');
+      }
     },
   },
 };
