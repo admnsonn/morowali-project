@@ -6,17 +6,17 @@
   <div class="main" :style="{
     backgroundColor: '#EEF1F3',
     marginLeft: posisi !== 0 ? '260px' : '0',
-    paddingBottom: posisi !== 0 ? '15%' : '0',
+    paddingBottom: posisi !== 0 ? '15%' : '15%',
   }">
     <RouterView />
   </div>
 
-  <!-- <div class="kaki" :style="{
+  <div class="kaki" :style="{
     backgroundColor: '#EEF1F3',
     marginLeft: posisi !== 0 ? '260px' : '0',
   }">
     <footerComponent />
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -119,15 +119,14 @@ export default {
 .tabel th,
 .tabel td {
   border-bottom: 1px solid #eef1f3;
-  padding: 15px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-left: 49px;
+  padding: 10px;
+  padding-right: 49px;
   text-align: center;
 }
 
 .tabel th {
   background-color: #eef1f3;
+  padding-right: 49px;
 }
 
 .pagination {
@@ -168,12 +167,10 @@ export default {
 }
 
 .tabel-container {
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
-.table-scroll {
-    max-height: 600px; /* Adjust the maximum height for vertical scrolling */
-    overflow-y: auto;
-    overflow-x: auto;
-  }
+h3{
+  font-weight: bold;
+}
 </style>

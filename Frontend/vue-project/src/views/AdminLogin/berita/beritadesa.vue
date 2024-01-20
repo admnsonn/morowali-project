@@ -18,87 +18,88 @@
     </div>
 
     <!-- tabel -->
-    <div class="content-berita">
+    <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <button type="button" class="btn search w-100 p-2 my-2">
+          <button type="button" class="btn btn-search w-100 my-2">
             <img src="src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-success btn-blue p-3 my-2">
+          <button type="button" class="btn btn-success btn-tambah my-2">
             <router-link to="/detail-berita" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
 
       <!-- Tabel -->
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>
-                ID
-                <button type="button" class="btn btn-link" @click="sortById()">
-                  <img src="src/assets/img/sort.svg" />
-                </button>
-              </th>
+      <div class="tabel-container">
+        <div class="table-scroll">
+          <table class="tabel">
+            <thead>
+              <tr>
+                <th>
+                  ID
+                  <button type="button" class="btn btn-link" @click="sortById()">
+                    <img src="src/assets/img/sort.svg" />
+                  </button>
+                </th>
 
-              <th>
-                Judul
-                <button type="button" class="btn btn-link" @click="sortByJudul()">
-                  <img src="src/assets/img/sort.svg" />
-                </button>
-              </th>
-              <th>Sub-Judul</th>
-              <th>Deskripsi</th>
-              <th>Foto Berita</th>
-              <th>
-                Kategori
-                <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-3 my-2">
-                  <option value="">All</option>
-                  <option value="Politik">Politik</option>
-                  <option value="Teknologi">Teknologi</option>
-                  <option value="Ekonomi">Ekonomi</option>
-                </select>
-              </th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in displayedData" :key="index">
-              <td>{{ item.id_berita }}</td>
-              <td>{{ item.judul }}</td>
-              <td>{{ item.sub_judul }}</td>
-              <td>{{ item.deskripsi }}</td>
-              <td>{{ item.foto_berita }}</td>
-              <td>{{ item.kategori }}</td>
-              <td>
-                <!-- <button type="button" class="btn btn-primary m-1">
+                <th>
+                  Judul
+                  <button type="button" class="btn btn-link" @click="sortByJudul()">
+                    <img src="src/assets/img/sort.svg" />
+                  </button>
+                </th>
+                <th>Sub-Judul</th>
+                <th>Deskripsi</th>
+                <th>Foto Berita</th>
+                <th>
+                  Kategori
+                  <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-1 my-2">
+                    <option value="">All</option>
+                    <option value="Politik">Politik</option>
+                    <option value="Teknologi">Teknologi</option>
+                    <option value="Ekonomi">Ekonomi</option>
+                  </select>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in displayedData" :key="index">
+                <td>{{ item.id_berita }}</td>
+                <td>{{ item.judul }}</td>
+                <td>{{ item.sub_judul }}</td>
+                <td>{{ item.deskripsi }}</td>
+                <td>{{ item.foto_berita }}</td>
+                <td>{{ item.kategori }}</td>
+                <td>
+                  <!-- <button type="button" class="btn btn-primary m-1">
                   <img src="src/assets/img/view.svg" />
                 </button> -->
-                <button type="button" class="btn btn-warning">
-                  <img src="src/assets/img/edit.svg" />
-                </button>
-                <button type="button" @click.prevent="deleteData(item.id_berita, item.judul)" class="btn btn-danger m-1">
-                  <img src="src/assets/img/delete.svg" />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Pagination -->
-        <div class="pagination">
-          <button @click="prevPage()" :disabled="currentPage === 1">
-            Previous
-          </button>
-          <span> {{ currentPage }} dari {{ totalPages }}</span>
-          <button @click="nextPage()" :disabled="currentPage === totalPages">
-            Next
-          </button>
+                  <button type="button" class="btn btn-warning m-1">
+                    <img src="src/assets/img/edit.svg" class="custom-icon" />
+                  </button>
+                  <button type="button" @click.prevent="deleteData(item.id_berita, item.judul)"
+                    class="btn btn-danger m-1">
+                    <img src="src/assets/img/delete.svg" class="custom-icon" />
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      <div class="pagination">
+            <button @click="prevPage()" :disabled="currentPage === 1">
+              Previous
+            </button>
+            <span> {{ currentPage }} dari {{ totalPages }}</span>
+            <button @click="nextPage()" :disabled="currentPage === totalPages">
+              Next
+            </button>
+          </div>
     </div>
   </div>
 </template>
@@ -237,31 +238,6 @@ export default {
 </script>
 
 <style scoped>
-th {
-  vertical-align: middle;
-}
-
-.teks-h3 {
-  font-weight: bold;
-  font-size: large;
-}
-
-.teks-p {
-  font-size: medium;
-}
-
-.teks-admin {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 0;
-}
-
-.teks-kabupaten {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  margin: 0;
-}
 
 .container {
   margin-top: 30px;
@@ -269,124 +245,50 @@ th {
   width: calc(100% - 100px);
 }
 
-.kontainer-data {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  margin-left: 80px;
-  margin-top: 32px;
-  margin-bottom: 46px;
-  margin-right: 79px;
-}
-
-.bartipis {
-  background-color: black;
-  height: 100%;
-  width: 3px;
-  grid-row: span 2;
-  top: 0;
-  left: 0;
-  align-self: center;
-}
-
-.pagination {
-  margin-right: 30px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-  /* Memindahkan pagination ke sebelah kanan */
-  align-items: center;
-}
-
-.pagination button {
-  margin: 0 10px;
-  padding: 8px;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  background-color: #003366;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.pagination button:disabled {
-  cursor: not-allowed;
-  color: #aaa;
-  border: 1px solid #ccc;
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination span {
-  margin: 0 10px;
-  font-weight: bold;
-}
-
-.table-container {
-  overflow-x: auto;
-}
-
-.btn-blue {
-  background-color: #003366;
-  color: #fff;
-  border: none;
-}
-
-.btn-grey {
-  background-color: #ffffff;
-  color: #000;
-  border: none;
-  font-size: small;
-}
-
-.search,
-.search:hover {
-  text-align: left;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 8px;
-  padding: 10%;
-}
-
-.table {
-  border-collapse: collapse;
-  margin-top: 32px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.table th,
-.table td {
-  border-bottom: 1px solid #eef1f3;
-  padding: 20px;
-  text-align: center;
-}
-
-.table th {
-  background-color: #eef1f3;
-}
-
-.table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.content-berita {
-  background-color: #eef1f3;
-  padding: 20px;
-  width: 100%;
-  border-radius: 5px;
-}
-
 .title-warga {
   font-size: 20px;
-  font-weight: bold;
 }
 
 .subtitle-warga {
   font-size: 15px;
   color: #5e5e5e;
+}
+
+.btn-tambah {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
+.btn-tambah:hover {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+}
+
+.btn-search,
+.btn-search:hover {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #fff;
+  border: 1px solid #8b8a8a;
+  text-align: left;
+  font-size: 14px;
+}
+
+.btn-light option {
+  font-size: small;
+  padding-left: 11px;
+}
+
+select {
+  font-size: 14px;
+}
+
+h3{
+  font-weight: bold;
 }
 </style>

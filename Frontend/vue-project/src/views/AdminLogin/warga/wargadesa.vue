@@ -44,36 +44,29 @@
               <tr>
                 <th>
                   ID
-                  <button type="button" class="btn btn-link">
+                  <button type="button" class="btn btn-link" @click="sortById()">
                     <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>
                   NIK
-                  <button type="button" class="btn btn-link">
+                  <button type="button" class="btn btn-link" @click="sortByNIK()">
                     <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
-                <th>
-                  Nama
-                  <button type="button" class="btn btn-link">
-                    <img src="src/assets/img/sort.svg" />
-                  </button>
-                </th>
-                <th>
-                  KK
-                  <button type="button" class="btn btn-link">
-                    <img src="src/assets/img/sort.svg" />
-                  </button>
-                </th>
+                <th>Alamat</th>
+                <th>Nama</th>
+                <th>No HP</th>
+                <th>Kartu Keluarga</th>
                 <th>
                   Jenis Kelamin
-                  <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light p-2 my-1">
+                  <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light p-1 my-1">
                     <option value="">All</option>
                     <option value="Laki-laki">Laki-Laki</option>
                     <option value="Perempuan">Perempuan</option>
                   </select>
                 </th>
+                <th>Umur</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -81,9 +74,12 @@
               <tr v-for="(item, index) in displayedData" :key="index">
                 <td>{{ item.id_pengguna }}</td>
                 <td>{{ item.nik }}</td>
+                <td>{{ item.alamat_pengguna }}</td>
                 <td>{{ item.nama_lengkap }}</td>
+                <td>{{ item.no_telp }}</td>
                 <td>{{ item.kk }}</td>
                 <td>{{ item.jenis_kelamin }}</td>
+                <td>{{ item.umur }}</td>
                 <td>
                   <router-link to="/detail-warga">
                     <button class="btn btn-info m-1">
@@ -104,18 +100,16 @@
               </tr>
             </tbody>
           </table>
-
-          <!-- Pagination -->
-          <div class="pagination">
-            <button @click="prevPage" :disabled="currentPage === 1">
-              Previous
-            </button>
-            <span> {{ currentPage }} dari {{ totalPages }}</span>
-            <button @click="nextPage" :disabled="currentPage === totalPages">
-              Next
-            </button>
-          </div>
         </div>
+      </div>
+      <div class="pagination">
+        <button @click="prevPage" :disable="currentPage === 1">
+          Previous
+        </button>
+        <span> {{ currentPage }} dari {{ totalPages }}</span>
+        <button @click="nextPage" :enable="currentPage === totalPages">
+          Next
+        </button>
       </div>
     </div>
   </div>
@@ -131,7 +125,7 @@ export default {
       tableData: [],
       currentPage: 1,
       selectedKategori: "",
-      itemsPerPage: 7, // Sesuaikan item table perhalaman
+      itemsPerPage: 7,
       sortDirection: "asc",
       filteredData: [],
     };
@@ -197,6 +191,32 @@ export default {
         console.error("Error in Axios DELETE request:", error);
       }
     },
+    sortById() {
+      this.filteredData.sort((a, b) => a.id_pengguna - b.id_pengguna); // Sort by ID ascending
+      // If you want to toggle ascending/descending order:
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.id_pengguna - b.id_pengguna
+          : b.id_pengguna - a.id_pengguna
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
+    },
+    sortByNIK() {
+      this.filteredData.sort((a, b) => a.nik.localeCompare(b.nik)); // Sort by judul alphabetically
+      // Toggle ascending/descending (optional):
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.nik.localeCompare(b.nik)
+          : b.nik.localeCompare(a.nik)
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
+    },
     fetchDetailData() {
       const residentId = 1; // You can change this to the desired resident ID
       axios.get(`http://localhost:8080/warga/detail/${residentId}`)
@@ -236,9 +256,6 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-weight: 700;
-}
 
 .container {
   margin-top: 30px;
@@ -300,5 +317,9 @@ h3 {
 
 select {
   font-size: 14px;
+}
+
+h3{
+  font-weight: bold;
 }
 </style>

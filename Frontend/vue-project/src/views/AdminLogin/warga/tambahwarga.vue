@@ -22,7 +22,7 @@
     </div>
     <div class="isi-tambahdata">
       <div class="grid-container">
-        <div class="field4">
+        <div class="field1">
           <div class="form-group">
             <label for="NIK">Nomor Induk Kependudukan (NIK)</label>
             <input type="text" v-model="model.warga.nik" class="form-control" id="NIK" aria-label="nik"
@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <div class="field1">
+        <div class="field2">
           <div class="form-group">
             <label for="NamaLengkap">Nama Lengkap</label>
             <input type="text" v-model="model.warga.nama_lengkap" class="form-control" id="NamaLengkap" aria-label="nama"
@@ -38,7 +38,15 @@
           </div>
         </div>
 
-        <div class="field8">
+        <div class="field3">
+          <div class="form-group">
+            <label for="NoHP">No Telepon</label>
+            <input type="text" v-model="model.warga.no_telp" class="form-control" id="NoHP" aria-label="hp"
+              placeholder="masukan no hp" />
+          </div>
+        </div>
+
+        <div class="field4">
           <div class="form-group">
             <label for="KK">Nomor Kartu Keluarga (KK)</label>
             <input type="text" v-model="model.warga.kk" class="form-control" id="KK" aria-label="kk"
@@ -46,17 +54,12 @@
           </div>
         </div>
 
-        <div class="field10">
+        <div class="field5">
           <div class="form-group">
             <label for="formFile" class="form-label">Jenis Kelamin</label>
             <br />
-            <select
-              ref="kategoriSelect"
-              v-model="model.warga.jenis_kelamin"
-              class="form-control"
-              id="kategori_id"
-              aria-label="category"
-            >
+            <select ref="kategoriSelect" v-model="model.warga.jenis_kelamin" class="form-control" id="kategori_id"
+              aria-label="category">
               <option value="" disabled selected>--Pilih Jenis Kelamin--</option>
               <option value="1">Laki-Laki</option>
               <option value="2">Perempuan</option>
@@ -64,14 +67,23 @@
           </div>
         </div>
 
-        <div class="field10">
+        <div class="field6">
           <div class="form-group">
-            <label for="formFile" class="form-label">Foto Warga</label>
-            <input class="form-control" v-on:change="onFileChange" type="file" id="formFile">
+            <label for="Umur">Umur</label>
+            <input type="text" v-model="model.warga.umur" class="form-control" id="Umur" aria-label="umur"
+              placeholder="masukan no hp" />
           </div>
         </div>
 
-        <div class="field13">
+        <div class="field7">
+          <div class="form-group">
+            <label for="AlamatPengguna">Alamat Pengguna</label>
+            <textarea type="text" v-model="model.warga.alamat_pengguna" class="form-control" id="AlamatPengguna"
+              aria-label="alamat" placeholder="masukan alamat" />
+          </div>
+        </div>
+
+        <div class="field8">
           <button type="button" class="btn btn-success btn-simpan p-2 my-2" @click="addNewData">
             <div class="nav-link router-link-underline teks-tambah">
               + Tambah Data
@@ -93,40 +105,38 @@ export default {
       model: {
         warga: {
           nik: "",
+          alamat_pengguna: "",
           nama_lengkap: "",
+          no_telp: "",
           kk: "",
           jenis_kelamin: "",
-          foto_pengguna: "",
+          umur: "",
         },
       },
+      tableData: [],
     };
   },
   methods: {
     addNewData() {
       // console.log(this.model.warga);
       axios.post("http://localhost:8080/warga/tambah", this.model.warga)
-        .then(res => {
+        .then((res) => {
           console.log(res.data)
           alert(res.data.message);
 
           this.model.warga = {
             nik: "",
+            alamat_pengguna: "",
             nama_lengkap: "",
+            no_telp: "",
             kk: "",
             jenis_kelamin: "",
-            foto_pengguna: "",
+            umur: "",
           };
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
         });
-    },
-    onFileChange(e) {
-      // console.log('Event:', e);
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-
-      this.model.warga.foto_pengguna = files[0].name;
     },
   },
   mounted() {
