@@ -9,20 +9,17 @@
     </div>
   </div>
 
-  <div class="kontainer-data">
-    <div>
-      <h3>Data Berita Desa</h3>
-      <p>Management Content dan Layanan warga</p>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3 class="title-warga">Data UMKM Desa</h3>
+        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
+      </div>
     </div>
 
     <!-- tabel -->
     <div class="content-berita">
       <div class="row">
-        <div class="col-auto">
-          <button type="button" class="btn btn-light btn-grey p-3 my-2">
-            Cari Berdasarkan: Nama
-          </button>
-        </div>
         <div class="col">
           <button type="button" class="btn search w-100 p-2 my-2">
             <img src="src/assets/img/search.svg" class="me-2" /> Search...
@@ -30,7 +27,11 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            + Tambah Data
+            <router-link
+              to="/detail-berita"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -42,47 +43,61 @@
             <tr>
               <th>
                 ID
-                <button type="button" class="btn btn-link">
+                <button type="button" class="btn btn-link" @click="sortById()">
                   <img src="src/assets/img/sort.svg" />
                 </button>
               </th>
+
               <th>
-                NIK
-                <button type="button" class="btn btn-link">
+                Nama UMKM
+                <button
+                  type="button"
+                  class="btn btn-link"
+                  @click="sortByNama()"
+                >
                   <img src="src/assets/img/sort.svg" />
                 </button>
               </th>
+              <th>No. Telp</th>
+              <th>Foto UMKM</th>
               <th>
-                Nama
-                <button type="button" class="btn btn-link">
-                  <img src="src/assets/img/sort.svg" />
-                </button>
+                Kategori
+                <select
+                  v-model="selectedKategori"
+                  @change="filterByKategori"
+                  class="btn btn-light btn-grey p-3 my-2"
+                >
+                  <!-- todo -->
+                  <option value="">All</option>
+                  <option value="Kategori 1">Kategori 1</option>
+                  <option value="Kategori 2">Kategori 2</option>
+                  <option value="Kategori 3">Kategori 3</option>
+                </select>
               </th>
-              <th>
-                KK
-                <button type="button" class="btn btn-link">
-                  <img src="src/assets/img/sort.svg" />
-                </button>
-              </th>
-              <th>Jenis Kelamin</th>
+              <th>Alamat</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in displayedData" :key="index">
-              <td>{{ item.id_pengguna }}</td>
-              <td>{{ item.nik }}</td>
-              <td>{{ item.nama_lengkap }}</td>
-              <td>{{ item.kk }}</td>
-              <td>{{ item.jenis_kelamin }}</td>
+              <td>{{ item.id_umkm }}</td>
+              <td>{{ item.nama_umkm }}</td>
+              <td>{{ item.no_telp_umkm }}</td>
+              <td>{{ item.foto_umkm }}</td>
+              <td>{{ item.kategori_umkm }}</td>
+              <td>{{ item.alamat }}</td>
               <td>
-                <button type="button" class="btn btn-primary m-1">
+                <!-- <button type="button" class="btn btn-primary m-1">
                   <img src="src/assets/img/view.svg" />
-                </button>
+                </button> -->
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button type="button" class="btn btn-danger m-1">
+                <button
+                  type="button"
+                  @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
+                  class="btn btn-danger m-1"
+                >
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -92,11 +107,11 @@
 
         <!-- Pagination -->
         <div class="pagination">
-          <button @click="prevPage" :disabled="currentPage === 1">
+          <button @click="prevPage()" :disabled="currentPage === 1">
             Previous
           </button>
           <span> {{ currentPage }} dari {{ totalPages }}</span>
-          <button @click="nextPage" :disabled="currentPage === totalPages">
+          <button @click="nextPage()" :disabled="currentPage === totalPages">
             Next
           </button>
         </div>
@@ -107,22 +122,28 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
+      selectedKategori: "",
+      sortDirection: "asc",
+      filteredData: [],
     };
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.tableData.length / this.itemsPerPage);
+      return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     displayedData() {
+      // Start with filteredData
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
-      return this.tableData.slice(startIndex, endIndex);
+      return this.filteredData.slice(startIndex, endIndex);
     },
   },
   methods: {
@@ -130,79 +151,121 @@ export default {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
       axios
-        .post("http://localhost:8080/warga/list", payload)
+        .post("http://localhost:8080/umkm/list", payload)
         .then(({ data }) => {
           this.tableData = data.data;
+          this.filteredData = this.tableData; // Initialize filteredData
+          this.filterByKategori(); // Apply initial filter
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
         });
     },
+    async deleteData(id, nama_umkm) {
+      try {
+        const result = await Swal.fire({
+          title: `Hapus data ${nama_umkm}?`,
+          text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#C03221",
+          cancelButtonColor: "#4F4F4F",
+          confirmButtonText: "Hapus",
+          cancelButtonText: "Batal",
+        });
+
+        if (result.isConfirmed) {
+          const response = await axios
+            .delete
+            // `http://localhost:8080/berita/delete/${id}`
+            ();
+          if (response.data.status) {
+            await Swal.fire(
+              "Data berhasil dihapus!",
+              response.data.message,
+              "success"
+            );
+            this.fetchData();
+          } else {
+            await Swal.fire(
+              "Data gagal dihapus.",
+              response.data.message,
+              "error"
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Error in Axios DELETE request:", error);
+      }
+    },
+    sortById() {
+      this.filteredData.sort((a, b) => a.id_umkm - b.id_umkm); // Sort by ID ascending
+      // If you want to toggle ascending/descending order:
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.id_umkm - b.id_umkm
+          : b.id_umkm - a.id_umkm
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
+    },
+
+    sortByNama() {
+      this.filteredData.sort((a, b) => a.nama_umkm.localeCompare(b.nama_umkm)); // Sort by nama alphabetically
+      // Toggle ascending/descending (optional):
+      this.filteredData.sort((a, b) =>
+        this.sortDirection === "asc"
+          ? a.nama_umkm.localeCompare(b.nama_umkm)
+          : b.nama_umkm.localeCompare(a.nama_umkm)
+      );
+
+      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
+
+      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        // Fetch data for the next page if needed
+      }
+    },
+    prevPage() {
+      if (this.currentPage >= this.totalPages) {
+        this.currentPage--;
+      }
+    },
+    filterByKategori() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.kategori === this.selectedKategori ||
+          this.selectedKategori === ""
+      );
+      this.displayedData = this.filteredData.slice(
+        (this.currentPage - 1) * this.itemsPerPage,
+        this.currentPage * this.itemsPerPage
+      );
+    },
   },
   created() {
-    this.fetchData();
+    this.fetchData(); // Get original data
   },
 };
-
-// export default {
-//   data() {
-//     return {
-//       tableData: [],
-//       currentPage: 1,
-//       itemsPerPage: 7, // Sesuaikan item table perhalaman
-//     };
-//   },
-//   computed: {
-//     totalPages() {
-//       return Math.ceil(this.tableData.length / this.itemsPerPage);
-//     },
-//     displayedData() {
-//       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-//       const endIndex = startIndex + this.itemsPerPage;
-//       return this.tableData.slice(startIndex, endIndex);
-//     },
-//   },
-//   methods: {
-//     fetchData() {
-//       const payload = { id_desa: "1" }; // Replace with the desired id_desa value
-
-//       axios
-//         .get("http://localhost:8080/berita/list", {
-//           data: JSON.stringify(payload), // Send raw JSON body
-//           headers: { "Content-Type": "application/json" },
-//         })
-//         .then(({ data }) => {
-//           this.tableData = data.data;
-//         })
-//         .catch((error) => {
-//           console.error("Error in Axios GET request:", error);
-//         });
-//     },
-//     prevPage() {
-//       if (this.currentPage > 1) {
-//         this.currentPage--;
-//       }
-//     },
-//     nextPage() {
-//       if (this.currentPage < this.totalPages) {
-//         this.currentPage++;
-//       }
-//     },
-//   },
-//   mounted() {
-//     this.fetchData();
-//   },
-// };
 </script>
 
 <style scoped>
-.kontainer-data {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  margin-left: 80px;
-  margin-top: 32px;
-  margin-bottom: 46px;
+th {
+  vertical-align: middle;
+}
+
+.teks-h3 {
+  font-weight: bold;
+  font-size: large;
+}
+
+.teks-p {
+  font-size: medium;
 }
 
 .teks-admin {
@@ -217,24 +280,21 @@ export default {
   font-size: 16px;
   margin: 0;
 }
-
-.kontainer {
-  display: grid;
-  grid-template-columns: 10px auto;
-  grid-template-rows: auto;
+.container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  width: calc(100% - 100px);
 }
 
-.kontainer-admin {
-  border: 22%;
-  background-color: white;
-  height: 131px;
+.kontainer-data {
+  height: auto;
   display: flex;
-  align-items: center;
-  padding-left: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  flex-direction: column;
+  margin-left: 80px;
+  margin-top: 32px;
+  margin-bottom: 46px;
+  margin-right: 79px;
 }
-
 .bartipis {
   background-color: black;
   height: 100%;
@@ -334,5 +394,15 @@ export default {
   padding: 20px;
   width: 100%;
   border-radius: 5px;
+}
+
+.title-warga {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.subtitle-warga {
+  font-size: 15px;
+  color: #5e5e5e;
 }
 </style>
