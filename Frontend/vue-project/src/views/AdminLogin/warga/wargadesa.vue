@@ -289,7 +289,7 @@ export default {
 
 .btn-excel {
   background-color: #33b949;
-  color: #000;
+  color: #ffffff;
   border: none;
   font-size: 14px;
   padding-top: 10%;
