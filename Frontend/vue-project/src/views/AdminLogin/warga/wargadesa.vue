@@ -25,10 +25,14 @@
     <div class="content-warga">
       <div class="row">
         <div class="col-auto">
-          <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-3 my-2">
-                  <option value="">All</option>
-                  <option value="Laki-laki">Laki-Laki</option>
-                  <option value="Perempuan">Perempuan</option>
+          <select
+            v-model="selectedKategori"
+            @change="filterByKategori"
+            class="btn btn-light btn-grey p-3 my-2"
+          >
+            <option value="">All</option>
+            <option value="Laki-laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
           </select>
         </div>
         <div class="col">
@@ -38,7 +42,11 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link
+              to="/tambah-warga"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -90,8 +98,13 @@
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button type="button" @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
-                  class="btn btn-danger m-1">
+                <button
+                  type="button"
+                  @click.prevent="
+                    deleteData(item.id_pengguna, item.nama_lengkap)
+                  "
+                  class="btn btn-danger m-1"
+                >
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -161,16 +174,26 @@ export default {
           confirmButtonColor: "#C03221",
           cancelButtonColor: "#4F4F4F",
           confirmButtonText: "Hapus",
-          cancelButtonText: "Batal"
+          cancelButtonText: "Batal",
         });
 
         if (result.isConfirmed) {
-          const response = await axios.delete(`http://localhost:8080/warga/delete/${id}`);
+          const response = await axios.delete(
+            `http://localhost:8080/warga/delete/${id}`
+          );
           if (response.data.status) {
-            await Swal.fire("Data berhasil dihapus!", response.data.message, "success");
+            await Swal.fire(
+              "Data berhasil dihapus!",
+              response.data.message,
+              "success"
+            );
             this.fetchData();
           } else {
-            await Swal.fire("Data gagal dihapus.", response.data.message, "error");
+            await Swal.fire(
+              "Data gagal dihapus.",
+              response.data.message,
+              "error"
+            );
           }
         }
       } catch (error) {
@@ -299,11 +322,11 @@ h3 {
 }
 
 .btn-excel {
-  background-color: #33B949;
+  background-color: #33b949;
 }
 
 .btn-excel:hover {
-  background-color: #33B949;
+  background-color: #33b949;
 }
 
 .search,
@@ -329,5 +352,14 @@ h3 {
 .subtitle-warga {
   font-size: 15px;
   color: #5e5e5e;
+}
+.bartipis {
+  background-color: black;
+  height: 100%;
+  width: 3px;
+  grid-row: span 2;
+  top: 0;
+  left: 0;
+  align-self: center;
 }
 </style>
