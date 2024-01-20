@@ -122,13 +122,21 @@ export default {
         },
     },
     methods: {
-        async fetchData() {
-            try {
-                const response = await axios.get("http://localhost:8080/wisata/1");
-                this.tableData = response.data.data;
-            } catch (error) {
-                console.error("Error in Axios GET request:", error);
-            }
+        fetchData() {
+            axios
+                .get("http://localhost:8080/wisata/list/1", {
+                })
+                .then(({ data }) => {
+                    if (data.status) {
+                        this.tableData = data.data;
+                        console.log(data.message); // You can log the message if needed
+                    } else {
+                        console.error("Error in API response:", data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error in Axios GET request:", error);
+                });
         },
         async deleteData(id, nama) {
             try {
