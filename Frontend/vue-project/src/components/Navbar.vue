@@ -33,7 +33,7 @@
               >UMKM Desa</router-link
             >
 
-            <router-link to="/warga-desa" class="menu-item"
+            <router-link to="/wisata-desa" class="menu-item"
               >Wisata Desa</router-link
             >
 

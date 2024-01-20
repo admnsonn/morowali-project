@@ -27,11 +27,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            <router-link
-              to="/detail-berita"
-              class="nav-link router-link-underline"
-              >+ Tambah Data</router-link
-            >
+            <router-link to="/detail-berita" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -50,11 +46,7 @@
 
               <th>
                 Judul
-                <button
-                  type="button"
-                  class="btn btn-link"
-                  @click="sortByJudul()"
-                >
+                <button type="button" class="btn btn-link" @click="sortByJudul()">
                   <img src="src/assets/img/sort.svg" />
                 </button>
               </th>
@@ -63,11 +55,7 @@
               <th>Foto Berita</th>
               <th>
                 Kategori
-                <select
-                  v-model="selectedKategori"
-                  @change="filterByKategori"
-                  class="btn btn-light btn-grey p-3 my-2"
-                >
+                <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-3 my-2">
                   <option value="">All</option>
                   <option value="Politik">Politik</option>
                   <option value="Teknologi">Teknologi</option>
@@ -92,11 +80,7 @@
                 <button type="button" class="btn btn-warning">
                   <img src="src/assets/img/edit.svg" />
                 </button>
-                <button
-                  type="button"
-                  @click.prevent="deleteData(item.id_berita, item.judul)"
-                  class="btn btn-danger m-1"
-                >
+                <button type="button" @click.prevent="deleteData(item.id_berita, item.judul)" class="btn btn-danger m-1">
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -278,6 +262,7 @@ th {
   font-size: 16px;
   margin: 0;
 }
+
 .container {
   margin-top: 30px;
   margin-bottom: 50px;
@@ -293,6 +278,7 @@ th {
   margin-bottom: 46px;
   margin-right: 79px;
 }
+
 .bartipis {
   background-color: black;
   height: 100%;
