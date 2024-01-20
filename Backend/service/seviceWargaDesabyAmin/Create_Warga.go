@@ -221,9 +221,9 @@ func Create_warga(c *gin.Context) {
 		input.KodePos,
 		input.Kewarganegaraan,
 		time.Now(),
-		"Admin",
+		"Admin Sistem",
 		time.Now(),
-		"Admin",
+		"Admin Sistem",
 	).Scan(&newID)
 
 	if err != nil {

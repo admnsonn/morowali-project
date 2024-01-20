@@ -93,6 +93,10 @@ func Routes(router *gin.Engine) {
 		warga.POST("/tambah", sevicewargadesabyamin.Create_warga)
 		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
 		warga.PUT("/update", sevicewargadesabyamin.Create_warga)
+		warga.GET("/financial", sevicewargadesabyamin.Kategori_financial)
+		warga.GET("/pendidikan", sevicewargadesabyamin.Kategori_pendidikan)
+		warga.GET("/agama", sevicewargadesabyamin.Kategori_agama)
+		warga.GET("/jk", sevicewargadesabyamin.JK_pengguna)
 
 	}
 
