@@ -25,11 +25,7 @@
     <div class="content-warga">
       <div class="row">
         <div class="col-auto">
-          <select
-            v-model="selectedKategori"
-            @change="filterByKategori"
-            class="btn btn-light btn-grey p-3 my-2"
-          >
+          <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-3 my-2">
             <option value="">All</option>
             <option value="Laki-laki">Laki-Laki</option>
             <option value="Perempuan">Perempuan</option>
@@ -42,11 +38,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            <router-link
-              to="/tambah-warga"
-              class="nav-link router-link-underline"
-              >+ Tambah Data</router-link
-            >
+            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -92,19 +84,19 @@
               <td>{{ item.kk }}</td>
               <td>{{ item.jenis_kelamin }}</td>
               <td>
-                <button type="button" class="btn btn-primary m-1">
-                  <img src="src/assets/img/view.svg" />
-                </button>
-                <button type="button" class="btn btn-warning">
-                  <img src="src/assets/img/edit.svg" />
-                </button>
-                <button
-                  type="button"
-                  @click.prevent="
-                    deleteData(item.id_pengguna, item.nama_lengkap)
-                  "
-                  class="btn btn-danger m-1"
-                >
+                <router-link to="/detail-warga">
+                  <button class="btn btn-info m-1">
+                    <img src="src/assets/img/view.svg" />
+                  </button>
+                </router-link>
+                <router-link to="/edit-detail">
+                  <button class="btn btn-warning m-1" @click="fetchDetailData">
+                    <img src="src/assets/img/edit.svg" />
+                  </button>
+                </router-link>
+                <button type="button" @click.prevent="
+                  deleteData(item.id_pengguna, item.nama_lengkap)
+                  " class="btn btn-danger m-1">
                   <img src="src/assets/img/delete.svg" />
                 </button>
               </td>
@@ -200,7 +192,16 @@ export default {
         console.error("Error in Axios DELETE request:", error);
       }
     },
-
+    fetchDetailData() {
+            const residentId = 1; // You can change this to the desired resident ID
+            axios.get(`http://localhost:8080/warga/detail/${residentId}`)
+                .then((res) => {
+                    this.detailWarga = res.data.data;
+                })
+                .catch((error) => {
+                    console.error("Error in Axios GET request:", error);
+                });
+        },
     filterByKategori() {
       this.filteredData = this.tableData.filter(
         (item) =>
@@ -353,6 +354,7 @@ h3 {
   font-size: 15px;
   color: #5e5e5e;
 }
+
 .bartipis {
   background-color: black;
   height: 100%;
@@ -361,5 +363,46 @@ h3 {
   top: 0;
   left: 0;
   align-self: center;
+}
+
+
+/* Style for the button icon/image */
+.color-button img {
+  width: 20px; /* Adjust the width as needed */
+  height: 20px; /* Adjust the height as needed */
+  margin-right: 10px; /* Add some space between the text and the icon */
+}
+
+/* Add a subtle shadow effect on hover */
+.color-button:hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Optional: Add some margin to the button for spacing */
+.m-1 {
+  margin: 5px;
+}
+
+.color-button{
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 </style>

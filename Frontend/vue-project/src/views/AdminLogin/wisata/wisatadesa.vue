@@ -129,7 +129,7 @@ export default {
                 .then(({ data }) => {
                     if (data.status) {
                         this.tableData = data.data;
-                        console.log(data.message); // You can log the message if needed
+                        console.log(data.message);
                     } else {
                         console.error("Error in API response:", data.message);
                     }
