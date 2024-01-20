@@ -240,38 +240,6 @@ export default {
 </script>
 
 <style>
-/* Admin */
-
-.teks-admin {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 0;
-}
-
-.teks-kabupaten {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  margin: 0;
-}
-
-.kontainer {
-  display: grid;
-  grid-template-columns: 10px auto;
-  grid-template-rows: auto;
-}
-
-.kontainer-admin {
-  border: 22%;
-  background-color: #eef1f3;
-  height: 131px;
-  display: flex;
-  align-items: center;
-  padding-left: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .sidebar {
   width: 285px;
   height: 100vh;
