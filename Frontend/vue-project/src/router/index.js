@@ -16,18 +16,24 @@ import LembagaView from "../views/lembaga.vue";
 import SejarahView from "../views/sejarah.vue";
 import GaleriView from "../views/galeri.vue";
 import PendidikanView from "../views/datapendidikan.vue";
-import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
-import Userbyadmin from "../views/AdminLogin/userbyadmin.vue";
-import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
-import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
-
+import UmkmView from "../views/umkm.vue";
+import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
+// Beranda admin 
+import BerandaAdmin from "../views/AdminLogin/beranda/berandaadmin.vue";
+// Warga admin
+import Wargadesa from "../views/AdminLogin/warga/wargadesa.vue";
+import TambahWarga from "../views/AdminLogin/warga/tambahwarga.vue";
+// UMKM admin
+import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
+// Berita admin
+import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const userRole = localStorage.getItem('role_pengguna');
-  
-    // ADIT UBAH 
+
+  // ADIT UBAH 
   return isLoggedIn === 'true' && userRole === 'Admin';
 };
 
@@ -43,8 +49,8 @@ const authGuardAdmin = (to, from, next) => {
 const isWarga = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const userRole = localStorage.getItem('role_pengguna');
-  
-    // ADIT UBAH 
+
+  // ADIT UBAH 
   return isLoggedIn === 'true' && userRole === 'Warga';
 };
 
@@ -78,7 +84,10 @@ const routes = [
   { path: '/contentberita', component: ContentView },
   // Buat Admin
   { path: '/beranda-admin', component: BerandaAdmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  { path: '/user-by-admin', component: Userbyadmin, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buar Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }

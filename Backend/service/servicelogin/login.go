@@ -73,11 +73,12 @@ func Login(c *gin.Context) {
 	}
 
 	var validasi_pass string
+	var idp int
 
 	cek_password := `
-		select password from dev.pengguna where UPPER(username) = UPPER($1)
+		select password, id_pengguna from dev.pengguna where UPPER(username) = UPPER($1)
 	`
-	err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass)
+	err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass, &idp)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -99,16 +100,17 @@ func Login(c *gin.Context) {
 	}
 
 	query_pengguna := `
-		select 
-			id_pengguna,
-			role_pengguna,
-			role_id,
-			desa_id,
-			COALESCE(token, '') AS token
-		from dev.pengguna
-		where UPPER(username) = UPPER($1)
+	select 
+		a.id_pengguna,
+		b.nama_role as role_pengguna,
+		a.role_id,
+		a.desa_id,
+		COALESCE(a.token, '') AS token
+	from dev.pengguna a, dev.role b
+	where id_pengguna = $1
+	and a.role_id  = b.id_role 
 	`
-	row1, err := tx.Query(ctx, query_pengguna, input.Username)
+	row1, err := tx.Query(ctx, query_pengguna, idp)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})

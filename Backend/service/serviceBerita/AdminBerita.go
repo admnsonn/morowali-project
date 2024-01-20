@@ -16,7 +16,6 @@ type Data_berita_admin struct {
 	Kategori   string `json:"kategori"`
 }
 
-// CreateBerita creates a new berita
 func CreateBerita(c *gin.Context) {
 	var inputBerita Data_berita_admin
 	if err := c.ShouldBindJSON(&inputBerita); err != nil {
@@ -72,7 +71,6 @@ func GetBerita(c *gin.Context) {
 	}
 	defer tx.Rollback(ctx)
 
-	// Modify the SQL query based on your database schema
 	query := `
 		SELECT 
 			a.id_berita,

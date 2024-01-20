@@ -4,7 +4,12 @@
       <br />
       <ul class="sidebar-top sidebar-bg">
         <li class="sidebar-toggle navbar-brand d-flex align-items-center">
-          <img src="../assets/../assets/img/Logo.png" alt="Logo Desa" height="50" class="me-3" />
+          <img
+            src="../assets/../assets/img/Logo.png"
+            alt="Logo Desa"
+            height="50"
+            class="me-3"
+          />
           <div>
             <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
             <span class="sub-text">Kab. Morowali</span>
@@ -15,17 +20,23 @@
       <div class="sidebar-content">
         <ul class="sidebar-list">
           <li class="sidebar-link">
-            <div class="menu-item ">
+            <div class="menu-item">
               <router-link to="/aa" class="tulisan">Beranda</router-link>
             </div>
             <div class="menu-item">
-              <router-link to="/user-by-admin" class="tulisan">Warga Desa</router-link>
+              <router-link to="/warga-desa" class="tulisan"
+                >Warga Desa</router-link
+              >
             </div>
             <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Berita Desa</router-link>
+              <router-link to="/berita-desa" class="tulisan"
+                >Berita Desa</router-link
+              >
             </div>
             <div class="menu-item">
-              <router-link to="/sas" class="tulisan">UMKM Desa</router-link>
+              <router-link to="/umkm-desa" class="tulisan"
+                >UMKM Desa</router-link
+              >
             </div>
             <div class="menu-item">
               <router-link to="/sas" class="tulisan">Wisata Desa</router-link>
@@ -35,7 +46,9 @@
               <router-link to="/sas" class="tulisan">Potensi Desa</router-link>
             </div>
             <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Kreatifitas Desa</router-link>
+              <router-link to="/sas" class="tulisan"
+                >Kreatifitas Desa</router-link
+              >
             </div>
             <div class="menu-item">
               <router-link to="/sas" class="tulisan">Wilayah Desa</router-link>
@@ -47,8 +60,13 @@
         </ul>
 
         <div class="sidebar-bottom">
-          <button @click="clearLocalStorage" class="btn panjang-tombol-login1 btn-light text-tombol text-start">
-            <span class="tulisan"><v-icon name="ai-academiaSquare" />Logout</span>
+          <button
+            @click="clearLocalStorage"
+            class="btn panjang-tombol-login1 btn-light text-tombol text-start"
+          >
+            <span class="tulisan"
+              ><v-icon name="ai-academiaSquare" />Logout</span
+            >
           </button>
         </div>
       </div>
@@ -66,20 +84,35 @@
       <div class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div className="container">
           <router-link to="/" class="navbar-brand d-flex align-items-center">
-            <img src="../assets/../assets/img/Logo.png" alt="Logo Desa" height="50" class="me-3" />
+            <img
+              src="../assets/../assets/img/Logo.png"
+              alt="Logo Desa"
+              height="50"
+              class="me-3"
+            />
             <div>
               <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
               <span class="sub-text">Kab. Morowali</span>
             </div>
           </router-link>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <div class="collapse navbar-collapse"></div>
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarNav"
+          >
             <div class="menu-item"><a href="/">Beranda</a></div>
             <Dropdown title="Profil Desa" :items="profil" />
             <div class="menu-item">
@@ -92,10 +125,17 @@
             <div class="menu-item"><a href="/data-desa">Data Desa</a></div>
           </div>
 
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
             <div class="d-flex">
-              <button class="btn panjang-tombol-login btn-light me-2 text-tombol">
-                <router-link to="/login" class="nav-link router-link-underline">Login</router-link>
+              <button
+                class="btn panjang-tombol-login btn-light me-2 text-tombol"
+              >
+                <router-link to="/login" class="nav-link router-link-underline"
+                  >Login</router-link
+                >
               </button>
             </div>
           </div>
@@ -166,8 +206,8 @@ export default {
   methods: {
     clearLocalStorage() {
       localStorage.clear();
-      console.log('Localstorage dibersihin!');
-      this.userRole = ""
+      console.log("Localstorage dibersihin!");
+      this.userRole = "";
       location.reload();
     },
 
@@ -204,13 +244,43 @@ export default {
 <style>
 /* Admin */
 
+.teks-admin {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}
+
+.teks-kabupaten {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+.kontainer {
+  display: grid;
+  grid-template-columns: 10px auto;
+  grid-template-rows: auto;
+}
+
+.kontainer-admin {
+  border: 22%;
+  background-color: #EEF1F3;
+  height: 131px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .tulisan {
   font-size: 15px;
 }
 
 .sidebar {
   width: 285px;
-  height: 110%;
+  height: 100vh;
   position: fixed;
   justify-content: center;
   top: 0;

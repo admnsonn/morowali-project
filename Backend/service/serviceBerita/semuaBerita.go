@@ -13,35 +13,42 @@ func SemuaBerita(c *gin.Context) {
 	type Data_berita struct {
 		ID         int    `json:"id_berita"`
 		Judul      string `json:"judul"`
+		SubJudul   string `json:"sub_judul"`
 		Deskripsi  string `json:"deskripsi"`
 		FotoBerita string `json:"foto_berita"`
 		Kategori   string `json:"kategori"`
 	}
 
-	id := c.Param("id")
+	type Request struct {
+		IDDesa string `json:"id_desa"`
+	}
+
+	var input Request
+
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&input); err != nil {
+			fmt.Print("masuk sini")
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&input); err != nil {
+			fmt.Print("masuk sini")
+			return
+		}
+
+	}
 
 	ctx := context.Background()
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
 	}
+	defer tx.Rollback(context.Background())
 
 	var id_desa int
-
-	desa := `
-		select id_desa from dev.desa d where id_desa = $1
-	`
-
-	err = tx.QueryRow(ctx, desa, id).Scan(&id_desa)
-
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		err = tx.Commit(ctx)
-		if err != nil {
-			panic(err.Error())
-		}
-		return
-	}
 
 	fmt.Print(id_desa)
 
@@ -49,6 +56,7 @@ func SemuaBerita(c *gin.Context) {
 	SELECT 
 		a.id_berita,
 		a.judul,
+		a.sub_judul,
 		a.deskripsi,
 		a.foto_berita,
 		b.kategori
@@ -59,7 +67,7 @@ func SemuaBerita(c *gin.Context) {
 		AND a.desa_id = $1
 	`
 
-	row, err := tx.Query(ctx, berita, id_desa)
+	row, err := tx.Query(ctx, berita, input.IDDesa)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
@@ -79,6 +87,7 @@ func SemuaBerita(c *gin.Context) {
 		row.Scan(
 			&ambil.ID,
 			&ambil.Judul,
+			&ambil.SubJudul,
 			&ambil.Deskripsi,
 			&ambil.FotoBerita,
 			&ambil.Kategori,
@@ -97,7 +106,7 @@ func SemuaBerita(c *gin.Context) {
 
 	}
 
-	fmt.Println(Tampung_berita)
+	// fmt.Println(Tampung_berita)
 
 	if len(Tampung_berita) != 0 {
 		c.JSON(http.StatusOK, gin.H{

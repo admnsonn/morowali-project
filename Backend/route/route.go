@@ -27,13 +27,16 @@ func Routes(router *gin.Engine) {
 
 	beritaRoutes := router.Group("/berita")
 	{
-		beritaRoutes.GET("/list/:id", serviceberita.SemuaBerita)
 		beritaRoutes.GET("/:id", serviceberita.DetailBerita)
+		beritaRoutes.POST("/create", serviceberita.Tulis_Berita)
+		beritaRoutes.DELETE("/delete/:id", serviceberita.DeleteBerita)
+		beritaRoutes.GET("/categori", serviceberita.Kategori_berita)
+		beritaRoutes.POST("/list", serviceberita.SemuaBerita)
 	}
 
 	umkmRoutes := router.Group("/umkm")
 	{
-		umkmRoutes.GET("/list/:id", serviceumkm.Semuaumkm)
+		umkmRoutes.POST("/list", serviceumkm.Semuaumkm)
 		umkmRoutes.GET("/:id", serviceumkm.Detailumkm)
 	}
 
@@ -81,7 +84,7 @@ func Routes(router *gin.Engine) {
 		Wilayah_desa.GET("/desa", servicewilayahdesa.Luas_desa)
 	}
 
-	warga := router.Group("/warga") // Menambahkan grup "/warga" di dalam grup "/admin"
+	warga := router.Group("/warga")
 	{
 		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
 		warga.POST("/list", sevicewargadesabyamin.Warga_desa_by_admin)
@@ -89,11 +92,13 @@ func Routes(router *gin.Engine) {
 		warga.GET("/detail/:id", sevicewargadesabyamin.Get_detail_warga_by_admin)
 		warga.POST("/tambah", sevicewargadesabyamin.Create_warga)
 		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
+		warga.PUT("/update", sevicewargadesabyamin.Create_warga)
+
 	}
 
 	//sejarahdesa/kepaladesa
 
-	sejarahdesa := router.Group("/sejarahdesa") // Menambahkan grup "/warga" di dalam grup "/admin"
+	sejarahdesa := router.Group("/sejarahdesa")
 	{
 		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
 		sejarahdesa.GET("/kepaladesa/:id", servicesejarahdesa.Kepaladesa)
