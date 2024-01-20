@@ -16,15 +16,18 @@ import LembagaView from "../views/lembaga.vue";
 import SejarahView from "../views/sejarah.vue";
 import GaleriView from "../views/galeri.vue";
 import PendidikanView from "../views/datapendidikan.vue";
-import BerandaAdmin from "../views/AdminLogin/berandaadmin.vue";
-import Wargadesa from "../views/AdminLogin/warga/wargadesa.vue";
-import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
-import DetailWarga from "../views/AdminLogin/warga/detailwarga.vue";
-import UmkmView from "../views/umkm.vue";
 import ArtikelView from "../views/artikel.vue";
+import UmkmView from "../views/umkm.vue";
+import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
+// Beranda admin 
+import BerandaAdmin from "../views/AdminLogin/beranda/berandaadmin.vue";
+// Warga admin
+import Wargadesa from "../views/AdminLogin/warga/wargadesa.vue";
+import TambahWarga from "../views/AdminLogin/warga/tambahwarga.vue";
+// UMKM admin
+import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
+// Berita admin
 import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
-import DetailBerita from '../views/AdminLogin/berita/detailberita.vue'
-import UMKMDesa from '../views/AdminLogin/umkmdesa.vue'
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');

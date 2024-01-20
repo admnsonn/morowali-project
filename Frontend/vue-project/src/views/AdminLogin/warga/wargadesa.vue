@@ -25,9 +25,11 @@
     <div class="content-warga">
       <div class="row">
         <div class="col-auto">
-          <button type="button" class="btn btn-light btn-grey p-3 my-2">
-            Cari Berdasarkan: Nama
-          </button>
+          <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-3 my-2">
+                  <option value="">All</option>
+                  <option value="Laki-laki">Laki-Laki</option>
+                  <option value="Perempuan">Perempuan</option>
+          </select>
         </div>
         <div class="col">
           <button type="button" class="btn search w-100 p-2 my-2">
@@ -36,7 +38,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-blue p-3 my-2">
-            <router-link to="/detail-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -121,7 +123,9 @@ export default {
     return {
       tableData: [],
       currentPage: 1,
+      selectedKategori: "",
       itemsPerPage: 7, // Sesuaikan item table perhalaman
+      sortDirection: "asc",
     };
   },
   computed: {
@@ -172,6 +176,18 @@ export default {
       } catch (error) {
         console.error("Error in Axios DELETE request:", error);
       }
+    },
+
+    filterByKategori() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.kategori === this.selectedKategori ||
+          this.selectedKategori === ""
+      );
+      this.displayedData = this.filteredData.slice(
+        (this.currentPage - 1) * this.itemsPerPage,
+        this.currentPage * this.itemsPerPage
+      );
     },
     prevPage() {
       if (this.currentPage > 1) {

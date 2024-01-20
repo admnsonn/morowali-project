@@ -78,31 +78,19 @@
           </div>
         </div>
 
-        <div class="field6">
+        <div class="field7">
           <div class="form-group">
-            <label for="Alamat">Alamat</label>
-            <input
-              type="text"
-              v-model="model.warga.alamat_pengguna"
-              class="form-control"
-              id="Alamat"
-              aria-label="alamat"
-              placeholder="masukan alamat"
-            />
+            <label for="Pendidikan">Pendidikan Terakhir</label>
+            <input type="text" v-model="model.warga.profesi" class="form-control" id="Pendidikan" aria-label="pendidikan"
+              placeholder="masukan pendidikan">
           </div>
         </div>
 
-        <div class="field7">
+        <div class="field6">
           <div class="form-group">
-            <label for="Pendidikan">Pendidikan Terahir</label>
-            <input
-              type="text"
-              v-model="model.warga.profesi"
-              class="form-control"
-              id="Pendidikan"
-              aria-label="pendidikan"
-              placeholder="masukan pendidikan"
-            />
+            <label for="Alamat">Alamat</label>
+            <textarea type="text" v-model="model.warga.alamat_pengguna" class="form-control" id="Alamat" aria-label="alamat"
+              placeholder="masukan alamat" rows="3"></textarea>
           </div>
         </div>
 
