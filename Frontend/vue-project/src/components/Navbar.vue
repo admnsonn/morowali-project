@@ -20,44 +20,40 @@
       <div class="sidebar-content">
         <ul class="sidebar-list">
           <li class="sidebar-link">
-            <div class="menu-item">
-              <router-link to="/beranda-admin" class="tulisan"
-                >Beranda</router-link
-              >
-            </div>
-            <div class="menu-item">
-              <router-link to="/warga-desa" class="tulisan"
-                >Warga Desa</router-link
-              >
-            </div>
-            <div class="menu-item">
-              <router-link to="/berita-desa" class="tulisan"
-                >Berita Desa</router-link
-              >
-            </div>
-            <div class="menu-item">
-              <router-link to="/umkm-desa" class="tulisan"
-                >UMKM Desa</router-link
-              >
-            </div>
-            <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Wisata Desa</router-link>
-            </div>
+            <router-link to="/beranda-admin" class="menu-item"
+              >Beranda</router-link
+            >
+            <router-link to="/warga-desa" class="menu-item">
+              Warga Desa</router-link
+            >
+            <router-link to="/berita-desa" class="menu-item"
+              >Berita Desa</router-link
+            >
+            <router-link to="/umkm-desa" class="menu-item"
+              >UMKM Desa</router-link
+            >
+
+            <router-link to="/warga-desa" class="menu-item"
+              >Wisata Desa</router-link
+            >
+
             <Dropdown title="Pemerintahan" class="tulisan" />
-            <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Potensi Desa</router-link>
-            </div>
-            <div class="menu-item">
-              <router-link to="/sas" class="tulisan"
-                >Kreatifitas Desa</router-link
-              >
-            </div>
-            <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Wilayah Desa</router-link>
-            </div>
-            <div class="menu-item">
-              <router-link to="/sas" class="tulisan">Layanan Desa</router-link>
-            </div>
+
+            <router-link to="/warga-desa" class="menu-item"
+              >Potensi Desa</router-link
+            >
+
+            <router-link to="/warga-desa" class="menu-item"
+              >Kreatifitas Desa</router-link
+            >
+
+            <router-link to="/warga-desa" class="menu-item"
+              >Wilayah Desa</router-link
+            >
+
+            <router-link to="/warga-desa" class="menu-item"
+              >Layanan Desa</router-link
+            >
           </li>
         </ul>
 
@@ -276,10 +272,6 @@ export default {
   padding-bottom: 10px;
 }
 
-.tulisan {
-  font-size: 15px;
-}
-
 .sidebar {
   width: 285px;
   height: 100vh;
@@ -362,10 +354,6 @@ ul {
   border-bottom: 3px solid transparent;
   display: flex;
   transition: all 0.3s ease;
-}
-
-.menu-item a {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -374,12 +362,13 @@ ul {
   background-color: white;
   border-bottom-color: #003366;
   border-radius: 20px;
-}
-
-.menu-item.active a,
-.menu-item:hover a {
   color: #003366;
 }
+
+/* .menu-item.active a,
+.menu-item:hover a {
+  color: #003366;
+} */
 
 .sidebar-bottom {
   color: white;
