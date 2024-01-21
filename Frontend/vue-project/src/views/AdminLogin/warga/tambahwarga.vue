@@ -119,9 +119,10 @@ export default {
   methods: {
     addNewData() {
       // console.log(this.model.warga);
-      axios.post("http://localhost:8080/warga/tambah", this.model.warga)
+      axios
+      .post("http://localhost:8080/warga/tambah", this.model.warga)
         .then((res) => {
-          console.log(res.data)
+          console.log(res.data);
           alert(res.data.message);
 
           this.model.warga = {
@@ -135,7 +136,7 @@ export default {
           };
         })
         .catch((error) => {
-          console.error("Error in Axios POST request:", error);
+          console.error(error);
         });
     },
   },

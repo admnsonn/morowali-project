@@ -22,26 +22,139 @@
         </div>
         <div class="isi-tambahdata">
             <div class="grid-container">
-                <div class="field4">
+                <div class="field1">
                     <div class="form-group">
-                        <label for="NIK">Nomor Induk Kependudukan (NIK)</label>
-                        <input type="text" v-model="model.warga.nik" class="form-control" id="NIK" aria-label="nik"
+                        <label for="NamaLengkap">Nama Lengkap</label>
+                        <input type="text" v-model="detail.nama_lengkap" class="form-control" id="NamaLengkap" aria-label="nama"
                             disabled />
                     </div>
                 </div>
 
-                <div class="field1">
+                <div class="field2">
                     <div class="form-group">
-                        <label for="NamaLengkap">Nama Lengkap</label>
-                        <input type="text" v-model="model.warga.nama_lengkap" class="form-control" id="NamaLengkap"
-                            aria-label="nama" disabled />
+                        <label for="Umur">Umur</label>
+                        <input type="text" v-model="detail.umur" class="form-control" id="Umur" aria-label="umur" disabled />
+                    </div>
+                </div>
+
+                <div class="field3">
+                    <div class="form-group">
+                        <label for="NIK">Nomer Induk Keluarga (NIK)</label>
+                        <input type="text" v-model="detail.nik" class="form-control" id="NIK" aria-label="nik" disabled />
+                    </div>
+                </div>
+
+                <div class="field4">
+                    <div class="form-group">
+                        <label for="KK">Kartu Keluarga (KK)</label>
+                        <input type="text" v-model="detail.kk" class="form-control" id="KK" aria-label="kk" disabled />
+                    </div>
+                </div>
+
+                <div class="field4">
+                    <div class="form-group">
+                        <label for="TL">Tempat Lahir</label>
+                        <input type="text" v-model="detail.tempat_lahir" class="form-control" id="TL" aria-label="tl" disabled />
+                    </div>
+                </div>
+
+                <div class="field5">
+                    <div class="form-group">
+                        <label for="LT">Tanggal Lahir</label>
+                        <input type="text" v-model="detail.tanggal_lahir" class="form-control" id="LT" aria-label="lt" disabled />
+                    </div>
+                </div>
+
+                <div class="field6">
+                    <div class="form-group">
+                        <label for="JenisKelamin">Jenis Kelamin</label>
+                        <input type="text" v-model="detail.jenis_kelamin" class="form-control" id="JenisKelamin"
+                            aria-label="jeniskelamin" disabled />
+                    </div>
+                </div>
+
+                <div class="field7">
+                    <div class="form-group">
+                        <label for="NamaAgama">Agama</label>
+                        <input type="text" v-model="detail.agama" class="form-control" id="NamaAgama" aria-label="namaagama"
+                            disabled />
                     </div>
                 </div>
 
                 <div class="field8">
                     <div class="form-group">
-                        <label for="KK">Nomor Kartu Keluarga (KK)</label>
-                        <input type="text" v-model="model.warga.kk" class="form-control" id="KK" aria-label="kk" disabled />
+                        <label for="StatusPernikahan">Status Pernikahan</label>
+                        <input type="text" v-model="detail.status_pernikahan" class="form-control" id="StatusPenikahan"
+                            aria-label="statuspernihakan" disabled />
+                    </div>
+                </div>
+
+                <div class="field9">
+                    <div class="form-group">
+                        <label for="Profesi">Profesi</label>
+                        <input type="text" v-model="detail.profesi" class="form-control" id="Profesi" aria-label="profesi"
+                            disabled />
+                    </div>
+                </div>
+
+                <div class="field10">
+                    <div class="form-group">
+                        <label for="NoHP">No Telp</label>
+                        <input type="text" v-model="detail.no_telp" class="form-control" id="NoHP" aria-label="nohp" disabled />
+                    </div>
+                </div>
+
+                <div class="field11">
+                    <div class="form-group">
+                        <label for="TP">Tingkat Pendidikan</label>
+                        <input type="text" v-model="detail.tingkat_pendidikan" class="form-control" id="TP" aria-label="tp"
+                            disabled />
+                    </div>
+                </div>
+
+                <div class="field12">
+                    <div class="form-group">
+                        <label for="FotoPengguna">Foto Pengguna</label>
+                        <input type="text" v-model="detail.foto_pengguna" class="form-control" id="FotoPengguna"
+                            aria-label="fotopengguna" disabled />
+                    </div>
+                </div>
+
+                <div class="field13">
+                    <div class="form-group">
+                        <label for="AlamatPengguna">Alamat Pengguna</label>
+                        <textarea type="text" v-model="detail.alamat_pengguna" class="form-control" id="AlamatPengguna"
+                            aria-label="alamatpengguna" disabled />
+                    </div>
+                </div>
+
+                <div class="field14">
+                    <div class="form-group">
+                        <label for="RT">RT</label>
+                        <input type="text" v-model="detail.rt" class="form-control" id="RT" aria-label="rt" disabled />
+                    </div>
+                </div>
+
+                <div class="field15">
+                    <div class="form-group">
+                        <label for="RW">RW</label>
+                        <input type="text" v-model="detail.rw" class="form-control" id="RW" aria-label="rw" disabled />
+                    </div>
+                </div>
+
+                <div class="field16">
+                    <div class="form-group">
+                        <label for="NamaDesa">Nama Desa</label>
+                        <input type="text" v-model="detail.nama_desa" class="form-control" id="NamaDesa" aria-label="namadesa"
+                            disabled />
+                    </div>
+                </div>
+
+                <div class="field17">
+                    <div class="form-group">
+                        <label for="NamaKecamatan">Nama Kecamatan</label>
+                        <input type="text" v-model="detail.nama_kecamatan" class="form-control" id="NamaKecamatan"
+                            aria-label="namakecamatan" disabled />
                     </div>
                 </div>
             </div>
@@ -53,32 +166,25 @@
 import axios from "axios";
 
 export default {
-    name: "wargaCreate",
     data() {
         return {
-            model: {
-                warga: {
-                    nik: "",
-                    nama_lengkap: "",
-                    kk: "",
-                    jenis_kelamin: "",
-                    foto_pengguna: "",
-                },
-            },
+            id: this.$route.params.id_pengguna,
+            detail: {},
         };
     },
     methods: {
-        onFileChange(e) {
-            // console.log('Event:', e);
-            var files = e.target.files || e.dataTransfer.files;
-            if (!files.length) return;
-
-            this.model.warga.foto_pengguna = files[0].name;
+        getDetail() {
+            axios.get(`http://localhost:8080/warga/detail/${this.id}`)
+                .then(response => {
+                    this.detail = response.data;
+                })
+                .catch(error => {
+                    console.error('Error fetching detail:', error);
+                });
         },
     },
-    mounted() {
-        console.log(this.$refs.kategoriSelect.value);
-        this.$refs.kategoriSelect.focus();
+    created() {
+        this.getDetail();
     },
 };
 </script>

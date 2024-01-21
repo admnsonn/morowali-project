@@ -94,9 +94,9 @@ const routes = [
   { path: '/tambah-berita', component: TambahBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: WisataDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  { path: '/detail-warga', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-warga/:id', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
-  // Buar Warga
+  // Buat Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }
 ];
 

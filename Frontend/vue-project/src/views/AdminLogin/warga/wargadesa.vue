@@ -81,13 +81,12 @@
                 <td>{{ item.jenis_kelamin }}</td>
                 <td>{{ item.umur }}</td>
                 <td>
-                  <router-link to="/detail-warga">
+                  <router-link :to="`/detail-warga/${item.id_pengguna}`">
                     <button class="btn btn-info m-1">
-                      <img src="src/assets/img/view.svg" class="custom-icon" />
-                    </button>
+                      <img src="src/assets/img/view.svg" class="custom-icon" /></button>
                   </router-link>
                   <router-link to="/edit-detail">
-                    <button class="btn btn-warning m-1" @click="fetchDetailData">
+                    <button class="btn btn-warning m-1">
                       <img src="src/assets/img/edit.svg" class="custom-icon" />
                     </button>
                   </router-link>
@@ -256,7 +255,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   margin-top: 30px;
   margin-bottom: 50px;
@@ -319,7 +317,7 @@ select {
   font-size: 14px;
 }
 
-h3{
+h3 {
   font-weight: bold;
 }
 </style>
