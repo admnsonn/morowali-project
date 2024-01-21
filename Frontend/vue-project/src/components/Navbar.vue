@@ -314,6 +314,10 @@ ul {
   width: 100px;
 }
 
+.menu-item a{
+  color: white;
+  text-decoration: none;
+}
 .menu-item {
   color: white;
   padding: 10px 15px;
@@ -333,10 +337,10 @@ ul {
   color: #003366;
 }
 
-/* .menu-item.active a,
+.menu-item.active a,
 .menu-item:hover a {
   color: #003366;
-} */
+}
 
 .sidebar-bottom {
   color: white;
