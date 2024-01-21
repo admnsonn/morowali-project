@@ -19,7 +19,6 @@ import PendidikanView from "../views/datapendidikan.vue";
 import ArtikelView from "../views/artikel.vue";
 import UmkmView from "../views/umkm.vue";
 import BerandaWarga from "../views/WargaLogin/berandawarga.vue";
-import DetailBerita from "../views/AdminLogin/berita/detailberita.vue"
 // Beranda admin 
 import BerandaAdmin from "../views/AdminLogin/beranda/berandaadmin.vue";
 // Warga admin
@@ -30,6 +29,7 @@ import DetailWarga from "../views/AdminLogin/warga/detailwarga.vue";
 import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
 // Berita admin
 import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
+import TambahBerita from "../views/AdminLogin/berita/tambahberita.vue"
 // Wisata admin
 import WisataDesa from '../views/AdminLogin/wisata/wisatadesa.vue'
 
@@ -91,7 +91,7 @@ const routes = [
   { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  { path: '/detail-berita', component: DetailBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/tambah-berita', component: TambahBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: WisataDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-warga', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
