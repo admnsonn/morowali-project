@@ -1,19 +1,7 @@
-# Build stage
-FROM golang:latest as build
-
-WORKDIR /app
-COPY . .
-
-RUN go build -o main .
-
-FROM alpine:latest
+FROM golang:1.20.13
 
 WORKDIR /app
 
-COPY --from=build /app/main .
-
-RUN ls -la
-
-EXPOSE 8080
+COPY ./main .
 
 CMD ["./main"]
