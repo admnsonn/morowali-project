@@ -1,9 +1,9 @@
 package main
 
 import (
-	"backendpgx7071/database"
-	"backendpgx7071/route"
 	"fmt"
+	"main/database"
+	"main/route"
 	"net/http"
 	"time"
 
