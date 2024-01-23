@@ -60,3 +60,5 @@ func NewConnect() *pgxpool.Pool {
 
 	return db
 }
+
+// KONEKSI DATA BASE
