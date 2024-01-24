@@ -2,7 +2,8 @@ version: '3'
 
 services:
 
-  moroback:
+  moroback:    
+    image: "docker.io/boyangyang/moroback:latest"
     build:
       context: . 
       dockerfile: Dockerfile

@@ -12,11 +12,25 @@ pipeline {
                     sh'''
                     echo initiate GO
                     whoami
+                    sudo su - ec2-user
 
                     '''
                 }
             }
 
         }
+        // stage ("build image"){
+        //     steps{
+        //         script{
+        //             sh'''
+        //                 docker build -t boyangyang/morowaliback:latest .
+        //                 docker push boyangyang/morowaliback:latest
+
+        //             '''
+        //         }
+        //     }
+
+        // }
+        
     }
 }

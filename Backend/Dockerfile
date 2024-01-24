@@ -52,3 +52,4 @@ USER morowali:morowali
 
 # Run the hello binary.
 ENTRYPOINT ["/app/main"]
+EXPOSE 8080
