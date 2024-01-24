@@ -12,7 +12,6 @@ pipeline {
                     sh'''
                     echo initiate GO
                     whoami
-                    sudo su - ec2-user
 
                     '''
                 }
