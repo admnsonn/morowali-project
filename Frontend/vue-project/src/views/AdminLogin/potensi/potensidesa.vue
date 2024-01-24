@@ -7,31 +7,63 @@
         <p class="teks-kabupaten">Kabupaten, Morowali</p>
       </div>
     </div>
+    <div class="container-userbtn">
+      <button class="btn user-button">
+        User
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-person-circle"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Data UMKM Desa</h3>
+        <h3 class="title-warga">Data Potensi Desa</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
     </div>
 
     <!-- tabel -->
     <div class="bungkus-tabel">
-      <div class="row">
-        <div class="col">
-          <button type="button" class="btn btn-search w-100 my-2">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+      <div class="wrapper-tabletop">
+        <div class="col-auto">
+          <button type="button" class="btn btn-tambah my-2">
+            <router-link
+              to="/potensi-desa"
+              class="nav-link router-link-underline"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
+                />
+              </svg>
+              Delete
+            </router-link>
           </button>
         </div>
-        <div class="col-auto">
-          <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link
-              to="/detail-berita"
-              class="nav-link router-link-underline"
-              >+ Tambah Data</router-link
-            >
+        <div class="container-searchbar">
+          <button type="button" class="btn btn-search">
+            <img src="src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
       </div>
@@ -54,7 +86,7 @@
                 </th>
 
                 <th>
-                  Nama UMKM
+                  Judul
                   <button
                     type="button"
                     class="btn btn-link m-1"
@@ -63,47 +95,40 @@
                     <img src="src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
-                <th>No. Telp</th>
-                <th>Foto UMKM</th>
-                <th>
-                  Kategori
-                  <select
-                    v-model="selectedKategori"
-                    @change="filterByKategori"
-                    class="btn btn-light btn-grey p-1 my-2"
-                  >
-                    <!-- todo -->
-                    <option value="">All</option>
-                    <option value="Kategori 1">Kategori 1</option>
-                    <option value="Kategori 2">Kategori 2</option>
-                    <option value="Kategori 3">Kategori 3</option>
-                  </select>
-                </th>
-                <th>Alamat</th>
+                <th>Deskripsi</th>
+                <th>Sub Judul</th>
+                <th>Foto Potensi</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, index) in displayedData" :key="index">
-                <td>{{ item.id_umkm }}</td>
-                <td>{{ item.nama_umkm }}</td>
-                <td>{{ item.no_telp_umkm }}</td>
-                <td>{{ item.foto_umkm }}</td>
-                <td>{{ item.kategori_umkm }}</td>
-                <td>{{ item.alamat }}</td>
+                <td>AWAITING API</td>
+                <td>AWAITING API</td>
+                <td>AWAITING API</td>
+                <td>AWAITING API</td>
+                <td>AWAITING API</td>
                 <td>
                   <!-- <button type="button" class="btn btn-primary m-1">
-                  <img src="src/assets/img/view.svg" />
-                </button> -->
-                  <button type="button" class="btn btn-warning">
-                    <img src="src/assets/img/edit.svg" class="custom-icon" />
-                  </button>
-                  <button
-                    type="button"
-                    @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
-                    class="btn btn-danger m-1"
-                  >
-                    <img src="src/assets/img/delete.svg" class="custom-icon" />
+                    <img src="src/assets/img/view.svg" />
+                  </button> -->
+                  <button type="button" class="btn btn-primary button-detail">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-card-list"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"
+                      />
+                      <path
+                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
+                      />
+                    </svg>
+                    Detail
                   </button>
                 </td>
               </tr>
@@ -155,7 +180,7 @@ export default {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
       axios
-        .post("http://localhost:8080/umkm/list", payload)
+        .post("http://localhost:8080/berita/list", payload)
         .then(({ data }) => {
           this.tableData = data.data;
           this.filteredData = this.tableData; // Initialize filteredData
@@ -275,16 +300,17 @@ export default {
 }
 
 .btn-tambah {
-  background-color: #003366;
+  background-color: #b50511;
   color: #fff;
   border: none;
   font-size: 14px;
   padding-top: 10%;
   padding-bottom: 10%;
+  height: 100%;
 }
 
 .btn-tambah:hover {
-  background-color: #003366;
+  background-color: #c41e1e;
   color: #fff;
   border: none;
 }
@@ -310,6 +336,7 @@ export default {
   border: 1px solid #8b8a8a;
   text-align: left;
   font-size: 14px;
+  width: 100%;
 }
 
 .btn-light option {
@@ -322,6 +349,48 @@ select {
 }
 
 h3 {
+  font-weight: bold;
+}
+
+.wrapper-tabletop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.container-searchbar {
+  width: 23%;
+}
+
+.kontainer-admin {
+  justify-content: space-between;
+  padding-right: 11rem;
+}
+
+.container-userbtn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.user-button {
+  background-color: #003366;
+  color: white;
+  height: 50%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.button-detail {
+  width: 100%;
   font-weight: bold;
 }
 </style>

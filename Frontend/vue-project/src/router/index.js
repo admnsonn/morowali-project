@@ -32,6 +32,8 @@ import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
 import TambahBerita from "../views/AdminLogin/berita/tambahberita.vue"
 // Wisata admin
 import WisataDesa from '../views/AdminLogin/wisata/wisatadesa.vue'
+// Potensi Admin
+import PotensiDesa from '../views/AdminLogin/potensi/potensidesa.vue'
 
 const isAdmin = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -94,6 +96,7 @@ const routes = [
   { path: '/tambah-berita', component: TambahBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: WisataDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/potensi-desa', component: PotensiDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-warga/:id', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
