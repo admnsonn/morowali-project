@@ -52,11 +52,11 @@ func Semuaumkm(c *gin.Context) {
 	select 
 		a.id_umkm , 
 		a.nama_umkm , 
-		a.kategori_umkm , 
+		c.kategori_umkm , 
 		a.foto_umkm , 
 		a.no_telp_umkm , 
 		a.alamat 
-	from dev.umkm a, dev.desa b 
+	from dev.umkm a, dev.desa b, dev.kategori_umkm c 
 	where a.desa_id = b.id_desa 
 	and b.id_desa = $1
 	`

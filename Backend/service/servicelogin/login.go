@@ -76,7 +76,7 @@ func Login(c *gin.Context) {
 	var idp int
 
 	cek_password := `
-		select password, id_pengguna from dev.pengguna where UPPER(username) = UPPER($1)
+		select password, id_pengguna from dev.pengguna where username = $1
 	`
 	err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass, &idp)
 	if err != nil {
