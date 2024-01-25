@@ -20,9 +20,18 @@ func Update_umkm(c *gin.Context) {
 	}
 
 	var input Data_umkm_kontainer
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": false, "message": "Invalid input"})
-		return
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&input); err != nil {
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&input); err != nil {
+			return
+		}
+
 	}
 
 	ctx := context.Background()
