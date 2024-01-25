@@ -10,11 +10,11 @@ import (
 
 func UpdateBerita(c *gin.Context) {
 	type Data_berita_admin struct {
-		ID         string `json:"id_berita"`
+		ID         int    `json:"id_berita"`
 		Judul      string `json:"judul"`
 		Deskripsi  string `json:"deskripsi"`
 		FotoBerita string `json:"foto_berita"`
-		Kategori   string `json:"kategori_id"`
+		Kategori   int    `json:"kategori_id"`
 		SubJudul   string `json:"sub_judul"`
 	}
 
