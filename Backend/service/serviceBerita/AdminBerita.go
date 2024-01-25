@@ -19,9 +19,18 @@ func UpdateBerita(c *gin.Context) {
 	}
 
 	var inputBerita Data_berita_admin
-	if err := c.BindJSON(&inputBerita); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": false, "message": "Invalid input"})
-		return
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&inputBerita); err != nil {
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&inputBerita); err != nil {
+			return
+		}
+
 	}
 
 	ctx := context.Background()
