@@ -27,7 +27,7 @@
             <label for="NamaLengkap">Judul</label>
             <input
               type="text"
-              v-model="model.berita.judul"
+              v-model="this.tableData[0].judul"
               class="form-control"
               id="JudulBerita"
               aria-label="nama"
@@ -41,7 +41,7 @@
             <label for="JenisKelamin">Sub-Judul</label>
             <input
               type="text"
-              v-model="model.berita.sub_judul"
+              v-model="this.tableData[0].sub_judul"
               class="form-control"
               id="SubJudulBerita"
               aria-label="kelamin"
@@ -55,11 +55,10 @@
             <label for="NomorTelpon">Deskripsi</label>
             <input
               type="text"
-              v-model="model.deskripsi"
+              v-model="this.tableData[0].deskripsi"
               class="form-control"
               id="DeskripsiBerita"
               aria-label="hp"
-              :placeholder="model.deskripsi"
             />
           </div>
         </div>
@@ -70,7 +69,7 @@
             <br />
             <select
               ref="kategoriSelect"
-              v-model="model.berita.kategori_id"
+              v-model="this.tableData[0].kategori_id"
               class="form-control"
               id="kategori_id"
               aria-label="category"
@@ -116,21 +115,12 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "beritaCreate",
   data() {
     return {
-      model: {
-        berita: {
-          judul: "",
-          sub_judul: "",
-          deskripsi: "",
-          foto_berita: "", // Store only the file name here
-          desa_id: "1",
-          kategori_id: "",
-        },
-      },
       tableData: [],
       kategoriList: [],
     };
@@ -154,8 +144,7 @@ export default {
         .then(({ data }) => {
           this.tableData = data.data;
           console.log("ini this.tabledata", this.tableData);
-          const fetchedDeskripsi = data.data.data.judul;
-          console.log(fetchedDeskripsi);
+          console.log("ini datadatadatajudul", fetchedDeskripsi);
           this.model.berita.deskripsi = fetchedDeskripsi;
 
           this.filteredData = this.tableData; // Initialize filteredData
@@ -165,27 +154,31 @@ export default {
           console.error("Error in Axios POST request:", error);
         });
     },
-    updateData() {
-      // Send only the file name and other form data
-      axios
-        .put("http://localhost:8080/berita/update", this.model.berita)
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data.message);
-
-          this.model.berita = {
-            judul: "",
-            sub_judul: "",
-            deskripsi: "",
-            foto_berita: "", // Reset for next upload
-            desa_id: "1",
-            kategori_id: "",
-          };
-        })
-        .catch((error) => {
-          console.error(error);
-          // Handle error, e.g., show an error message
-        });
+    async updateData() {
+      const result = await Swal.fire({
+        title: "Apakah anda yakin?",
+        text: "Cek kembali data yang akan diubah!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#003366",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, ubah!",
+      });
+      if (result.isConfirmed) {
+        axios
+          .put("http://localhost:8080/berita/update", this.tableData[0])
+          .then((res) => {
+            if (res.data.status) {
+              Swal.fire("Data berhasil diubah.", res.data.message, "success");
+            } else {
+              Swal.fire("Data gagal diubah.", res.data.message, "error");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle error, e.g., show an error message
+          });
+      }
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;

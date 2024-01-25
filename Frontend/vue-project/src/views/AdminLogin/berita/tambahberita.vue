@@ -136,7 +136,7 @@ export default {
     async addNewData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
-        text: "Data yang sudah ditambahkan tidak dapat diubah kembali!",
+        text: "Cek kembali data yang atkan ditambahkan!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#003366",
