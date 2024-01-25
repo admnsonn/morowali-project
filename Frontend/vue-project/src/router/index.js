@@ -30,6 +30,7 @@ import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
 // Berita admin
 import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
 import TambahBerita from "../views/AdminLogin/berita/tambahberita.vue"
+import UpdateBerita from '../views/AdminLogin/berita/[id]/updateberita.vue'
 // Wisata admin
 import WisataDesa from '../views/AdminLogin/wisata/wisatadesa.vue'
 // Potensi Admin
@@ -96,6 +97,7 @@ const routes = [
   { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-berita', component: TambahBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-berita/:id', component: UpdateBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: WisataDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/potensi-desa', component: PotensiDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
