@@ -11,10 +11,10 @@ import (
 
 func Update_umkm(c *gin.Context) {
 	type Data_umkm_kontainer struct {
-		ID           string `json:"id_umkm"`
+		ID           int    `json:"id_umkm"`
 		Nama         string `json:"nama_umkm"`
 		Konten       string `json:"konten_umkm"`
-		Kategori     string `json:"kategori_umkm_id"`
+		Kategori     int    `json:"kategori_umkm_id"`
 		Foto         string `json:"foto_umkm"`
 		NomorTelepon string `json:"no_telp_umkm"`
 	}
