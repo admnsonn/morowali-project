@@ -43,7 +43,7 @@
               >Potensi Desa</router-link
             >
 
-            <router-link to="/warga-desa" class="menu-item"
+            <router-link to="/kreatifitas-desa" class="menu-item"
               >Kreatifitas Desa</router-link
             >
 
