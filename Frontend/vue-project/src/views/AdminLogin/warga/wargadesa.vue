@@ -31,7 +31,11 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link
+              to="/tambah-warga"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -44,13 +48,21 @@
               <tr>
                 <th>
                   ID
-                  <button type="button" class="btn btn-link" @click="sortById()">
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    @click="sortById()"
+                  >
                     <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>
                   NIK
-                  <button type="button" class="btn btn-link" @click="sortByNIK()">
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    @click="sortByNIK()"
+                  >
                     <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
@@ -60,7 +72,11 @@
                 <th>Kartu Keluarga</th>
                 <th>
                   Jenis Kelamin
-                  <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light p-1 my-1">
+                  <select
+                    v-model="selectedKategori"
+                    @change="filterByKategori"
+                    class="btn btn-light p-1 my-1"
+                  >
                     <option value="">All</option>
                     <option value="Laki-laki">Laki-Laki</option>
                     <option value="Perempuan">Perempuan</option>
@@ -83,16 +99,21 @@
                 <td>
                   <router-link :to="`/detail-warga/${item.id_pengguna}`">
                     <button class="btn btn-info m-1">
-                      <img src="src/assets/img/view.svg" class="custom-icon" /></button>
+                      <img src="src/assets/img/view.svg" class="custom-icon" />
+                    </button>
                   </router-link>
                   <router-link to="/edit-detail">
                     <button class="btn btn-warning m-1">
                       <img src="src/assets/img/edit.svg" class="custom-icon" />
                     </button>
                   </router-link>
-                  <button type="button" @click.prevent="
-                    deleteData(item.id_pengguna, item.nama_lengkap)
-                    " class="btn btn-danger m-1">
+                  <button
+                    type="button"
+                    @click.prevent="
+                      deleteData(item.id_pengguna, item.nama_lengkap)
+                    "
+                    class="btn btn-danger m-1"
+                  >
                     <img src="src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
@@ -102,9 +123,7 @@
         </div>
       </div>
       <div class="pagination">
-        <button @click="prevPage" :disable="currentPage === 1">
-          Previous
-        </button>
+        <button @click="prevPage" :disable="currentPage === 1">Previous</button>
         <span> {{ currentPage }} dari {{ totalPages }}</span>
         <button @click="nextPage" :enable="currentPage === totalPages">
           Next
@@ -218,7 +237,8 @@ export default {
     },
     fetchDetailData() {
       const residentId = 1; // You can change this to the desired resident ID
-      axios.get(`http://localhost:8080/warga/detail/${residentId}`)
+      axios
+        .get(`http://localhost:8080/warga/detail/${residentId}`)
         .then((res) => {
           this.detailWarga = res.data.data;
         })
