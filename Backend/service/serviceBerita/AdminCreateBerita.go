@@ -25,7 +25,7 @@ func Tulis_Berita(c *gin.Context) {
 		Deskripsi  string `json:"deskripsi"`
 		FotoBerita string `json:"foto_berita"`
 		DesaID     string `json:"desa_id"`
-		KategoriID string `json:"kategori_id"`
+		KategoriID int    `json:"kategori_id"`
 	}
 
 	var input Request
@@ -127,10 +127,8 @@ func Tulis_Berita(c *gin.Context) {
 	var id_next, id_now int
 
 	cek_berita := `
-	SELECT id_berita
-	FROM dev.berita
-	ORDER BY created_at DESC
-	LIMIT 1;	
+	SELECT MAX(id_berita) AS last_id
+	FROM dev.berita;	
 	`
 	err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
 

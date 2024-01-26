@@ -128,19 +128,16 @@ func Tambah_UMKM(c *gin.Context) {
 	var id_next, id_now int
 
 	cek_berita := `
-	SELECT id_umkm
-	FROM dev.umkm
-	ORDER BY created_at DESC
-	LIMIT 1;
+	SELECT MAX(id_umkm) AS last_id
+	FROM dev.umkm;
 	`
 	err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		return
+		id_next = id_now + 1
+	} else {
+		id_next = id_now + 1
 	}
-
-	id_next = id_now + 1
 
 	query := `
 		INSERT INTO dev.umkm (

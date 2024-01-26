@@ -59,6 +59,9 @@ func Routes(router *gin.Engine) {
 	{
 		potensiDesa.GET("/list/:id", servicepotensidesa.Semuapotensi_desa)
 		potensiDesa.GET("/:id", servicepotensidesa.Detailpotensi_desa)
+		potensiDesa.POST("/tambah_potensi", servicepotensidesa.Tambah_potensi)
+		potensiDesa.PUT("/update_potensi", servicepotensidesa.Update_Potensi)
+		potensiDesa.DELETE("/delete_potensi/:id", servicepotensidesa.Delete_potensi)
 	}
 
 	Kreatifitas := router.Group("/kreatifitas")

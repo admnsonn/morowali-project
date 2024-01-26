@@ -168,7 +168,7 @@ func Tambah_wisata(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": true, "message": "Berita berhasil ditambahkan"})
+	c.JSON(http.StatusOK, gin.H{"status": true, "message": "WISATA berhasil ditambahkan"})
 
 }
 
