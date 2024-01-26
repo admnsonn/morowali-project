@@ -94,6 +94,7 @@
                 <td>{{ item.deskripsi }}</td>
                 <td>
                   <img
+                    class="td-foto"
                     :src="`data:image/png;base64,${item.foto_berita}`"
                     alt="foto berita"
                     height="75"
@@ -348,6 +349,10 @@ export default {
 .dropdown-kategori {
   width: max-content;
   margin-left: 20px;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 
 select {
