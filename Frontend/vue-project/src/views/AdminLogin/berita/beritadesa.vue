@@ -22,7 +22,8 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" />
+            Search...
           </button>
         </div>
         <div class="col-auto">
@@ -91,18 +92,32 @@
                 <td>{{ item.judul }}</td>
                 <td>{{ item.sub_judul }}</td>
                 <td>{{ item.deskripsi }}</td>
-                <td>{{ item.foto_berita }}</td>
+                <td>
+                  <img
+                    :src="`data:image/png;base64,${item.foto_berita}`"
+                    alt="foto berita"
+                    height="75"
+                    width="100"
+                  />
+                </td>
+                <!-- <td>{{ item.foto_berita }}</td> -->
                 <td>{{ item.kategori }}</td>
                 <td>
                   <router-link :to="`/detail-berita/${item.id_berita}`">
                     <button class="btn btn-info m-1">
-                      <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
+                      <img
+                        src="../../../../src/assets/img/view.svg"
+                        class="custom-icon"
+                      />
                     </button>
                   </router-link>
                   <router-link :to="`/update-berita/${item.id_berita}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
-                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                      <img
+                        src="../../../../src/assets/img/edit.svg"
+                        class="custom-icon"
+                      />
                     </button>
                   </router-link>
                   <button
@@ -111,7 +126,10 @@
                     class="btn btn-danger m-1"
                   >
                     <!-- delete button -->
-                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
+                    <img
+                      src="../../../../src/assets/img/delete.svg"
+                      class="custom-icon"
+                    />
                   </button>
                 </td>
               </tr>
@@ -173,7 +191,6 @@ export default {
 
     fetchData() {
       const payload = { id_desa: localStorage.getItem("desa_id") };
-
       axios
         .post("http://localhost:8080/berita/list", payload)
         .then(({ data }) => {
@@ -229,9 +246,7 @@ export default {
           ? a.id_berita - b.id_berita
           : b.id_berita - a.id_berita
       );
-
       this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
       this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
 
@@ -243,22 +258,23 @@ export default {
           ? a.judul.localeCompare(b.judul)
           : b.judul.localeCompare(a.judul)
       );
-
       this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
       this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
+
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
         // Fetch data for the next page if needed
       }
     },
+
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
       }
     },
+
     filterByKategori() {
       this.filteredData = this.tableData.filter(
         (item) =>
@@ -267,7 +283,15 @@ export default {
       );
       this.currentPage = 1; // Reset pagination
     },
+    blobToURL(blob) {
+      if (blob) {
+        return URL.createObjectURL(blob);
+      } else {
+        return null;
+      }
+    },
   },
+
   created() {
     this.fetchData(); // Get original data
     this.fetchKategori();

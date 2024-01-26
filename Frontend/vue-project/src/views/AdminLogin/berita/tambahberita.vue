@@ -139,7 +139,7 @@ export default {
   methods: {
     fetchKategori() {
       axios
-        .get("  ")
+        .get("http://localhost:8080/berita/categori")
         .then(({ data }) => {
           this.kategoriList = data.data;
         })
@@ -210,12 +210,18 @@ export default {
           ctx.drawImage(img, 0, 0, width, height);
 
           canvas.toBlob((resizedBlob) => {
-            this.model.berita.foto_berita = resizedBlob;
+            const reader = new FileReader();
+            reader.readAsDataURL(resizedBlob);
+
+            reader.onloadend = () => {
+              const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
+              this.model.berita.foto_berita = base64String;
+              // Now you can send this.model.berita to your API
+            };
           }, "image/jpeg"); // Adjust the image type as needed
         };
 
         img.src = imageUrl;
-        console.log(img.src);
       };
     },
   },
