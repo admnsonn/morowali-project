@@ -31,11 +31,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link
-              to="/tambah-warga"
-              class="nav-link router-link-underline"
-              >+ Tambah Data</router-link
-            >
+            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -48,21 +44,13 @@
               <tr>
                 <th>
                   ID
-                  <button
-                    type="button"
-                    class="btn btn-link"
-                    @click="sortById()"
-                  >
+                  <button type="button" class="btn btn-link" @click="sortById()">
                     <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>
                   NIK
-                  <button
-                    type="button"
-                    class="btn btn-link"
-                    @click="sortByNIK()"
-                  >
+                  <button type="button" class="btn btn-link" @click="sortByNIK()">
                     <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
@@ -72,14 +60,34 @@
                 <th>Kartu Keluarga</th>
                 <th>
                   Jenis Kelamin
-                  <select
-                    v-model="selectedKategori"
-                    @change="filterByKategori"
-                    class="btn btn-light p-1 my-1"
-                  >
-                    <option value="">All</option>
-                    <option value="Laki-laki">Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                  <select v-model.number="selectedKategorijk" @change="filterByKategorijk" class="btn btn-light p-1 my-1">
+                    <option value="0">All</option>
+                    <option v-for="item in kategoriJK" :value="item.id_jenis_kelamin">
+                      {{ item.jenis_kelamin }}</option>
+                  </select>
+                </th>
+                <th>
+                  Agama
+                  <select v-model.number="selectedKategoriag" @change="filterByKategoriag" class="btn btn-light p-1 my-1">
+                    <option value="0">All</option>
+                    <option v-for="item in kategoriAG" :value="item.id_agama">
+                      {{ item.Agama }}</option>
+                  </select>
+                </th>
+                <th>
+                  Pendidikan
+                  <select v-model.number="selectedKategoripn" @change="filterByKategoripn" class="btn btn-light p-1 my-1">
+                    <option value="0">All</option>
+                    <option v-for="item in kategoriPN" :value="item.id_pendidikan">
+                      {{ item.kategori_pendidikan }}</option>
+                  </select>
+                </th>
+                <th>
+                  Finansial
+                  <select v-model.number="selectedKategorifn" @change="filterByKategorifn" class="btn btn-light p-1 my-1">
+                    <option value="0">All</option>
+                    <option v-for="item in kategoriFN" :value="item.id_financial">
+                      {{ item.financial }}</option>
                   </select>
                 </th>
                 <th>Umur</th>
@@ -95,6 +103,9 @@
                 <td>{{ item.no_telp }}</td>
                 <td>{{ item.kk }}</td>
                 <td>{{ item.jenis_kelamin }}</td>
+                <td>{{ item.nama_agama }}</td>
+                <td>{{ item.nama_pendidikan }}</td>
+                <td>{{ item.kategori_financial }}</td>
                 <td>{{ item.umur }}</td>
                 <td>
                   <router-link :to="`/detail-warga/${item.id_pengguna}`">
@@ -107,13 +118,9 @@
                       <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                     </button>
                   </router-link>
-                  <button
-                    type="button"
-                    @click.prevent="
-                      deleteData(item.id_pengguna, item.nama_lengkap)
-                    "
-                    class="btn btn-danger m-1"
-                  >
+                  <button type="button" @click.prevent="
+                    deleteData(item.id_pengguna, item.nama_lengkap)
+                    " class="btn btn-danger m-1">
                     <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
@@ -142,10 +149,17 @@ export default {
     return {
       tableData: [],
       currentPage: 1,
-      selectedKategori: "",
+      selectedKategorijk: 0,
+      selectedKategorifn: 0,
+      selectedKategoriag: 0,
+      selectedKategoripn: 0,
       itemsPerPage: 7,
       sortDirection: "asc",
       filteredData: [],
+      kategoriJK: [],
+      kategoriFN: [],
+      kategoriPN: [],
+      kategoriAG: [],
     };
   },
   computed: {
@@ -159,6 +173,54 @@ export default {
     },
   },
   methods: {
+    fetchKategoriJK() {
+      axios
+        .get("http://localhost:8080/warga/jk")
+        .then(({ data }) => {
+          this.kategoriJK = data.data;
+          console.log(this.kategoriJK);
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
+
+    fetchKategoriAG() {
+      axios
+        .get("http://localhost:8080/warga/agama")
+        .then(({ data }) => {
+          this.kategoriAG = data.data;
+          console.log(this.kategoriAG);
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
+
+    fetchKategoriPN() {
+      axios
+        .get("http://localhost:8080/warga/pendidikan")
+        .then(({ data }) => {
+          this.kategoriPN = data.data;
+          console.log(this.kategoriPN);
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
+
+    fetchKategoriFN() {
+      axios
+        .get("http://localhost:8080/warga/financial")
+        .then(({ data }) => {
+          this.kategoriFN = data.data;
+          console.log(this.kategoriFN);
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
+
     fetchData() {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
@@ -167,7 +229,10 @@ export default {
         .then(({ data }) => {
           this.tableData = data.data;
           this.filteredData = this.tableData;
-          this.filterByKategori();
+          this.filterByKategorijk();
+          this.filterByKategorifn();
+          this.filterByKategoriag();
+          this.filterByKategoripn();
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
@@ -246,16 +311,37 @@ export default {
           console.error("Error in Axios GET request:", error);
         });
     },
-    filterByKategori() {
+    filterByKategorijk() {
       this.filteredData = this.tableData.filter(
         (item) =>
-          item.jenis_kelamin === this.selectedKategori ||
-          this.selectedKategori === ""
+          item.jk_id === this.selectedKategorijk ||
+          this.selectedKategorijk === 0
       );
-      this.displayedData = this.filteredData.slice(
-        (this.currentPage - 1) * this.itemsPerPage,
-        this.currentPage * this.itemsPerPage
+      this.currentPage = 1;
+    },
+    filterByKategoriag() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.agama_id === this.selectedKategoriag ||
+          this.selectedKategoriag === 0
       );
+      this.currentPage = 1;
+    },
+    filterByKategoripn() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.pendidikan_id === this.selectedKategoripn ||
+          this.selectedKategoripn === 0
+      );
+      this.currentPage = 1;
+    },
+    filterByKategorifn() {
+      this.filteredData = this.tableData.filter(
+        (item) =>
+          item.kategori_financial_id === this.selectedKategorifn ||
+          this.selectedKategorifn === 0
+      );
+      this.currentPage = 1;
     },
     prevPage() {
       if (this.currentPage > 1) {
@@ -270,6 +356,10 @@ export default {
   },
   created() {
     this.fetchData();
+    this.fetchKategoriJK();
+    this.fetchKategoriFN();
+    this.fetchKategoriPN();
+    this.fetchKategoriAG();
   },
 };
 </script>
