@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col">
         <h3 class="title-warga">Tambah Data UMKM</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
+        <p class="subtitle-warga">Management Content dan Layanan UMKM</p>
       </div>
     </div>
 
@@ -24,7 +24,7 @@
       <div class="grid-container">
         <div class="field1">
           <div class="form-group">
-            <label for="NamaLengkap">Judul</label>
+            <label for="NamaLengkap">Nama UMKM</label>
             <input
               type="text"
               v-model="model.umkm.nama_umkm"
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <!-- <div class="field2">
+        <div class="field2">
           <div class="form-group">
             <label for="KontenUMKM">Konten UMKM</label>
             <input
@@ -45,21 +45,35 @@
               class="form-control"
               id="KontenUMKM"
               aria-label="Konten-UMKM"
-              placeholder="Konten UMKM"
+              placeholder="Deskripsi UMKM"
             />
           </div>
-        </div> -->
+        </div>
 
         <div class="field32">
           <div class="form-group">
-            <label for="NomorTelpon">Deskripsi</label>
+            <label for="NomorTelpon">Alamat UMKM</label>
             <input
               type="text"
-              v-model="model.berita.deskripsi"
+              v-model="model.umkm.alamat_umkm"
               class="form-control"
-              id="DeskripsiBerita"
+              id="AlamatUMKM"
               aria-label="hp"
-              placeholder="Deskripsi singkat berita"
+              placeholder="Alamat dari UMKM"
+            />
+          </div>
+        </div>
+
+        <div class="field11">
+          <div class="form-group">
+            <label for="NomorTelpon">No. Telp. UMKM</label>
+            <input
+              type="text"
+              v-model="model.umkm.no_telp_umkm"
+              class="form-control"
+              id="NoTelpUMKM"
+              aria-label="hp"
+              placeholder="Nomor telepon UMKM"
             />
           </div>
         </div>
@@ -76,16 +90,19 @@
               aria-label="category"
             >
               <option value="" disabled selected>--Pilih Kategori--</option>
-              <option value="1">Politik</option>
-              <option value="2">Teknologi</option>
-              <option value="3">Ekonomi</option>
+              <option
+                v-for="item in kategoriList"
+                :value="item.id_kategori_umkm"
+              >
+                {{ item.umkm_kategori }}
+              </option>
             </select>
           </div>
         </div>
 
         <div class="field10">
           <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
+            <label for="formFile" class="form-label">Foto UMKM</label>
             <input
               class="form-control"
               v-on:change="onFileChange"
@@ -116,7 +133,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "beritaCreate",
+  name: "umkmCreate",
   data() {
     return {
       model: {
@@ -125,15 +142,26 @@ export default {
           konten_umkm: "",
           kategori_umkm_id: "",
           foto_umkm: "", // Store only the file name here
-          desa_id: "1",
+          desa_id: 1,
           no_telp_umkm: "",
           alamat_umkm: "",
         },
       },
       tableData: [],
+      kategoriList: [],
     };
   },
   methods: {
+    fetchKategori() {
+      axios
+        .get("http://localhost:8080/umkm/umkm_kategori")
+        .then(({ data }) => {
+          this.kategoriList = data.data;
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
     async addNewData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
@@ -146,13 +174,13 @@ export default {
       });
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:8080/umkm/tambah_umkm", this.model.berita)
+          .post("http://localhost:8080/umkm/tambah_umkm", this.model.umkm)
           .then((res) => {
-            this.model.berita = {
+            this.model.umkm = {
               nama_umkm: "",
               konten_umkm: "",
               kategori_umkm_id: "",
-              desa_id: "1",
+              desa_id: 1,
               foto_umkm: "", // Reset for next upload
               no_telp_umkm: "",
               alamat_umkm: "", //
@@ -177,12 +205,44 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
-      // Update the model with only the file name
-      this.model.berita.foto_berita = files[0].name;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        const img = new Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const scaleX = 0.5; // Resize to 50%
+          const scaleY = 0.5;
+          const width = img.width * scaleX;
+          const height = img.height * scaleY;
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((resizedBlob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(resizedBlob);
+
+            reader.onloadend = () => {
+              const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
+              this.model.umkm.foto_umkm = base64String;
+            };
+          }, "image/jpeg"); // Adjust the image type as needed
+        };
+
+        img.src = imageUrl;
+      };
     },
   },
+  created() {
+    this.fetchKategori();
+  },
   mounted() {
-    console.log(this.$refs.kategoriSelect.value); // Access the selected value
     this.$refs.kategoriSelect.focus(); // Focus the element
   },
 };

@@ -76,7 +76,7 @@
 
         <div class="field5">
           <div class="form-group">
-            <label for="KK">Kategori</label>
+            <label for="KK">ID Kategori</label>
             <input
               type="text"
               v-model="detail[0].kategori_id"

@@ -22,7 +22,8 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" />
+            Search...
           </button>
         </div>
         <div class="col-auto">
@@ -49,7 +50,10 @@
                     class="btn btn-link"
                     @click="sortById()"
                   >
-                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
+                    <img
+                      src="../../../../src/assets/img/sort.svg"
+                      class="custom-icon"
+                    />
                   </button>
                 </th>
 
@@ -60,7 +64,10 @@
                     class="btn btn-link"
                     @click="sortByNamaUmkm()"
                   >
-                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
+                    <img
+                      src="../../../../src/assets/img/sort.svg"
+                      class="custom-icon"
+                    />
                   </button>
                 </th>
                 <th>Alamat UMKM</th>
@@ -163,7 +170,6 @@ export default {
         .catch((error) => {
           console.error("Error in Axios GET request:", error);
         });
-      console.log(this.kategoriList);
     },
 
     fetchData() {
@@ -224,9 +230,7 @@ export default {
           ? a.id_umkm - b.id_umkm
           : b.id_umkm - a.id_umkm
       );
-
       this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
       this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
 
@@ -238,9 +242,7 @@ export default {
           ? a.nama_umkm.localeCompare(b.nama_umkm)
           : b.nama_umkm.localeCompare(a.nama_umkm)
       );
-
       this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
       this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
     nextPage() {

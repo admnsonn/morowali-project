@@ -146,7 +146,6 @@ export default {
         .catch((error) => {
           console.error("Error in Axios GET request:", error);
         });
-      console.log(this.kategoriList);
     },
     async addNewData() {
       const result = await Swal.fire({
@@ -229,7 +228,6 @@ export default {
     this.fetchKategori();
   },
   mounted() {
-    console.log(this.$refs.kategoriSelect.value); // Access the selected value
     this.$refs.kategoriSelect.focus(); // Focus the element
   },
 };
