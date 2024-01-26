@@ -12,8 +12,8 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Tambah Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
+        <h3 class="title-warga">Ubah Data UMKM</h3>
+        <p class="subtitle-warga">Management Content dan Layanan UMKM</p>
       </div>
     </div>
 
@@ -24,53 +24,67 @@
       <div class="grid-container">
         <div class="field1">
           <div class="form-group">
-            <label for="NamaLengkap">Judul</label>
+            <label for="NamaLengkap">Nama UMKM</label>
             <input
               type="text"
-              v-model="model.berita.judul"
+              v-model="this.tableData[0].nama_umkm"
               class="form-control"
               id="JudulBerita"
               aria-label="nama"
-              placeholder="Judul berita"
+              placeholder="Nama UMKM"
             />
           </div>
         </div>
 
         <div class="field2">
           <div class="form-group">
-            <label for="SubJudulBerita">Sub-Judul</label>
+            <label for="JenisKelamin">Konten UMKM</label>
             <input
               type="text"
-              v-model="model.berita.sub_judul"
+              v-model="this.tableData[0].konten_umkm"
               class="form-control"
-              id="SubJudulBerita"
-              aria-label="kelamin"
-              placeholder="Sub-Judul berita"
+              id="KontenUMKM"
+              aria-label="Konten-UMKM"
+              placeholder="Deskripsi UMKM"
             />
           </div>
         </div>
 
         <div class="field3">
           <div class="form-group">
-            <label for="NomorTelpon">Deskripsi</label>
+            <label for="NomorTelpon">Alamat UMKM</label>
             <input
               type="text"
-              v-model="model.berita.deskripsi"
+              v-model="this.tableData[0].alamat_umkm"
               class="form-control"
-              id="DeskripsiBerita"
+              id="AlamatUMKM"
               aria-label="hp"
-              placeholder="Deskripsi singkat berita"
+              placeholder="Alamat dari UMKM"
+            />
+          </div>
+        </div>
+
+        <div class="field11">
+          <div class="form-group">
+            <label for="NomorTelpon">No. Telp. UMKM</label>
+            <input
+              type="text"
+              v-model="this.tableData[0].no_telp_umkm"
+              class="form-control"
+              id="NoTelpUMKM"
+              aria-label="hp"
+              placeholder="Nomor telepon UMKM"
             />
           </div>
         </div>
 
         <div class="field10">
           <div class="form-group">
-            <label for="formFile" class="form-label">Kategori</label>
+            <label for="formFile" class="form-label">Kategori UMKM</label>
             <br />
             <select
               ref="kategoriSelect"
-              v-model="model.berita.kategori_id"
+              v-model="this.tableData[0].kategori_umkm_id"
               class="form-control"
               id="kategori_id"
               aria-label="category"
@@ -78,9 +92,9 @@
               <option value="" disabled selected>--Pilih Kategori--</option>
               <option
                 v-for="item in kategoriList"
-                :value="item.id_kategori_berita"
+                :value="item.id_kategori_umkm"
               >
-                {{ item.berita_kategori }}
+                {{ item.umkm_kategori }}
               </option>
             </select>
           </div>
@@ -88,7 +102,7 @@
 
         <div class="field10">
           <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
+            <label for="formFile" class="form-label">Foto UMKM</label>
             <input
               class="form-control"
               v-on:change="onFileChange"
@@ -102,10 +116,10 @@
           <button
             type="button"
             class="btn btn-success btn-simpan p-2 my-2"
-            @click="addNewData"
+            @click="updateData"
           >
             <div class="nav-link router-link-underline teks-tambah">
-              + Tambah Data
+              > Ganti Data
             </div>
           </button>
         </div>
@@ -119,27 +133,18 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "beritaCreate",
+  name: "umkmCreate",
   data() {
     return {
-      model: {
-        berita: {
-          judul: "",
-          sub_judul: "",
-          deskripsi: "",
-          foto_berita: "", // Store only the file name here
-          desa_id: "1",
-          kategori_id: "",
-        },
-      },
       tableData: [],
       kategoriList: [],
     };
   },
+
   methods: {
     fetchKategori() {
       axios
-        .get("http://localhost:8080/berita/categori")
+        .get("http://localhost:8080/umkm/umkm_kategori")
         .then(({ data }) => {
           this.kategoriList = data.data;
         })
@@ -147,36 +152,36 @@ export default {
           console.error("Error in Axios GET request:", error);
         });
     },
-    async addNewData() {
+    fetchData() {
+      axios
+        .get(`http://localhost:8080/umkm/${this.$route.params.id}`)
+        .then(({ data }) => {
+          this.tableData = data.data;
+
+          this.filteredData = this.tableData; // Initialize filteredData
+        })
+        .catch((error) => {
+          console.error("Error in Axios POST request:", error);
+        });
+    },
+    async updateData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
-        text: "Cek kembali data yang atkan ditambahkan!",
+        text: "Cek kembali data yang akan diubah!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#003366",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, tambahkan!",
+        confirmButtonText: "Ya, ubah!",
       });
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:8080/berita/create", this.model.berita)
+          .put("http://localhost:8080/umkm/update_umkm", this.tableData[0])
           .then((res) => {
-            this.model.berita = {
-              judul: "",
-              sub_judul: "",
-              deskripsi: "",
-              foto_berita: "", // Reset for next upload
-              desa_id: "1",
-              kategori_id: "",
-            };
             if (res.data.status) {
-              Swal.fire(
-                "Data berhasil ditambahkan.",
-                res.data.message,
-                "success"
-              );
+              Swal.fire("Data berhasil diubah.", res.data.message, "success");
             } else {
-              Swal.fire("Data gagal ditambahkan.", res.data.message, "error");
+              Swal.fire("Data gagal diubah.", res.data.message, "error");
             }
           })
           .catch((error) => {
@@ -214,8 +219,7 @@ export default {
 
             reader.onloadend = () => {
               const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
-              this.model.berita.foto_berita = base64String;
-              // Now you can send this.model.berita to your API
+              this.tableData[0].foto_umkm = base64String;
             };
           }, "image/jpeg"); // Adjust the image type as needed
         };
@@ -224,11 +228,12 @@ export default {
       };
     },
   },
-  created() {
-    this.fetchKategori();
-  },
   mounted() {
     this.$refs.kategoriSelect.focus(); // Focus the element
+  },
+  created() {
+    this.fetchData(); // Get original data
+    this.fetchKategori();
   },
 };
 </script>

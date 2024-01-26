@@ -12,8 +12,8 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Detail Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
+        <h3 class="title-warga">Detail Data UMKM</h3>
+        <p class="subtitle-warga">Management Content dan Layanan UMKM</p>
       </div>
     </div>
 
@@ -24,10 +24,10 @@
       <div class="grid-container">
         <div class="field1">
           <div class="form-group">
-            <label for="NamaLengkap">Judul</label>
+            <label for="NamaLengkap">Nama UMKM</label>
             <input
               type="text"
-              v-model="detail[0].judul"
+              v-model="detail[0].nama_umkm"
               class="form-control"
               id="NamaLengkap"
               aria-label="nama"
@@ -38,13 +38,13 @@
 
         <div class="field2">
           <div class="form-group">
-            <label for="Umur">Sub Judul</label>
+            <label for="Umur">Konten UMKM</label>
             <input
               type="text"
-              v-model="detail[0].sub_judul"
+              v-model="detail[0].konten_umkm"
               class="form-control"
-              id="Umur"
-              aria-label="umur"
+              id="konten"
+              aria-label="konten"
               disabled
             />
           </div>
@@ -52,24 +52,28 @@
 
         <div class="field3">
           <div class="form-group">
-            <label for="NIK">Deskripsi</label>
+            <label for="NIK">No. Telp. UMKM</label>
             <textarea
               type="text"
-              v-model="detail[0].deskripsi"
+              v-model="detail[0].no_telp_umkm"
               class="form-control"
-              id="NIK"
-              aria-label="nik"
+              id="telp"
+              aria-label="telp"
               disabled
             />
           </div>
         </div>
 
-        <div class="field4">
-          <div class="form-group-foto">
-            <label for="KK">Foto Berita</label>
-            <img
-              :src="`data:image/png;base64,${detail[0].foto_berita}`"
-              alt="foto berita"
+        <div class="field6">
+          <div class="form-group">
+            <label for="NIK">Alamat UMKM</label>
+            <textarea
+              type="text"
+              v-model="detail[0].alamat"
+              class="form-control"
+              id="alamat"
+              aria-label="alamat"
+              disabled
             />
           </div>
         </div>
@@ -79,11 +83,21 @@
             <label for="KK">ID Kategori</label>
             <input
               type="text"
-              v-model="detail[0].kategori_id"
+              v-model="detail[0].kategori_umkm_id"
               class="form-control"
-              id="NIK"
-              aria-label="nik"
+              id="id kategori"
+              aria-label="kategori"
               disabled
+            />
+          </div>
+        </div>
+
+        <div class="field4">
+          <div class="form-group-foto">
+            <label for="KK">Foto UMKM</label>
+            <img
+              :src="`data:image/png;base64,${detail[0].foto_umkm}`"
+              alt="foto umkm"
             />
           </div>
         </div>
@@ -105,7 +119,7 @@ export default {
   methods: {
     getDetail() {
       axios
-        .get(`http://localhost:8080/berita/${this.id}`)
+        .get(`http://localhost:8080/umkm/${this.id}`)
         .then((response) => {
           const data = response.data.data;
           this.detail = data;

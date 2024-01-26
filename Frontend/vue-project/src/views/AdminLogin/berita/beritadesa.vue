@@ -283,14 +283,6 @@ export default {
       );
       this.currentPage = 1; // Reset pagination
     },
-
-    blobToURL(blob) {
-      if (blob) {
-        return URL.createObjectURL(blob);
-      } else {
-        return null;
-      }
-    },
   },
 
   created() {
