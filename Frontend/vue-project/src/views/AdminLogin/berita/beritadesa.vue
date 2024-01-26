@@ -186,7 +186,6 @@ export default {
         .catch((error) => {
           console.error("Error in Axios GET request:", error);
         });
-      console.log(this.kategoriList);
     },
 
     fetchData() {
@@ -283,6 +282,7 @@ export default {
       );
       this.currentPage = 1; // Reset pagination
     },
+
     blobToURL(blob) {
       if (blob) {
         return URL.createObjectURL(blob);

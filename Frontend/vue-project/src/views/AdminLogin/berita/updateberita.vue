@@ -143,12 +143,8 @@ export default {
         .get(`http://localhost:8080/berita/${this.$route.params.id}`)
         .then(({ data }) => {
           this.tableData = data.data;
-          console.log("ini this.tabledata", this.tableData);
-          console.log("ini datadatadatajudul", fetchedDeskripsi);
-          this.model.berita.deskripsi = fetchedDeskripsi;
 
           this.filteredData = this.tableData; // Initialize filteredData
-          this.filterByKategori(); // Apply initial filter
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
@@ -184,8 +180,38 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
-      // Update the model with only the file name
-      this.model.berita.foto_berita = files[0].name;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        const img = new Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const scaleX = 0.5; // Resize to 50%
+          const scaleY = 0.5;
+          const width = img.width * scaleX;
+          const height = img.height * scaleY;
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((resizedBlob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(resizedBlob);
+
+            reader.onloadend = () => {
+              const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
+              this.tableData[0].foto_berita = base64String;
+            };
+          }, "image/jpeg"); // Adjust the image type as needed
+        };
+
+        img.src = imageUrl;
+      };
     },
   },
   mounted() {
@@ -195,6 +221,7 @@ export default {
   created() {
     this.fetchData(); // Get original data
     this.fetchKategori();
+    console.log(this.tableData[0]); //
   },
 };
 </script>
