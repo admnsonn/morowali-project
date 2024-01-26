@@ -10,8 +10,8 @@
       <div class="filter-section p-4">
         <!-- Hamburger Icon for Filter -->
         <div class="filter-icon" @click="toggleFilter">
-          <img v-if="!showFilter" src="@/assets/img/filter.png" alt="Filter Icon">
-          <img v-if="showFilter" src="@/assets/img/filter.png" alt="Close Icon">
+          <img v-if="!showFilter" src="../../src/assets/img/filter.png" alt="Filter Icon">
+          <img v-if="showFilter" src="../../src/assets/img/filter.png" alt="Close Icon">
         </div>
         <div v-if="showFilter" class="row align-items-center">
           <div class="col-md-11 d-flex flex-wrap align-items-center">

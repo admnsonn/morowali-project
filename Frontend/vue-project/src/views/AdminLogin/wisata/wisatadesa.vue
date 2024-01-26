@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col">
                     <button type="button" class="btn btn-search w-100 my-2">
-                        <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
+                        <img src="" class="me-2" /> Search...
                     </button>
                 </div>
                 <div class="col-auto">

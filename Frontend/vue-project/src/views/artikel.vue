@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Gambar artikel -->
-                                <img src="~@/assets/img/Artikel.png" alt="Gambar artikel" class="img-fluid">
+                                <img src="../../src/assets/img/Artikel.png" alt="Gambar artikel" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="d-none d-md-block">

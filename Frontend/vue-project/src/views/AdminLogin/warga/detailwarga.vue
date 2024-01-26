@@ -168,7 +168,6 @@
   
 <script>
 import axios from "axios";
-import { array } from "prop-types";
 
 export default {
     data() {

@@ -10,8 +10,8 @@
       <div class="filter-section p-4">
         <!-- Hamburger Icon for Filter -->
         <div class="filter-icon" @click="toggleFilter">
-          <img v-if="!showFilter" src="@/assets/img/filter.png" alt="Filter Icon">
-          <img v-if="showFilter" src="@/assets/img/filter.png" alt="Close Icon">
+          <img v-if="!showFilter" src="../../src/assets/img/filter.png" alt="Filter Icon">
+          <img v-if="showFilter" src="../../src/assets/img/filter.png" alt="Close Icon">
         </div>
         <div v-if="showFilter" class="row align-items-center">
           <div class="col-md-11 d-flex flex-wrap align-items-center">
@@ -109,13 +109,13 @@ export default {
 
     setTimeout(() => {
       this.umkms = [
-        { id: 1, name: 'UMKM 1', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 2, name: 'UMKM 2', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 3, name: 'UMKM 3', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 4, name: 'UMKM 4', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 5, name: 'UMKM 5', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 6, name: 'UMKM 6', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 7, name: 'UMKM 7', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 1, name: 'UMKM 1', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 2, name: 'UMKM 2', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 3, name: 'UMKM 3', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 4, name: 'UMKM 4', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 5, name: 'UMKM 5', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 6, name: 'UMKM 6', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
+        { id: 7, name: 'UMKM 7', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
       ];
     }, 100);
 
