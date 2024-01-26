@@ -139,7 +139,7 @@ export default {
   methods: {
     fetchKategori() {
       axios
-        .get("http://localhost:8080/berita/categori")
+        .get("  ")
         .then(({ data }) => {
           this.kategoriList = data.data;
         })
