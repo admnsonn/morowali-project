@@ -14,7 +14,8 @@ func Kreatifitas_desa(c *gin.Context) {
 		JudulKreatifitas string `json:"judul_kreatifitas"`
 		Deskripsi        string `json:"deskripsi"`
 		FotoKreatifitas  string `json:"foto_kreatifitas"`
-		TotalPengunjung  string `json:"total_pengunjung"`
+		TotalPengunjung  int    `json:"total_pengunjung"`
+		ID               int    `json:"id_kreatifitas"`
 	}
 
 	id := c.Param("id")
@@ -30,7 +31,9 @@ func Kreatifitas_desa(c *gin.Context) {
 
 	a.judul_kreatifitas,
 	a.deskripsi        ,
-	a.foto_kreatifitas 
+	a.foto_kreatifitas ,
+	a.pengunjung	   ,
+	a.id_kreatifitas
 
 	from dev.kreatifitas a, dev.desa b
 	where a.desa_id = b.id_desa
@@ -60,6 +63,8 @@ func Kreatifitas_desa(c *gin.Context) {
 			&ambil.JudulKreatifitas,
 			&ambil.Deskripsi,
 			&ambil.FotoKreatifitas,
+			&ambil.TotalPengunjung,
+			&ambil.ID,
 		)
 
 		if err != nil {

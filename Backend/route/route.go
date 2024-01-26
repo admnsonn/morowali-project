@@ -67,6 +67,10 @@ func Routes(router *gin.Engine) {
 	Kreatifitas := router.Group("/kreatifitas")
 	{
 		Kreatifitas.GET("/list/:id", servicekreativitas.Kreatifitas_desa)
+		Kreatifitas.POST("/tambah_kreatif", servicekreativitas.Tambah)
+		Kreatifitas.PUT("/update", servicekreativitas.Update)
+		Kreatifitas.GET("/detail/:id", servicekreativitas.Detail)
+		Kreatifitas.DELETE("/delete/:id", servicekreativitas.Delete)
 	}
 
 	Visi := router.Group("/visi")
