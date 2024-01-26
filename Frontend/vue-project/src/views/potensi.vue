@@ -7,15 +7,24 @@
 
     <section v-if="showLatestData" class="py-5 bg-light">
       <div class="container">
-        <div v-for="item in paginatedData" :key="item.id_potensi"
-          class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
-          @mouseenter="addShadow" @mouseleave="removeShadow">
+        <div
+          v-for="item in paginatedData"
+          :key="item.id_potensi"
+          class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow"
+          :class="{ 'with-shadow': isHovered }"
+          @mouseenter="addShadow"
+          @mouseleave="removeShadow"
+        >
           <!-- Display the data here -->
 
           <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
             <div class="col-12 d-md-none mb-4">
-              <img src="../../src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img
+                src="../../src/assets/img/Artikel.png"
+                alt="Latest Image"
+                class="img-fluid"
+              />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
@@ -30,7 +39,7 @@
                   <h2 class="mb-2 warna-judul-artikel">
                     {{ item.judul_potensi }}
                   </h2>
-                  <br>
+                  <br />
                 </div>
                 <h5 class="mb-4 sub-potensi">{{ item.sub_judul }}</h5>
                 <h5 class="mb-4 item-potensi">{{ item.date }}</h5>
@@ -43,7 +52,11 @@
 
             <!-- INI UNTUK GAMBAR PADA DESKTOP -->
             <div class="col-md-6 order-md-2 d-none d-md-block">
-              <img src="../../src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img
+                src="../../src/assets/img/Artikel.png"
+                alt="Latest Image"
+                class="img-fluid"
+              />
             </div>
           </div>
         </div>
@@ -67,17 +80,24 @@
 
             <!-- Tampilan Nomor Halaman -->
             <li v-for="pageNumber in totalPages" :key="pageNumber">
-              <button class="page-link" @click="goToPage(pageNumber)" :class="{ active: currentPage === pageNumber }"
+              <button
+                class="page-link"
+                @click="goToPage(pageNumber)"
+                :class="{ active: currentPage === pageNumber }"
                 :style="{
                   backgroundColor: currentPage === pageNumber ? '#003366' : '',
                   color: currentPage === pageNumber ? 'white' : '',
-                }">
+                }"
+              >
                 {{ pageNumber }}
               </button>
             </li>
 
             <!-- Tombol Next -->
-            <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+            <li
+              class="page-item"
+              :class="{ disabled: currentPage === totalPages }"
+            >
               <button class="page-link" @click="nextPage" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="visually-hidden">Next</span>
@@ -281,7 +301,7 @@ export default {
   text-shadow: 2px 2px #252525;
 }
 
-.item-potensi{
+.item-potensi {
   color: #003366;
   font-size: 18px;
   font-weight: bold;
@@ -293,18 +313,18 @@ export default {
   font-weight: bold;
   border: none;
   padding: 10px 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
   border-radius: 30px;
 }
 
-.btn-secondary{
-  background-color:#003366;
+.btn-secondary {
+  background-color: #003366;
   border: none;
   padding: 10px 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -357,4 +377,3 @@ export default {
   color: white;
 }
 </style>
-
