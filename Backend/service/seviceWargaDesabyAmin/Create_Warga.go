@@ -1,18 +1,16 @@
 package sevicewargadesabyamin
 
 import (
-	"bytes"
 	"context"
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
-	"image"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
-	"github.com/rwcarlsen/goexif/exif"
-	"golang.org/x/image/draw"
 )
 
 func Create_warga(c *gin.Context) {
@@ -85,7 +83,12 @@ func Create_warga(c *gin.Context) {
 		return
 	}
 
-	// Query INSERT
+	password := "desabahomoleo123"
+
+	hasher := md5.New()
+	hasher.Write([]byte(password))
+	hashedInputPassword := hex.EncodeToString(hasher.Sum(nil))
+	fmt.Println(hashedInputPassword)
 
 	query := `
 		INSERT INTO dev.pengguna (
@@ -112,9 +115,10 @@ func Create_warga(c *gin.Context) {
 			created_at ,
 			created_by ,
 			update_at ,
-			updated_by 
+			updated_by ,
+			password
 		) VALUES (
-			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24
+			$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25
 		)
 		RETURNING id_pengguna;
 		`
@@ -146,89 +150,29 @@ func Create_warga(c *gin.Context) {
 		"Admin Sistem",
 		time.Now(),
 		"Admin Sistem",
+		hashedInputPassword,
 	).Scan(&newID)
 
 	if err != nil {
-		// log.Fatal(err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  false,
 			"message": "Query Insert Bermasalah",
 		})
+		return
 	}
 
-	// Commit the transaction
 	err = tx.Commit(ctx)
 	if err != nil {
-		// log.Fatal(err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  false,
 			"message": "Data Gagal Ditambahkan",
 		})
+		return
 	}
 
-	// Return success response
 	c.JSON(http.StatusOK, gin.H{
 		"status":  true,
 		"message": "Data Berhasil Di Tambahkan",
 	})
 
-}
-
-func rotateImage(src image.Image, angle float64) image.Image {
-	dst := image.NewRGBA(image.Rect(0, 0, src.Bounds().Dy(), src.Bounds().Dx()))
-
-	switch angle {
-	case -90:
-		fmt.Println("MASUK -90")
-
-		draw.Copy(dst, image.Pt(0, 0), src, src.Bounds(), draw.Over, nil)
-		for x := 0; x < dst.Bounds().Dx(); x++ {
-			for y := 0; y < dst.Bounds().Dy(); y++ {
-				dst.Set(x, y, src.At(src.Bounds().Dx()-y-1, x))
-			}
-		}
-	case 90:
-		fmt.Println("MASUK 90")
-
-		draw.Copy(dst, image.Pt(0, 0), src, src.Bounds(), draw.Over, nil)
-		for x := 0; x < dst.Bounds().Dx(); x++ {
-			for y := 0; y < dst.Bounds().Dy(); y++ {
-				dst.Set(x, y, src.At(y, src.Bounds().Dy()-x-1))
-			}
-		}
-	case 180:
-		fmt.Println("MASUK 180")
-
-		draw.Copy(dst, image.Pt(0, 0), src, src.Bounds(), draw.Over, nil)
-		for x := 0; x < dst.Bounds().Dx(); x++ {
-			for y := 0; y < dst.Bounds().Dy(); y++ {
-				dst.Set(x, y, src.At(src.Bounds().Dx()-x-1, src.Bounds().Dy()-y-1))
-			}
-		}
-	default:
-
-		fmt.Println("MASUK DEFAULT")
-		draw.Copy(dst, image.Pt(0, 0), src, src.Bounds(), draw.Over, nil)
-	}
-
-	return dst
-}
-
-func getExifOrientation(imageData []byte) (int, error) {
-	exifData, err := exif.Decode(bytes.NewReader(imageData))
-	if err != nil {
-		return 0, err
-	}
-
-	orientationTag, err := exifData.Get(exif.Orientation)
-	if err != nil {
-		return 0, err
-	}
-
-	orientationValue, err := orientationTag.Int(0)
-	if err != nil {
-		return 0, err
-	}
-
-	return orientationValue, nil
 }
