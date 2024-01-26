@@ -190,8 +190,33 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
-      // Update the model with only the file name
-      this.model.berita.foto_berita = files[0].name;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        const img = new Image();
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const scaleX = 0.5; // Resize to 50%
+          const scaleY = 0.5;
+          const width = img.width * scaleX;
+          const height = img.height * scaleY;
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((resizedBlob) => {
+            this.model.berita.foto_berita = resizedBlob;
+          }, "image/jpeg"); // Adjust the image type as needed
+        };
+
+        img.src = imageUrl;
+        console.log(img.src);
+      };
     },
   },
   created() {
