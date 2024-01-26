@@ -66,17 +66,20 @@
                 <th>Sub-Judul</th>
                 <th>Deskripsi</th>
                 <th>Foto Berita</th>
-                <th>
-                  Kategori
+                <th class="">
+                  Kategori:
                   <select
-                    v-model="selectedKategori"
+                    v-model.number="selectedKategori"
                     @change="filterByKategori"
-                    class="btn btn-light btn-grey p-1 my-2"
+                    class="btn btn-light btn-grey p-1 my-2 dropdown-kategori"
                   >
-                    <option value="">All</option>
-                    <option value="Politik">Politik</option>
-                    <option value="Teknologi">Ekonomi</option>
-                    <option value="Ekonomi">Ekonomi</option>
+                    <option value="0">All</option>
+                    <option
+                      v-for="item in kategoriList"
+                      :value="item.id_kategori_berita"
+                    >
+                      {{ item.berita_kategori }}
+                    </option>
                   </select>
                 </th>
                 <th>Action</th>
@@ -91,9 +94,6 @@
                 <td>{{ item.foto_berita }}</td>
                 <td>{{ item.kategori }}</td>
                 <td>
-                  <!-- <button type="button" class="btn btn-primary m-1">
-                  <img src="src/assets/img/view.svg" />
-                </button> -->
                   <router-link :to="`/update-berita/${item.id_berita}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
@@ -137,9 +137,10 @@ export default {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
-      selectedKategori: "",
+      selectedKategori: 0,
       sortDirection: "asc",
       filteredData: [],
+      kategoriList: [],
     };
   },
   computed: {
@@ -147,13 +148,24 @@ export default {
       return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     displayedData() {
-      // Start with filteredData
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
       return this.filteredData.slice(startIndex, endIndex);
     },
   },
   methods: {
+    fetchKategori() {
+      axios
+        .get("http://localhost:8080/berita/categori")
+        .then(({ data }) => {
+          this.kategoriList = data.data;
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+      console.log(this.kategoriList);
+    },
+
     fetchData() {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
@@ -245,17 +257,15 @@ export default {
     filterByKategori() {
       this.filteredData = this.tableData.filter(
         (item) =>
-          item.kategori === this.selectedKategori ||
-          this.selectedKategori === ""
+          item.id_kategori_berita === this.selectedKategori ||
+          this.selectedKategori === 0
       );
-      this.displayedData = this.filteredData.slice(
-        (this.currentPage - 1) * this.itemsPerPage,
-        this.currentPage * this.itemsPerPage
-      );
+      this.currentPage = 1; // Reset pagination
     },
   },
   created() {
     this.fetchData(); // Get original data
+    this.fetchKategori();
   },
 };
 </script>
@@ -304,6 +314,11 @@ export default {
 .btn-light option {
   font-size: small;
   padding-left: 11px;
+}
+
+.dropdown-kategori {
+  width: max-content;
+  margin-left: 20px;
 }
 
 select {
