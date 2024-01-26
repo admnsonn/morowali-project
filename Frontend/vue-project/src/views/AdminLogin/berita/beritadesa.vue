@@ -69,7 +69,7 @@
                 <th class="">
                   Kategori:
                   <select
-                    v-model="selectedKategori"
+                    v-model.number="selectedKategori"
                     @change="filterByKategori"
                     class="btn btn-light btn-grey p-1 my-2 dropdown-kategori"
                   >
@@ -148,7 +148,6 @@ export default {
       return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     displayedData() {
-      // Start with filteredData
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
       return this.filteredData.slice(startIndex, endIndex);
@@ -256,15 +255,12 @@ export default {
       }
     },
     filterByKategori() {
-      this.displayedData = this.filteredData.filter(
+      this.filteredData = this.tableData.filter(
         (item) =>
           item.id_kategori_berita === this.selectedKategori ||
           this.selectedKategori === 0
       );
-      this.displayedData.slice(
-        (this.currentPage - 1) * this.itemsPerPage,
-        this.currentPage * this.itemsPerPage
-      );
+      this.currentPage = 1; // Reset pagination
     },
   },
   created() {
