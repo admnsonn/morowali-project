@@ -173,4 +173,8 @@ export default {
 h3{
   font-weight: bold;
 }
+
+.td-foto {
+  border-radius: 0.375rem;
+}
 </style>

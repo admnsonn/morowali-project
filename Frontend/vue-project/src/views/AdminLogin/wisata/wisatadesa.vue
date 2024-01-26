@@ -60,7 +60,10 @@
                                 <td>{{ item.id_wisata }}</td>
                                 <td>{{ item.nama_wisata }}</td>
                                 <td>{{ item.alamat }}</td>
-                                <td>{{ item.foto_wisata }}</td>
+                                <td>
+                                    <img class="td-foto" :src="`data:image/png;base64,${item.foto_wisata}`"
+                                        alt="foto berita" height="75" width="100" />
+                                </td>
                                 <td>{{ item.no_telp }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning m-1">
@@ -116,19 +119,16 @@ export default {
     },
     methods: {
         fetchData() {
+            const payload = { id_desa: localStorage.getItem("desa_id") };
             axios
-                .get("http://localhost:8080/wisata/list/1", {
-                })
+                .post("http://localhost:8080/wisata/list", payload)
                 .then(({ data }) => {
-                    if (data.status) {
-                        this.filteredData = data.data;
-                        console.log(data.message);
-                    } else {
-                        console.error("Error in API response:", data.message);
-                    }
+                    this.tableData = data.data;
+                    this.filteredData = this.tableData;
+                    this.filterByKategori();
                 })
                 .catch((error) => {
-                    console.error("Error in Axios GET request:", error);
+                    console.error("Error in Axios POST request:", error);
                 });
         },
         async deleteData(id, nama) {
