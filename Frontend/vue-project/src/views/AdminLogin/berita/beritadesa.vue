@@ -65,7 +65,7 @@
                   </button>
                 </th>
                 <th>Sub-Judul</th>
-                <th>Deskripsi</th>
+                <!-- <th>Deskripsi</th> -->
                 <th>Foto Berita</th>
                 <th class="">
                   Kategori:
@@ -91,7 +91,7 @@
                 <td>{{ item.id_berita }}</td>
                 <td>{{ item.judul }}</td>
                 <td>{{ item.sub_judul }}</td>
-                <td>{{ item.deskripsi }}</td>
+                <!-- <td>{{ item.deskripsi }}</td> -->
                 <td>
                   <img
                     class="td-foto"

@@ -12,13 +12,13 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Tambah Data Desa</h3>
+        <h3 class="title-warga">Detail Data Berita</h3>
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
     </div>
 
     <div class="content-warga">
-      <p class="header-title">Form Nama</p>
+      <p class="header-title">Form Detail</p>
     </div>
     <div class="isi-tambahdata">
       <div class="grid-container">
@@ -65,14 +65,24 @@
         </div>
 
         <div class="field4">
-          <div class="form-group">
+          <div class="form-group-foto">
             <label for="KK">Foto Berita</label>
+            <img
+              :src="`data:image/png;base64,${detail[0].foto_berita}`"
+              alt="foto berita"
+            />
+          </div>
+        </div>
+
+        <div class="field5">
+          <div class="form-group">
+            <label for="KK">Kategori</label>
             <input
               type="text"
-              v-model="detail[0].foto_berita"
+              v-model="detail[0].kategori_id"
               class="form-control"
-              id="KK"
-              aria-label="kk"
+              id="NIK"
+              aria-label="nik"
               disabled
             />
           </div>
@@ -84,7 +94,6 @@
 
 <script>
 import axios from "axios";
-import { array } from "prop-types";
 
 export default {
   data() {
@@ -182,5 +191,10 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
 }
 </style>
