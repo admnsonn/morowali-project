@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
         <div class="col-auto">
@@ -49,7 +49,7 @@
                     class="btn btn-link m-1"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
 
@@ -60,7 +60,7 @@
                     class="btn btn-link m-1"
                     @click="sortByNama()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
                 <th>No. Telp</th>
@@ -93,17 +93,17 @@
                 <td>{{ item.alamat }}</td>
                 <td>
                   <!-- <button type="button" class="btn btn-primary m-1">
-                  <img src="src/assets/img/view.svg" />
+                  <img src="../../../../src/assets/img/view.svg" />
                 </button> -->
                   <button type="button" class="btn btn-warning">
-                    <img src="src/assets/img/edit.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                   </button>
                   <button
                     type="button"
                     @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
                     class="btn btn-danger m-1"
                   >
-                    <img src="src/assets/img/delete.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
               </tr>

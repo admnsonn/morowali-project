@@ -3,13 +3,10 @@ package sevicewargadesabyamin
 import (
 	"bytes"
 	"context"
-	"encoding/base64"
 	"fmt"
 	"image"
-	"image/jpeg"
 	"log"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -86,81 +83,6 @@ func Create_warga(c *gin.Context) {
 			fmt.Println(err.Error())
 		}
 		return
-	}
-
-	if input.FotoProfile != "" {
-
-		percent := 0.5
-
-		match := strings.HasPrefix(input.FotoProfile, "data:image/")
-
-		if match {
-
-			dataParts := strings.Split(input.FotoProfile, ",")
-			if len(dataParts) != 2 {
-				fmt.Println("Invalid base64 image format.")
-				return
-			}
-
-			data := dataParts[1]
-			dataBytes, err := base64.StdEncoding.DecodeString(data)
-			if err != nil {
-				fmt.Println("Error decoding base64 data:", err)
-				return
-			}
-
-			imgReader := bytes.NewReader(dataBytes)
-			img, _, err := image.Decode(imgReader)
-			if err != nil {
-				fmt.Println("Error decoding image:", err)
-				return
-			}
-
-			fmt.Println("Image successfully decoded.")
-			exifOrientation, err := getExifOrientation(dataBytes)
-			if err != nil {
-				fmt.Println("Error getting EXIF orisentation:", err)
-				return
-			}
-			var im2 image.Image
-
-			if exifOrientation != 0 {
-				switch exifOrientation {
-				case 8:
-					im2 = rotateImage(img, -90)
-				case 3:
-					im2 = rotateImage(img, 180)
-				case 6:
-					im2 = rotateImage(img, 90)
-				default:
-					im2 = img
-				}
-			}
-
-			// Calculate new width and height
-			newWidth := int(float64(im2.Bounds().Dx()) * percent)
-			newHeight := int(float64(im2.Bounds().Dy()) * percent)
-			newImg := image.NewRGBA(image.Rect(0, 0, newWidth, newHeight))
-			draw.ApproxBiLinear.Scale(newImg, newImg.Bounds(), im2, im2.Bounds(), draw.Over, nil)
-
-			// Convert newImg to base64
-			var buf bytes.Buffer
-			err = jpeg.Encode(&buf, newImg, nil)
-			if err != nil {
-				log.Println("Error encoding image to JPEG:", err)
-				return
-			}
-
-			newImgBase64 := base64.StdEncoding.EncodeToString(buf.Bytes())
-
-			input.FotoProfile = newImgBase64
-
-			log.Println("Processed image in base64:", newImgBase64)
-		} else {
-			fmt.Println("Image format is not valid.")
-		}
-	} else {
-		fmt.Println("FotoProfile is empty.")
 	}
 
 	// Query INSERT

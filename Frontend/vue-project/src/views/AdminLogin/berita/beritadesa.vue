@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
         <div class="col-auto">
@@ -49,7 +49,7 @@
                     class="btn btn-link"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
 
@@ -60,7 +60,7 @@
                     class="btn btn-link"
                     @click="sortByJudul()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>Sub-Judul</th>
@@ -97,7 +97,7 @@
                   <router-link :to="`/update-berita/${item.id_berita}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
-                      <img src="src/assets/img/edit.svg" class="custom-icon" />
+                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                     </button>
                   </router-link>
                   <button
@@ -106,7 +106,7 @@
                     class="btn btn-danger m-1"
                   >
                     <!-- delete button -->
-                    <img src="src/assets/img/delete.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
               </tr>

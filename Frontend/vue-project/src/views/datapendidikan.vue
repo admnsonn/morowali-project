@@ -15,7 +15,7 @@
                 <p class="pendidikan-number mb-4" :class="'color-' + (index % 3 + 1)">{{ item.number }}</p>
 
                 <div class="mb-2 gambar-orang">
-                    <img src="src/assets/img/orang.png" alt="Latest Image" class="img-fluid" />
+                    <img src="../../src/assets/img/orang.png" alt="Latest Image" class="img-fluid" />
                 </div>
             </div>
         </div>
