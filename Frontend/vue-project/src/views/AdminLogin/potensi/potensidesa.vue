@@ -63,7 +63,7 @@
         </div>
         <div class="container-searchbar">
           <button type="button" class="btn btn-search">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
       </div>
@@ -81,7 +81,7 @@
                     class="btn btn-link m-1"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
 
@@ -92,7 +92,7 @@
                     class="btn btn-link m-1"
                     @click="sortByNama()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
                 <th>Deskripsi</th>
@@ -110,7 +110,7 @@
                 <td>AWAITING API</td>
                 <td>
                   <!-- <button type="button" class="btn btn-primary m-1">
-                    <img src="src/assets/img/view.svg" />
+                    <img src="../../../../src/assets/img/view.svg" />
                   </button> -->
                   <button type="button" class="btn btn-primary button-detail">
                     <svg

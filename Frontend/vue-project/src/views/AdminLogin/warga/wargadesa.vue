@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
         <div class="col-auto">
@@ -53,7 +53,7 @@
                     class="btn btn-link"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>
@@ -63,7 +63,7 @@
                     class="btn btn-link"
                     @click="sortByNIK()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
                 <th>Alamat</th>
@@ -99,12 +99,12 @@
                 <td>
                   <router-link :to="`/detail-warga/${item.id_pengguna}`">
                     <button class="btn btn-info m-1">
-                      <img src="src/assets/img/view.svg" class="custom-icon" />
+                      <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
                     </button>
                   </router-link>
                   <router-link to="/edit-detail">
                     <button class="btn btn-warning m-1">
-                      <img src="src/assets/img/edit.svg" class="custom-icon" />
+                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                     </button>
                   </router-link>
                   <button
@@ -114,7 +114,7 @@
                     "
                     class="btn btn-danger m-1"
                   >
-                    <img src="src/assets/img/delete.svg" class="custom-icon" />
+                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
               </tr>

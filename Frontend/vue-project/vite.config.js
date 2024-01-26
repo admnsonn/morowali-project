@@ -1,22 +1,16 @@
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig  } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
-export default defineConfig ({
-  plugins: [
-    vue(),
-  ],
+export default defineConfig({
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src/assets/*', import.meta.url))
+      '@': '/absolute/path/to/src'
     }
   },
-
   build: {
     rollupOptions: {
-      external: ['src/assets/img/*.svg'],
+      external: ['path/to/external/file.svg'],
     },
     outDir: 'dist',
     assetsDir: '',
@@ -24,5 +18,3 @@ export default defineConfig ({
     minify: true,
   }
 })
-
-

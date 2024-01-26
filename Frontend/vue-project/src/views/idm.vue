@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="col">
-              <img src="src/assets/img/skor-saat-ini.svg" alt="Image Skor Saat Ini" class="img-fluid text-center" />
+              <img src="../../src/assets/img/skor-saat-ini.svg" alt="Image Skor Saat Ini" class="img-fluid text-center" />
             </div>
             <div class="col text-white">
               <div class="gradient-status-idm p-2 pb-4 rounded">
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="col">
-              <img src="src/assets/img/status-idm.svg" alt="Image Status IDM" class="img-fluid text-center" />
+              <img src="../../src/assets/img/status-idm.svg" alt="Image Status IDM" class="img-fluid text-center" />
             </div>
           </div>
 
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="col">
-              <img src="src/assets/img/skor-minimal.svg" alt="Image Skor Minimal" class="img-fluid text-center" />
+              <img src="../../src/assets/img/skor-minimal.svg" alt="Image Skor Minimal" class="img-fluid text-center" />
             </div>
             <div class="col text-white">
               <div class="gradient-target-status p-2 pb-4 rounded">
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="col">
-              <img src="src/assets/img/target-status.svg" alt="Image Target Status" class="img-fluid text-center" />
+              <img src="../../src/assets/img/target-status.svg" alt="Image Target Status" class="img-fluid text-center" />
             </div>
           </div>
 

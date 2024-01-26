@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col">
                     <button type="button" class="btn btn-search w-100 my-2">
-                        <img src="src/assets/img/search.svg" class="me-2" /> Search...
+                        <img src="" class="me-2" /> Search...
                     </button>
                 </div>
                 <div class="col-auto">
@@ -40,13 +40,13 @@
                                 <th>
                                     ID
                                     <button type="button" class="btn btn-link" @click="sortById()">
-                                        <img src="src/assets/img/sort.svg" />
+                                        <img src="../../../../src/assets/img/sort.svg" />
                                     </button>
                                 </th>
                                 <th>
                                     Nama Wisata
                                     <button type="button" class="btn btn-link" @click="sortByWisata()">
-                                        <img src="src/assets/img/sort.svg" />
+                                        <img src="../../../../src/assets/img/sort.svg" />
                                     </button>
                                 </th>
                                 <th>Alamat</th>
@@ -64,11 +64,11 @@
                                 <td>{{ item.no_telp }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning m-1">
-                                        <img src="src/assets/img/edit.svg" class="custom-icon" />
+                                        <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                                     </button>
                                     <button type="button" @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
                                         class="btn btn-danger m-1">
-                                        <img src="src/assets/img/delete.svg" class="custom-icon" />
+                                        <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                                     </button>
                                 </td>
                             </tr>

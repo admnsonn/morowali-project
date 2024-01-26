@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col">
           <button type="button" class="btn btn-search w-100 my-2">
-            <img src="src/assets/img/search.svg" class="me-2" /> Search...
+            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
           </button>
         </div>
         <div class="col-auto">
@@ -49,7 +49,7 @@
                     class="btn btn-link"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
 
@@ -60,7 +60,7 @@
                     class="btn btn-link"
                     @click="sortByNamaUmkm()"
                   >
-                    <img src="src/assets/img/sort.svg" />
+                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
                 <th>Alamat UMKM</th>
