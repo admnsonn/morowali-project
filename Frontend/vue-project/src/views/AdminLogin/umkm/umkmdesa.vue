@@ -98,13 +98,25 @@
                 <td>{{ item.nama_umkm }}</td>
                 <td>{{ item.alamat }}</td>
                 <td>{{ item.no_telp_umkm }}</td>
-                <td>{{ item.foto_umkm }}</td>
+                <!-- <td>{{ item.foto_umkm }}</td> -->
+                <td>
+                  <img
+                    class="td-foto"
+                    :src="`data:image/png;base64,${item.foto_umkm}`"
+                    alt="foto berita"
+                    height="75"
+                    width="100"
+                  />
+                </td>
                 <td>{{ item.kategori_umkm }}</td>
                 <td>
                   <router-link :to="`/update-umkm/${item.id_umkm}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
-                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                      <img
+                        src="../../../../src/assets/img/edit.svg"
+                        class="custom-icon"
+                      />
                     </button>
                   </router-link>
                   <button
@@ -113,7 +125,10 @@
                     class="btn btn-danger m-1"
                   >
                     <!-- delete button -->
-                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
+                    <img
+                      src="../../../../src/assets/img/delete.svg"
+                      class="custom-icon"
+                    />
                   </button>
                 </td>
               </tr>
@@ -321,6 +336,10 @@ export default {
 .dropdown-kategori {
   width: max-content;
   margin-left: 20px;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 
 select {
