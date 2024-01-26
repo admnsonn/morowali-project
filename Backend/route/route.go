@@ -47,8 +47,12 @@ func Routes(router *gin.Engine) {
 
 	wisataRoutes := router.Group("/wisata")
 	{
-		wisataRoutes.GET("/list/:id", servicewisata.Semuawisata)
+		wisataRoutes.POST("/list", servicewisata.Semuawisata)
 		wisataRoutes.GET("/:id", servicewisata.Detailwisata)
+		wisataRoutes.POST("/tambah_data", servicewisata.Tambah_wisata)
+		wisataRoutes.DELETE("/delete_wisata/:id", servicewisata.Delete_wisata)
+		wisataRoutes.GET("/kategori_wisata", servicewisata.List_kat_wisata)
+		wisataRoutes.PUT("/update_wisata", servicewisata.Update_Wisata)
 	}
 
 	potensiDesa := router.Group("/potensi_desa")

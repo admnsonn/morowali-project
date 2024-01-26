@@ -17,6 +17,7 @@ func SemuaBerita(c *gin.Context) {
 		Deskripsi  string `json:"deskripsi"`
 		FotoBerita string `json:"foto_berita"`
 		Kategori   string `json:"kategori"`
+		IDkategori int    `json:"id_kategori_berita"`
 	}
 
 	type Request struct {
@@ -59,7 +60,8 @@ func SemuaBerita(c *gin.Context) {
 		a.sub_judul,
 		a.deskripsi,
 		a.foto_berita,
-		b.kategori
+		b.kategori,
+		a.kategori_id
 	FROM
 		dev.berita a, dev.kategori_berita b
 	WHERE
@@ -84,13 +86,14 @@ func SemuaBerita(c *gin.Context) {
 
 	for row.Next() {
 		var ambil Data_berita
-		row.Scan(
+		err := row.Scan(
 			&ambil.ID,
 			&ambil.Judul,
 			&ambil.SubJudul,
 			&ambil.Deskripsi,
 			&ambil.FotoBerita,
 			&ambil.Kategori,
+			&ambil.IDkategori,
 		)
 
 		if err != nil {

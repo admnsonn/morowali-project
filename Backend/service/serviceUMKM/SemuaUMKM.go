@@ -11,12 +11,13 @@ import (
 
 func Semuaumkm(c *gin.Context) {
 	type Data_umkm struct {
-		ID       int    `json:"id_umkm"`
-		Nama     string `json:"nama_umkm"`
-		Kategori string `json:"kategori_umkm"`
-		Foto     string `json:"foto_umkm"`
-		NoTelp   string `json:"no_telp_umkm"`
-		Alamat   string `json:"alamat"`
+		ID          int    `json:"id_umkm"`
+		Nama        string `json:"nama_umkm"`
+		Kategori    string `json:"kategori_umkm"`
+		Foto        string `json:"foto_umkm"`
+		NoTelp      string `json:"no_telp_umkm"`
+		Alamat      string `json:"alamat"`
+		Kategori_id int    `json:"kategori_umkm_id"`
 	}
 
 	type Request struct {
@@ -55,7 +56,8 @@ func Semuaumkm(c *gin.Context) {
 		c.kategori_umkm , 
 		a.foto_umkm , 
 		a.no_telp_umkm , 
-		a.alamat 
+		a.alamat ,
+		a.kategori_umkm_id
 	from dev.umkm a, dev.desa b, dev.kategori_umkm c 
 	where a.desa_id = b.id_desa 
 	and b.id_desa = $1
@@ -85,6 +87,7 @@ func Semuaumkm(c *gin.Context) {
 			&ambil.Foto,
 			&ambil.NoTelp,
 			&ambil.Alamat,
+			&ambil.Kategori_id,
 		)
 
 		if err != nil {

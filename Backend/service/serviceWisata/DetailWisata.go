@@ -26,6 +26,7 @@ func Detailwisata(c *gin.Context) {
 		LinkLokasi string    `json:"link_lokasi"`
 		Alamat     string    `json:"alamat"`
 		FotoWisata string    `json:"foto_wisata"`
+		IDKATEGORI int       `json:"id_kategori"`
 	}
 
 	id := c.Param("id")
@@ -41,20 +42,21 @@ func Detailwisata(c *gin.Context) {
 
 	query := `
 	select 
-		id_wisata      ,
-		nama_wisata    ,
-		konten_wisata  ,
-		kategori_wisata,
-		desa_id        ,
-		no_telp        ,
-		created_at     ,
-		created_by     ,
-		update_at      ,
-		updated_by     ,
-		link_lokasi    ,
-		alamat         ,
-		foto_wisata    
-	from dev.wisata where id_wisata = $1
+		a.id_wisata      ,
+		a.nama_wisata    ,
+		a.konten_wisata  ,
+		b.nama_kategori	 ,
+		a.desa_id        ,
+		a.no_telp        ,
+		a.created_at     ,
+		a.created_by     ,
+		a.update_at      ,
+		a.updated_by     ,
+		a.link_lokasi    ,
+		a.alamat         ,
+		a.foto_wisata    ,
+		a.idkategoriwisata
+	from dev.wisata a, dev.kategoriwisata b where id_wisata = $1 and a.idkategoriwisata = b.idkategoriwisata
 
 	`
 
@@ -72,6 +74,7 @@ func Detailwisata(c *gin.Context) {
 		&ambil.LinkLokasi,
 		&ambil.Alamat,
 		&ambil.FotoWisata,
+		&ambil.IDKATEGORI,
 	)
 
 	if err != nil {

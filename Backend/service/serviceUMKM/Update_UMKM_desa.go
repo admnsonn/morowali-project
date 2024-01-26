@@ -11,18 +11,27 @@ import (
 
 func Update_umkm(c *gin.Context) {
 	type Data_umkm_kontainer struct {
-		ID           string `json:"id_umkm"`
+		ID           int    `json:"id_umkm"`
 		Nama         string `json:"nama_umkm"`
 		Konten       string `json:"konten_umkm"`
-		Kategori     string `json:"kategori_umkm_id"`
+		Kategori     int    `json:"kategori_umkm_id"`
 		Foto         string `json:"foto_umkm"`
 		NomorTelepon string `json:"no_telp_umkm"`
 	}
 
 	var input Data_umkm_kontainer
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": false, "message": "Invalid input"})
-		return
+	if c.GetHeader("content-type") == "application/x-www-form-urlencoded" || c.GetHeader("content-type") == "application/x-www-form-urlencoded; charset=utf-8" {
+
+		if err := c.Bind(&input); err != nil {
+			return
+		}
+
+	} else {
+
+		if err := c.BindJSON(&input); err != nil {
+			return
+		}
+
 	}
 
 	ctx := context.Background()
@@ -51,6 +60,6 @@ func Update_umkm(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": true, "message": "Berita updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"status": true, "message": "UMKM updated successfully"})
 
 }
