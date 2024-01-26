@@ -110,6 +110,15 @@
                 </td>
                 <td>{{ item.kategori_umkm }}</td>
                 <td>
+                  <router-link :to="`/detail-umkm/${item.id_umkm}`">
+                    <button type="button" class="btn btn-info m-1">
+                      <!-- edit button -->
+                      <img
+                        src="../../../../src/assets/img/view.svg"
+                        class="custom-icon"
+                      />
+                    </button>
+                  </router-link>
                   <router-link :to="`/update-umkm/${item.id_umkm}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
