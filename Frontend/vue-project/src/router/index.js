@@ -56,6 +56,7 @@ const routes = [
   { path: '/berita-desa', component: import('../views/AdminLogin/berita/beritadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-berita', component: import('../views/AdminLogin/berita/tambahberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-berita/:id', component: import('../views/AdminLogin/berita/updateberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-berita/:id', component: import('../views/AdminLogin/berita/detailberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: import('../views/AdminLogin/umkm/umkmdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-umkm', component: import('../views/AdminLogin/umkm/tambahumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: import('../views/AdminLogin/wisata/wisatadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
