@@ -51,8 +51,7 @@ func Tulis_Berita(c *gin.Context) {
 	err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		return
+		id_now = 0
 	}
 
 	id_next = id_now + 1
