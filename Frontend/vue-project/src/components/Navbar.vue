@@ -39,11 +39,11 @@
 
             <Dropdown title="Pemerintahan" class="tulisan" />
 
-            <router-link to="/warga-desa" class="menu-item"
+            <router-link to="/potensi-desa" class="menu-item"
               >Potensi Desa</router-link
             >
 
-            <router-link to="/warga-desa" class="menu-item"
+            <router-link to="/kreatifitas-desa" class="menu-item"
               >Kreatifitas Desa</router-link
             >
 
@@ -314,7 +314,7 @@ ul {
   width: 100px;
 }
 
-.menu-item a{
+.menu-item a {
   color: white;
   text-decoration: none;
 }

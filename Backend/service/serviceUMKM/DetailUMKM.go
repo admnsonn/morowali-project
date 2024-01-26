@@ -16,7 +16,6 @@ func Detailumkm(c *gin.Context) {
 		ID         int       `json:"id_umkm"`
 		Nama       string    `json:"nama_umkm"`
 		Konten     string    `json:"konten_umkm"`
-		Kategori   string    `json:"kategori_umkm"`
 		KategoriID int       `json:"kategori_umkm_id"`
 		Foto       string    `json:"foto_umkm"`
 		DesaID     int       `json:"desa_id"`
@@ -45,7 +44,6 @@ func Detailumkm(c *gin.Context) {
 		id_umkm,
 		nama_umkm,
 		konten_umkm,
-		kategori_umkm,
 		kategori_umkm_id,
 		foto_umkm,
 		desa_id,
@@ -63,7 +61,6 @@ func Detailumkm(c *gin.Context) {
 		&ambil.ID,
 		&ambil.Nama,
 		&ambil.Konten,
-		&ambil.Kategori,
 		&ambil.KategoriID,
 		&ambil.Foto,
 		&ambil.DesaID,

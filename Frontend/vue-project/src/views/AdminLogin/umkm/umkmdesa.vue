@@ -27,7 +27,11 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link to="/detail-berita" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link
+              to="/detail-berita"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -40,14 +44,22 @@
               <tr>
                 <th>
                   ID
-                  <button type="button" class="btn btn-link m-1" @click="sortById()">
+                  <button
+                    type="button"
+                    class="btn btn-link m-1"
+                    @click="sortById()"
+                  >
                     <img src="src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
 
                 <th>
                   Nama UMKM
-                  <button type="button" class="btn btn-link m-1" @click="sortByNama()">
+                  <button
+                    type="button"
+                    class="btn btn-link m-1"
+                    @click="sortByNama()"
+                  >
                     <img src="src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
@@ -55,7 +67,11 @@
                 <th>Foto UMKM</th>
                 <th>
                   Kategori
-                  <select v-model="selectedKategori" @change="filterByKategori" class="btn btn-light btn-grey p-1 my-2">
+                  <select
+                    v-model="selectedKategori"
+                    @change="filterByKategori"
+                    class="btn btn-light btn-grey p-1 my-2"
+                  >
                     <!-- todo -->
                     <option value="">All</option>
                     <option value="Kategori 1">Kategori 1</option>
@@ -82,8 +98,11 @@
                   <button type="button" class="btn btn-warning">
                     <img src="src/assets/img/edit.svg" class="custom-icon" />
                   </button>
-                  <button type="button" @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
-                    class="btn btn-danger m-1">
+                  <button
+                    type="button"
+                    @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
+                    class="btn btn-danger m-1"
+                  >
                     <img src="src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>

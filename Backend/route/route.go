@@ -32,18 +32,27 @@ func Routes(router *gin.Engine) {
 		beritaRoutes.DELETE("/delete/:id", serviceberita.DeleteBerita)
 		beritaRoutes.GET("/categori", serviceberita.Kategori_berita)
 		beritaRoutes.POST("/list", serviceberita.SemuaBerita)
+		beritaRoutes.PUT("/update", serviceberita.UpdateBerita)
 	}
 
 	umkmRoutes := router.Group("/umkm")
 	{
 		umkmRoutes.POST("/list", serviceumkm.Semuaumkm)
 		umkmRoutes.GET("/:id", serviceumkm.Detailumkm)
+		umkmRoutes.GET("/umkm_kategori", serviceumkm.List_kat_umkm)
+		umkmRoutes.POST("/tambah_umkm", serviceumkm.Tambah_UMKM)
+		umkmRoutes.DELETE("/delete_umkm/:id", serviceumkm.Delete_umkm)
+		umkmRoutes.PUT("/update_umkm", serviceumkm.Update_umkm)
 	}
 
 	wisataRoutes := router.Group("/wisata")
 	{
-		wisataRoutes.GET("/list/:id", servicewisata.Semuawisata)
+		wisataRoutes.POST("/list", servicewisata.Semuawisata)
 		wisataRoutes.GET("/:id", servicewisata.Detailwisata)
+		wisataRoutes.POST("/tambah_data", servicewisata.Tambah_wisata)
+		wisataRoutes.DELETE("/delete_wisata/:id", servicewisata.Delete_wisata)
+		wisataRoutes.GET("/kategori_wisata", servicewisata.List_kat_wisata)
+		wisataRoutes.PUT("/update_wisata", servicewisata.Update_Wisata)
 	}
 
 	potensiDesa := router.Group("/potensi_desa")

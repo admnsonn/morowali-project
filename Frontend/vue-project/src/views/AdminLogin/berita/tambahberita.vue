@@ -113,6 +113,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "beritaCreate",
@@ -132,27 +133,43 @@ export default {
     };
   },
   methods: {
-    addNewData() {
-      // Send only the file name and other form data
-      axios
-        .post("http://localhost:8080/berita/create", this.model.berita)
-        .then((res) => {
-          console.log(res.data);
-          alert(res.data.message);
-
-          this.model.berita = {
-            judul: "",
-            sub_judul: "",
-            deskripsi: "",
-            foto_berita: "", // Reset for next upload
-            desa_id: "1",
-            kategori_id: "",
-          };
-        })
-        .catch((error) => {
-          console.error(error);
-          // Handle error, e.g., show an error message
-        });
+    async addNewData() {
+      const result = await Swal.fire({
+        title: "Apakah anda yakin?",
+        text: "Cek kembali data yang atkan ditambahkan!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#003366",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, tambahkan!",
+      });
+      if (result.isConfirmed) {
+        axios
+          .post("http://localhost:8080/berita/create", this.model.berita)
+          .then((res) => {
+            this.model.berita = {
+              judul: "",
+              sub_judul: "",
+              deskripsi: "",
+              foto_berita: "", // Reset for next upload
+              desa_id: "1",
+              kategori_id: "",
+            };
+            if (res.data.status) {
+              Swal.fire(
+                "Data berhasil ditambahkan.",
+                res.data.message,
+                "success"
+              );
+            } else {
+              Swal.fire("Data gagal ditambahkan.", res.data.message, "error");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle error, e.g., show an error message
+          });
+      }
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
