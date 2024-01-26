@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    environment{
+        LOGIN_CREDS = credentials('docker-login')
+
+    }
+    
+    stages{
+        stage ("initiate"){
+            steps{
+                script{
+                    sh'''
+                    echo initiate GO
+                    whoami
+
+                    '''
+                }
+            }
+
+        }
+        // stage ("build image"){
+        //     steps{
+        //         script{
+        //             sh'''
+        //                 docker build -t boyangyang/morowaliback:latest .
+        //                 docker push boyangyang/morowaliback:latest
+
+        //             '''
+        //         }
+        //     }
+
+        // }
+        
+    }
+}
