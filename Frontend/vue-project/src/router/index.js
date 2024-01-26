@@ -30,6 +30,7 @@ import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
 // Berita admin
 import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
 import TambahBerita from "../views/AdminLogin/berita/tambahberita.vue"
+import DetailBerita from "../views/AdminLogin/berita/detailberita.vue"
 import UpdateBerita from '../views/AdminLogin/berita/[id]/updateberita.vue'
 // Wisata admin
 import WisataDesa from '../views/AdminLogin/wisata/wisatadesa.vue'
@@ -103,6 +104,7 @@ const routes = [
   { path: '/potensi-desa', component: PotensiDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/kreatifitas-desa', component: KreatifitasDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-warga/:id', component: DetailWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-berita/:id', component: DetailBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: BerandaWarga, meta: { requiresAuth: true }, beforeEnter: authGuardWarga }

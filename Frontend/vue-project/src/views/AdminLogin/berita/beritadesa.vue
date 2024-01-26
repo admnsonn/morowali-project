@@ -94,6 +94,11 @@
                 <td>{{ item.foto_berita }}</td>
                 <td>{{ item.kategori }}</td>
                 <td>
+                  <router-link :to="`/detail-berita/${item.id_berita}`">
+                    <button class="btn btn-info m-1">
+                      <img src="src/assets/img/view.svg" class="custom-icon" />
+                    </button>
+                  </router-link>
                   <router-link :to="`/update-berita/${item.id_berita}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
