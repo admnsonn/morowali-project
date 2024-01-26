@@ -28,7 +28,7 @@
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
             <router-link
-              to="/detail-berita"
+              to="/tambah-umkm"
               class="nav-link router-link-underline"
               >+ Tambah Data</router-link
             >
@@ -46,10 +46,10 @@
                   ID
                   <button
                     type="button"
-                    class="btn btn-link m-1"
+                    class="btn btn-link"
                     @click="sortById()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
 
@@ -57,29 +57,31 @@
                   Nama UMKM
                   <button
                     type="button"
-                    class="btn btn-link m-1"
-                    @click="sortByNama()"
+                    class="btn btn-link"
+                    @click="sortByNamaUmkm()"
                   >
-                    <img src="src/assets/img/sort.svg" class="custom-icon" />
+                    <img src="src/assets/img/sort.svg" />
                   </button>
                 </th>
+                <th>Alamat UMKM</th>
                 <th>No. Telp</th>
                 <th>Foto UMKM</th>
-                <th>
-                  Kategori
+                <th class="">
+                  Kategori:
                   <select
-                    v-model="selectedKategori"
+                    v-model.number="selectedKategori"
                     @change="filterByKategori"
-                    class="btn btn-light btn-grey p-1 my-2"
+                    class="btn btn-light btn-grey p-1 my-2 dropdown-kategori"
                   >
-                    <!-- todo -->
-                    <option value="">All</option>
-                    <option value="Kategori 1">Kategori 1</option>
-                    <option value="Kategori 2">Kategori 2</option>
-                    <option value="Kategori 3">Kategori 3</option>
+                    <option value="0">All</option>
+                    <option
+                      v-for="item in kategoriList"
+                      :value="item.id_kategori_umkm"
+                    >
+                      {{ item.umkm_kategori }}
+                    </option>
                   </select>
                 </th>
-                <th>Alamat</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -87,22 +89,23 @@
               <tr v-for="(item, index) in displayedData" :key="index">
                 <td>{{ item.id_umkm }}</td>
                 <td>{{ item.nama_umkm }}</td>
+                <td>{{ item.alamat }}</td>
                 <td>{{ item.no_telp_umkm }}</td>
                 <td>{{ item.foto_umkm }}</td>
                 <td>{{ item.kategori_umkm }}</td>
-                <td>{{ item.alamat }}</td>
                 <td>
-                  <!-- <button type="button" class="btn btn-primary m-1">
-                  <img src="src/assets/img/view.svg" />
-                </button> -->
-                  <button type="button" class="btn btn-warning">
-                    <img src="src/assets/img/edit.svg" class="custom-icon" />
-                  </button>
+                  <router-link :to="`/update-umkm/${item.id_umkm}`">
+                    <button type="button" class="btn btn-warning m-1">
+                      <!-- edit button -->
+                      <img src="src/assets/img/edit.svg" class="custom-icon" />
+                    </button>
+                  </router-link>
                   <button
                     type="button"
                     @click.prevent="deleteData(item.id_umkm, item.nama_umkm)"
                     class="btn btn-danger m-1"
                   >
+                    <!-- delete button -->
                     <img src="src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
@@ -134,9 +137,10 @@ export default {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
-      selectedKategori: "",
+      selectedKategori: 0,
       sortDirection: "asc",
       filteredData: [],
+      kategoriList: [],
     };
   },
   computed: {
@@ -144,13 +148,24 @@ export default {
       return Math.ceil(this.filteredData.length / this.itemsPerPage);
     },
     displayedData() {
-      // Start with filteredData
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
       return this.filteredData.slice(startIndex, endIndex);
     },
   },
   methods: {
+    fetchKategori() {
+      axios
+        .get("http://localhost:8080/umkm/umkm_kategori")
+        .then(({ data }) => {
+          this.kategoriList = data.data;
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+      console.log(this.kategoriList);
+    },
+
     fetchData() {
       const payload = { id_desa: localStorage.getItem("desa_id") };
 
@@ -179,10 +194,9 @@ export default {
         });
 
         if (result.isConfirmed) {
-          const response = await axios
-            .delete
-            // `http://localhost:8080/berita/delete/${id}`
-            ();
+          const response = await axios.delete(
+            `http://localhost:8080/umkm/delete_umkm/${id}`
+          );
           if (response.data.status) {
             await Swal.fire(
               "Data berhasil dihapus!",
@@ -216,8 +230,8 @@ export default {
       this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
     },
 
-    sortByNama() {
-      this.filteredData.sort((a, b) => a.nama_umkm.localeCompare(b.nama_umkm)); // Sort by nama alphabetically
+    sortByNamaUmkm() {
+      this.filteredData.sort((a, b) => a.nama_umkm.localeCompare(b.nama_umkm)); // Sort by nama_umkm alphabetically
       // Toggle ascending/descending (optional):
       this.filteredData.sort((a, b) =>
         this.sortDirection === "asc"
@@ -236,24 +250,22 @@ export default {
       }
     },
     prevPage() {
-      if (this.currentPage >= this.totalPages) {
+      if (this.currentPage > 1) {
         this.currentPage--;
       }
     },
     filterByKategori() {
       this.filteredData = this.tableData.filter(
         (item) =>
-          item.kategori === this.selectedKategori ||
-          this.selectedKategori === ""
+          item.kategori_umkm_id === this.selectedKategori ||
+          this.selectedKategori === 0
       );
-      this.displayedData = this.filteredData.slice(
-        (this.currentPage - 1) * this.itemsPerPage,
-        this.currentPage * this.itemsPerPage
-      );
+      this.currentPage = 1; // Reset pagination
     },
   },
   created() {
     this.fetchData(); // Get original data
+    this.fetchKategori();
   },
 };
 </script>
@@ -289,19 +301,6 @@ export default {
   border: none;
 }
 
-.btn-excel {
-  background-color: #33b949;
-  color: #000;
-  border: none;
-  font-size: 14px;
-  padding-top: 10%;
-  padding-bottom: 10%;
-}
-
-.btn-excel:hover {
-  background-color: #33b949;
-}
-
 .btn-search,
 .btn-search:hover {
   padding-top: 12px;
@@ -315,6 +314,11 @@ export default {
 .btn-light option {
   font-size: small;
   padding-left: 11px;
+}
+
+.dropdown-kategori {
+  width: max-content;
+  margin-left: 20px;
 }
 
 select {

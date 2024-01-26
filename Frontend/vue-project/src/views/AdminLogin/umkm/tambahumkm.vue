@@ -12,7 +12,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Tambah Data Berita</h3>
+        <h3 class="title-warga">Tambah Data UMKM</h3>
         <p class="subtitle-warga">Management Content dan Layanan Berita</p>
       </div>
     </div>
@@ -27,30 +27,30 @@
             <label for="NamaLengkap">Judul</label>
             <input
               type="text"
-              v-model="model.berita.judul"
+              v-model="model.umkm.nama_umkm"
               class="form-control"
-              id="JudulBerita"
+              id="NamaUmkm"
               aria-label="nama"
-              placeholder="Judul berita"
+              placeholder="Nama UMKM"
             />
           </div>
         </div>
 
-        <div class="field2">
+        <!-- <div class="field2">
           <div class="form-group">
-            <label for="SubJudulBerita">Sub-Judul</label>
+            <label for="KontenUMKM">Konten UMKM</label>
             <input
               type="text"
-              v-model="model.berita.sub_judul"
+              v-model="model.umkm.konten_umkm"
               class="form-control"
-              id="SubJudulBerita"
-              aria-label="kelamin"
-              placeholder="Sub-Judul berita"
+              id="KontenUMKM"
+              aria-label="Konten-UMKM"
+              placeholder="Konten UMKM"
             />
           </div>
-        </div>
+        </div> -->
 
-        <div class="field3">
+        <div class="field32">
           <div class="form-group">
             <label for="NomorTelpon">Deskripsi</label>
             <input
@@ -66,22 +66,19 @@
 
         <div class="field10">
           <div class="form-group">
-            <label for="formFile" class="form-label">Kategori</label>
+            <label for="formFile" class="form-label">Kategori UMKM</label>
             <br />
             <select
               ref="kategoriSelect"
-              v-model="model.berita.kategori_id"
+              v-model="model.umkm.kategori_umkm_id"
               class="form-control"
               id="kategori_id"
               aria-label="category"
             >
               <option value="" disabled selected>--Pilih Kategori--</option>
-              <option
-                v-for="item in kategoriList"
-                :value="item.id_kategori_berita"
-              >
-                {{ item.berita_kategori }}
-              </option>
+              <option value="1">Politik</option>
+              <option value="2">Teknologi</option>
+              <option value="3">Ekonomi</option>
             </select>
           </div>
         </div>
@@ -123,31 +120,20 @@ export default {
   data() {
     return {
       model: {
-        berita: {
-          judul: "",
-          sub_judul: "",
-          deskripsi: "",
-          foto_berita: "", // Store only the file name here
+        umkm: {
+          nama_umkm: "",
+          konten_umkm: "",
+          kategori_umkm_id: "",
+          foto_umkm: "", // Store only the file name here
           desa_id: "1",
-          kategori_id: "",
+          no_telp_umkm: "",
+          alamat_umkm: "",
         },
       },
       tableData: [],
-      kategoriList: [],
     };
   },
   methods: {
-    fetchKategori() {
-      axios
-        .get("http://localhost:8080/berita/categori")
-        .then(({ data }) => {
-          this.kategoriList = data.data;
-        })
-        .catch((error) => {
-          console.error("Error in Axios GET request:", error);
-        });
-      console.log(this.kategoriList);
-    },
     async addNewData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
@@ -160,15 +146,16 @@ export default {
       });
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:8080/berita/create", this.model.berita)
+          .post("http://localhost:8080/umkm/tambah_umkm", this.model.berita)
           .then((res) => {
             this.model.berita = {
-              judul: "",
-              sub_judul: "",
-              deskripsi: "",
-              foto_berita: "", // Reset for next upload
+              nama_umkm: "",
+              konten_umkm: "",
+              kategori_umkm_id: "",
               desa_id: "1",
-              kategori_id: "",
+              foto_umkm: "", // Reset for next upload
+              no_telp_umkm: "",
+              alamat_umkm: "", //
             };
             if (res.data.status) {
               Swal.fire(
@@ -193,9 +180,6 @@ export default {
       // Update the model with only the file name
       this.model.berita.foto_berita = files[0].name;
     },
-  },
-  created() {
-    this.fetchKategori();
   },
   mounted() {
     console.log(this.$refs.kategoriSelect.value); // Access the selected value

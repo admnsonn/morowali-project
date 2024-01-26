@@ -27,6 +27,7 @@ import TambahWarga from "../views/AdminLogin/warga/tambahwarga.vue";
 import DetailWarga from "../views/AdminLogin/warga/detailwarga.vue";
 // UMKM admin
 import UMKMDesa from '../views/AdminLogin/umkm/umkmdesa.vue'
+import TambahUMKM from '../views/AdminLogin/umkm/tambahumkm.vue'
 // Berita admin
 import BeritaDesa from '../views/AdminLogin/berita/beritadesa.vue'
 import TambahBerita from "../views/AdminLogin/berita/tambahberita.vue"
@@ -96,6 +97,7 @@ const routes = [
   { path: '/warga-desa', component: Wargadesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/berita-desa', component: BeritaDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: UMKMDesa, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/tambah-umkm', component: TambahUMKM, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-berita', component: TambahBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-berita/:id', component: UpdateBerita, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: TambahWarga, meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

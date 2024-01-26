@@ -261,7 +261,7 @@ export default {
       }
     },
     prevPage() {
-      if (this.currentPage >= this.totalPages) {
+      if (this.currentPage > 1) {
         this.currentPage--;
       }
     },
