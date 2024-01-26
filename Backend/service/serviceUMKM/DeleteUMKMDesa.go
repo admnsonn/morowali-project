@@ -33,7 +33,7 @@ func Delete_umkm(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": true, "message": "Berita deleted successfully"})
+	c.JSON(http.StatusOK, gin.H{"status": true, "message": "UMKM deleted successfully"})
 	err = tx.Commit(ctx)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})

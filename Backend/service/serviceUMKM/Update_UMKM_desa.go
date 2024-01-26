@@ -60,6 +60,6 @@ func Update_umkm(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": true, "message": "Berita updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"status": true, "message": "UMKM updated successfully"})
 
 }
