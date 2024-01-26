@@ -25,7 +25,7 @@ func Tulis_Berita(c *gin.Context) {
 		Deskripsi  string `json:"deskripsi"`
 		FotoBerita string `json:"foto_berita"`
 		DesaID     string `json:"desa_id"`
-		KategoriID string `json:"kategori_id"`
+		KategoriID int    `json:"kategori_id"`
 	}
 
 	var input Request
