@@ -27,6 +27,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 		NamaAgama             string `json:"nama_agama"`
 		PendidikanID          int    `json:"pendidikan_id"`
 		NamaPendidikan        string `json:"nama_pendidikan"`
+		FOTO                  string `json:"foto_pengguna"`
 	}
 
 	type Request struct {
@@ -78,7 +79,8 @@ func Warga_desa_by_admin(c *gin.Context) {
 			a.agama_id ,
 			d.nama_agama ,
 			a.pendidikan_id ,
-			e.category_name 
+			e.category_name ,
+			a.foto_pengguna
 		FROM
 			dev.pengguna a, dev.jenis_kelamin b, dev.kategori_financial c , dev.agama d , dev.kategori_pendidikan e 
 			where 
@@ -121,6 +123,7 @@ func Warga_desa_by_admin(c *gin.Context) {
 			&ambil4.NamaAgama,
 			&ambil4.PendidikanID,
 			&ambil4.NamaPendidikan,
+			&ambil4.FOTO,
 		)
 
 		if err != nil {
