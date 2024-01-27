@@ -343,10 +343,6 @@ export default {
   margin-left: 20px;
 }
 
-.td-foto {
-  border-radius: 0.375rem;
-}
-
 select {
   font-size: 14px;
 }
