@@ -64,6 +64,18 @@
           </div>
         </div>
 
+        <div class="field10">
+          <div class="form-group">
+            <label for="formFile" class="form-label">Foto UMKM</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+            />
+          </div>
+        </div>
+
         <div class="field11">
           <div class="form-group">
             <label for="NomorTelpon">No. Telp. UMKM</label>
@@ -100,16 +112,15 @@
           </div>
         </div>
 
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto UMKM</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-            />
-          </div>
+        <div class="form-group-foto">
+          <label for="foto">Preview foto</label>
+          <img
+            :src="`data:image/png;base64,${this.tableData[0].foto_umkm}`"
+            alt="foto berita"
+            height="300"
+            width="400"
+            class="td-foto"
+          />
         </div>
 
         <div class="field13">
@@ -315,5 +326,21 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+}
+
+.field13 {
+  display: flex;
+  grid-column: span 2;
+  justify-content: flex-end;
+  padding-bottom: 40%;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>
