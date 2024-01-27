@@ -92,8 +92,7 @@
               v-on:change="onFileChange"
               type="file"
               id="formFile"
-              height="100"
-              width="100"
+              accept="image/*"
             />
             <div class="form-group-foto">
               <label for="foto">Preview foto</label>
@@ -204,6 +203,13 @@ export default {
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
+      const imageFile = files[0];
+      const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
+      if (!validTypes.includes(imageFile.type)) {
+        // Display an error message or alert
+        alert("Please select an image file.");
+        return;
+      }
 
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);

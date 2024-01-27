@@ -36,11 +36,6 @@
           </div>
         </div>
 
-        <div class="field2">
-          <label for="konten umkm">Konten UMKM</label>
-          <div v-html="detail[0].konten_umkm" />
-        </div>
-
         <div class="field3">
           <div class="form-group">
             <label for="no-telp">No. Telp. UMKM</label>
@@ -81,6 +76,11 @@
               disabled
             />
           </div>
+        </div>
+
+        <div class="field2">
+          <label for="konten umkm">Konten UMKM</label>
+          <div class="form-control" v-html="detail[0].konten_umkm" />
         </div>
 
         <div class="field4">

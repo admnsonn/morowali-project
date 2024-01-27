@@ -66,7 +66,7 @@
 
         <div class="field3">
           <label for="NIK">Deskripsi</label>
-          <div v-html="detail[0].deskripsi" />
+          <div class="form-control" v-html="detail[0].deskripsi" />
         </div>
 
         <div class="field4">
