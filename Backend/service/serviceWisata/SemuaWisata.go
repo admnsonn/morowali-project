@@ -49,15 +49,15 @@ func Semuawisata(c *gin.Context) {
 	}
 
 	wisata := `
-	select a.nama_wisata ,
-				a.alamat ,
-				a.foto_wisata ,
-				a.no_telp ,
-				a.id_wisata ,
-				a.idkategoriwisata ,
-				c.nama_kategori 
-			from dev.wisata a, dev.desa b  , DEV.kategoriwisata C
-			where a.desa_id  = b.id_desa  and a.idkategoriwisata = c.idkategoriwisata 
+	select 	a.nama_wisata ,
+			a.alamat ,
+			a.foto_wisata ,
+			a.no_telp ,
+			a.id_wisata ,
+			a.idkategoriwisata ,
+			c.nama_kategori 
+		from dev.wisata a, dev.desa b  , DEV.kategoriwisata C
+		where a.desa_id  = b.id_desa  and a.idkategoriwisata = c.idkategoriwisata 
 	and b.id_desa = $1
 	`
 
@@ -100,8 +100,6 @@ func Semuawisata(c *gin.Context) {
 		Tampung_wisata = append(Tampung_wisata, ambil)
 
 	}
-
-	fmt.Println(Tampung_wisata)
 
 	if len(Tampung_wisata) != 0 {
 		c.JSON(http.StatusOK, gin.H{
