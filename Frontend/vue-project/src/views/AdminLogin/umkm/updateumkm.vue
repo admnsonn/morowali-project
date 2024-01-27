@@ -39,13 +39,11 @@
         <div class="field2">
           <div class="form-group">
             <label for="JenisKelamin">Konten UMKM</label>
-            <input
-              type="text"
-              v-model="this.tableData[0].konten_umkm"
-              class="form-control"
-              id="KontenUMKM"
-              aria-label="Konten-UMKM"
-              placeholder="Deskripsi UMKM"
+            <QuillEditor
+              toolbar="essential"
+              v-model:content="this.tableData[0].konten_umkm"
+              theme="snow"
+              content-type="html"
             />
           </div>
         </div>
@@ -142,8 +140,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
+  components: {
+    QuillEditor,
+  },
   name: "umkmCreate",
   data() {
     return {

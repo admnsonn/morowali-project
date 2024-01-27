@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col">
         <h3 class="title-warga">Detail Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
+        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
       </div>
     </div>
 
@@ -50,9 +50,22 @@
           </div>
         </div>
 
+        <div class="field5">
+          <div class="form-group">
+            <label for="KK">ID Kategori</label>
+            <input
+              type="text"
+              v-model="detail[0].kategori_id"
+              class="form-control"
+              id="NIK"
+              aria-label="kategori"
+              disabled
+            />
+          </div>
+        </div>
+
         <div class="field3">
           <label for="NIK">Deskripsi</label>
-
           <div v-html="detail[0].deskripsi" />
         </div>
 
@@ -62,20 +75,6 @@
             <img
               :src="`data:image/png;base64,${detail[0].foto_berita}`"
               alt="foto berita"
-            />
-          </div>
-        </div>
-
-        <div class="field5">
-          <div class="form-group">
-            <label for="KK">ID Kategori</label>
-            <input
-              type="text"
-              v-model="detail[0].kategori_id"
-              class="form-control"
-              id="NIK"
-              aria-label="nik"
-              disabled
             />
           </div>
         </div>

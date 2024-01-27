@@ -57,16 +57,8 @@
               toolbar="essential"
               v-model:content="model.berita.deskripsi"
               theme="snow"
+              content-type="html"
             />
-
-            <!-- <input
-              type="text"
-              v-model="model.berita.deskripsi"
-              class="form-control"
-              id="DeskripsiBerita"
-              aria-label="hp"
-              placeholder="Deskripsi singkat berita"
-            /> -->
           </div>
         </div>
 

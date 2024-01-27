@@ -81,13 +81,6 @@
               theme="snow"
               content-type="html"
             />
-            <!-- <input
-              type="text"
-              v-model="this.tableData[0].deskripsi"
-              class="form-control"
-              id="DeskripsiBerita"
-              aria-label="hp"
-            /> -->
           </div>
         </div>
 
