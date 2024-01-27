@@ -51,17 +51,9 @@
         </div>
 
         <div class="field3">
-          <div class="form-group">
-            <label for="NIK">Deskripsi</label>
-            <textarea
-              type="text"
-              v-model="detail[0].deskripsi"
-              class="form-control"
-              id="NIK"
-              aria-label="nik"
-              disabled
-            />
-          </div>
+          <label for="NIK">Deskripsi</label>
+
+          <div v-html="detail[0].deskripsi" />
         </div>
 
         <div class="field4">

@@ -53,14 +53,20 @@
         <div class="field3">
           <div class="form-group">
             <label for="NomorTelpon">Deskripsi</label>
-            <input
+            <QuillEditor
+              toolbar="essential"
+              v-model:content="model.berita.deskripsi"
+              theme="snow"
+            />
+
+            <!-- <input
               type="text"
               v-model="model.berita.deskripsi"
               class="form-control"
               id="DeskripsiBerita"
               aria-label="hp"
               placeholder="Deskripsi singkat berita"
-            />
+            /> -->
           </div>
         </div>
 
@@ -117,8 +123,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
+  components: {
+    QuillEditor,
+  },
   name: "beritaCreate",
   data() {
     return {
@@ -158,8 +169,17 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
+        const plainTextDescription = this.model.berita.deskripsi.ops[0].insert;
+
         axios
-          .post("http://localhost:8080/berita/create", this.model.berita)
+          .post("http://localhost:8080/berita/create", {
+            judul: this.model.berita.judul,
+            sub_judul: this.model.berita.sub_judul,
+            deskripsi: plainTextDescription,
+            foto_berita: this.model.berita.foto_berita,
+            desa_id: this.model.berita.desa_id,
+            kategori_id: this.model.berita.kategori_id,
+          })
           .then((res) => {
             this.model.berita = {
               judul: "",

@@ -50,33 +50,6 @@
           </div>
         </div>
 
-        <div class="field3">
-          <div class="form-group">
-            <label for="NomorTelpon">Deskripsi</label>
-            <input
-              type="text"
-              v-model="this.tableData[0].deskripsi"
-              class="form-control"
-              id="DeskripsiBerita"
-              aria-label="hp"
-            />
-          </div>
-        </div>
-
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-              height="100"
-              width="100"
-            />
-          </div>
-        </div>
-
         <div class="field10">
           <div class="form-group">
             <label for="formFile" class="form-label">Kategori</label>
@@ -99,27 +72,59 @@
           </div>
         </div>
 
-        <div class="field13">
+        <div class="field3">
+          <div class="form-group">
+            <label for="NomorTelpon">Deskripsi</label>
+            <QuillEditor
+              toolbar="essential"
+              v-model:content="this.tableData[0].deskripsi"
+              theme="snow"
+              content-type="html"
+            />
+            <!-- <input
+              type="text"
+              v-model="this.tableData[0].deskripsi"
+              class="form-control"
+              id="DeskripsiBerita"
+              aria-label="hp"
+            /> -->
+          </div>
+        </div>
+
+        <div class="field10">
+          <div class="form-group-foto">
+            <label for="formFile" class="form-label">Foto Berita</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              height="100"
+              width="100"
+            />
+            <div class="form-group-foto">
+              <label for="foto">Preview foto</label>
+              <img
+                :src="`data:image/png;base64,${this.tableData[0].foto_berita}`"
+                alt="foto berita"
+                height="300"
+                width="400"
+                class="td-foto"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="wrapper-button">
           <button
             type="button"
-            class="btn btn-success btn-simpan p-2 my-2"
+            class="btn btn-success btn-simpan p-2 my-2 button-styling"
             @click="updateData"
           >
             <div class="nav-link router-link-underline teks-tambah">
               > Ganti Data
             </div>
           </button>
-        </div>
-
-        <div class="form-group-foto">
-          <label for="foto">Preview foto</label>
-          <img
-            :src="`data:image/png;base64,${this.tableData[0].foto_berita}`"
-            alt="foto berita"
-            height="300"
-            width="400"
-            class="td-foto"
-          />
         </div>
       </div>
     </div>
@@ -129,8 +134,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
+  components: {
+    QuillEditor,
+  },
   name: "beritaCreate",
   data() {
     return {
@@ -174,8 +184,17 @@ export default {
         confirmButtonText: "Ya, ubah!",
       });
       if (result.isConfirmed) {
+        const plainTextDescription = this.tableData[0].deskripsi;
+        console.log(plainTextDescription);
         axios
-          .put("http://localhost:8080/berita/update", this.tableData[0])
+          .put("http://localhost:8080/berita/update", {
+            id_berita: Number(this.$route.params.id),
+            judul: this.tableData[0].judul,
+            sub_judul: this.tableData[0].sub_judul,
+            deskripsi: plainTextDescription,
+            foto_berita: this.tableData[0].foto_berita,
+            kategori_id: this.tableData[0].kategori_id,
+          })
           .then((res) => {
             if (res.data.status) {
               Swal.fire("Data berhasil diubah.", res.data.message, "success");
@@ -325,5 +344,11 @@ h3 {
 
 .td-foto {
   border-radius: 0.375rem;
+}
+
+.wrapper-button {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 </style>
