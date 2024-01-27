@@ -65,6 +65,20 @@
 
         <div class="field10">
           <div class="form-group">
+            <label for="formFile" class="form-label">Foto Berita</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              height="100"
+              width="100"
+            />
+          </div>
+        </div>
+
+        <div class="field10">
+          <div class="form-group">
             <label for="formFile" class="form-label">Kategori</label>
             <br />
             <select
@@ -85,18 +99,6 @@
           </div>
         </div>
 
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-            />
-          </div>
-        </div>
-
         <div class="field13">
           <button
             type="button"
@@ -107,6 +109,17 @@
               > Ganti Data
             </div>
           </button>
+        </div>
+
+        <div class="form-group-foto">
+          <label for="foto">Preview foto</label>
+          <img
+            :src="`data:image/png;base64,${this.tableData[0].foto_berita}`"
+            alt="foto berita"
+            height="300"
+            width="400"
+            class="td-foto"
+          />
         </div>
       </div>
     </div>
@@ -303,5 +316,14 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>
