@@ -29,22 +29,8 @@
               type="text"
               v-model="detail[0].nama_umkm"
               class="form-control"
-              id="NamaLengkap"
+              id="namaUmkm"
               aria-label="nama"
-              disabled
-            />
-          </div>
-        </div>
-
-        <div class="field2">
-          <div class="form-group">
-            <label for="Umur">Konten UMKM</label>
-            <input
-              type="text"
-              v-model="detail[0].konten_umkm"
-              class="form-control"
-              id="konten"
-              aria-label="konten"
               disabled
             />
           </div>
@@ -52,7 +38,7 @@
 
         <div class="field3">
           <div class="form-group">
-            <label for="NIK">No. Telp. UMKM</label>
+            <label for="no-telp">No. Telp. UMKM</label>
             <textarea
               type="text"
               v-model="detail[0].no_telp_umkm"
@@ -90,6 +76,11 @@
               disabled
             />
           </div>
+        </div>
+
+        <div class="field2">
+          <label for="konten umkm">Konten UMKM</label>
+          <div class="form-control" v-html="detail[0].konten_umkm" />
         </div>
 
         <div class="field4">

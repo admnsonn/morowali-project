@@ -59,10 +59,10 @@
       <div class="wisata-cards-section row mx-0">
         <div v-for="wisata in pagedwisatas" :key="wisata.id" class="col-md-6 mb-4">
           <div class="wisata-card">
-            <img :src="wisata.imageUrl" alt="wisata image" class="img-fluid" />
-            <h2 class="wisata-title">{{ wisata.title }}</h2>
-            <p class="wisata-address">{{ wisata.address }}</p>
-            <p class="wisata-phone">{{ wisata.phoneNumber }}</p>
+            <img :src="wisata.foto_wisata" alt="wisata image" class="img-fluid" />
+            <h2 class="wisata-title">{{ wisata.nama_wisata }}</h2>
+            <p class="wisata-address">{{ wisata.alamat }}</p>
+            <p class="wisata-phone">{{ wisata.no_telp }}</p>
           </div>
         </div>
       </div>
@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -105,21 +107,6 @@ export default {
       return this.wisatas.slice(this.startIndex, this.endIndex);
     },
   },
-  mounted() {
-
-    setTimeout(() => {
-      this.wisatas = [
-        { id: 1, name: 'wisata 1', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 2, name: 'wisata 2', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 3, name: 'wisata 3', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 4, name: 'wisata 4', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 5, name: 'wisata 5', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 6, name: 'wisata 6', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 7, name: 'wisata 7', imageUrl: 'src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-      ];
-    }, 100);
-
-  },
   methods: {
     toggleFilter() {
       this.showFilter = !this.showFilter; // Toggle filter visibility
@@ -134,167 +121,182 @@ export default {
         this.currentPage -= 1;
       }
     },
+    fetchData() {
+      axios
+        .get("http://localhost:8080/wisata/list/1")
+        .then(({ data }) => {
+          this.wisatas = data.data;
+        })
+        .catch((error) => {
+          console.error("Error in Axios POST request:", error);
+        });
+    },
   },
-  };
+  mounted() {
+    this.fetchData();
+  },
+};
 </script>
 
 <style scoped>
-  .bg-hero {
-    background-color: #003366;
-  }
+.bg-hero {
+  background-color: #003366;
+}
 
-  .text-white {
-    color: white;
-    font-weight: bold;
-    text-shadow: 2px 2px #252525;
-  }
+.text-white {
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px #252525;
+}
 
-  .text-blue {
-    color: #003366 !important;
-  }
+.text-blue {
+  color: #003366 !important;
+}
 
-  .btn-primary {
-    background-color: white;
-    color: #003366;
-    font-weight: bold;
-    border: none;
-    padding: 10px 30px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 30px;
-  }
+.btn-primary {
+  background-color: white;
+  color: #003366;
+  font-weight: bold;
+  border: none;
+  padding: 10px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 30px;
+}
 
+.filter-section {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.filter-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.dropdown {
+  margin: 0 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the wisata Cards Section */
+.wisata-cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.wisata-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #D9D9D9;
+  width: 100%;
+  /* Make cards take full width on mobile */
+}
+
+/* Style for wisata Card Images */
+.wisata-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.wisata-title {
+  font-family: 'Poppins', sans-serif;
+  color: #003366;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.wisata-address,
+.wisata-phone {
+  font-family: 'Poppins', sans-serif;
+  color: #003366;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.phone-info {
+  display: flex;
+  align-items: center;
+  color: #555;
+  /* Adjust the color as needed */
+}
+
+.pagination-controls {
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #003366;
+}
+
+@media (max-width: 767px) {
   .filter-section {
     margin-left: 5px;
-    margin-right: 15px;
+    margin-right: 5px;
   }
 
-  .filter-icon {
-    cursor: pointer;
-    font-size: 20px;
+  .col-md-11 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
-  .dropdown {
-    margin: 0 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  /* Style for the wisata Cards Section */
-  .wisata-cards-section {
+  .filter-section .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    overflow-x: auto;
-    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .filter-section .dropdown {
+    margin-bottom: 10px;
+    flex: 0 0 48%;
+    /* Two dropdowns per row on mobile */
+    max-width: 48%;
+  }
+
+  .wisata-cards-section {
     margin-left: 5px;
     margin-right: 5px;
   }
 
   .wisata-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #D9D9D9;
-    width: 100%; /* Make cards take full width on mobile */
-  }
-
-  /* Style for wisata Card Images */
-  .wisata-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 8px;
-  }
-
-  .wisata-title {
-    font-family: 'Poppins', sans-serif;
-    color: #003366;
-    font-size: 24px;
-    font-weight: 500;
-  }
-
-  .wisata-address,
-  .wisata-phone {
-    font-family: 'Poppins', sans-serif;
-    color: #003366;
-    font-size: 15px;
-    font-weight: 500;
-  }
-
-  .phone-info {
-    display: flex;
-    align-items: center;
-    color: #555;
-    /* Adjust the color as needed */
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
   .pagination-controls {
-    margin-top: 20px;
+    margin-top: 10px;
   }
-
-  .pagination-controls button {
-    background-color: #003366;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  .pagination-controls button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-
-  .pagination-controls span {
-    margin: 0 10px;
-    font-weight: bold;
-    color: #003366;
-  }
-
-  @media (max-width: 767px) {
-    .filter-section {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-
-    .col-md-11 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-
-    .filter-section .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-
-    .filter-section .dropdown {
-      margin-bottom: 10px;
-      flex: 0 0 48%; /* Two dropdowns per row on mobile */
-      max-width: 48%;
-    }
-
-    .wisata-cards-section {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-
-    .wisata-card {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-
-    .pagination-controls {
-      margin-top: 10px;
-    }
-  }
+}
 </style>
 

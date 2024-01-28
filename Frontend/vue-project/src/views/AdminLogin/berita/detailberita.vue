@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col">
         <h3 class="title-warga">Detail Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Warga</p>
+        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
       </div>
     </div>
 
@@ -50,30 +50,6 @@
           </div>
         </div>
 
-        <div class="field3">
-          <div class="form-group">
-            <label for="NIK">Deskripsi</label>
-            <textarea
-              type="text"
-              v-model="detail[0].deskripsi"
-              class="form-control"
-              id="NIK"
-              aria-label="nik"
-              disabled
-            />
-          </div>
-        </div>
-
-        <div class="field4">
-          <div class="form-group-foto">
-            <label for="KK">Foto Berita</label>
-            <img
-              :src="`data:image/png;base64,${detail[0].foto_berita}`"
-              alt="foto berita"
-            />
-          </div>
-        </div>
-
         <div class="field5">
           <div class="form-group">
             <label for="KK">ID Kategori</label>
@@ -82,8 +58,23 @@
               v-model="detail[0].kategori_id"
               class="form-control"
               id="NIK"
-              aria-label="nik"
+              aria-label="kategori"
               disabled
+            />
+          </div>
+        </div>
+
+        <div class="field3">
+          <label for="NIK">Deskripsi</label>
+          <div class="form-control" v-html="detail[0].deskripsi" />
+        </div>
+
+        <div class="field4">
+          <div class="form-group-foto">
+            <label for="KK">Foto Berita</label>
+            <img
+              :src="`data:image/png;base64,${detail[0].foto_berita}`"
+              alt="foto berita"
             />
           </div>
         </div>
@@ -191,10 +182,5 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.form-group-foto {
-  display: flex;
-  flex-direction: column;
 }
 </style>

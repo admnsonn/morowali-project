@@ -64,6 +64,8 @@ const routes = [
   { path: '/wisata-desa', component: import('../views/AdminLogin/wisata/wisatadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga }

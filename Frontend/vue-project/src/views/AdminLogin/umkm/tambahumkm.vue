@@ -39,13 +39,11 @@
         <div class="field2">
           <div class="form-group">
             <label for="KontenUMKM">Konten UMKM</label>
-            <input
-              type="text"
-              v-model="model.umkm.konten_umkm"
-              class="form-control"
-              id="KontenUMKM"
-              aria-label="Konten-UMKM"
-              placeholder="Deskripsi UMKM"
+            <QuillEditor
+              toolbar="essential"
+              v-model:content="model.umkm.konten_umkm"
+              theme="snow"
+              content-type="html"
             />
           </div>
         </div>
@@ -62,6 +60,30 @@
               placeholder="Alamat dari UMKM"
             />
           </div>
+        </div>
+
+        <div class="field10">
+          <div class="form-group">
+            <label for="formFile" class="form-label">Foto UMKM</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group-foto" v-if="this.model.umkm.foto_umkm">
+            <label for="foto">Preview foto</label>
+            <img
+              :src="`data:image/png;base64,${this.model.umkm.foto_umkm}`"
+              alt="foto berita"
+              height="300"
+              width="400"
+              class="td-foto"
+            />
+          </div>
+          <div v-else>Tidak ada gambar yang dipilih</div>
         </div>
 
         <div class="field11">
@@ -100,18 +122,6 @@
           </div>
         </div>
 
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto UMKM</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-            />
-          </div>
-        </div>
-
         <div class="field13">
           <button
             type="button"
@@ -131,8 +141,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
+  components: {
+    QuillEditor,
+  },
   name: "umkmCreate",
   data() {
     return {
@@ -204,6 +219,13 @@ export default {
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
+      const imageFile = files[0];
+      const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
+      if (!validTypes.includes(imageFile.type)) {
+        // Display an error message or alert
+        alert("Please select an image file.");
+        return;
+      }
 
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
@@ -325,5 +347,15 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>
