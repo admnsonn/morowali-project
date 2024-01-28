@@ -20,21 +20,20 @@ func Create_warga(c *gin.Context) {
 		KK              string `json:"kk"`
 		TempatLahir     string `json:"tempat_lahir"`
 		TanggalLahir    string `json:"tanggal_lahir"`
-		JenisKelamin    string `json:"jenis_kelamin_id"`
+		JenisKelamin    int    `json:"jenis_kelamin_id"`
 		Alamat          string `json:"alamat_pengguna"`
-		Agama           string `json:"agama_id"`
-		StatusPenikahan string `json:"status_perkawinan_id"`
+		Agama           int    `json:"agama_id"`
+		StatusPenikahan int    `json:"status_perkawinan_id"`
 		Profesi         string `json:"profesi"`
 		NoTelp          string `json:"no_telp"`
-		PendidikanLast  string `json:"pendidikan_terakhir_id"`
+		PendidikanLast  int    `json:"pendidikan_terakhir_id"`
 		FotoProfile     string `json:"foto_profile"`
 		RW              string `json:"rw"`
 		RT              string `json:"rt"`
 		DesaID          string `json:"id_desa"`
-		Financial       string `json:"kategori_financial_id"`
+		Financial       int    `json:"kategori_financial_id"`
 		KodePos         string `json:"kode_pos"`
-		Kewarganegaraan string `json:"kewarganegaraan"
-		`
+		Kewarganegaraan string `json:"kewarganegaraan"`
 	}
 
 	var input Request
