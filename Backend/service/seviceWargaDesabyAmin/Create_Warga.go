@@ -90,6 +90,9 @@ func Create_warga(c *gin.Context) {
 	hashedInputPassword := hex.EncodeToString(hasher.Sum(nil))
 	fmt.Println(hashedInputPassword)
 
+	fmt.Println("ini hasher : ", hasher)
+	fmt.Println("ini hashedInputPassword : ", hashedInputPassword)
+
 	query := `
 		INSERT INTO dev.pengguna (
 			nama_lengkap,

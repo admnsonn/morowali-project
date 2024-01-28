@@ -53,15 +53,37 @@
         <div class="field3">
           <div class="form-group">
             <label for="NomorTelpon">Deskripsi</label>
-            <input
-              type="text"
-              v-model="model.berita.deskripsi"
-              class="form-control"
-              id="DeskripsiBerita"
-              aria-label="hp"
-              placeholder="Deskripsi singkat berita"
+            <QuillEditor
+              toolbar="essential"
+              v-model:content="model.berita.deskripsi"
+              theme="snow"
+              content-type="html"
             />
           </div>
+        </div>
+
+        <div class="field10">
+          <div class="form-group">
+            <label for="formFile" class="form-label">Foto Berita</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group-foto" v-if="this.model.berita.foto_berita">
+            <label for="foto">Preview foto</label>
+            <img
+              :src="`data:image/png;base64,${this.model.berita.foto_berita}`"
+              alt="foto berita"
+              height="300"
+              width="400"
+              class="td-foto"
+            />
+          </div>
+          <div v-else>Tidak ada gambar yang dipilih</div>
         </div>
 
         <div class="field10">
@@ -86,18 +108,6 @@
           </div>
         </div>
 
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-            />
-          </div>
-        </div>
-
         <div class="field13">
           <button
             type="button"
@@ -117,8 +127,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
+  components: {
+    QuillEditor,
+  },
   name: "beritaCreate",
   data() {
     return {
@@ -146,7 +161,6 @@ export default {
         .catch((error) => {
           console.error("Error in Axios GET request:", error);
         });
-      console.log(this.kategoriList);
     },
     async addNewData() {
       const result = await Swal.fire({
@@ -159,8 +173,17 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
+        const plainTextDescription = this.model.berita.deskripsi;
+
         axios
-          .post("http://localhost:8080/berita/create", this.model.berita)
+          .post("http://localhost:8080/berita/create", {
+            judul: this.model.berita.judul,
+            sub_judul: this.model.berita.sub_judul,
+            deskripsi: plainTextDescription,
+            foto_berita: this.model.berita.foto_berita,
+            desa_id: this.model.berita.desa_id,
+            kategori_id: this.model.berita.kategori_id,
+          })
           .then((res) => {
             this.model.berita = {
               judul: "",
@@ -189,6 +212,13 @@ export default {
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
+      const imageFile = files[0];
+      const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
+      if (!validTypes.includes(imageFile.type)) {
+        // Display an error message or alert
+        alert("Please select an image file.");
+        return;
+      }
 
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
@@ -229,7 +259,6 @@ export default {
     this.fetchKategori();
   },
   mounted() {
-    console.log(this.$refs.kategoriSelect.value); // Access the selected value
     this.$refs.kategoriSelect.focus(); // Focus the element
   },
 };
@@ -312,5 +341,15 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>

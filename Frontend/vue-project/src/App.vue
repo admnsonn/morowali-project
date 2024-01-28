@@ -173,4 +173,13 @@ export default {
 h3{
   font-weight: bold;
 }
+
+.td-foto {
+  border-radius: 0.375rem;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+}
 </style>

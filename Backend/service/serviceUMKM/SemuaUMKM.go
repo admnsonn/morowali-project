@@ -59,7 +59,7 @@ func Semuaumkm(c *gin.Context) {
 		a.alamat ,
 		a.kategori_umkm_id
 	from dev.umkm a, dev.desa b, dev.kategori_umkm c 
-	where a.desa_id = b.id_desa 
+	where a.desa_id = b.id_desa and a.kategori_umkm_id  = c.id_kategori_umkm 
 	and b.id_desa = $1
 	`
 

@@ -226,34 +226,34 @@ export default {
     fetchData() {
       const apiResponse = {
         data: {
-          imageUrl: "src/assets/img/desa.png",
+          imageUrl: "../../src/assets/img/desa.png",
           title: "Kenali Lebih dalam Desa Kami!",
           subtitle: "Desa yang berada di Kab Morowali ",
           penjelasan: [
             { judul: 'Desa Bahomoleo', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.' }
           ],
           idm: [
-            { imageUrl: 'src/assets/img/Idm.png', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.' }
+            { imageUrl: '../../src/assets/img/Idm.png', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.' }
           ],
           struktur: [
-            { imageUrl: 'src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
-            { imageUrl: 'src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-            { imageUrl: 'src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
+            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
           ],
           berita: [
             { judul: 'Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP', subtitle: 'Deskripsi tambahan untuk berita', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.', tanggal: '08-09-2019' }
           ],
           galeri: [
             {
-              imageUrl: "src/assets/img/Artikel.png",
+              imageUrl: "../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
             {
-              imageUrl: "src/assets/img/Artikel.png",
+              imageUrl: "../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
             {
-              imageUrl: "src/assets/img/Artikel.png",
+              imageUrl: "../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
           ]

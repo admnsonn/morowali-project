@@ -15,7 +15,7 @@
           <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
             <div class="col-12 d-md-none mb-4">
-              <img src="../../src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img :src="item.foto_potensi_desa" alt="Latest Image" class="img-fluid" />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
@@ -30,7 +30,7 @@
                   <h2 class="mb-2 warna-judul-artikel">
                     {{ item.judul_potensi }}
                   </h2>
-                  <br>
+                  <br />
                 </div>
                 <h5 class="mb-4 sub-potensi">{{ item.sub_judul }}</h5>
                 <h5 class="mb-4 item-potensi">{{ item.date }}</h5>
@@ -43,7 +43,7 @@
 
             <!-- INI UNTUK GAMBAR PADA DESKTOP -->
             <div class="col-md-6 order-md-2 d-none d-md-block">
-              <img src="../../src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
+              <img :src="item.foto_potensi_desa" alt="Latest Image" class="img-fluid" />
             </div>
           </div>
         </div>
@@ -91,6 +91,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -144,112 +146,19 @@ export default {
     removeShadow() {
       this.isHovered = false;
     },
-
     fetchData() {
-      // Simulasi pengambilan data dari API (dalam hal ini, data respons API)
-      const apiResponse = {
-        data: [
-          {
-            id_potensi: 1,
-            judul_potensi: "Pertanian Organik",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pengembangan pertanian organik di daerah dengan tanah subur.",
-            foto_potensi_desa: "gambar1.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 1",
-          },
-          {
-            id_potensi: 2,
-            judul_potensi: "Pemberdayaan Wanita",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Program pelatihan untuk pemberdayaan ekonomi wanita di desa.",
-            foto_potensi_desa: "gambar2.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 2",
-          },
-          {
-            id_potensi: 3,
-            judul_potensi: "Usaha Kecil Menengah (UKM)",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Dukungan pembinaan UKM di bidang kerajinan tangan.",
-            foto_potensi_desa: "gambar3.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 3",
-          },
-          {
-            id_potensi: 4,
-            judul_potensi: "Edukasi Anak Muda",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Program edukasi dan pelatihan keterampilan untuk anak muda.",
-            foto_potensi_desa: "gambar4.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 4",
-          },
-          {
-            id_potensi: 5,
-            judul_potensi: "Program Lingkungan",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Inisiatif untuk menjaga lingkungan alam sekitar.",
-            foto_potensi_desa: "gambar5.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 5",
-          },
-          {
-            id_potensi: 6,
-            judul_potensi: "Pariwisata Lokal",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pengembangan atraksi pariwisata lokal.",
-            foto_potensi_desa: "gambar6.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 6",
-          },
-          {
-            id_potensi: 7,
-            judul_potensi: "Kesehatan Masyarakat",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Program kesehatan masyarakat di desa.",
-            foto_potensi_desa: "gambar7.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 7",
-          },
-          {
-            id_potensi: 8,
-            judul_potensi: "Program Literasi",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Peningkatan literasi penduduk desa melalui kegiatan membaca.",
-            foto_potensi_desa: "gambar8.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 8",
-          },
-          {
-            id_potensi: 9,
-            judul_potensi: "Pelatihan Petani",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pelatihan teknik pertanian modern untuk petani desa.",
-            foto_potensi_desa: "gambar9.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 9",
-          },
-          {
-            id_potensi: 10,
-            judul_potensi: "Infrastruktur Desa",
-            date: "28-04-2001",
-            deskripsi:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque. Pengembangan infrastruktur dasar di desa.",
-            foto_potensi_desa: "gambar10.jpg",
-            sub_judul: "Deskripsi tambahan untuk potensi desa 10",
-          },
-        ],
-      };
-
-      // Setelah data diambil dari API (simulasi pengambilan data), atur ke latestData
-      this.latestData = apiResponse.data;
-      this.showLatestData = true;
-
-      // Set halaman pertama ketika data diambil
-      this.paginatedData = this.latestData.slice(0, this.itemsPerPage);
+      axios
+        .get("http://localhost:8080/potensi_desa/list/1")
+        .then(({ data }) => {
+          this.latestData = data.data;
+          this.showLatestData = true;
+          // Set halaman pertama ketika data diambil
+          this.paginatedData = this.latestData.slice(0, this.itemsPerPage);
+        })
+        .catch((error) => {
+          console.error("Error in Axios POST request:", error);
+        });
     },
-
     handlePageChange(page) {
       this.currentPage = page;
       const startIndex = (page - 1) * this.itemsPerPage;
@@ -258,13 +167,11 @@ export default {
       // Update paginatedData based on the selected page
       this.paginatedData = this.latestData.slice(startIndex, endIndex);
     },
-
     showDetail(data) {
       console.log("Menampilkan detail informasi:", data);
     },
   },
   mounted() {
-    // Panggil fetchData() saat komponen dimuat
     this.fetchData();
   },
 };
@@ -281,7 +188,7 @@ export default {
   text-shadow: 2px 2px #252525;
 }
 
-.item-potensi{
+.item-potensi {
   color: #003366;
   font-size: 18px;
   font-weight: bold;
@@ -293,18 +200,18 @@ export default {
   font-weight: bold;
   border: none;
   padding: 10px 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
   border-radius: 30px;
 }
 
-.btn-secondary{
-  background-color:#003366;
+.btn-secondary {
+  background-color: #003366;
   border: none;
   padding: 10px 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -357,4 +264,3 @@ export default {
   color: white;
 }
 </style>
-

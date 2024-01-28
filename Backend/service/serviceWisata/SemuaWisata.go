@@ -11,11 +11,13 @@ import (
 
 func Semuawisata(c *gin.Context) {
 	type Data_wisata struct {
-		Nama   string `json:"nama_wisata"`
-		Alamat string `json:"alamat"`
-		Foto   string `json:"foto_wisata"`
-		NoTelp string `json:"no_telp"`
-		ID     int    `json:"id_wisata"`
+		Nama       string `json:"nama_wisata"`
+		Alamat     string `json:"alamat"`
+		Foto       string `json:"foto_wisata"`
+		NoTelp     string `json:"no_telp"`
+		ID         int    `json:"id_wisata"`
+		IDkategori int    `json:"id_kategori"`
+		Kategori   string `json:"kategori"`
 	}
 
 	type Request struct {
@@ -47,15 +49,16 @@ func Semuawisata(c *gin.Context) {
 	}
 
 	wisata := `
-	select 
-		a.nama_wisata ,
-		a.alamat ,
-		a.foto_wisata ,
-		a.no_telp ,
-		a.id_wisata 
-	from dev.wisata a, dev.desa d  
-	where a.desa_id  = d.id_desa 
-	and d.id_desa = $1
+	select 	a.nama_wisata ,
+			a.alamat ,
+			a.foto_wisata ,
+			a.no_telp ,
+			a.id_wisata ,
+			a.idkategoriwisata ,
+			c.nama_kategori 
+		from dev.wisata a, dev.desa b  , DEV.kategoriwisata C
+		where a.desa_id  = b.id_desa  and a.idkategoriwisata = c.idkategoriwisata 
+	and b.id_desa = $1
 	`
 
 	row, err := tx.Query(ctx, wisata, input.IDDesa)
@@ -81,6 +84,8 @@ func Semuawisata(c *gin.Context) {
 			&ambil.Foto,
 			&ambil.NoTelp,
 			&ambil.ID,
+			&ambil.IDkategori,
+			&ambil.Kategori,
 		)
 
 		if err != nil {
@@ -95,8 +100,6 @@ func Semuawisata(c *gin.Context) {
 		Tampung_wisata = append(Tampung_wisata, ambil)
 
 	}
-
-	fmt.Println(Tampung_wisata)
 
 	if len(Tampung_wisata) != 0 {
 		c.JSON(http.StatusOK, gin.H{

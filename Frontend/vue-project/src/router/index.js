@@ -59,9 +59,13 @@ const routes = [
   { path: '/detail-berita/:id', component: import('../views/AdminLogin/berita/detailberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/umkm-desa', component: import('../views/AdminLogin/umkm/umkmdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-umkm', component: import('../views/AdminLogin/umkm/tambahumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-umkm/:id', component: import('../views/AdminLogin/umkm/updateumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-umkm/:id', component: import('../views/AdminLogin/umkm/detailumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wisata-desa', component: import('../views/AdminLogin/wisata/wisatadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga }

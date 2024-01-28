@@ -43,16 +43,7 @@
           <table class="tabel">
             <thead>
               <tr>
-                <th>
-                  ID
-                  <button
-                    type="button"
-                    class="btn btn-link"
-                    @click="sortById()"
-                  >
-                    <img src="../../../../src/assets/img/sort.svg" />
-                  </button>
-                </th>
+                <th>No.</th>
 
                 <th>
                   Judul
@@ -88,7 +79,7 @@
             </thead>
             <tbody>
               <tr v-for="(item, index) in displayedData" :key="index">
-                <td>{{ item.id_berita }}</td>
+                <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                 <td>{{ item.judul }}</td>
                 <td>{{ item.sub_judul }}</td>
                 <!-- <td>{{ item.deskripsi }}</td> -->
@@ -101,7 +92,6 @@
                     width="100"
                   />
                 </td>
-                <!-- <td>{{ item.foto_berita }}</td> -->
                 <td>{{ item.kategori }}</td>
                 <td>
                   <router-link :to="`/detail-berita/${item.id_berita}`">
@@ -238,17 +228,6 @@ export default {
         console.error("Error in Axios DELETE request:", error);
       }
     },
-    sortById() {
-      this.filteredData.sort((a, b) => a.id_berita - b.id_berita); // Sort by ID ascending
-      // If you want to toggle ascending/descending order:
-      this.filteredData.sort((a, b) =>
-        this.sortDirection === "asc"
-          ? a.id_berita - b.id_berita
-          : b.id_berita - a.id_berita
-      );
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
-    },
 
     sortByJudul() {
       this.filteredData.sort((a, b) => a.judul.localeCompare(b.judul)); // Sort by judul alphabetically
@@ -282,14 +261,6 @@ export default {
           this.selectedKategori === 0
       );
       this.currentPage = 1; // Reset pagination
-    },
-
-    blobToURL(blob) {
-      if (blob) {
-        return URL.createObjectURL(blob);
-      } else {
-        return null;
-      }
     },
   },
 
@@ -349,10 +320,6 @@ export default {
 .dropdown-kategori {
   width: max-content;
   margin-left: 20px;
-}
-
-.td-foto {
-  border-radius: 0.375rem;
 }
 
 select {

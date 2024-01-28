@@ -80,7 +80,15 @@ func Login(c *gin.Context) {
 	`
 	err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass, &idp)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("masuk sini 1")
+		cek_password := `
+			select password, id_pengguna from dev.pengguna where nik = $1
+		`
+		err = tx.QueryRow(ctx, cek_password, input.Username).Scan(&validasi_pass, &idp)
+		if err != nil {
+
+			log.Fatal(err)
+		}
 	}
 
 	hasher := md5.New()
@@ -98,6 +106,8 @@ func Login(c *gin.Context) {
 		}
 		return
 	}
+
+	fmt.Println("masuk sini 2")
 
 	query_pengguna := `
 	select 
