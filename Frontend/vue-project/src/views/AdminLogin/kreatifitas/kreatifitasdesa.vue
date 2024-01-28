@@ -19,33 +19,20 @@
 
     <!-- tabel -->
     <div class="bungkus-tabel">
-      <div class="wrapper-tabletop">
-        <div class="col-auto">
-          <button type="button" class="btn btn-tambah my-2">
-            <router-link
-              to="/potensi-desa"
-              class="nav-link router-link-underline"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-trash-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"
-                />
-              </svg>
-              Delete
-            </router-link>
-          </button>
-        </div>
-        <div class="container-searchbar">
-          <button type="button" class="btn btn-search">
+      <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-search w-100 my-2">
             <img src="../../../../src/assets/img/search.svg" class="me-2" />
             Search...
+          </button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-success btn-tambah my-2">
+            <router-link
+              to="/tambah-kreatifitas"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -264,19 +251,12 @@ export default {
 }
 
 .btn-tambah {
-  background-color: #b50511;
+  background-color: #003366;
   color: #fff;
   border: none;
   font-size: 14px;
   padding-top: 10%;
   padding-bottom: 10%;
-  height: 100%;
-}
-
-.btn-tambah:hover {
-  background-color: #c41e1e;
-  color: #fff;
-  border: none;
 }
 
 .btn-tambah:hover {
@@ -293,7 +273,16 @@ export default {
   border: 1px solid #8b8a8a;
   text-align: left;
   font-size: 14px;
-  width: 100%;
+}
+
+.btn-light option {
+  font-size: small;
+  padding-left: 11px;
+}
+
+.dropdown-kategori {
+  width: max-content;
+  margin-left: 20px;
 }
 
 select {
@@ -302,17 +291,5 @@ select {
 
 h3 {
   font-weight: bold;
-}
-
-.wrapper-tabletop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-}
-
-.container-searchbar {
-  width: 23%;
 }
 </style>
