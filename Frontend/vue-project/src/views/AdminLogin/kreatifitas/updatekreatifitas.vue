@@ -12,8 +12,8 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Ubah Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
+        <h3 class="title-warga">Ubah Data Kreatifitas</h3>
+        <p class="subtitle-warga">Management Content dan Layanan Kreatifitas</p>
       </div>
     </div>
 
@@ -24,51 +24,29 @@
       <div class="grid-container">
         <div class="field1">
           <div class="form-group">
-            <label for="NamaLengkap">Judul</label>
+            <label for="NamaLengkap">Judul Kreatifitas</label>
             <input
               type="text"
-              v-model="this.tableData[0].judul"
+              v-model="this.tableData[0].judul_kreatifitas"
               class="form-control"
-              id="JudulBerita"
+              id="JudulKreatifitas"
               aria-label="nama"
-              placeholder="Judul berita"
+              placeholder="Judul kreatifitas"
             />
           </div>
         </div>
 
         <div class="field2">
           <div class="form-group">
-            <label for="JenisKelamin">Sub-Judul</label>
+            <label for="Total-Pengunjung">Total Pengunjung</label>
             <input
               type="text"
-              v-model="this.tableData[0].sub_judul"
+              v-model="this.tableData[0].pengunjung"
               class="form-control"
-              id="SubJudulBerita"
-              aria-label="kelamin"
-              placeholder="Sub-Judul berita"
+              id="TotalPengunung"
+              aria-label="pengunjung"
+              placeholder="Total Pengunjung Kreatifitas"
             />
-          </div>
-        </div>
-
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Kategori</label>
-            <br />
-            <select
-              ref="kategoriSelect"
-              v-model="this.tableData[0].kategori_id"
-              class="form-control"
-              id="kategori_id"
-              aria-label="category"
-            >
-              <option value="" disabled selected>--Pilih Kategori--</option>
-              <option
-                v-for="item in kategoriList"
-                :value="item.id_kategori_berita"
-              >
-                {{ item.berita_kategori }}
-              </option>
-            </select>
           </div>
         </div>
 
@@ -86,7 +64,7 @@
 
         <div class="field10">
           <div class="form-group-foto">
-            <label for="formFile" class="form-label">Foto Berita</label>
+            <label for="formFile" class="form-label">Foto Kreatifitas</label>
             <input
               class="form-control"
               v-on:change="onFileChange"
@@ -97,8 +75,8 @@
             <div class="form-group-foto">
               <label for="foto">Preview foto</label>
               <img
-                :src="`data:image/png;base64,${this.tableData[0].foto_berita}`"
-                alt="foto berita"
+                :src="`data:image/png;base64,${this.tableData[0].foto_kreatifitas}`"
+                alt="foto Kreatifitas"
                 height="300"
                 width="400"
                 class="td-foto"
@@ -133,31 +111,24 @@ export default {
   components: {
     QuillEditor,
   },
-  name: "beritaCreate",
+  name: "kreatifitasCreate",
   data() {
     return {
       tableData: [],
-      kategoriList: [],
     };
   },
 
   methods: {
-    fetchKategori() {
-      axios
-        .get("http://localhost:8080/berita/categori")
-        .then(({ data }) => {
-          this.kategoriList = data.data;
-        })
-        .catch((error) => {
-          console.error("Error in Axios GET request:", error);
-        });
-      console.log(this.kategoriList);
-    },
     fetchData() {
       axios
-        .get(`http://localhost:8080/berita/${this.$route.params.id}`)
+        .get(
+          `http://localhost:8080/kreatifitas/detail/${this.$route.params.id}`
+        )
         .then(({ data }) => {
           this.tableData = data.data;
+          this.tableData[0].pengunjung =
+            this.tableData[0].pengunjung.toString();
+          console.log(this.tableData);
 
           this.filteredData = this.tableData; // Initialize filteredData
         })
@@ -179,13 +150,12 @@ export default {
         const plainTextDescription = this.tableData[0].deskripsi;
         console.log(plainTextDescription);
         axios
-          .put("http://localhost:8080/berita/update", {
-            id_berita: Number(this.$route.params.id),
-            judul: this.tableData[0].judul,
-            sub_judul: this.tableData[0].sub_judul,
+          .put("http://localhost:8080/kreatifitas/update", {
+            id_kreatifitas: Number(this.$route.params.id),
+            judul_kreatifitas: this.tableData[0].judul_kreatifitas,
+            pengunjung: this.tableData[0].pengunjung,
             deskripsi: plainTextDescription,
-            foto_berita: this.tableData[0].foto_berita,
-            kategori_id: this.tableData[0].kategori_id,
+            foto_kreatifitas: this.tableData[0].foto_kreatifitas,
           })
           .then((res) => {
             if (res.data.status) {
@@ -236,7 +206,7 @@ export default {
 
             reader.onloadend = () => {
               const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
-              this.tableData[0].foto_berita = base64String;
+              this.tableData[0].foto_kreatifitas = base64String;
             };
           }, "image/jpeg"); // Adjust the image type as needed
         };
@@ -245,13 +215,8 @@ export default {
       };
     },
   },
-  mounted() {
-    console.log(this.$refs.kategoriSelect.value); // Access the selected value
-    this.$refs.kategoriSelect.focus(); // Focus the element
-  },
   created() {
     this.fetchData(); // Get original data
-    this.fetchKategori();
     console.log(this.tableData[0]); //
   },
 };
