@@ -24,7 +24,7 @@
       <div class="grid-container">
         <div class="field1">
           <div class="form-group">
-            <label for="NamaLengkap">Judul</label>
+            <label for="NamaLengkap">Judul Kreatifitas</label>
             <input
               type="text"
               v-model="model.kreatifitas.judul_kreatifitas"
@@ -183,7 +183,7 @@ export default {
       const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
       if (!validTypes.includes(imageFile.type)) {
         // Display an error message or alert
-        alert("Please select an image file.");
+        alert("Silakan unggah file gambar.");
         return;
       }
 

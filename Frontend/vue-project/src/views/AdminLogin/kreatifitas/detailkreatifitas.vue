@@ -38,43 +38,29 @@
 
         <div class="field2">
           <div class="form-group">
-            <label for="Umur">Sub Judul</label>
+            <label for="TotalPengunjung">Total Pengunjung</label>
             <input
-              type="text"
-              v-model="detail[0].sub_judul"
+              type="number"
+              v-model="detail[0].pengunjung"
               class="form-control"
-              id="Umur"
-              aria-label="umur"
-              disabled
-            />
-          </div>
-        </div>
-
-        <div class="field5">
-          <div class="form-group">
-            <label for="KK">ID Kategori</label>
-            <input
-              type="text"
-              v-model="detail[0].kategori_id"
-              class="form-control"
-              id="NIK"
-              aria-label="kategori"
+              id="TotalPengunjung"
+              aria-label="TotalPengunjung"
               disabled
             />
           </div>
         </div>
 
         <div class="field3">
-          <label for="NIK">Deskripsi</label>
+          <label for="Deskripsi">Deskripsi</label>
           <div class="form-control" v-html="detail[0].deskripsi" />
         </div>
 
         <div class="field4">
           <div class="form-group-foto">
-            <label for="KK">Foto Berita</label>
+            <label for="FotoKreatifitas">Foto Kreatifitas</label>
             <img
-              :src="`data:image/png;base64,${detail[0].foto_berita}`"
-              alt="foto berita"
+              :src="`data:image/png;base64,${detail[0].foto_kreatifitas}`"
+              alt="foto kreatifitas"
             />
           </div>
         </div>
@@ -96,7 +82,7 @@ export default {
   methods: {
     getDetail() {
       axios
-        .get(`http://localhost:8080/berita/${this.id}`)
+        .get(`http://localhost:8080/kreatifitas/detail/${this.id}`)
         .then((response) => {
           const data = response.data.data;
           this.detail = data;
