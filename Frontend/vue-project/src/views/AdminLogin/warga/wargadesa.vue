@@ -16,8 +16,8 @@
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-light btn-excel my-2">
-          Import Excel
+        <button type="button" class="btn btn-light btn-excel my-2" @click="exportToExcel">
+          Export Excel
         </button>
       </div>
     </div>
@@ -143,6 +143,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import * as XLSX from "xlsx";
 
 export default {
   data() {
@@ -173,6 +174,13 @@ export default {
     },
   },
   methods: {
+    exportToExcel() {
+      const ws = XLSX.utils.json_to_sheet(this.tableData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      XLSX.writeFile(wb, "warga_data.xlsx");
+    },
     fetchKategoriJK() {
       axios
         .get("http://localhost:8080/warga/jk")
