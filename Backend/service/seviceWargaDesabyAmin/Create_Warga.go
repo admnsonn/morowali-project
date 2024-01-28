@@ -33,7 +33,8 @@ func Create_warga(c *gin.Context) {
 		DesaID          string `json:"id_desa"`
 		Financial       string `json:"kategori_financial_id"`
 		KodePos         string `json:"kode_pos"`
-		Kewarganegaraan string `json:"kewarganegaraan"`
+		Kewarganegaraan string `json:"kewarganegaraan"
+		`
 	}
 
 	var input Request

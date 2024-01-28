@@ -113,6 +113,7 @@ func Routes(router *gin.Engine) {
 		warga.GET("/pendidikan", sevicewargadesabyamin.Kategori_pendidikan)
 		warga.GET("/agama", sevicewargadesabyamin.Kategori_agama)
 		warga.GET("/jk", sevicewargadesabyamin.JK_pengguna)
+		warga.GET("/pernikahan", sevicewargadesabyamin.Pernikahan)
 
 	}
 
