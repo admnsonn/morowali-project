@@ -177,4 +177,9 @@ h3{
 .td-foto {
   border-radius: 0.375rem;
 }
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+}
 </style>

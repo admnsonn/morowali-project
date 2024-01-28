@@ -183,9 +183,4 @@ h3 {
   padding-left: 5px;
   padding-right: 5px;
 }
-
-.form-group-foto {
-  display: flex;
-  flex-direction: column;
-}
 </style>

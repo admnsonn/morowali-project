@@ -22,10 +22,18 @@
         </div>
         <div class="isi-tambahdata">
             <div class="grid-container">
+
+                <div class="field0">
+                    <div class="form-group-foto">
+                        <label for="FotoPengguna">Foto Pengguna</label>
+                        <img :src="`data:image/png;base64,${detail[0].foto_pengguna}`" alt="foto pengguna" />
+                    </div>
+                </div>
+
                 <div class="field1">
                     <div class="form-group">
                         <label for="NamaLengkap">Nama Lengkap</label>
-                        <input type="text" v-model="detail[0].nama_lengkap " class="form-control" id="NamaLengkap"
+                        <input type="text" v-model="detail[0].nama_lengkap" class="form-control" id="NamaLengkap"
                             aria-label="nama" disabled />
                     </div>
                 </div>
@@ -39,9 +47,10 @@
                 </div>
 
                 <div class="field3">
-                    <div class="form-group">
+                    <div class="form-group-foto">
                         <label for="NIK">Nomer Induk Keluarga (NIK)</label>
-                        <input type="text" v-model="detail[0].nik" class="form-control" id="NIK" aria-label="nik" disabled />
+                        <input type="text" v-model="detail[0].nik" class="form-control" id="NIK" aria-label="nik"
+                            disabled />
                     </div>
                 </div>
 
@@ -79,8 +88,8 @@
                 <div class="field7">
                     <div class="form-group">
                         <label for="NamaAgama">Agama</label>
-                        <input type="text" v-model="detail[0].nama_agama" class="form-control" id="NamaAgama" aria-label="namaagama"
-                            disabled />
+                        <input type="text" v-model="detail[0].nama_agama" class="form-control" id="NamaAgama"
+                            aria-label="namaagama" disabled />
                     </div>
                 </div>
 
@@ -95,8 +104,8 @@
                 <div class="field9">
                     <div class="form-group">
                         <label for="Profesi">Profesi</label>
-                        <input type="text" v-model="detail[0].profesi" class="form-control" id="Profesi" aria-label="profesi"
-                            disabled />
+                        <input type="text" v-model="detail[0].profesi" class="form-control" id="Profesi"
+                            aria-label="profesi" disabled />
                     </div>
                 </div>
 
@@ -111,16 +120,8 @@
                 <div class="field11">
                     <div class="form-group">
                         <label for="TP">Tingkat Pendidikan</label>
-                        <input type="text" v-model="detail[0].tingkat_pendidikan" class="form-control" id="TP" aria-label="tp"
-                            disabled />
-                    </div>
-                </div>
-
-                <div class="field12">
-                    <div class="form-group">
-                        <label for="FotoPengguna">Foto Pengguna</label>
-                        <input type="text" v-model="detail[0].foto_pengguna" class="form-control" id="FotoPengguna"
-                            aria-label="fotopengguna" disabled />
+                        <input type="text" v-model="detail[0].tingkat_pendidikan" class="form-control" id="TP"
+                            aria-label="tp" disabled />
                     </div>
                 </div>
 
@@ -265,5 +266,6 @@ h3 {
     padding-bottom: 2%;
     padding-left: 5px;
     padding-right: 5px;
-}</style>
+}
+</style>
   
