@@ -53,6 +53,7 @@ const routes = [
   { path: '/warga-desa', component: () => import('../views/AdminLogin/warga/wargadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-warga', component: () => import('../views/AdminLogin/warga/tambahwarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-warga/:id', component: () => import('../views/AdminLogin/warga/detailwarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-warga/:id', component: () => import('../views/AdminLogin/warga/updatewarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/berita-desa', component: import('../views/AdminLogin/berita/beritadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-berita', component: import('../views/AdminLogin/berita/tambahberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-berita/:id', component: import('../views/AdminLogin/berita/updateberita.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

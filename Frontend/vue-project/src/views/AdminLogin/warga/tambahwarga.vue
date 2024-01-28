@@ -317,8 +317,6 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
-        const plainTextDescription = this.model.warga.alamat_pengguna;
-
         axios
           .post("http://localhost:8080/warga/tambah", {
             nama_lengkap: this.model.warga.nama_lengkap,
