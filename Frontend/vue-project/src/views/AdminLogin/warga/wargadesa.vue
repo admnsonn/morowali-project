@@ -154,6 +154,7 @@ export default {
       selectedKategorifn: 0,
       selectedKategoriag: 0,
       selectedKategoripn: 0,
+      selectedKategorist: 0,
       itemsPerPage: 7,
       sortDirection: "asc",
       filteredData: [],
