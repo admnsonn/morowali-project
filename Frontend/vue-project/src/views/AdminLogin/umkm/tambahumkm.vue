@@ -62,6 +62,30 @@
           </div>
         </div>
 
+        <div class="field10">
+          <div class="form-group">
+            <label for="formFile" class="form-label">Foto UMKM</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group-foto" v-if="this.model.umkm.foto_umkm">
+            <label for="foto">Preview foto</label>
+            <img
+              :src="`data:image/png;base64,${this.model.umkm.foto_umkm}`"
+              alt="foto berita"
+              height="300"
+              width="400"
+              class="td-foto"
+            />
+          </div>
+          <div v-else>Tidak ada gambar yang dipilih</div>
+        </div>
+
         <div class="field11">
           <div class="form-group">
             <label for="NomorTelpon">No. Telp. UMKM</label>
@@ -95,19 +119,6 @@
                 {{ item.umkm_kategori }}
               </option>
             </select>
-          </div>
-        </div>
-
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto UMKM</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-              accept="image/*"
-            />
           </div>
         </div>
 
@@ -336,5 +347,15 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>

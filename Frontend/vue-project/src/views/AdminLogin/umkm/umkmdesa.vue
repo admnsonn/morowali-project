@@ -43,19 +43,7 @@
           <table class="tabel">
             <thead>
               <tr>
-                <th>
-                  ID
-                  <button
-                    type="button"
-                    class="btn btn-link"
-                    @click="sortById()"
-                  >
-                    <img
-                      src="../../../../src/assets/img/sort.svg"
-                      class="custom-icon"
-                    />
-                  </button>
-                </th>
+                <th>No.</th>
 
                 <th>
                   Nama UMKM
@@ -94,7 +82,7 @@
             </thead>
             <tbody>
               <tr v-for="(item, index) in displayedData" :key="index">
-                <td>{{ item.id_umkm }}</td>
+                <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                 <td>{{ item.nama_umkm }}</td>
                 <td>{{ item.alamat }}</td>
                 <td>{{ item.no_telp_umkm }}</td>

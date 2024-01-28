@@ -64,6 +64,30 @@
 
         <div class="field10">
           <div class="form-group">
+            <label for="formFile" class="form-label">Foto Berita</label>
+            <input
+              class="form-control"
+              v-on:change="onFileChange"
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-group-foto" v-if="this.model.berita.foto_berita">
+            <label for="foto">Preview foto</label>
+            <img
+              :src="`data:image/png;base64,${this.model.berita.foto_berita}`"
+              alt="foto berita"
+              height="300"
+              width="400"
+              class="td-foto"
+            />
+          </div>
+          <div v-else>Tidak ada gambar yang dipilih</div>
+        </div>
+
+        <div class="field10">
+          <div class="form-group">
             <label for="formFile" class="form-label">Kategori</label>
             <br />
             <select
@@ -81,19 +105,6 @@
                 {{ item.berita_kategori }}
               </option>
             </select>
-          </div>
-        </div>
-
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
-            <input
-              class="form-control"
-              v-on:change="onFileChange"
-              type="file"
-              id="formFile"
-              accept="image/*"
-            />
           </div>
         </div>
 
@@ -162,7 +173,7 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
-        const plainTextDescription = this.model.berita.deskripsi.ops[0].insert;
+        const plainTextDescription = this.model.berita.deskripsi;
 
         axios
           .post("http://localhost:8080/berita/create", {
@@ -330,5 +341,15 @@ h3 {
   padding-bottom: 2%;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.form-group-foto {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.td-foto {
+  border-radius: 0.375rem;
 }
 </style>
