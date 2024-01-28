@@ -13,7 +13,7 @@ export default defineConfig({
       external: ['path/to/external/file.svg'],
     },
     outDir: 'dist',
-    assetsDir: '',
+    assetsDir: 'src/assets',
     sourcemap: false,
     minify: true,
   }
