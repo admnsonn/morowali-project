@@ -12,8 +12,8 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="title-warga">Tambah Data Berita</h3>
-        <p class="subtitle-warga">Management Content dan Layanan Berita</p>
+        <h3 class="title-warga">Tambah Data Kreatifitas</h3>
+        <p class="subtitle-warga">Management Content dan Layanan Kreatifitas</p>
       </div>
     </div>
 
@@ -27,25 +27,25 @@
             <label for="NamaLengkap">Judul</label>
             <input
               type="text"
-              v-model="model.berita.judul"
+              v-model="model.kreatifitas.judul_kreatifitas"
               class="form-control"
-              id="JudulBerita"
+              id="judul_kreatifitas"
               aria-label="nama"
-              placeholder="Judul berita"
+              placeholder="Judul Kreatifitas"
             />
           </div>
         </div>
 
         <div class="field2">
           <div class="form-group">
-            <label for="SubJudulBerita">Sub-Judul</label>
+            <label for="TotalPengunjung">Total Pengunjung</label>
             <input
               type="text"
-              v-model="model.berita.sub_judul"
+              v-model="model.kreatifitas.pengunjung"
               class="form-control"
-              id="SubJudulBerita"
-              aria-label="kelamin"
-              placeholder="Sub-Judul berita"
+              id="TotalPengunjung"
+              aria-label="pengunjung"
+              placeholder="Total pengunjung kreatifitas"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@
             <label for="NomorTelpon">Deskripsi</label>
             <QuillEditor
               toolbar="essential"
-              v-model:content="model.berita.deskripsi"
+              v-model:content="model.kreatifitas.deskripsi"
               theme="snow"
               content-type="html"
             />
@@ -64,7 +64,7 @@
 
         <div class="field10">
           <div class="form-group">
-            <label for="formFile" class="form-label">Foto Berita</label>
+            <label for="formFile" class="form-label">Foto Kreatifitas</label>
             <input
               class="form-control"
               v-on:change="onFileChange"
@@ -73,39 +73,20 @@
               accept="image/*"
             />
           </div>
-          <div class="form-group-foto" v-if="this.model.berita.foto_berita">
+          <div
+            class="form-group-foto"
+            v-if="this.model.kreatifitas.foto_kreatifitas"
+          >
             <label for="foto">Preview foto</label>
             <img
-              :src="`data:image/png;base64,${this.model.berita.foto_berita}`"
-              alt="foto berita"
+              :src="`data:image/png;base64,${this.model.kreatifitas.foto_kreatifitas}`"
+              alt="foto kreatifitas"
               height="300"
               width="400"
               class="td-foto"
             />
           </div>
           <div v-else>Tidak ada gambar yang dipilih</div>
-        </div>
-
-        <div class="field10">
-          <div class="form-group">
-            <label for="formFile" class="form-label">Kategori</label>
-            <br />
-            <select
-              ref="kategoriSelect"
-              v-model="model.berita.kategori_id"
-              class="form-control"
-              id="kategori_id"
-              aria-label="category"
-            >
-              <option value="" disabled selected>--Pilih Kategori--</option>
-              <option
-                v-for="item in kategoriList"
-                :value="item.id_kategori_berita"
-              >
-                {{ item.berita_kategori }}
-              </option>
-            </select>
-          </div>
         </div>
 
         <div class="field13">
@@ -134,17 +115,16 @@ export default {
   components: {
     QuillEditor,
   },
-  name: "beritaCreate",
+  name: "kreatifitasCreate",
   data() {
     return {
       model: {
-        berita: {
-          judul: "",
-          sub_judul: "",
+        kreatifitas: {
+          judul_kreatifitas: "",
+          pengunjung: 0,
           deskripsi: "",
-          foto_berita: "", // Store only the file name here
+          foto_kreatifitas: "",
           desa_id: "1",
-          kategori_id: "",
         },
       },
       tableData: [],
@@ -152,16 +132,6 @@ export default {
     };
   },
   methods: {
-    fetchKategori() {
-      axios
-        .get("http://localhost:8080/berita/categori")
-        .then(({ data }) => {
-          this.kategoriList = data.data;
-        })
-        .catch((error) => {
-          console.error("Error in Axios GET request:", error);
-        });
-    },
     async addNewData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
@@ -173,25 +143,22 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
-        const plainTextDescription = this.model.berita.deskripsi;
+        const plainTextDescription = this.model.kreatifitas.deskripsi;
 
         axios
-          .post("http://localhost:8080/berita/create", {
-            judul: this.model.berita.judul,
-            sub_judul: this.model.berita.sub_judul,
+          .post("http://localhost:8080/kreatifitas/tambah_kreatif", {
+            judul_kreatifitas: this.model.kreatifitas.judul_kreatifitas,
+            pengunjung: this.model.kreatifitas.pengunjung.toString(),
             deskripsi: plainTextDescription,
-            foto_berita: this.model.berita.foto_berita,
-            desa_id: this.model.berita.desa_id,
-            kategori_id: this.model.berita.kategori_id,
+            foto_kreatifitas: this.model.kreatifitas.foto_kreatifitas,
+            desa_id: this.model.kreatifitas.desa_id,
           })
           .then((res) => {
-            this.model.berita = {
-              judul: "",
-              sub_judul: "",
+            this.model.kreatifitas = {
+              judul_kreatifitas: "",
+              pengunjung: 0,
               deskripsi: "",
-              foto_berita: "", // Reset for next upload
-              desa_id: "1",
-              kategori_id: "",
+              foto_kreatifitas: "",
             };
             if (res.data.status) {
               Swal.fire(
@@ -245,8 +212,7 @@ export default {
 
             reader.onloadend = () => {
               const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
-              this.model.berita.foto_berita = base64String;
-              // Now you can send this.model.berita to your API
+              this.model.kreatifitas.foto_kreatifitas = base64String;
             };
           }, "image/jpeg"); // Adjust the image type as needed
         };
@@ -254,12 +220,6 @@ export default {
         img.src = imageUrl;
       };
     },
-  },
-  created() {
-    this.fetchKategori();
-  },
-  mounted() {
-    this.$refs.kategoriSelect.focus(); // Focus the element
   },
 };
 </script>
