@@ -70,7 +70,24 @@ const routes = [
   { path: '/detail-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/detailkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
-  { path: '/beranda-warga', component: () => import('../views/WargaLogin/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga }
+  { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skbi', component: () => import('../views/WargaLogin/skbi/skbi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skm-skck', component: () => import('../views/WargaLogin/skm-skck/skm-skck.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skp', component: () => import('../views/WargaLogin/skp/skp.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skpd', component: () => import('../views/WargaLogin/skpd/skpd.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skrn', component: () => import('../views/WargaLogin/skrn/skrn.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/sktu', component: () => import('../views/WargaLogin/sktu/sktu.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/sktm', component: () => import('../views/WargaLogin/sktm/sktm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/sku', component: () => import('../views/WargaLogin/sku/sku.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skbm', component: () => import('../views/WargaLogin/skbm/skbm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skbm', component: () => import('../views/WargaLogin/skbm/skbm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skd', component: () => import('../views/WargaLogin/skd/skd.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/sksm', component: () => import('../views/WargaLogin/sksm/sksm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skktm', component: () => import('../views/WargaLogin/skktm/skktm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skkm', component: () => import('../views/WargaLogin/skkm/skkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/skik', component: () => import('../views/WargaLogin/skik/skik.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+  { path: '/spipj', component: () => import('../views/WargaLogin/spipj/spipj.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
+
 ];
 
 const router = createRouter({
