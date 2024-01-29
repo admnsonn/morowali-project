@@ -259,7 +259,7 @@ export default {
     this.fetchKategori();
   },
   mounted() {
-    this.$refs.kategoriSelect.focus(); // Focus the element
+    this.$refs.kategoriSelect.focus();
   },
 };
 </script>

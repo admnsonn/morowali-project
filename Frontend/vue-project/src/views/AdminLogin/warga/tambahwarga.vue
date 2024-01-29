@@ -78,8 +78,8 @@
         <div class="field6">
           <div class="form-group">
             <label for="Alamat">Alamat</label>
-            <QuillEditor toolbar="essential" v-model:content="model.warga.alamat_pengguna" theme="snow"
-              content-type="html" />
+            <input type="text" v-model="model.warga.alamat" class="form-control" id="Alamat" aria-label="alamat"
+              placeholder="Alamat" />
           </div>
         </div>
 
@@ -185,7 +185,21 @@
           </div>
         </div>
 
-        <div class="field8">
+        <div class="field17">
+          <div class="form-group">
+            <label for="formFile" class="form-label">Status</label>
+            <br />
+            <select ref="selectST" v-model="model.warga.status_perkawinan_id" class="form-control"
+              id="status_perkawinan_id" aria-label="category">
+              <option value="" disabled selected>--Pilih Kategori--</option>
+              <option v-for="item in kategoriST" :value="item.id">
+                {{ item.pernikahan }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field18">
           <button type="button" class="btn btn-success btn-simpan p-2 my-2" @click="addNewData">
             <div class="nav-link router-link-underline teks-tambah">
               + Tambah Data
@@ -200,13 +214,13 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { QuillEditor } from "@vueup/vue-quill";
+// import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 export default {
-  components: {
-    QuillEditor
-  },
+  // components: {
+  //   QuillEditor
+  // },
   name: "wargaCreate",
   data() {
     return {
@@ -230,6 +244,7 @@ export default {
           kategori_financial_id: "",
           kode_pos: "",
           kewarganegaraan: "",
+          status_perkawinan_id: "",
         },
       },
       tableData: [],
@@ -237,6 +252,7 @@ export default {
       kategoriAG: [],
       kategoriFN: [],
       kategoriPN: [],
+      kategoriST: [],
     };
   },
   methods: {
@@ -280,6 +296,16 @@ export default {
           console.error("Error in Axios GET request:", error);
         });
     },
+    fetchKategoriST() {
+      axios
+        .get("http://localhost:8080/warga/pernikahan")
+        .then(({ data }) => {
+          this.kategoriST = data.data;
+        })
+        .catch((error) => {
+          console.error("Error in Axios GET request:", error);
+        });
+    },
     async addNewData() {
       const result = await Swal.fire({
         title: "Apakah anda yakin?",
@@ -291,8 +317,6 @@ export default {
         confirmButtonText: "Ya, tambahkan!",
       });
       if (result.isConfirmed) {
-        const plainTextDescription = this.model.warga.alamat_pengguna;
-
         axios
           .post("http://localhost:8080/warga/tambah", {
             nama_lengkap: this.model.warga.nama_lengkap,
@@ -313,6 +337,7 @@ export default {
             kategori_financial_id: this.model.warga.kategori_financial_id,
             kode_pos: this.model.warga.kode_pos,
             kewarganegaraan: this.model.warga.kewarganegaraan,
+            status_perkawinan_id: this.model.warga.status_perkawinan_id,
           })
           .then((res) => {
             this.model.warga = {
@@ -334,6 +359,7 @@ export default {
               kategori_financial_id: "",
               kode_pos: "",
               kewarganegaraan: "",
+              status_perkawinan_id: "",
             };
             if (res.data.status) {
               Swal.fire(
@@ -402,12 +428,14 @@ export default {
     this.fetchKategoriJK();
     this.fetchKategoriFN();
     this.fetchKategoriPN();
+    this.fetchKategoriST();
   },
   mounted() {
     this.$refs.selectAG.focus();
     this.$refs.selectFN.focus();
     this.$refs.selectPN.focus();
     this.$refs.selectJK.focus();
+    this.$refs.selectST.focus();
   },
 };
 </script>
