@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -200,27 +200,31 @@ export default {
       title: "",
       subtitle: "",
       isHovered: false,
-      currentHost: "" 
+      currentHost: "",
     };
   },
   methods: {
-    CekDesa(){
+    CekDesa() {
       this.currentHost = window.location.host;
       console.log("Ini adalah nilainya :", this.currentHost);
 
-      axios.post('http://localhost:8080/link_url', {
-        cari_link_url: this.currentHost
-      })
-      .then(response => {
-        if (response.data.status === true) {
-          const IDDESA = response.data.id_desa;
-          localStorage.setItem('id_desa', IDDESA);
-        }
-      })
-      .catch(error => {
-        console.error('Terjadi Kesalahan saat Cek Ketersediaan ID Desa:', error);
-        alert('Desa Tidak Ditemukan !');
-      });
+      axios
+        .post("http://localhost:8080/link_url", {
+          cari_link_url: this.currentHost,
+        })
+        .then((response) => {
+          if (response.data.status === true) {
+            const IDDESA = response.data.id_desa;
+            localStorage.setItem("id_desa", IDDESA);
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "Terjadi Kesalahan saat Cek Ketersediaan ID Desa:",
+            error
+          );
+          alert("Desa Tidak Ditemukan !");
+        });
     },
 
     fetchData() {
@@ -230,18 +234,42 @@ export default {
           title: "Kenali Lebih dalam Desa Kami!",
           subtitle: "Desa yang berada di Kab Morowali ",
           penjelasan: [
-            { judul: 'Desa Bahomoleo', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.' }
+            {
+              judul: "Desa Bahomoleo",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.",
+            },
           ],
           idm: [
-            { imageUrl: '../../src/assets/img/Idm.png', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.' }
+            {
+              imageUrl: "../../src/assets/img/Idm.png",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.",
+            },
           ],
           struktur: [
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+            {
+              imageUrl: "../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 1",
+              periode: "Tahun 20XX-20YY",
+            },
+            {
+              imageUrl: "../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 2",
+              periode: "Tahun 20YY-20ZZ",
+            },
+            {
+              imageUrl: "../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 2",
+              periode: "Tahun 20YY-20ZZ",
+            },
           ],
           berita: [
-            { judul: 'Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP', subtitle: 'Deskripsi tambahan untuk berita', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.', tanggal: '08-09-2019' }
+            {
+              judul:
+                "Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP",
+              subtitle: "Deskripsi tambahan untuk berita",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.",
+              tanggal: "08-09-2019",
+            },
           ],
           galeri: [
             {
@@ -256,7 +284,7 @@ export default {
               imageUrl: "../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
-          ]
+          ],
         },
       };
       this.imageUrl = apiResponse.data.imageUrl;
@@ -278,10 +306,8 @@ export default {
   mounted() {
     this.fetchData();
     this.CekDesa();
-  }
-
-
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -3,18 +3,24 @@
     <Navbar />
   </div>
 
-  <div class="main" :style="{
-    backgroundColor: '#EEF1F3',
-    marginLeft: posisi !== 0 ? '260px' : '0',
-    paddingBottom: posisi !== 0 ? '15%' : '15%',
-  }">
+  <div
+    class="main"
+    :style="{
+      backgroundColor: '#EEF1F3',
+      marginLeft: posisi !== 0 ? '268px' : '0',
+      paddingBottom: posisi !== 0 ? '15%' : '15%',
+    }"
+  >
     <RouterView />
   </div>
 
-  <div class="kaki" :style="{
-    backgroundColor: '#EEF1F3',
-    marginLeft: posisi !== 0 ? '260px' : '0',
-  }">
+  <div
+    class="kaki"
+    :style="{
+      backgroundColor: '#EEF1F3',
+      marginLeft: posisi !== 0 ? '260px' : '0',
+    }"
+  >
     <footerComponent />
   </div>
 </template>
@@ -85,7 +91,6 @@ export default {
 }
 
 .teks-kabupaten {
-
   font-size: 16px;
   margin: 0;
 }
@@ -98,7 +103,7 @@ export default {
 
 .kontainer-admin {
   border: 22%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   height: 131px;
   display: flex;
   align-items: center;
@@ -170,7 +175,7 @@ export default {
   overflow-x: scroll;
 }
 
-h3{
+h3 {
   font-weight: bold;
 }
 
