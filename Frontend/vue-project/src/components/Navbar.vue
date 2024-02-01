@@ -72,8 +72,114 @@
   </div>
 
   <div v-else-if="userRole === 'Warga'">
-    <nav class="sidebar-admin">
-      <h1>INI JADI SIDEBAR WARGA</h1>
+    <nav class="sidebar">
+      <br />
+      <router-link to="/beranda-warga">
+        <ul class="sidebar-top sidebar-bg">
+          <li class="sidebar-toggle navbar-brand d-flex align-items-center">
+            <img
+              src="../assets/../assets/img/Logo.png"
+              alt="Logo Desa"
+              height="50"
+              class="me-3"
+            />
+            <div>
+              <span class="font-weight-bold nama-desa">Desa Bahomoleo</span>
+              <span class="sub-text">Kab. Morowali</span>
+            </div>
+          </li>
+        </ul>
+      </router-link>
+
+      <div class="sidebar-content">
+        <ul class="sidebar-list">
+          <li class="sidebar-link">
+            <router-link to="/skbi" class="menu-item-warga"
+              >Surat Keterangan Beda Identitas</router-link
+            >
+            <hr class="tambah-border" />
+            <router-link to="/skm-skck" class="menu-item-warga">
+              Surat Keterangan Mendapatkan SKCK</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skp" class="menu-item-warga"
+              >Surat Keterangan Pemakaman</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skpd" class="menu-item-warga"
+              >Surat Keterangan Pindah Domisili</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skrn" class="menu-item-warga"
+              >Surat Keterangan Rekomendasi Nikah</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/sktu" class="menu-item-warga"
+              >Surat Keterangan Tempat Usaha</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/sktm" class="menu-item-warga"
+              >Surat Keterangan Tidak Mampu</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/sku" class="menu-item-warga"
+              >Surat Keterangan Usaha</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skbm" class="menu-item-warga"
+              >Surat Keterangan Belum Menikah</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skd" class="menu-item-warga"
+              >Surat Keterangan Domisili</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/sksm" class="menu-item-warga"
+              >Surat Keterangan Sudah Menikah</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skktm" class="menu-item-warga"
+              >Surat Keterangan Keluarga Tidak Mampu</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skkm" class="menu-item-warga"
+              >Surat Keterangan Keterlambatan Menikah</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/skik" class="menu-item-warga"
+              >Surat Keterangan Izin Keramaian</router-link
+            >
+            <hr class="tambah-border" />
+
+            <router-link to="/spipj" class="menu-item-warga"
+              >Surat Pengantar Izin Penutupan Jalan</router-link
+            >
+          </li>
+        </ul>
+
+        <div class="sidebar-bottom">
+          <button
+            @click="clearLocalStorage"
+            class="btn panjang-tombol-login1 btn-light text-tombol text-start"
+          >
+            <span class="tulisan"
+              ><v-icon name="ai-academiaSquare" />Logout</span
+            >
+          </button>
+        </div>
+      </div>
     </nav>
   </div>
 
@@ -251,6 +357,7 @@ export default {
   background-color: #003366;
   margin-left: -1%;
   padding: 0px 30px;
+  overflow: auto;
 }
 
 .sidebar-top {
@@ -371,5 +478,43 @@ ul {
 
 .panjang-tombol-login1 {
   width: 250px;
+}
+
+.menu-item-warga a {
+  color: white;
+  text-decoration: none;
+}
+.menu-item-warga {
+  color: white;
+  padding: 10px 15px;
+  position: relative;
+  text-align: left;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.menu-item-warga.active,
+.menu-item-warga:hover {
+  background-color: white;
+  border-bottom-color: #003366;
+  border-radius: 20px;
+  color: #003366;
+}
+
+.menu-item-warga.active a,
+.menu-item-warga:hover a {
+  color: #003366;
+}
+
+.tambah-border {
+  border-color: #ffffff;
+  opacity: 1;
+  border-width: 1px;
+}
+
+hr {
+  margin-top: 0.8rem;
 }
 </style>

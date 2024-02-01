@@ -207,7 +207,7 @@ export default {
       const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
       if (!validTypes.includes(imageFile.type)) {
         // Display an error message or alert
-        alert("Please select an image file.");
+        alert("Silakan unggah file gambar.");
         return;
       }
 

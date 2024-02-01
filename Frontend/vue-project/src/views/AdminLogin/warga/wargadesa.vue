@@ -113,7 +113,7 @@
                       <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
                     </button>
                   </router-link>
-                  <router-link to="/edit-detail">
+                  <router-link :to="`/update-warga/${item.id_pengguna}`">
                     <button class="btn btn-warning m-1">
                       <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                     </button>
@@ -154,6 +154,7 @@ export default {
       selectedKategorifn: 0,
       selectedKategoriag: 0,
       selectedKategoripn: 0,
+      selectedKategorist: 0,
       itemsPerPage: 7,
       sortDirection: "asc",
       filteredData: [],
