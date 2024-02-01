@@ -19,6 +19,7 @@ func Kategori_agama(c *gin.Context) {
 	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		panic(err.Error())
+
 	}
 	defer tx.Rollback(context.Background())
 

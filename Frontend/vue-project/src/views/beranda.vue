@@ -215,6 +215,8 @@ export default {
         if (response.data.status === true) {
           const IDDESA = response.data.id_desa;
           localStorage.setItem('id_desa', IDDESA);
+          // const iddesaa = localStorage.getItem('id_desa')
+          // console.log("INI ID DESA: ",iddesaa)
         }
       })
       .catch(error => {
