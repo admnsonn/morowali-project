@@ -84,6 +84,8 @@ func Routes(router *gin.Engine) {
 		Pemerintah.PUT("/sejarah/setting", servicepemerintahgo.Setting_sejarah)
 		Pemerintah.GET("/proker/:id", servicepemerintahgo.Proker)
 		Pemerintah.PUT("/proker/setting", servicepemerintahgo.Setting_Proker)
+		Pemerintah.GET("/peraturan/:id", servicepemerintahgo.Peraturan)
+		Pemerintah.PUT("/peraturan/setting", servicepemerintahgo.Setting_Peraturan)
 
 		Pemerintah.GET("/kepdes/:id", servicepemerintahgo.Kepaladesa)
 	}
