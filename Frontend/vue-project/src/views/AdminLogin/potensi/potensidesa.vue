@@ -75,14 +75,7 @@
             <thead>
               <tr>
                 <th>
-                  ID
-                  <button
-                    type="button"
-                    class="btn btn-link m-1"
-                    @click="sortById()"
-                  >
-                    <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
-                  </button>
+                  No.
                 </th>
 
                 <th>
@@ -228,27 +221,13 @@ export default {
         console.error("Error in Axios DELETE request:", error);
       }
     },
-    sortById() {
-      this.filteredData.sort((a, b) => a.id_umkm - b.id_umkm); // Sort by ID ascending
-      // If you want to toggle ascending/descending order:
-      this.filteredData.sort((a, b) =>
-        this.sortDirection === "asc"
-          ? a.id_umkm - b.id_umkm
-          : b.id_umkm - a.id_umkm
-      );
-
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
-      this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
-    },
-
     sortByNama() {
-      this.filteredData.sort((a, b) => a.nama_umkm.localeCompare(b.nama_umkm)); // Sort by nama alphabetically
+      this.filteredData.sort((a, b) => a.judul_potensi.localeCompare(b.judul_potensi)); // Sort by nama alphabetically
       // Toggle ascending/descending (optional):
       this.filteredData.sort((a, b) =>
         this.sortDirection === "asc"
-          ? a.nama_umkm.localeCompare(b.nama_umkm)
-          : b.nama_umkm.localeCompare(a.nama_umkm)
+          ? a.judul_potensi.localeCompare(b.judul_potensi)
+          : b.judul_potensi.localeCompare(a.judul_potensi)
       );
 
       this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction

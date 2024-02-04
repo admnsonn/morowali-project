@@ -38,10 +38,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    ID
-                                    <button type="button" class="btn btn-link" @click="sortById()">
-                                        <img src="../../../../src/assets/img/sort.svg" />
-                                    </button>
+                                    No.
                                 </th>
                                 <th>
                                     Nama Wisata
@@ -57,7 +54,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in displayedData" :key="index">
-                                <td>{{ item.id_wisata }}</td>
+                                <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                                 <td>{{ item.nama_wisata }}</td>
                                 <td>{{ item.alamat }}</td>
                                 <td>
@@ -156,19 +153,6 @@ export default {
             } catch (error) {
                 console.error("Error in Axios DELETE request:", error);
             }
-        },
-        sortById() {
-            this.filteredData.sort((a, b) => a.id_wisata - b.id_wisata); // Sort by ID ascending
-            // If you want to toggle ascending/descending order:
-            this.filteredData.sort((a, b) =>
-                this.sortDirection === "asc"
-                    ? a.id_wisata - b.id_wisata
-                    : b.id_wisata - a.id_wisata
-            );
-
-            this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc"; // Toggle direction
-
-            this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
         },
         sortByWisata() {
             this.filteredData.sort((a, b) => a.nama_wisata.localeCompare(b.nama_wisata)); // Sort by judul alphabetically

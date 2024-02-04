@@ -53,7 +53,7 @@
               </div>
             </div>
 
-            <router-link to="/warga-desa" class="menu-item">Wilayah Desa</router-link>
+            <router-link to="/wilayah-desa" class="menu-item">Wilayah Desa</router-link>
 
             <router-link to="/warga-desa" class="menu-item">Layanan Desa</router-link>
           </li>

@@ -48,6 +48,7 @@ const routes = [
   { path: '/lembaga', component: () => import('../views/lembaga.vue') },
   { path: '/data-pendidikan', component: () => import('../views/datapendidikan.vue') },
   { path: '/contentberita', component: () => import('../views/contentberita.vue') },
+
   // Buat Admin
   { path: '/beranda-admin', component: () => import('../views/AdminLogin/beranda/berandaadmin.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/warga-desa', component: () => import('../views/AdminLogin/warga/wargadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
@@ -68,6 +69,7 @@ const routes = [
   { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/detailkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/wilayah-desa', component: import('../views/AdminLogin/wilayah/wilayahdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
