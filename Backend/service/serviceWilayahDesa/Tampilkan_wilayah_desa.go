@@ -54,6 +54,10 @@ func Wilayah_desa(c *gin.Context) {
 
 	if len(Tampung) != 0 {
 
+		if Tampung[0].Status_wilayah == "" {
+			Tampung[0].Status_wilayah = "Tambah"
+		}
+
 		c.JSON(http.StatusOK, gin.H{
 			"status":  true,
 			"message": "Data ditemukan",

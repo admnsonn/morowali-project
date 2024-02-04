@@ -1,17 +1,16 @@
 package route
 
 import (
+	servicepemerintahgo "main/service/ServicePemerintah.go"
+	serviceproduksi "main/service/ServiceProduksi"
 	serviceberita "main/service/serviceBerita"
 	serviceidm "main/service/serviceIDM"
 	servicekreativitas "main/service/serviceKreativitas"
-	servicemisidesa "main/service/serviceMisiDesa"
 	serviceperaturandesa "main/service/servicePeraturanDesa"
 	servicepotensidesa "main/service/servicePotensiDesa"
-	servicesambutandesa "main/service/serviceSambutanDesa"
 	servicesejarahdesa "main/service/serviceSejarahDesa"
 	serviceumkm "main/service/serviceUMKM"
 	serviceumum "main/service/serviceUmum"
-	servicevisi "main/service/serviceVisi"
 	servicewilayahdesa "main/service/serviceWilayahDesa"
 	servicewisata "main/service/serviceWisata"
 	"main/service/servicelogin"
@@ -75,14 +74,18 @@ func Routes(router *gin.Engine) {
 		Kreatifitas.DELETE("/delete/:id", servicekreativitas.Delete)
 	}
 
-	Visi := router.Group("/visi")
+	Pemerintah := router.Group("/pemerintah")
 	{
-		Visi.GET("/", servicevisi.Visi_desa)
-	}
+		Pemerintah.GET("/visi-misi/:id", servicepemerintahgo.Visi_Misi)
+		Pemerintah.PUT("/visi-misi/setting", servicepemerintahgo.Setting_visimisi)
+		Pemerintah.GET("/sambutan/:id", servicepemerintahgo.Sambutan)
+		Pemerintah.PUT("/sambutan/setting", servicepemerintahgo.Setting_sambutan)
+		Pemerintah.GET("/sejarah/:id", servicepemerintahgo.Sejarah)
+		Pemerintah.PUT("/sejarah/setting", servicepemerintahgo.Setting_sejarah)
+		Pemerintah.GET("/proker/:id", servicepemerintahgo.Proker)
+		Pemerintah.PUT("/proker/setting", servicepemerintahgo.Setting_Proker)
 
-	Misi := router.Group("/misi")
-	{
-		Misi.GET("/", servicemisidesa.Misi_desa)
+		Pemerintah.GET("/kepdes/:id", servicepemerintahgo.Kepaladesa)
 	}
 
 	Peraturan := router.Group("/peraturan")
@@ -90,28 +93,23 @@ func Routes(router *gin.Engine) {
 		Peraturan.GET("/", serviceperaturandesa.Peraturan_desa)
 	}
 
-	Sambutan := router.Group("/sambutan")
-	{
-		Sambutan.GET("/", servicesambutandesa.Sambutan_desa)
-	}
-
 	Wilayah_desa := router.Group("/wilayah_desa")
 	{
-		Wilayah_desa.GET("/produksi", servicewilayahdesa.Wilayah_produksi)
-		// Wilayah_desa.GET("/warga", servicewilayahdesa.Total_warga)
 		Wilayah_desa.GET("/desa/:id", servicewilayahdesa.Wilayah_desa)
 		Wilayah_desa.POST("/setting", servicewilayahdesa.Setting)
+	}
 
+	Produksi_desa := router.Group("/produksi")
+	{
+		Produksi_desa.GET("/list/:id", serviceproduksi.Wilayah_produksi)
 	}
 
 	warga := router.Group("/warga")
 	{
-		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
 		warga.POST("/list", sevicewargadesabyamin.Warga_desa_by_admin)
 		warga.DELETE("/delete/:id", sevicewargadesabyamin.Delete_warga_desa)
 		warga.GET("/detail/:id", sevicewargadesabyamin.Get_detail_warga_by_admin)
 		warga.POST("/tambah", sevicewargadesabyamin.Create_warga)
-		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
 		warga.PUT("/update", sevicewargadesabyamin.Update_data_warga)
 		warga.GET("/financial", sevicewargadesabyamin.Kategori_financial)
 		warga.GET("/pendidikan", sevicewargadesabyamin.Kategori_pendidikan)
@@ -121,14 +119,10 @@ func Routes(router *gin.Engine) {
 
 	}
 
-	//sejarahdesa/kepaladesa
-
 	sejarahdesa := router.Group("/sejarahdesa")
 	{
-		// warga.GET("/perkebunan", sevicewargadesabyamin.Wilayah_Perkebunan)
 		sejarahdesa.GET("/kepaladesa/:id", servicesejarahdesa.Kepaladesa)
 		sejarahdesa.GET("/sejarahdesa/:id", servicesejarahdesa.Sejarahdesa)
-		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
 	}
 
 	idmiksike := router.Group("/idmiksike")
@@ -138,5 +132,3 @@ func Routes(router *gin.Engine) {
 	}
 
 }
-
-// ROUTE GOLANG

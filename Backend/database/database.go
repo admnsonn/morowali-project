@@ -2,6 +2,8 @@ package database
 
 import (
 	"log"
+	servicepemerintahgo "main/service/ServicePemerintah.go"
+	serviceproduksi "main/service/ServiceProduksi"
 	serviceberita "main/service/serviceBerita"
 	servicekreativitas "main/service/serviceKreativitas"
 	servicemisidesa "main/service/serviceMisiDesa"
@@ -57,6 +59,8 @@ func NewConnect() *pgxpool.Pool {
 	serviceumum.InitiateDB(db)
 	sevicewargadesabyamin.InitiateDB(db)
 	servicesejarahdesa.InitiateDB(db)
+	serviceproduksi.InitiateDB(db)
+	servicepemerintahgo.InitiateDB(db)
 
 	return db
 }
