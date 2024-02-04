@@ -42,6 +42,17 @@
 
             <router-link to="/kreatifitas-desa" class="menu-item">Kreatifitas Desa</router-link>
 
+            <div class="menu-item1 dropdown">
+              <button @click="togglePemerintahanDropdown" class="btn dropdown-toggle" type="button"
+                id="dropdownPemerintahan" :aria-expanded="isPemerintahanDropdownOpen ? 'true' : 'false'">
+                Informasi
+              </button>
+              <div v-if="isPemerintahanDropdownOpen" class="dropdown-menu" aria-labelledby="dropdownPemerintahan">
+                <router-link to="/pemerintahan/halaman1" class="dropdown-item">Pembangunan</router-link>
+                <router-link to="/wisata-desa" class="dropdown-item">Produk Hukum</router-link>
+              </div>
+            </div>
+
             <router-link to="/warga-desa" class="menu-item">Wilayah Desa</router-link>
 
             <router-link to="/warga-desa" class="menu-item">Layanan Desa</router-link>
@@ -508,5 +519,9 @@ hr {
 
 .dropdown-toggle{
   color: white;
+}
+
+.tulisan{
+  font-size: 14px;
 }
 </style>
