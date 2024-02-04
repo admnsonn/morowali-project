@@ -78,6 +78,7 @@ const routes = [
   { path: '/pemerintahan/program-kerja', component: import('../views/AdminLogin/pemerintah/proker.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/peraturan', component: import('../views/AdminLogin/pemerintah/peraturan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/struktur-organisasi', component: import('../views/AdminLogin/pemerintah/struktur.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/pegawai', component: import('../views/AdminLogin/pemerintah/pegawai.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
