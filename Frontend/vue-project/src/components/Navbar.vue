@@ -34,6 +34,7 @@
                 <router-link to="/pemerintahan/sejarah-desa" class="dropdown-item">Sejarah Desa</router-link>
                 <router-link to="/pemerintahan/visi-misi" class="dropdown-item">Visi Misi</router-link>
                 <router-link to="/pemerintahan/program-kerja" class="dropdown-item">Program Kerja</router-link>
+                <router-link to="/pemerintahan/peraturan" class="dropdown-item">Peraturan</router-link>
                 <router-link to="/pemerintahan/pegawai" class="dropdown-item">Pegawai</router-link>
                 <router-link to="/pemerintahan/struktur-organisasi" class="dropdown-item">Struktur Organisasi</router-link>
               </div>

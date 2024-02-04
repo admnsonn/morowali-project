@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Data Program Kerja</h3>
+                <h3 class="title-warga">Data Struktur Organisasi</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Kreatifitas</p>
             </div>
         </div>
@@ -33,16 +33,19 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Proker</th>
+                                <th>Struktur</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in displayedData" :key="index">
                                 <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
-                                <td>{{ item.proker }}</td>
                                 <td>
-                                    <router-link :to="`/update-kreatifitas/${item.id_kepala_desa}`">
+                                    <img class="td-foto" :src="getImageSource(item.struktur_organisasi)" alt="foto struktur"
+                                        height="75" width="100" />
+                                </td>
+                                <td>
+                                    <router-link :to="`/update-kreatifitas/${item.id_kreatifitas}`">
                                         <button type="button" class="btn btn-warning m-1">
                                             <!-- edit button -->
                                             <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
@@ -95,7 +98,7 @@ export default {
     methods: {
         fetchData() {
             axios
-                .get("http://localhost:8080/pemerintah/proker/1")
+                .get("http://localhost:8080/pemerintah/organigram/1")
                 .then(({ data }) => {
                     this.tableData = data.data;
                     this.filteredData = this.tableData; // Initialize filteredData
@@ -104,19 +107,20 @@ export default {
                     console.error("Error in Axios POST request:", error);
                 });
         },
+        filterData() {
+            this.filteredData = this.tableData.filter((item) => {
+                return (
+                    item.visi_desa.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+                    item.misi_desa.toLowerCase().includes(this.searchKeyword.toLowerCase())
+                );
+            });
+            this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
+        },
         nextPage() {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
                 // Fetch data for the next page if needed
             }
-        },
-        filterData() {
-            this.filteredData = this.tableData.filter((item) => {
-                return (
-                    item.proker.toLowerCase().includes(this.searchKeyword.toLowerCase())
-                );
-            });
-            this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
         },
         prevPage() {
             if (this.currentPage > 1) {
@@ -127,6 +131,7 @@ export default {
             return `data:image/png;base64,${base64String}`;
         },
     },
+
     created() {
         this.fetchData(); // Get original data
     },
