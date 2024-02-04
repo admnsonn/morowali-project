@@ -2,6 +2,7 @@ package route
 
 import (
 	serviceberita "main/service/serviceBerita"
+	serviceidm "main/service/serviceIDM"
 	servicekreativitas "main/service/serviceKreativitas"
 	servicemisidesa "main/service/serviceMisiDesa"
 	serviceperaturandesa "main/service/servicePeraturanDesa"
@@ -94,11 +95,13 @@ func Routes(router *gin.Engine) {
 		Sambutan.GET("/", servicesambutandesa.Sambutan_desa)
 	}
 
-	Wilayah_desa := router.Group("/Wilayah_desa")
+	Wilayah_desa := router.Group("/wilayah_desa")
 	{
-		Wilayah_desa.GET("/perkebunan", servicewilayahdesa.Wilayah_Perkebunan)
-		Wilayah_desa.GET("/warga", servicewilayahdesa.Total_warga)
-		Wilayah_desa.GET("/desa", servicewilayahdesa.Luas_desa)
+		Wilayah_desa.GET("/produksi", servicewilayahdesa.Wilayah_produksi)
+		// Wilayah_desa.GET("/warga", servicewilayahdesa.Total_warga)
+		Wilayah_desa.GET("/desa/:id", servicewilayahdesa.Wilayah_desa)
+		Wilayah_desa.POST("/setting", servicewilayahdesa.Setting)
+
 	}
 
 	warga := router.Group("/warga")
@@ -126,6 +129,12 @@ func Routes(router *gin.Engine) {
 		sejarahdesa.GET("/kepaladesa/:id", servicesejarahdesa.Kepaladesa)
 		sejarahdesa.GET("/sejarahdesa/:id", servicesejarahdesa.Sejarahdesa)
 		// warga.GET("/desa", sevicewargadesabyamin.Luas_desa)
+	}
+
+	idmiksike := router.Group("/idmiksike")
+	{
+		idmiksike.POST("/input", serviceidm.Input)
+		idmiksike.GET("/sejarahdesa/:id", servicesejarahdesa.Sejarahdesa)
 	}
 
 }
