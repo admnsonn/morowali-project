@@ -72,6 +72,8 @@ const routes = [
   { path: '/wilayah-desa', component: import('../views/AdminLogin/wilayah/wilayahdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // Dropdown Pemerintahan
   { path: '/pemerintahan/visi-misi', component: import('../views/AdminLogin/pemerintah/visimisi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/kepala-desa', component: import('../views/AdminLogin/pemerintah/kepdes.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/sambutan-kades', component: import('../views/AdminLogin/pemerintah/sambutan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
