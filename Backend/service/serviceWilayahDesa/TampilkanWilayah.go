@@ -11,7 +11,7 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-func Wilayah_Perkebunan(c *gin.Context) {
+func Wilayah_produksi(c *gin.Context) {
 	type Wilayah_Perkebunan_container struct {
 		LuasWilayah  string `json:"luas_wilayah"`
 		NamaProduksi string `json:"nama_produksi"`
@@ -27,7 +27,7 @@ func Wilayah_Perkebunan(c *gin.Context) {
 		select a.luas_wilayah, a.nama_produksi 
 		from dev.produksi_desa a, dev.desa d 
 		where a.desa_id = d.id_desa 
-		and d.id_desa = 1
+		and d.id_desa = $1
 	`
 
 	row, err := tx.Query(ctx, query)
