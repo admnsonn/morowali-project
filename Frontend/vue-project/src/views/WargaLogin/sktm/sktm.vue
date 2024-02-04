@@ -1,6 +1,48 @@
 <template>
   <div class="wrapper-h1">
     <h1>SKTM</h1>
+    <table class="tabel">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Kolom</th>
+          <th>Kolom</th>
+          <th>Kolom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>asdasdads</td>
+          <td>asdasd</td>
+          <td>asdasd</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>asdasdads</td>
+          <td>asdasd</td>
+          <td>asdasd</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>asdasdads</td>
+          <td>asdasd</td>
+          <td>asdasd</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>asdasdads</td>
+          <td>asdasd</td>
+          <td>asdasd</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>asdasdads</td>
+          <td>asdasd</td>
+          <td>asdasd</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

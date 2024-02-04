@@ -95,23 +95,28 @@
                     <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
-                <th>Deskripsi</th>
                 <th>Sub Judul</th>
+                <th>Deskripsi</th>
                 <th>Foto Potensi</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, index) in displayedData" :key="index">
-                <td>AWAITING API</td>
-                <td>AWAITING API</td>
-                <td>AWAITING API</td>
-                <td>AWAITING API</td>
-                <td>AWAITING API</td>
+                <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
+                <td>{{ item.judul_potensi }}</td>
+                <td>{{ item.sub_judul }}</td>
+                <td>{{ item.deskripsi }}</td>
                 <td>
-                  <!-- <button type="button" class="btn btn-primary m-1">
-                    <img src="../../../../src/assets/img/view.svg" />
-                  </button> -->
+                  <img
+                    class="td-foto"
+                    :src="`data:image/png;base64,${item.foto_potensi_desa}`"
+                    alt="foto_potensi"
+                    height="75"
+                    width="100"
+                  />
+                </td>
+                <td>
                   <button type="button" class="btn btn-primary button-detail">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +164,6 @@ export default {
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
-      selectedKategori: "",
       sortDirection: "asc",
       filteredData: [],
     };
@@ -177,14 +181,11 @@ export default {
   },
   methods: {
     fetchData() {
-      const payload = { id_desa: localStorage.getItem("desa_id") };
-
       axios
-        .post("http://localhost:8080/berita/list", payload)
+        .get("http://localhost:8080/potensi_desa/list/1")
         .then(({ data }) => {
           this.tableData = data.data;
           this.filteredData = this.tableData; // Initialize filteredData
-          this.filterByKategori(); // Apply initial filter
         })
         .catch((error) => {
           console.error("Error in Axios POST request:", error);
