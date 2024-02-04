@@ -29,12 +29,13 @@
                 Pemerintahan
               </button>
               <div v-if="isPemerintahanDropdownOpen" class="dropdown-menu" aria-labelledby="dropdownPemerintahan">
-                <router-link to="/pemerintahan/halaman1" class="dropdown-item">Sambutan Kepala Desa</router-link>
-                <router-link to="/wisata-desa" class="dropdown-item">Sejarah Desa</router-link>
-                <router-link to="/pemerintahan/halaman2" class="dropdown-item">Visi Misi</router-link>
-                <router-link to="/pemerintahan/halaman2" class="dropdown-item">Program Kerja</router-link>
-                <router-link to="/pemerintahan/halaman2" class="dropdown-item">Pegawai</router-link>
-                <router-link to="/pemerintahan/halaman2" class="dropdown-item">Struktur Organisasi</router-link>
+                <router-link to="/pemerintahan/kepala-desa" class="dropdown-item">Kepala Desa</router-link>
+                <router-link to="/pemerintahan/sambutan-kades" class="dropdown-item">Sambutan Kepala Desa</router-link>
+                <router-link to="/pemerintahan/sejarah-desa" class="dropdown-item">Sejarah Desa</router-link>
+                <router-link to="/pemerintahan/visi-misi" class="dropdown-item">Visi Misi</router-link>
+                <router-link to="/pemerintahan/program-kerja" class="dropdown-item">Program Kerja</router-link>
+                <router-link to="/pemerintahan/pegawai" class="dropdown-item">Pegawai</router-link>
+                <router-link to="/pemerintahan/struktur-organisasi" class="dropdown-item">Struktur Organisasi</router-link>
               </div>
             </div>
 
@@ -196,7 +197,7 @@ export default {
   data() {
     return {
       userRole: 'Admin',
-      isPemerintahanDropdownOpen: false,
+      isPemerintahanDropdownOpen: true,
       profil: [
         {
           title: "Sejarah Desa",

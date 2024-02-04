@@ -25,9 +25,7 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <button type="button" class="btn btn-search w-100 my-2">
-            <img src="../../../../src/assets/img/search.svg" class="me-2" /> Search...
-          </button>
+          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
@@ -94,7 +92,7 @@
             <tbody>
               <tr v-for="(item, index) in displayedData" :key="index">
                 <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
-                <td>{{ item.nik }}</td>
+                <td>{{ item.niK }}</td>
                 <td>{{ item.alamat_pengguna }}</td>
                 <td>{{ item.nama_lengkap }}</td>
                 <td>{{ item.no_telp }}</td>
@@ -145,6 +143,7 @@ import * as XLSX from "xlsx";
 export default {
   data() {
     return {
+      searchKeyword: "",
       tableData: [],
       currentPage: 1,
       selectedKategorijk: 0,
@@ -279,6 +278,24 @@ export default {
       } catch (error) {
         console.error("Error in Axios DELETE request:", error);
       }
+    },
+    filterData() {
+      this.filteredData = this.tableData.filter((item) => {
+        return (
+          item.niK.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.kk.toString().includes(this.searchKeyword) ||
+          item.jenis_kelamin.toString().includes(this.searchKeyword) ||
+          item.alamat_pengguna.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_lengkap.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.umur.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.no_telp.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.kategori_financial.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_agama.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_pendidikan.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.status_pernikahan.toLowerCase().includes(this.searchKeyword.toLowerCase())
+        );
+      });
+      this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
     },
     sortByNIK() {
       this.filteredData.sort((a, b) => a.nik.localeCompare(b.nik)); // Sort by judul alphabetically
