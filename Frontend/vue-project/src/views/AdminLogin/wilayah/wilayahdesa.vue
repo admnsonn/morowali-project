@@ -21,7 +21,7 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control" placeholder="Search...">
+          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
         </div>
       </div>
 

@@ -21,10 +21,7 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <button type="button" class="btn btn-search w-100 my-2">
-            <img src="../../../../src/assets/img/search.svg" class="me-2" />
-            Search...
-          </button>
+          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
@@ -134,6 +131,7 @@ import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      searchKeyword: "",
       tableData: [],
       currentPage: 1,
       itemsPerPage: 7, // Sesuaikan item table perhalaman
@@ -199,7 +197,16 @@ export default {
         console.error("Error in Axios DELETE request:", error);
       }
     },
-
+    filterData() {
+      this.filteredData = this.tableData.filter((item) => {
+        return (
+          item.judul_kreatifitas.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.deskripsi.toString().includes(this.searchKeyword) ||
+          item.total_pengunjung.toString().includes(this.searchKeyword)
+        );
+      });
+      this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
+    },
     sortByJudul() {
       this.filteredData.sort((a, b) =>
         a.judul_kreatifitas.localeCompare(b.judul_kreatifitas)
