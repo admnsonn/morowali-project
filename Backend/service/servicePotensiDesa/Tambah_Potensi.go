@@ -12,7 +12,6 @@ import (
 
 func Tambah_potensi(c *gin.Context) {
 	type PotensiDesa struct {
-		ID        int    `json:"id_potensi"`
 		Judul     string `json:"judul_potensi"`
 		Deskripsi string `json:"deskripsi"`
 		Foto      string `json:"foto_potensi_desa"`

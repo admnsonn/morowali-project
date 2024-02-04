@@ -6,14 +6,11 @@ import (
 	serviceproduksi "main/service/ServiceProduksi"
 	serviceberita "main/service/serviceBerita"
 	servicekreativitas "main/service/serviceKreativitas"
-	servicemisidesa "main/service/serviceMisiDesa"
+	servicepegawai "main/service/servicePegawai"
 	serviceperaturandesa "main/service/servicePeraturanDesa"
 	servicepotensidesa "main/service/servicePotensiDesa"
-	servicesambutandesa "main/service/serviceSambutanDesa"
-	servicesejarahdesa "main/service/serviceSejarahDesa"
 	serviceumkm "main/service/serviceUMKM"
 	serviceumum "main/service/serviceUmum"
-	servicevisi "main/service/serviceVisi"
 	servicewilayahdesa "main/service/serviceWilayahDesa"
 	servicewisata "main/service/serviceWisata"
 	"main/service/servicelogin"
@@ -52,15 +49,12 @@ func NewConnect() *pgxpool.Pool {
 	servicekreativitas.InitiateDB(db)
 	servicewilayahdesa.InitiateDB(db)
 	servicelogin.InitiateDB(db)
-	servicevisi.InitiateDB(db)
-	servicemisidesa.InitiateDB(db)
 	serviceperaturandesa.InitiateDB(db)
-	servicesambutandesa.InitiateDB(db)
 	serviceumum.InitiateDB(db)
 	sevicewargadesabyamin.InitiateDB(db)
-	servicesejarahdesa.InitiateDB(db)
 	serviceproduksi.InitiateDB(db)
 	servicepemerintahgo.InitiateDB(db)
+	servicepegawai.InitiateDB(db)
 
 	return db
 }
