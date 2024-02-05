@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Data Program Kerja</h3>
+                <h3 class="title-warga">Data Pegawai</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Kreatifitas</p>
             </div>
         </div>
@@ -24,6 +24,11 @@
                     <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3"
                         placeholder="Search...">
                 </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-success btn-tambah my-2">
+                        <router-link to="#" class="nav-link router-link-underline">+ Tambah Data</router-link>
+                    </button>
+                </div>
             </div>
 
             <!-- Tabel -->
@@ -33,19 +38,22 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Proker</th>
+                                <th>Jabatan</th>
+                                <th>Nama UMKM</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in displayedData" :key="index">
                                 <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
-                                <td>{{ item.proker }}</td>
+                                <td>{{ item.jabatan }}</td>
+                                <td>{{ item.nama_umkm }}</td>
                                 <td>
                                     <router-link :to="`/update-kreatifitas/${item.id_kepala_desa}`">
-                                        <button type="button" class="btn btn-warning m-1">
-                                            <!-- edit button -->
-                                            <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                                        <button type="button"
+                                            @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
+                                            class="btn btn-danger m-1">
+                                            <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                                         </button>
                                     </router-link>
                                 </td>
@@ -94,8 +102,9 @@ export default {
     },
     methods: {
         fetchData() {
+            const payload = { id_desa: localStorage.getItem("desa_id") };
             axios
-                .get("http://localhost:8080/pemerintah/proker/1")
+                .post("http://localhost:8080/pegawai/", payload)
                 .then(({ data }) => {
                     this.tableData = data.data;
                     this.filteredData = this.tableData; // Initialize filteredData
@@ -113,7 +122,8 @@ export default {
         filterData() {
             this.filteredData = this.tableData.filter((item) => {
                 return (
-                    item.proker.toLowerCase().includes(this.searchKeyword.toLowerCase())
+                    item.jabatan.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+                    item.nama_umkm.toLowerCase().includes(this.searchKeyword.toLowerCase())
                 );
             });
             this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah

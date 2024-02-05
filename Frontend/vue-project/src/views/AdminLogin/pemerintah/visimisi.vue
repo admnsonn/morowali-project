@@ -21,19 +21,8 @@
       <div class="bungkus-tabel">
         <div class="row">
           <div class="col">
-            <button type="button" class="btn btn-search w-100 my-2">
-              <img src="../../../../src/assets/img/search.svg" class="me-2" />
-              Search...
-            </button>
-          </div>
-          <div class="col-auto">
-            <button type="button" class="btn btn-success btn-tambah my-2">
-              <router-link
-                to="/tambah-kreatifitas"
-                class="nav-link router-link-underline"
-                >+ Tambah Data</router-link
-              >
-            </button>
+            <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3"
+                        placeholder="Search...">
           </div>
         </div>
   
@@ -92,6 +81,7 @@
   export default {
     data() {
       return {
+        searchKeyword: "",
         tableData: [],
         currentPage: 1,
         itemsPerPage: 7, // Sesuaikan item table perhalaman
@@ -121,6 +111,15 @@
             console.error("Error in Axios POST request:", error);
           });
       },
+      filterData() {
+            this.filteredData = this.tableData.filter((item) => {
+                return (
+                    item.visi_desa.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+                    item.misi_desa.toLowerCase().includes(this.searchKeyword.toLowerCase())
+                );
+            });
+            this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
+        },
       nextPage() {
         if (this.currentPage < this.totalPages) {
           this.currentPage++;
