@@ -103,7 +103,7 @@ func Semuaumkm(c *gin.Context) {
 
 	}
 
-	fmt.Println(Tampung_umkm)
+	// fmt.Println(Tampung_umkm)
 
 	if len(Tampung_umkm) != 0 {
 		c.JSON(http.StatusOK, gin.H{
