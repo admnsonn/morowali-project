@@ -9,6 +9,7 @@ import (
 	servicepegawai "main/service/servicePegawai"
 	serviceperaturandesa "main/service/servicePeraturanDesa"
 	servicepotensidesa "main/service/servicePotensiDesa"
+	serviceprodukhukum "main/service/serviceProdukHukum"
 	serviceumkm "main/service/serviceUMKM"
 	serviceumum "main/service/serviceUmum"
 	servicewilayahdesa "main/service/serviceWilayahDesa"
@@ -104,6 +105,14 @@ func Routes(router *gin.Engine) {
 		Pegawain.POST("/", servicepegawai.List)
 		Pegawain.DELETE("/delete/:id", servicepegawai.Delete)
 		Pegawain.POST("/tambah", servicepegawai.Tambah)
+	}
+
+	Hukum := router.Group("/hukum")
+	{
+		Hukum.POST("", serviceprodukhukum.List)
+		Hukum.DELETE("/delete/:id", serviceprodukhukum.Delete)
+		Hukum.POST("/tambah", serviceprodukhukum.Tambah)
+		Hukum.GET("/kategori-law", serviceprodukhukum.List_Kategori)
 	}
 
 	Wilayah_desa := router.Group("/wilayah_desa")
