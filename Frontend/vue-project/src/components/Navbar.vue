@@ -51,7 +51,7 @@
               </button>
               <div v-if="isPemerintahanDropdownOpen" class="dropdown-menu" aria-labelledby="dropdownPemerintahan">
                 <router-link to="/pemerintahan/halaman1" class="dropdown-item">Pembangunan</router-link>
-                <router-link to="/wisata-desa" class="dropdown-item">Produk Hukum</router-link>
+                <router-link to="/informasi/produk-hukum" class="dropdown-item">Produk Hukum</router-link>
               </div>
             </div>
 

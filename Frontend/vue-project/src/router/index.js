@@ -63,14 +63,17 @@ const routes = [
   { path: '/tambah-umkm', component: import('../views/AdminLogin/umkm/tambahumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-umkm/:id', component: import('../views/AdminLogin/umkm/updateumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-umkm/:id', component: import('../views/AdminLogin/umkm/detailumkm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // Admin: Wisata
   { path: '/wisata-desa', component: import('../views/AdminLogin/wisata/wisatadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-wisata/:id', component: import('../views/AdminLogin/wisata/detailwisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // 
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/detailkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/wilayah-desa', component: import('../views/AdminLogin/wilayah/wilayahdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  // Dropdown Pemerintahan
+  // Admin: Dropdown Pemerintahan
   { path: '/pemerintahan/visi-misi', component: import('../views/AdminLogin/pemerintah/visimisi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/kepala-desa', component: import('../views/AdminLogin/pemerintah/kepdes.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/sambutan-kades', component: import('../views/AdminLogin/pemerintah/sambutan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
@@ -79,6 +82,8 @@ const routes = [
   { path: '/pemerintahan/peraturan', component: import('../views/AdminLogin/pemerintah/peraturan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/struktur-organisasi', component: import('../views/AdminLogin/pemerintah/struktur.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/pegawai', component: import('../views/AdminLogin/pemerintah/pegawai.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // Dropdown Informasi
+  { path: '/informasi/produk-hukum', component: import('../views/AdminLogin/informasi/produk_hukum.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },

@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Data Wisata Desa</h3>
+                <h3 class="title-warga">Data Produk Hukum</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Warga</p>
             </div>
         </div>
@@ -40,48 +40,29 @@
                                     No.
                                 </th>
                                 <th>
-                                    Nama Wisata
+                                    Nama Produk
                                     <button type="button" class="btn btn-link" @click="sortByWisata()">
                                         <img src="../../../../src/assets/img/sort.svg" />
                                     </button>
                                 </th>
-                                <th>Alamat</th>
-                                <th>Foto Wisata</th>
-                                <th class="">
-                                    Kategori:
-                                    <select v-model.number="selectedKategori" @change="filterByKategori"
-                                        class="btn btn-light btn-grey p-1 my-2 dropdown-kategori">
-                                        <option value="0">All</option>
-                                        <option v-for="item in kategoriList" :value="item.id_wisata_kategori">
-                                            {{ item.wisata_kategori }}
-                                        </option>
-                                    </select>
-                                </th>
-                                <th>No Telp</th>
+                                <th>Nama Kategori</th>
+                                <th>File</th>
+                                <th>Terbit</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in displayedData" :key="index">
                                 <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
-                                <td>{{ item.nama_wisata }}</td>
-                                <td>{{ item.alamat }}</td>
+                                <td>{{ item.nama_produk }}</td>
+                                <td>{{ item.nama_kategori }}</td>
+                                <td>{{ item.file }}</td>
+                                <td>{{ item.terbit }}</td>
                                 <td>
-                                    <img class="td-foto" :src="`data:image/png;base64,${item.foto_wisata}`"
-                                        alt="foto berita" height="75" width="100" />
-                                </td>
-                                <td>{{ item.kategori }}</td>
-                                <td>{{ item.no_telp }}</td>
-                                <td>
-                                    <router-link :to="`/detail-wisata/${item.id_wisata}`">
-                                        <button class="btn btn-info m-1">
-                                            <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
-                                        </button>
-                                    </router-link>
                                     <button type="button" class="btn btn-warning m-1">
                                         <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
                                     </button>
-                                    <button type="button" @click.prevent="deleteData(item.id_wisata, item.nama_wisata)"
+                                    <button type="button" @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
                                         class="btn btn-danger m-1">
                                         <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                                     </button>
@@ -114,11 +95,10 @@ export default {
             searchKeyword: "",
             tableData: [],
             currentPage: 1,
-            selectedKategori: 0,
+            selectedKategori: "",
             itemsPerPage: 7, // Sesuaikan item table perhalaman
             sortDirection: "asc",
             filteredData: [],
-            kategoriList: [],
         };
     },
     computed: {
@@ -135,7 +115,7 @@ export default {
         fetchData() {
             const payload = { id_desa: localStorage.getItem("desa_id") };
             axios
-                .post("http://localhost:8080/wisata/list", payload)
+                .post("http://localhost:8080/hukum", payload)
                 .then(({ data }) => {
                     this.tableData = data.data;
                     this.filteredData = this.tableData;
@@ -145,20 +125,10 @@ export default {
                     console.error("Error in Axios POST request:", error);
                 });
         },
-        fetchKategori() {
-            axios
-                .get("http://localhost:8080/wisata/kategori_wisata")
-                .then(({ data }) => {
-                    this.kategoriList = data.data;
-                })
-                .catch((error) => {
-                    console.error("Error in Axios GET request:", error);
-                });
-        },
-        async deleteData(id, nama_wisata) {
+        async deleteData(id, nama) {
             try {
                 const result = await Swal.fire({
-                    title: `Hapus data ${nama_wisata}?`,
+                    title: `Hapus data ${nama}?`,
                     text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
                     icon: "warning",
                     showCancelButton: true,
@@ -169,7 +139,7 @@ export default {
                 });
 
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`http://localhost:8080/wisata/delete_wisata/${id}`);
+                    const response = await axios.delete(`http://localhost:8080/warga/delete/${id}`);
                     if (response.data.status) {
                         await Swal.fire("Data berhasil dihapus!", response.data.message, "success");
                         this.fetchData();
@@ -205,6 +175,18 @@ export default {
 
             this.displayedData = this.filteredData.slice(startIndex, endIndex); // Recalculate displayedData
         },
+
+        filterByKategori() {
+            this.filteredData = this.tableData.filter(
+                (item) =>
+                    item.kategori === this.selectedKategori ||
+                    this.selectedKategori === ""
+            );
+            this.displayedData = this.filteredData.slice(
+                (this.currentPage - 1) * this.itemsPerPage,
+                this.currentPage * this.itemsPerPage
+            );
+        },
         prevPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -215,17 +197,8 @@ export default {
                 this.currentPage++;
             }
         },
-        filterByKategori() {
-            this.filteredData = this.tableData.filter(
-                (item) =>
-                    item.id_kategori === this.selectedKategori ||
-                    this.selectedKategori === 0
-            );
-            this.currentPage = 1; // Reset pagination
-        },
     },
     created() {
-        this.fetchKategori();
         this.fetchData();
     },
 };
