@@ -21,7 +21,13 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
+          <input
+            v-model="searchKeyword"
+            @input="filterData"
+            type="text"
+            class="form-control w-100 my-3"
+            placeholder="Search..."
+          />
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">

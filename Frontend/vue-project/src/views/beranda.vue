@@ -1,7 +1,7 @@
 <template>
   <div class="gambar">
     <img
-      :src="imageUrl"
+      src="../assets/img/desa.png"
       alt="Gambar Berita"
       class="img-fluid gambar"
       width="2000"
@@ -23,7 +23,7 @@
         <div class="row">
           <div class="col-12 d-md-none mb-4">
             <img
-              src="/src/assets/img/Artikel.png"
+              src="../../src/assets/img/Artikel.png"
               alt="Latest Image"
               class="img-fluid"
             />
@@ -31,7 +31,7 @@
 
           <div class="col-md-6 order-md-2 d-none d-md-block">
             <img
-              src="/src/assets/img//Artikel.png"
+              src="../../src/assets/img/Artikel.png"
               alt="Gambar Berita"
               class="img-fluid"
             />
@@ -69,7 +69,7 @@
     <h2 class="text-idm mb-4">Index Desa Membangun</h2>
     <p class="text-sidm mb-4">Lihat total index desa</p>
     <img
-      v-bind:src="contentdua.imageUrl"
+      src="../assets/img/Idm.png"
       alt="Gambar Berita"
       class="img-fluid gambar"
       width="2000"
@@ -92,7 +92,7 @@
         class="col-md-4 mb-4"
       >
         <img
-          v-bind:src="contentketiga.imageUrl"
+          src="../assets/img/kepdes1.png"
           :alt="contentketiga.name"
           class="img-fluid foto-kepdes"
         />
@@ -176,7 +176,7 @@
         >
           <div class="mb-4 mt-2 gambar-orang">
             <img
-              v-bind:src="contentkelima.imageUrl"
+              src="../assets/img/Artikel.png"
               :alt="contentkelima.name"
               class="img-fluid"
             />
@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -200,65 +200,93 @@ export default {
       title: "",
       subtitle: "",
       isHovered: false,
-      currentHost: "" 
+      currentHost: "",
     };
   },
   methods: {
-    CekDesa(){
+    CekDesa() {
       this.currentHost = window.location.host;
       console.log("Ini adalah nilainya :", this.currentHost);
 
-      axios.post('http://localhost:8080/link_url', {
-        cari_link_url: this.currentHost
-      })
-      .then(response => {
-        if (response.data.status === true) {
-          const IDDESA = response.data.id_desa;
-          localStorage.setItem('id_desa', IDDESA);
-          // const iddesaa = localStorage.getItem('id_desa')
-          // console.log("INI ID DESA: ",iddesaa)
-        }
-      })
-      .catch(error => {
-        console.error('Terjadi Kesalahan saat Cek Ketersediaan ID Desa:', error);
-        alert('Desa Tidak Ditemukan !');
-      });
+      axios
+        .post("http://localhost:8080/link_url", {
+          cari_link_url: this.currentHost,
+        })
+        .then((response) => {
+          if (response.data.status === true) {
+            const IDDESA = response.data.id_desa;
+            localStorage.setItem("id_desa", IDDESA);
+            // const iddesaa = localStorage.getItem('id_desa')
+            // console.log("INI ID DESA: ",iddesaa)
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "Terjadi Kesalahan saat Cek Ketersediaan ID Desa:",
+            error
+          );
+          alert("Desa Tidak Ditemukan !");
+        });
     },
 
     fetchData() {
       const apiResponse = {
         data: {
-          imageUrl: "../../src/assets/img/desa.png",
+          imageUrl: "/../../src/assets/img/desa.png",
           title: "Kenali Lebih dalam Desa Kami!",
           subtitle: "Desa yang berada di Kab Morowali ",
           penjelasan: [
-            { judul: 'Desa Bahomoleo', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.' }
+            {
+              judul: "Desa Bahomoleo",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.",
+            },
           ],
           idm: [
-            { imageUrl: '../../src/assets/img/Idm.png', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.' }
+            {
+              imageUrl: "/../../src/assets/img/Idm.png",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec dui at dui tempor convallis id id lacus. In quam sem, euismod in elit sit amet, aliquet mollis magna. Etiam a viverra tortor. In malesuada faucibus mi. In laoreet sapien vitae felis suscipit, quis dignissim elit vestibulum. Sed convallis posuere metus eget volutpat. Duis odio mi, pellentesque et erat in, gravida malesuada nibh. Donec in fringilla orci, ut dapibus justo. Integer elementum non dui id convallis. Suspendisse elementum lectus non ullamcorper laoreet. In consequat dapibus sapien eu volutpat.",
+            },
           ],
           struktur: [
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 1', periode: 'Tahun 20XX-20YY' },
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
-            { imageUrl: '../../src/assets/img/kepdes1.png', name: 'Nama Kepala Desa 2', periode: 'Tahun 20YY-20ZZ' },
+            {
+              imageUrl: "/../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 1",
+              periode: "Tahun 20XX-20YY",
+            },
+            {
+              imageUrl: "/../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 2",
+              periode: "Tahun 20YY-20ZZ",
+            },
+            {
+              imageUrl: "/../../src/assets/img/kepdes1.png",
+              name: "Nama Kepala Desa 2",
+              periode: "Tahun 20YY-20ZZ",
+            },
           ],
           berita: [
-            { judul: 'Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP', subtitle: 'Deskripsi tambahan untuk berita', teks: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.', tanggal: '08-09-2019' }
+            {
+              judul:
+                "Warga Morowali Curhat Rumah Rusak-Anak Ispa gegara Debu Batu Bara PT IMIP",
+              subtitle: "Deskripsi tambahan untuk berita",
+              teks: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales consequat dictum. Praesent fermentum blandit ipsum et ultricies. Nunc ultrices neque ac velit aliquet, in iaculis nisi pellentesque.",
+              tanggal: "08-09-2019",
+            },
           ],
           galeri: [
             {
-              imageUrl: "../../src/assets/img/Artikel.png",
+              imageUrl: "/../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
             {
-              imageUrl: "../../src/assets/img/Artikel.png",
+              imageUrl: "/../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
             {
-              imageUrl: "../../src/assets/img/Artikel.png",
+              imageUrl: "/../../src/assets/img/Artikel.png",
               nama: "Pemancingan",
             },
-          ]
+          ],
         },
       };
       this.imageUrl = apiResponse.data.imageUrl;
@@ -280,10 +308,8 @@ export default {
   mounted() {
     this.fetchData();
     this.CekDesa();
-  }
-
-
-}
+  },
+};
 </script>
 
 <style scoped>
