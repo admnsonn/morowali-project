@@ -66,6 +66,7 @@ const routes = [
   // Admin: Wisata
   { path: '/wisata-desa', component: import('../views/AdminLogin/wisata/wisatadesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-wisata/:id', component: import('../views/AdminLogin/wisata/detailwisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-wisata/:id', component: import('../views/AdminLogin/wisata/updatewisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // 
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

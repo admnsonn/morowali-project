@@ -78,9 +78,12 @@
                                             <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
                                         </button>
                                     </router-link>
-                                    <button type="button" class="btn btn-warning m-1">
-                                        <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
-                                    </button>
+                                    <router-link :to="`/update-wisata/${item.id_wisata}`">
+                                        <button type="button" class="btn btn-warning m-1">
+                                            <!-- edit button -->
+                                            <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                                        </button>
+                                    </router-link>
                                     <button type="button" @click.prevent="deleteData(item.id_wisata, item.nama_wisata)"
                                         class="btn btn-danger m-1">
                                         <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
