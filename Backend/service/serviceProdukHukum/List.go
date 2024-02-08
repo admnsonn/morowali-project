@@ -53,7 +53,7 @@ func List(c *gin.Context) {
 	where a.desa_id = c.id_desa
 	and a.kategori_id = b.id
 	and c.id_desa = $1
-	ORDER BY a.tanggal_terbit DESC
+	ORDER BY a.id DESC
 	`
 
 	row, err := tx.Query(ctx, umkm, input.IDDesa)
