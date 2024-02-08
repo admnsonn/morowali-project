@@ -89,6 +89,10 @@ const routes = [
   // Dropdown Informasi
   { path: '/informasi/produk-hukum', component: import('../views/AdminLogin/informasi/produk_hukum.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
+  // Admin: IDM
+  { path: '/idm-beranda', component: import('../views/AdminLogin/idm/idm-beranda.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/idm-management', component: import('../views/AdminLogin/idm/idm-management.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
   { path: '/skbi', component: () => import('../views/WargaLogin/skbi/skbi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },
