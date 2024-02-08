@@ -178,7 +178,11 @@ export default {
                     })
                     .catch((error) => {
                         console.error(error);
-                        // Handle error, e.g., show an error message
+                        Swal.fire({
+                            title: "Error",
+                            text: "Terjadi kesalahan saat mengubah data.",
+                            icon: "error",
+                        });
                     });
             }
         },
