@@ -94,7 +94,7 @@ func Kepaladesa(c *gin.Context) {
 		WHERE 
 			d.id_desa = $1
 		ORDER BY 
-			a.jabatan_dimulai DESC 
+			a.id_kepala_desa DESC 
 		LIMIT 1;
 	`
 
