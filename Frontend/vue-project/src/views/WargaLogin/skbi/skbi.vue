@@ -43,14 +43,26 @@
         </tr>
       </tbody>
     </table>
-    <button @click="generateXLSX" type="button" class="btn btn-success">
-      Expor File Excel
-    </button>
+    <div class="excelbutton-wrapper">
+      <div>
+        <label for="fileInput" class="btn btn-primary">Impor File Excel</label>
+        <input
+          type="file"
+          id="fileInput"
+          accept=".xlsx"
+          style="display: none"
+          @change="inputXLSX"
+        />
+      </div>
+      <button @click="generateXLSX" type="button" class="btn btn-success">
+        Expor File Excel
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-import ExcelJS from "exceljs";
+import ExcelJS, { ReadingOrder } from "exceljs";
 
 export default {
   name: "exceljsTest",
@@ -102,8 +114,38 @@ export default {
       // Remove the link from the body
       document.body.removeChild(link);
     },
+
+    inputXLSX(event) {
+      const selectedFile = event.target.files[0];
+
+      const workbook = new ExcelJS.Workbook();
+      workbook.xlsx
+        .load(selectedFile)
+        .then((workbook) => {
+          const worksheet = workbook.getWorksheet(1);
+          worksheet.eachRow((row, rowNumber) => {
+            console.log(
+              "Row " + rowNumber + " = " + JSON.stringify(row.values)
+            );
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.wrapper-h1 {
+  padding: 100px;
+}
+
+.excelbutton-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+</style>
