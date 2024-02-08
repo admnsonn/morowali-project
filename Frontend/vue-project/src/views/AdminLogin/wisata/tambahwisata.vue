@@ -185,6 +185,7 @@ export default {
                                 res.data.message,
                                 "success"
                             );
+                            this.$router.push('/wisata-desa');
                         } else {
                             Swal.fire("Data gagal ditambahkan.", res.data.message, "error");
                         }

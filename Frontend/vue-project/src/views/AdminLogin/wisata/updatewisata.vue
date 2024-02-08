@@ -170,6 +170,7 @@ export default {
                     .then((res) => {
                         if (res.data.status) {
                             Swal.fire("Data berhasil diubah.", res.data.message, "success");
+                            this.$router.push('/wisata-desa');
                         } else {
                             Swal.fire("Data gagal diubah.", res.data.message, "error");
                         }
