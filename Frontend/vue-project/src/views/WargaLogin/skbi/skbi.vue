@@ -5,47 +5,25 @@
       <thead>
         <tr>
           <th>No.</th>
-          <th>Kolom</th>
-          <th>Kolom</th>
-          <th>Kolom</th>
+          <th>Nama</th>
+          <th>TTL</th>
+          <th>Usia</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>asdasdads</td>
-          <td>asdasd</td>
-          <td>asdasd</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>asdasdads</td>
-          <td>asdasd</td>
-          <td>asdasd</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>asdasdads</td>
-          <td>asdasd</td>
-          <td>asdasd</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>asdasdads</td>
-          <td>asdasd</td>
-          <td>asdasd</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>asdasdads</td>
-          <td>asdasd</td>
-          <td>asdasd</td>
+        <tr v-for="(row, index) in tableData" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ row.Nama }}</td>
+          <td>{{ row.TTL }}</td>
+          <td>{{ row.Usia }}</td>
         </tr>
       </tbody>
     </table>
     <div class="excelbutton-wrapper">
       <div>
-        <label for="fileInput" class="btn btn-primary">Impor File Excel</label>
+        <label for="fileInput" class="btn btn-primary">
+          Impor File Excel
+        </label>
         <input
           type="file"
           id="fileInput"
@@ -55,18 +33,57 @@
         />
       </div>
       <button @click="generateXLSX" type="button" class="btn btn-success">
-        Expor File Excel
+        Ekspor File Excel
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import ExcelJS, { ReadingOrder } from "exceljs";
+import ExcelJS from "exceljs";
 
 export default {
   name: "exceljsTest",
+  data() {
+    return {
+      tableData: [],
+    };
+  },
   methods: {
+    async inputXLSX(event) {
+      const selectedFile = event.target.files[0];
+
+      if (!selectedFile) {
+        return;
+      }
+
+      const workbook = new ExcelJS.Workbook();
+
+      try {
+        await workbook.xlsx.load(selectedFile);
+        const worksheet = workbook.getWorksheet(1);
+
+        const tableData = [];
+        worksheet.eachRow((row, index) => {
+          if (index === 1) {
+            return;
+          }
+
+          const data = {
+            Nama: row.getCell(2).value,
+            TTL: row.getCell(3).value,
+            Usia: row.getCell(4).value,
+          };
+
+          tableData.push(data);
+        });
+
+        this.tableData = tableData;
+      } catch (error) {
+        console.error("Error reading Excel file: ", error);
+      }
+    },
+
     async generateXLSX() {
       const options = {
         useStyles: true,
@@ -103,7 +120,7 @@ export default {
       link.href = url;
 
       // Set the download attribute of the link to the desired filename
-      link.download = "test.xlsx";
+      link.download = "skbi.xlsx";
 
       // Append the link to the body
       document.body.appendChild(link);
@@ -113,25 +130,6 @@ export default {
 
       // Remove the link from the body
       document.body.removeChild(link);
-    },
-
-    inputXLSX(event) {
-      const selectedFile = event.target.files[0];
-
-      const workbook = new ExcelJS.Workbook();
-      workbook.xlsx
-        .load(selectedFile)
-        .then((workbook) => {
-          const worksheet = workbook.getWorksheet(1);
-          worksheet.eachRow((row, rowNumber) => {
-            console.log(
-              "Row " + rowNumber + " = " + JSON.stringify(row.values)
-            );
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
 };
