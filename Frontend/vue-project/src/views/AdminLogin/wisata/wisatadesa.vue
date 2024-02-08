@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-auto">
                     <button type="button" class="btn btn-success btn-tambah my-2">
-                        <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
+                        <router-link to="/tambah-wisata" class="nav-link router-link-underline">+ Tambah Data</router-link>
                     </button>
                 </div>
             </div>

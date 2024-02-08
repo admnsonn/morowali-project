@@ -54,8 +54,8 @@
                 <div class="field4">
                     <div class="form-group">
                         <label for="Alamat">Alamat</label>
-                        <QuillEditor toolbar="essential" v-model:content="this.tableData[0].alamat" theme="snow"
-                            content-type="html" />
+                        <input type="text" v-model="this.tableData[0].alamat" class="form-control" id="Alamat"
+                            aria-label="alamat" placeholder="alamat" />
                     </div>
                 </div>
 
@@ -82,7 +82,7 @@
                         <select ref="kategoriSelect" v-model="this.tableData[0].idkategoriwisata" class="form-control"
                             id="kategori_id" aria-label="category">
                             <option value="" disabled selected>--Pilih Kategori--</option>
-                            <option v-for="item in kategoriList" :value="item.id_kategori">
+                            <option v-for="item in kategoriList" :value="item.id_wisata_kategori">
                                 {{ item.wisata_kategori }}
                             </option>
                         </select>
@@ -154,20 +154,18 @@ export default {
                 confirmButtonText: "Ya, ubah!",
             });
             if (result.isConfirmed) {
-                const plainTextAlamat = this.tableData[0].alamat;
                 const plainTextKonten = this.tableData[0].konten_wisata;
-                console.log(plainTextAlamat);
                 console.log(plainTextKonten);
                 axios
                     .put("http://localhost:8080/wisata/update_wisata", {
-                        id_wisata: Number(this.$route.params.id),
+                        id_wisata: this.$route.params.id,
                         nama_wisata: this.tableData[0].nama_wisata,
                         no_telp: this.tableData[0].no_telp,
                         link_lokasi: this.tableData[0].link_lokasi,
-                        alamat: plainTextAlamat,
+                        alamat: this.tableData[0].alamat,
                         konten_wisata: plainTextKonten,
                         foto_wisata: this.tableData[0].foto_wisata,
-                        idkategoriwisata: this.tableData[0].idkategoriwisata,
+                        idkategoriwisata: this.tableData[0].idkategoriwisata.toString(),
                     })
                     .then((res) => {
                         if (res.data.status) {
