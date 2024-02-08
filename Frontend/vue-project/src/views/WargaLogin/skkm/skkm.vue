@@ -44,7 +44,7 @@
       </tbody>
     </table>
     <button @click="generateXLSX" type="button" class="btn btn-success">
-      Expor File Excel
+      Ekspor File Excel
     </button>
   </div>
 </template>
