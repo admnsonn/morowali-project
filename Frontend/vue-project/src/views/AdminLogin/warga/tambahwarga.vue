@@ -231,20 +231,20 @@ export default {
           kk: "",
           tempat_lahir: "",
           tanggal_lahir: "",
-          jenis_kelamin_id: "",
+          jenis_kelamin_id: 1,
           alamat_pengguna: "",
-          agama_id: "",
+          agama_id: 1,
           profesi: "",
           no_telp: "",
-          pendidikan_terakhir_id: "",
+          pendidikan_terakhir_id: 1,
           foto_profile: "",
           rw: "",
           rt: "",
-          id_desa: "1",
-          kategori_financial_id: "",
+          id_desa: "",
+          kategori_financial_id: 1,
           kode_pos: "",
           kewarganegaraan: "",
-          status_perkawinan_id: "",
+          status_perkawinan_id: 1,
         },
       },
       tableData: [],
@@ -321,7 +321,7 @@ export default {
           .post("http://localhost:8080/warga/tambah", {
             nama_lengkap: this.model.warga.nama_lengkap,
             nik: this.model.warga.nik,
-            alamat_pengguna: plainTextDescription,
+            alamat_pengguna: this.model.alamat_pengguna,
             kk: this.model.warga.kk,
             id_desa: this.model.warga.id_desa,
             tempat_lahir: this.model.warga.tempat_lahir,
@@ -346,20 +346,20 @@ export default {
               kk: "",
               tempat_lahir: "",
               tanggal_lahir: "",
-              jenis_kelamin_id: "",
+              jenis_kelamin_id: 1,
               alamat_pengguna: "",
-              agama_id: "",
+              agama_id: 1,
               profesi: "",
               no_telp: "",
-              pendidikan_terakhir_id: "",
+              pendidikan_terakhir_id: 1,
               foto_profile: "",
               rw: "",
               rt: "",
-              id_desa: "1",
-              kategori_financial_id: "",
+              id_desa: "",
+              kategori_financial_id: 1,
               kode_pos: "",
               kewarganegaraan: "",
-              status_perkawinan_id: "",
+              status_perkawinan_id: 1,
             };
             if (res.data.status) {
               Swal.fire(
@@ -423,7 +423,7 @@ export default {
       };
     },
   },
-  created(){
+  created() {
     this.fetchKategoriAG();
     this.fetchKategoriJK();
     this.fetchKategoriFN();

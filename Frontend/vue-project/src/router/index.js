@@ -68,8 +68,10 @@ const routes = [
   { path: '/detail-wisata/:id', component: import('../views/AdminLogin/wisata/detailwisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-wisata/:id', component: import('../views/AdminLogin/wisata/updatewisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-wisata', component: import('../views/AdminLogin/wisata/tambahwisata.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  // 
+  // Admin: Potensi
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-potensi:id', component: import('../views/AdminLogin/potensi/detailpotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // 
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

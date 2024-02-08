@@ -10,19 +10,11 @@
     <div class="container-userbtn">
       <button class="btn user-button">
         User
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-person-circle"
-          viewBox="0 0 16 16"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle"
+          viewBox="0 0 16 16">
           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-          <path
-            fill-rule="evenodd"
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-          />
+          <path fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
         </svg>
       </button>
     </div>
@@ -40,15 +32,12 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
+          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3"
+            placeholder="Search...">
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link
-              to="/tambah-umkm"
-              class="nav-link router-link-underline"
-              >+ Tambah Data</router-link
-            >
+            <router-link to="/tambah-umkm" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -65,11 +54,7 @@
 
                 <th>
                   Judul
-                  <button
-                    type="button"
-                    class="btn btn-link m-1"
-                    @click="sortByNama()"
-                  >
+                  <button type="button" class="btn btn-link m-1" @click="sortByNama()">
                     <img src="../../../../src/assets/img/sort.svg" class="custom-icon" />
                   </button>
                 </th>
@@ -86,32 +71,24 @@
                 <td>{{ item.sub_judul }}</td>
                 <td>{{ item.deskripsi }}</td>
                 <td>
-                  <img
-                    class="td-foto"
-                    :src="`data:image/png;base64,${item.foto_potensi_desa}`"
-                    alt="foto_potensi"
-                    height="75"
-                    width="100"
-                  />
+                  <img class="td-foto" :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="foto_potensi"
+                    height="75" width="100" />
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary button-detail">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-card-list"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"
-                      />
-                      <path
-                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"
-                      />
-                    </svg>
-                    Detail
+                  <router-link :to="`/detail-wisata/${item.id_wisata}`">
+                    <button class="btn btn-info m-1">
+                      <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
+                    </button>
+                  </router-link>
+                  <router-link :to="`/update-wisata/${item.id_wisata}`">
+                    <button type="button" class="btn btn-warning m-1">
+                      <!-- edit button -->
+                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                    </button>
+                  </router-link>
+                  <button type="button" @click.prevent="deleteData(item.id_potensi, item.judul_potensi)"
+                    class="btn btn-danger m-1">
+                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                   </button>
                 </td>
               </tr>
@@ -170,10 +147,10 @@ export default {
           console.error("Error in Axios POST request:", error);
         });
     },
-    async deleteData(id, nama_umkm) {
+    async deleteData(id, judul_potensi) {
       try {
         const result = await Swal.fire({
-          title: `Hapus data ${nama_umkm}?`,
+          title: `Hapus data ${judul_potensi}?`,
           text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
           icon: "warning",
           showCancelButton: true,
@@ -184,10 +161,7 @@ export default {
         });
 
         if (result.isConfirmed) {
-          const response = await axios
-            .delete
-            // `http://localhost:8080/berita/delete/${id}`
-            ();
+          const response = await axios.delete(`http://localhost:8080/potensi_desa/delete_potensi/${id}`);
           if (response.data.status) {
             await Swal.fire(
               "Data berhasil dihapus!",
