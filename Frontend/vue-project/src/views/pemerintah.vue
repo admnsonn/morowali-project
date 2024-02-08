@@ -52,9 +52,6 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            paragraphs: "",
-            visi_misi: "",
-
             imageUrl: "",
             id_desa: "", 
             sambutan: "",
