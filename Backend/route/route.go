@@ -27,6 +27,8 @@ func Routes(router *gin.Engine) {
 	router.POST("/validasi", servicelogin.ValidasiToken)
 	router.POST("/link_url", serviceumum.Cek_URL)
 	router.POST("/pendidikan", serviceumum.Pendidikan)
+	router.GET("/galeri/:id", serviceumum.GaleriFoto)
+	router.GET("/agama/:id", serviceumum.Agama)
 
 	beritaRoutes := router.Group("/berita")
 	{
