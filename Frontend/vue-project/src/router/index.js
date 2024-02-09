@@ -73,12 +73,14 @@ const routes = [
   { path: '/detail-potensi/:id', component: import('../views/AdminLogin/potensi/detailpotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-potensi/:id', component: import('../views/AdminLogin/potensi/updatepotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-potensi', component: import('../views/AdminLogin/potensi/tambahpotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  // Admin: Wilayah
+  { path: '/wilayah-desa', component: import('../views/AdminLogin/wilayah/wilayahdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-wilayah/:id', component: import('../views/AdminLogin/wilayah/updatewilayah.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // 
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/update-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/updatekreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-kreatifitas/:id', component: import('../views/AdminLogin/kreatifitas/detailkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
-  { path: '/wilayah-desa', component: import('../views/AdminLogin/wilayah/wilayahdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // Admin: Dropdown Pemerintahan
   { path: '/pemerintahan/visi-misi', component: import('../views/AdminLogin/pemerintah/visimisi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/kepala-desa', component: import('../views/AdminLogin/pemerintah/kepdes.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

@@ -52,7 +52,7 @@
                 <td>{{ item.latitude }}</td>
                 <td>{{ item.status_wilayah }}</td>
                 <td>
-                  <router-link :to="`/update-kreatifitas/${item.id_kreatifitas}`">
+                  <router-link :to="`/update-wilayah/1`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
                       <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
@@ -79,7 +79,6 @@
   
 <script>
 import axios from "axios";
-import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -124,42 +123,6 @@ export default {
         );
       });
       this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
-    },
-    async deleteData(id, judul_kreatifitas) {
-      try {
-        const result = await Swal.fire({
-          title: `Hapus data ${judul_kreatifitas}?`,
-          text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#C03221",
-          cancelButtonColor: "#4F4F4F",
-          confirmButtonText: "Hapus",
-          cancelButtonText: "Batal",
-        });
-
-        if (result.isConfirmed) {
-          const response = await axios.delete(
-            `http://localhost:8080/kreatifitas/delete/${id}`
-          );
-          if (response.data.status) {
-            await Swal.fire(
-              "Data berhasil dihapus!",
-              response.data.message,
-              "success"
-            );
-            this.fetchData();
-          } else {
-            await Swal.fire(
-              "Data gagal dihapus.",
-              response.data.message,
-              "error"
-            );
-          }
-        }
-      } catch (error) {
-        console.error("Error in Axios DELETE request:", error);
-      }
     },
 
     sortByJudul() {

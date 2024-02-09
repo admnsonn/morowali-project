@@ -68,7 +68,7 @@
                                 <td>{{ item.alamat }}</td>
                                 <td>
                                     <img class="td-foto" :src="`data:image/png;base64,${item.foto_wisata}`"
-                                        alt="foto berita" />
+                                        alt="foto wisata" />
                                 </td>
                                 <td>{{ item.kategori }}</td>
                                 <td>{{ item.no_telp }}</td>
