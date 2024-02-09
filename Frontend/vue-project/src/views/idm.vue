@@ -10,38 +10,54 @@
           <div class="row row-cols-4 mb-4">
             <div class="col text-white">
               <div class="gradient-skor-saat-ini p-2 pb-4 rounded">
-                <p><strong>0.0000</strong><br>SKOR SAAT INI</p>
+                <p><strong>0.0000</strong><br />SKOR SAAT INI</p>
               </div>
             </div>
             <div class="col">
-              <img src="../../src/assets/img/skor-saat-ini.svg" alt="Image Skor Saat Ini" class="img-fluid text-center" />
+              <img
+                src="../../src/assets/img/skor-saat-ini.svg"
+                alt="Image Skor Saat Ini"
+                class="img-fluid text-center"
+              />
             </div>
             <div class="col text-white">
               <div class="gradient-status-idm p-2 pb-4 rounded">
-                <p><strong>MANDIRI</strong><br>STATUS IDM</p>
+                <p><strong>MANDIRI</strong><br />STATUS IDM</p>
               </div>
             </div>
             <div class="col">
-              <img src="../../src/assets/img/status-idm.svg" alt="Image Status IDM" class="img-fluid text-center" />
+              <img
+                src="../../src/assets/img/status-idm.svg"
+                alt="Image Status IDM"
+                class="img-fluid text-center"
+              />
             </div>
           </div>
 
           <div class="row row-cols-4">
             <div class="col text-white">
               <div class="gradient-skor-minimal p-2 pb-4 rounded">
-                <p><strong>0.0000</strong><br>SKOR MINIMAL</p>
+                <p><strong>0.0000</strong><br />SKOR MINIMAL</p>
               </div>
             </div>
             <div class="col">
-              <img src="../../src/assets/img/skor-minimal.svg" alt="Image Skor Minimal" class="img-fluid text-center" />
+              <img
+                src="../../src/assets/img/skor-minimal.svg"
+                alt="Image Skor Minimal"
+                class="img-fluid text-center"
+              />
             </div>
             <div class="col text-white">
               <div class="gradient-target-status p-2 pb-4 rounded">
-                <p><strong>MANDIRI</strong><br>TARGET STATUS</p>
+                <p><strong>MANDIRI</strong><br />TARGET STATUS</p>
               </div>
             </div>
             <div class="col">
-              <img src="../../src/assets/img/target-status.svg" alt="Image Target Status" class="img-fluid text-center" />
+              <img
+                src="../../src/assets/img/target-status.svg"
+                alt="Image Target Status"
+                class="img-fluid text-center"
+              />
             </div>
           </div>
 
@@ -85,43 +101,48 @@
       </div>
 
       <!-- <div class="row pt-3">
-        <div class="col p-3">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1.</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2.</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3.</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div> -->
+          <div class="col p-3">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1.</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2.</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3.</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> -->
 
-      <div class="row py-3 ">
+      <div class="row py-3">
         <div class="col mx-0">
-          <button class="btn btn-secondary float-start mx-0">Download Pdf</button>
+          <button
+            @click="generateXLSX"
+            class="btn btn-secondary float-start mx-0"
+          >
+            Download Pdf
+          </button>
         </div>
       </div>
     </div>
@@ -129,34 +150,85 @@
 </template>
 
 <script>
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Pie } from 'vue-chartjs'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "vue-chartjs";
+import ExcelJS from "exceljs";
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
-  name: 'PieChart',
+  name: "PieChart",
   components: { Pie },
   data() {
     return {
+      tableData: [],
       chartData: {
-        labels: ['IKS', 'IKE', 'IKL'],
+        labels: ["IKS", "IKE", "IKL"],
         datasets: [
           {
-            backgroundColor: ['#90ED7D', '#434348', '#7CB5EC'],
-            data: [31.5, 29.7, 38.8]
-          }
-        ]
+            backgroundColor: ["#90ED7D", "#434348", "#7CB5EC"],
+            data: [31.5, 29.7, 38.8],
+          },
+        ],
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
-      }
+        maintainAspectRatio: false,
+      },
     };
-  }
-}
+  },
+  methods: {
+    async generateXLSX() {
+      const options = {
+        useStyles: true,
+        useSharedStrings: true,
+      };
+      const workbook = new ExcelJS.Workbook(options);
+      workbook.creator = "aditya patty";
+      workbook.lastModifiedBy = "aditya patty";
+      workbook.created = new Date(2024, 2, 7);
+      workbook.modified = new Date();
+      workbook.lastPrinted = new Date(2024, 2, 6);
+
+      const worksheet = workbook.addWorksheet("Sheet 1");
+
+      worksheet.columns = [
+        { header: "Id", key: "id", width: 10 },
+        { header: "Name", key: "name", width: 32 },
+        { header: "D.O.B.", key: "dob", width: 15 },
+        { header: "Age", key: "age", width: 10 },
+      ];
+
+      for (let index = 0; index < 10; index++) {
+        worksheet.addRow([index, "anjas", new Date(), 20 + index]);
+      }
+
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const url = URL.createObjectURL(blob);
+
+      // Create a link and set the URL as the href
+      const link = document.createElement("a");
+      link.href = url;
+
+      // Set the download attribute of the link to the desired filename
+      link.download = "Indeks Desa Membangun (IDM).xlsx";
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Programmatically click the link to start the download
+      link.click();
+
+      // Remove the link from the body
+      document.body.removeChild(link);
+    },
+  },
+};
 </script>
-  
+
 <style scoped>
 .bg-hero {
   background-color: #003366;
@@ -182,7 +254,7 @@ export default {
   background-color: #003366;
   border: none;
   padding: 10px 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -190,21 +262,20 @@ export default {
 }
 
 .gradient-skor-saat-ini {
-  background-image: linear-gradient(to right, #4A19C8, #7979FF);
+  background-image: linear-gradient(to right, #4a19c8, #7979ff);
 }
 
 .gradient-skor-minimal {
-  background-image: linear-gradient(to right, #CF0723, #F63B55);
+  background-image: linear-gradient(to right, #cf0723, #f63b55);
 }
 
 .gradient-status-idm {
-  background-image: linear-gradient(to right, #07BA7D, #0FD793);
+  background-image: linear-gradient(to right, #07ba7d, #0fd793);
 }
 
 .gradient-target-status {
-  background-image: linear-gradient(to right, #FF7800, #F5A811);
+  background-image: linear-gradient(to right, #ff7800, #f5a811);
 }
 
 /* Set card background color and spacing */
 </style>
-  

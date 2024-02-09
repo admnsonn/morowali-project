@@ -1,20 +1,12 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { splitVendorChunkPlugin } from 'vite'
+
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(),splitVendorChunkPlugin()],
   resolve: {
-    alias: {
-      '@': '/absolute/path/to/src'
-    }
+
   },
-  build: {
-    rollupOptions: {
-      external: ['path/to/external/file.svg'],
-    },
-    outDir: 'dist',
-    assetsDir: 'src/assets',
-    sourcemap: false,
-    minify: true,
-  }
+
 })
