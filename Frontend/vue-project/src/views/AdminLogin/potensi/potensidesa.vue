@@ -75,7 +75,7 @@
                     height="75" width="100" />
                 </td>
                 <td>
-                  <router-link :to="`/detail-wisata/${item.id_wisata}`">
+                  <router-link :to="`/detail-potensi/${item.id_potensi}`">
                     <button class="btn btn-info m-1">
                       <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
                     </button>

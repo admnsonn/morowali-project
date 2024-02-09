@@ -22,50 +22,34 @@
         </div>
         <div class="isi-tambahdata">
             <div class="grid-container">
-                <div class="field5">
+                <div class="field0">
                     <div class="form-group-foto">
-                        <label for="Fpto">Foto Berita</label>
-                        <img :src="`data:image/png;base64,${detail[0].foto_wisata}`" alt="foto wisata" />
+                        <label for="Fpto">Foto Potensi</label>
+                        <img :src="`data:image/png;base64,${detail[0].foto_potensi_desa}`" alt="foto potensi" />
                     </div>
                 </div>
 
                 <div class="field1">
                     <div class="form-group">
-                        <label for="NamaWisata">Nama Wisata</label>
-                        <input type="text" v-model="detail[0].nama_wisata" class="form-control" id="NamaWisata"
-                            aria-label="nama" disabled />
+                        <label for="JudulPotensi">Judul Potensi</label>
+                        <input type="text" v-model="detail[0].judul_potensi" class="form-control" id="JudulPotensi"
+                            aria-label="judul" disabled />
                     </div>
                 </div>
 
                 <div class="field2">
                     <div class="form-group">
-                        <label for="Konten">Konten Wisata</label>
-                        <textarea type="text" v-model="detail[0].konten_wisata" class="form-control" id="Konten"
-                            aria-label="konten" disabled />
+                        <label for="Deskripsi">Deskripsi</label>
+                        <textarea type="text" v-model="detail[0].deskripsi" class="form-control" id="Deskripsi"
+                            aria-label="deskripsi" disabled />
                     </div>
                 </div>
 
                 <div class="field3">
                     <div class="form-group">
-                        <label for="NoTelp">No Telp</label>
-                        <input type="text" v-model="detail[0].no_telp" class="form-control" id="NoTelp" aria-label="telp"
+                        <label for="Sub">Sub Judul</label>
+                        <input type="text" v-model="detail[0].sub_judul" class="form-control" id="Sub" aria-label="sub"
                             disabled />
-                    </div>
-                </div>
-
-                <div class="field4">
-                    <div class="form-group">
-                        <label for="Alamat">Konten Wisata</label>
-                        <textarea type="text" v-model="detail[0].alamat" class="form-control" id="Alamat"
-                            aria-label="alamat" disabled />
-                    </div>
-                </div>
-
-                <div class="field5">
-                    <div class="form-group">
-                        <label for="Kategori">Kategori</label>
-                        <input type="text" v-model="detail[0].kategori_wisata" class="form-control" id="Kategori"
-                            aria-label="kategori" disabled />
                     </div>
                 </div>
             </div>
@@ -86,7 +70,7 @@ export default {
     methods: {
         getDetail() {
             axios
-                .get(`http://localhost:8080/wisata/${this.id}`)
+                .get(`http://localhost:8080/potensi_desa/${this.id}`)
                 .then((response) => {
                     const data = response.data.data;
                     this.detail = data;
