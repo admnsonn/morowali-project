@@ -71,6 +71,7 @@ const routes = [
   // Admin: Potensi
   { path: '/potensi-desa', component: import('../views/AdminLogin/potensi/potensidesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/detail-potensi/:id', component: import('../views/AdminLogin/potensi/detailpotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/update-potensi/:id', component: import('../views/AdminLogin/potensi/updatepotensi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // 
   { path: '/kreatifitas-desa', component: import('../views/AdminLogin/kreatifitas/kreatifitasdesa.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-kreatifitas', component: import('../views/AdminLogin/kreatifitas/tambahkreatifitas.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

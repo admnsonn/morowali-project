@@ -71,8 +71,7 @@
                 <td>{{ item.sub_judul }}</td>
                 <td>{{ item.deskripsi }}</td>
                 <td>
-                  <img class="td-foto" :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="foto_potensi"
-                    height="75" width="100" />
+                  <img class="td-foto" :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="foto_potensi" />
                 </td>
                 <td>
                   <router-link :to="`/detail-potensi/${item.id_potensi}`">
@@ -80,7 +79,7 @@
                       <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
                     </button>
                   </router-link>
-                  <router-link :to="`/update-wisata/${item.id_wisata}`">
+                  <router-link :to="`/update-potensi/${item.id_potensi}`">
                     <button type="button" class="btn btn-warning m-1">
                       <!-- edit button -->
                       <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
@@ -342,5 +341,11 @@ h3 {
 .button-detail {
   width: 100%;
   font-weight: bold;
+}
+
+.td-foto {
+  max-width: 100%;
+  height: auto;
+  margin: 10px;
 }
 </style>

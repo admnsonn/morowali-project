@@ -68,7 +68,7 @@
                                 <td>{{ item.alamat }}</td>
                                 <td>
                                     <img class="td-foto" :src="`data:image/png;base64,${item.foto_wisata}`"
-                                        alt="foto berita" height="75" width="100" />
+                                        alt="foto berita" />
                                 </td>
                                 <td>{{ item.kategori }}</td>
                                 <td>{{ item.no_telp }}</td>
@@ -286,6 +286,12 @@ select {
 
 h3 {
     font-weight: bold;
+}
+
+.td-foto {
+    max-width: 100%;
+    height: auto;
+    margin: 10px; 
 }
 </style>
   
