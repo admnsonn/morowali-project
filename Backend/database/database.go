@@ -5,6 +5,7 @@ import (
 	servicepemerintahgo "main/service/ServicePemerintah.go"
 	serviceproduksi "main/service/ServiceProduksi"
 	serviceberita "main/service/serviceBerita"
+	serviceidm "main/service/serviceIDM"
 	serviceinformasipembangunango "main/service/serviceInformasiPembangunan.go"
 	servicekreativitas "main/service/serviceKreativitas"
 	servicepegawai "main/service/servicePegawai"
@@ -59,6 +60,7 @@ func NewConnect() *pgxpool.Pool {
 	servicepegawai.InitiateDB(db)
 	serviceprodukhukum.InitiateDB(db)
 	serviceinformasipembangunango.InitiateDB(db)
+	serviceidm.InitiateDB(db)
 
 	return db
 }

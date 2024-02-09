@@ -155,6 +155,8 @@ func Routes(router *gin.Engine) {
 	idmiksike := router.Group("/idmiksike")
 	{
 		idmiksike.POST("/input", serviceidm.Input)
+		idmiksike.POST("/detail", serviceidm.Detail)
+		idmiksike.POST("/list", serviceidm.List)
 	}
 
 }

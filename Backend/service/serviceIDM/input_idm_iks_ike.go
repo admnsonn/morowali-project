@@ -1,10 +1,13 @@
 package serviceidm
 
 import (
-	"fmt"
+	"context"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v4"
 )
 
 func Input(c *gin.Context) {
@@ -80,37 +83,160 @@ func Input(c *gin.Context) {
 
 	}
 
+	ctx := context.Background()
+	tx, err := DBConnect.BeginTx(ctx, pgx.TxOptions{})
+	if err != nil {
+		panic(err.Error())
+	}
+	defer tx.Rollback(context.Background())
+
+	year := strconv.Itoa(time.Now().Year())
+
 	if len(input.Data) != 0 {
-		ch := make(chan struct{})
 
-		go func() {
-			for _, v := range input.Data[0].IDMinput {
-				fmt.Println("INI DATA IDM INPUT", v)
+		for _, v := range input.Data[0].IDMinput {
+
+			var id_next, id_now int
+
+			cek_berita := `
+				SELECT MAX(id) AS last_id
+				FROM dev.idm;	
+				`
+			err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
+
+			if err != nil {
+				id_now = 0
 			}
 
-			ch <- struct{}{}
-		}()
+			id_next = id_now + 1
 
-		go func() {
-			for _, v := range input.Data[0].IKSinput {
-				fmt.Println("INI DATA IKS INPUT", v)
+			query := `
+					INSERT INTO dev.idm (
+						id,
+						desa_id, 
+						tahun, 
+						indikator, 
+						skor, 
+						keterangan, 
+						kegiatan,
+						nilai,
+						pusat,
+						provinsi,
+						kabupaten,
+						desa,
+						csr,
+						lainya
+					)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+				`
+
+			_, err = tx.Exec(ctx, query, id_next, input.DesaID, year, v.Indikator,
+				v.Skor, v.Keterangan, v.Kegiatan, v.Nilai, v.Pusat, v.Provinsi, v.Kabupaten,
+				v.Desa, v.CSR, v.Lainya)
+
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+				return
 			}
-
-			ch <- struct{}{}
-		}()
-
-		go func() {
-			for _, v := range input.Data[0].IKEinput {
-				fmt.Println("INI DATA IKE INPUT", v)
-			}
-
-			ch <- struct{}{}
-		}()
-
-		for i := 0; i < 3; i++ {
-			<-ch
 		}
+
+		for _, v := range input.Data[0].IKSinput {
+			var id_next, id_now int
+
+			cek_berita := `
+				SELECT MAX(id) AS last_id
+				FROM dev.iks;	
+				`
+			err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
+
+			if err != nil {
+				id_now = 0
+			}
+
+			id_next = id_now + 1
+
+			query := `
+					INSERT INTO dev.iks (
+						id,
+						desa_id, 
+						tahun, 
+						indikator, 
+						skor, 
+						keterangan, 
+						kegiatan,
+						nilai,
+						pusat,
+						provinsi,
+						kabupaten,
+						desa,
+						csr,
+						lainya
+					)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+				`
+
+			_, err = tx.Exec(ctx, query, id_next, input.DesaID, year, v.Indikator,
+				v.Skor, v.Keterangan, v.Kegiatan, v.Nilai, v.Pusat, v.Provinsi, v.Kabupaten,
+				v.Desa, v.CSR, v.Lainya)
+
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+				return
+			}
+		}
+
+		for _, v := range input.Data[0].IKEinput {
+			var id_next, id_now int
+
+			cek_berita := `
+				SELECT MAX(id) AS last_id
+				FROM dev.ike;	
+				`
+			err = tx.QueryRow(ctx, cek_berita).Scan(&id_now)
+
+			if err != nil {
+				id_now = 0
+			}
+
+			id_next = id_now + 1
+
+			query := `
+					INSERT INTO dev.ike (
+						id,
+						desa_id, 
+						tahun, 
+						indikator, 
+						skor, 
+						keterangan, 
+						kegiatan,
+						nilai,
+						pusat,
+						provinsi,
+						kabupaten,
+						desa,
+						csr,
+						lainya
+					)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+				`
+
+			_, err = tx.Exec(ctx, query, id_next, input.DesaID, year, v.Indikator,
+				v.Skor, v.Keterangan, v.Kegiatan, v.Nilai, v.Pusat, v.Provinsi, v.Kabupaten,
+				v.Desa, v.CSR, v.Lainya)
+
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
+				return
+			}
+		}
+
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": true, "message": input})
+	err = tx.Commit(ctx)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": "Error committing transaction"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": true, "message": "Upload Berhasil"})
 }
