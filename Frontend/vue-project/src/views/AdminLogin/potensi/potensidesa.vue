@@ -37,7 +37,7 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link to="/tambah-umkm" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link to="/tambah-potensi" class="nav-link router-link-underline">+ Tambah Data</router-link>
           </button>
         </div>
       </div>
@@ -71,7 +71,7 @@
                 <td>{{ item.sub_judul }}</td>
                 <td>{{ item.deskripsi }}</td>
                 <td>
-                  <img class="td-foto" :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="foto_potensi" />
+                  <img class="td-foto" :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="foto potensi" />
                 </td>
                 <td>
                   <router-link :to="`/detail-potensi/${item.id_potensi}`">

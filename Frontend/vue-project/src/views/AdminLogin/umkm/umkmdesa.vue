@@ -89,8 +89,6 @@
                     class="td-foto"
                     :src="`data:image/png;base64,${item.foto_umkm}`"
                     alt="foto berita"
-                    height="75"
-                    width="100"
                   />
                 </td>
                 <td>{{ item.kategori_umkm }}</td>
@@ -354,5 +352,11 @@ select {
 
 h3 {
   font-weight: bold;
+}
+
+.td-foto {
+  max-width: 100%;
+  height: auto;
+  margin: 10px;
 }
 </style>
