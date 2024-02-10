@@ -45,7 +45,7 @@
                   <td>{{ item.misi_desa }}</td>
                   <td>
                     <router-link
-                      :to="`/update-kreatifitas/${item.id_kreatifitas}`"
+                      :to="`/pemerintahan/update-visi-misi/1`"
                     >
                       <button type="button" class="btn btn-warning m-1">
                         <!-- edit button -->
