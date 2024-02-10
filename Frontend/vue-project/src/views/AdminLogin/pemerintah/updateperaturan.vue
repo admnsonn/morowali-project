@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Ubah Data Visi-Misi</h3>
+                <h3 class="title-warga">Ubah Data Peraturan</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Berita</p>
             </div>
         </div>
