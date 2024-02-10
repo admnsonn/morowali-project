@@ -84,6 +84,7 @@ const routes = [
   // Admin: Dropdown Pemerintahan
   { path: '/pemerintahan/visi-misi', component: import('../views/AdminLogin/pemerintah/visimisi.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/kepala-desa', component: import('../views/AdminLogin/pemerintah/kepdes.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/tambah-kepala-desa', component: import('../views/AdminLogin/pemerintah/tambahkepdes.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/sambutan-kades', component: import('../views/AdminLogin/pemerintah/sambutan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/sejarah-desa', component: import('../views/AdminLogin/pemerintah/sejarah.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/program-kerja', component: import('../views/AdminLogin/pemerintah/proker.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },

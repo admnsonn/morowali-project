@@ -81,6 +81,7 @@ export default {
     data() {
         return {
             tableData: [],
+            id_desa: "1",
         };
     },
 
@@ -114,7 +115,7 @@ export default {
                         latitude: this.tableData[0].latitude,
                         status_wilayah: this.tableData[0].status_wilayah,
                         luas_wilayah: this.tableData[0].luas_wilayah,
-                        id_desa: this.tableData[0].id_desa,
+                        id_desa: this.id_desa,
                     })
                     .then((res) => {
                         if (res.data.status) {
