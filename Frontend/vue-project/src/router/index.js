@@ -91,7 +91,9 @@ const routes = [
   { path: '/pemerintahan/sejarah-desa', component: import('../views/AdminLogin/pemerintah/sejarah.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/update-sejarah-desa/:id', component: import('../views/AdminLogin/pemerintah/updatesejarah.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/program-kerja', component: import('../views/AdminLogin/pemerintah/proker.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/update-program-kerja/:id', component: import('../views/AdminLogin/pemerintah/updateproker.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/peraturan', component: import('../views/AdminLogin/pemerintah/peraturan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/update-peraturan/:id', component: import('../views/AdminLogin/pemerintah/updateperaturan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/struktur-organisasi', component: import('../views/AdminLogin/pemerintah/struktur.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/pegawai', component: import('../views/AdminLogin/pemerintah/pegawai.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // Dropdown Informasi
