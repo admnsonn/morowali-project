@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Ubah Data Wilayah</h3>
+                <h3 class="title-warga">Ubah Data Visi-Misi</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Berita</p>
             </div>
         </div>
@@ -25,33 +25,17 @@
 
                 <div class="field1">
                     <div class="form-group">
-                        <label for="Luas">Luas Wilayah</label>
-                        <input type="text" v-model="this.tableData[0].luas_wilayah" class="form-control" id="Luas"
-                            aria-label="luas" placeholder="Luas Wilayah" />
+                        <label for="Visi">Visi</label>
+                        <QuillEditor toolbar="essential" v-model:content="this.tableData[0].visi_desa" theme="snow"
+                            content-type="html" />
                     </div>
                 </div>
 
-                <div class="field2">
+                <div class="field1">
                     <div class="form-group">
-                        <label for="Long">Longitude</label>
-                        <input type="text" v-model="this.tableData[0].longitude" class="form-control" id="Longitude"
-                            aria-label="longitude" placeholder="Longitude" />
-                    </div>
-                </div>
-
-                <div class="field3">
-                    <div class="form-group">
-                        <label for="Lati">Latitude</label>
-                        <input type="text" v-model="this.tableData[0].latitude" class="form-control" id="Lati"
-                            aria-label="lati" placeholder="Latitude" />
-                    </div>
-                </div>
-
-                <div class="field4">
-                    <div class="form-group">
-                        <label for="Status">Status Wilayah</label>
-                        <input type="text" v-model="this.tableData[0].status_wilayah" class="form-control" id="Status"
-                            aria-label="status" placeholder="Status Wilayah" />
+                        <label for="Misi">Misi</label>
+                        <QuillEditor toolbar="essential" v-model:content="this.tableData[0].misi_desa" theme="snow"
+                            content-type="html" />
                     </div>
                 </div>
 
@@ -88,7 +72,7 @@ export default {
     methods: {
         fetchData() {
             axios
-                .get(`http://localhost:8080/wilayah_desa/desa/1`)
+                .get(`http://localhost:8080/pemerintah/visi-misi/1`)
                 .then(({ data }) => {
                     this.tableData = data.data;
                     console.log(this.tableData);
@@ -110,17 +94,15 @@ export default {
             });
             if (result.isConfirmed) {
                 axios
-                    .post("http://localhost:8080/wilayah_desa/setting", {
-                        longitude: this.tableData[0].longitude,
-                        latitude: this.tableData[0].latitude,
-                        status_wilayah: this.tableData[0].status_wilayah,
-                        luas_wilayah: this.tableData[0].luas_wilayah,
+                    .put("http://localhost:8080/pemerintah/visi-misi/setting", {
+                        visi_desa: this.tableData[0].visi_desa,
+                        misi_desa: this.tableData[0].misi_desa,
                         id_desa: this.id_desa,
                     })
                     .then((res) => {
                         if (res.data.status) {
                             Swal.fire("Data berhasil diubah.", res.data.message, "success");
-                            this.$router.push('/wilayah-desa');
+                            this.$router.push('/pemerintahan/visi-misi');
                         } else {
                             Swal.fire("Data gagal diubah.", res.data.message, "error");
                         }

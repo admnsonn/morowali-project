@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="title-warga">Ubah Data Wilayah</h3>
+                <h3 class="title-warga">Ubah Data Struktr Organisasi</h3>
                 <p class="subtitle-warga">Management Content dan Layanan Berita</p>
             </div>
         </div>
@@ -24,34 +24,14 @@
             <div class="grid-container">
 
                 <div class="field1">
-                    <div class="form-group">
-                        <label for="Luas">Luas Wilayah</label>
-                        <input type="text" v-model="this.tableData[0].luas_wilayah" class="form-control" id="Luas"
-                            aria-label="luas" placeholder="Luas Wilayah" />
-                    </div>
-                </div>
-
-                <div class="field2">
-                    <div class="form-group">
-                        <label for="Long">Longitude</label>
-                        <input type="text" v-model="this.tableData[0].longitude" class="form-control" id="Longitude"
-                            aria-label="longitude" placeholder="Longitude" />
-                    </div>
-                </div>
-
-                <div class="field3">
-                    <div class="form-group">
-                        <label for="Lati">Latitude</label>
-                        <input type="text" v-model="this.tableData[0].latitude" class="form-control" id="Lati"
-                            aria-label="lati" placeholder="Latitude" />
-                    </div>
-                </div>
-
-                <div class="field4">
-                    <div class="form-group">
-                        <label for="Status">Status Wilayah</label>
-                        <input type="text" v-model="this.tableData[0].status_wilayah" class="form-control" id="Status"
-                            aria-label="status" placeholder="Status Wilayah" />
+                    <div class="form-group-foto">
+                        <label for="formFile" class="form-label">Organigram</label>
+                        <input class="form-control" v-on:change="onFileChange" type="file" id="formFile" accept="image/*" />
+                        <div class="form-group-foto">
+                            <label for="foto">Preview foto</label>
+                            <img :src="`data:image/png;base64,${this.tableData[0].organigram}`" alt="foto berita"
+                                height="300" width="400" class="td-foto" />
+                        </div>
                     </div>
                 </div>
 
@@ -88,7 +68,7 @@ export default {
     methods: {
         fetchData() {
             axios
-                .get(`http://localhost:8080/wilayah_desa/desa/1`)
+                .get(`http://localhost:8080/pemerintah/organigram/1`)
                 .then(({ data }) => {
                     this.tableData = data.data;
                     console.log(this.tableData);
@@ -110,17 +90,14 @@ export default {
             });
             if (result.isConfirmed) {
                 axios
-                    .post("http://localhost:8080/wilayah_desa/setting", {
-                        longitude: this.tableData[0].longitude,
-                        latitude: this.tableData[0].latitude,
-                        status_wilayah: this.tableData[0].status_wilayah,
-                        luas_wilayah: this.tableData[0].luas_wilayah,
+                    .put("http://localhost:8080/pemerintah/organigram/setting", {
+                        organigram: this.tableData[0].organigram,
                         id_desa: this.id_desa,
                     })
                     .then((res) => {
                         if (res.data.status) {
                             Swal.fire("Data berhasil diubah.", res.data.message, "success");
-                            this.$router.push('/wilayah-desa');
+                            this.$router.push('/pemerintahan/struktur-organisasi');
                         } else {
                             Swal.fire("Data gagal diubah.", res.data.message, "error");
                         }
@@ -134,6 +111,50 @@ export default {
                         });
                     });
             }
+        },
+        onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+            const imageFile = files[0];
+            const validTypes = ["image/jpeg", "image/png", "image/gif"]; // Adjust as needed
+            if (!validTypes.includes(imageFile.type)) {
+                // Display an error message or alert
+                alert("Silakan unggah file gambar.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+
+            reader.onload = (e) => {
+                const imageUrl = e.target.result;
+                const img = new Image();
+
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const scaleX = 0.5; // Resize to 50%
+                    const scaleY = 0.5;
+                    const width = img.width * scaleX;
+                    const height = img.height * scaleY;
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((resizedBlob) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(resizedBlob);
+
+                        reader.onloadend = () => {
+                            const base64String = reader.result.split(",")[1]; // Extract base64-encoded data
+                            this.tableData[0].organigram = base64String;
+                        };
+                    }, "image/jpeg"); // Adjust the image type as needed
+                };
+
+                img.src = imageUrl;
+            };
         },
     },
     created() {

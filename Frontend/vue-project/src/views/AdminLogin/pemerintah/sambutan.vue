@@ -42,7 +42,7 @@
                                 <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                                 <td>{{ item.sambutan }}</td>
                                 <td>
-                                    <router-link :to="`/update-kreatifitas/${item.id_kepala_desa}`">
+                                    <router-link :to="`/pemerintahan/update-sambutan-kades/1`">
                                         <button type="button" class="btn btn-warning m-1">
                                             <!-- edit button -->
                                             <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />

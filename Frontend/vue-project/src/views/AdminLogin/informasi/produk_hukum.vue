@@ -45,7 +45,16 @@
                                         <img src="../../../../src/assets/img/sort.svg" />
                                     </button>
                                 </th>
-                                <th>Nama Kategori</th>
+                                <th class="">
+                                    Kategori:
+                                    <select v-model.number="selectedKategori" @change="filterByKategori"
+                                        class="btn btn-light btn-grey p-1 my-2 dropdown-kategori">
+                                        <option value="0">All</option>
+                                        <option v-for="item in kategoriList" :value="item.id">
+                                            {{ item.kategori_nama }}
+                                        </option>
+                                    </select>
+                                </th>
                                 <th>File</th>
                                 <th>Terbit</th>
                                 <th>Action</th>
@@ -95,10 +104,11 @@ export default {
             searchKeyword: "",
             tableData: [],
             currentPage: 1,
-            selectedKategori: "",
+            selectedKategori: 0,
             itemsPerPage: 7, // Sesuaikan item table perhalaman
             sortDirection: "asc",
             filteredData: [],
+            kategoriList: [],
         };
     },
     computed: {
@@ -112,6 +122,16 @@ export default {
         },
     },
     methods: {
+        fetchKategori() {
+            axios
+                .get("http://localhost:8080/hukum/kategori-law")
+                .then(({ data }) => {
+                    this.kategoriList = data.data;
+                })
+                .catch((error) => {
+                    console.error("Error in Axios GET request:", error);
+                });
+        },
         fetchData() {
             const payload = { id_desa: localStorage.getItem("desa_id") };
             axios
@@ -179,13 +199,10 @@ export default {
         filterByKategori() {
             this.filteredData = this.tableData.filter(
                 (item) =>
-                    item.kategori === this.selectedKategori ||
-                    this.selectedKategori === ""
+                    item.id === this.selectedKategori ||
+                    this.selectedKategori === 0
             );
-            this.displayedData = this.filteredData.slice(
-                (this.currentPage - 1) * this.itemsPerPage,
-                this.currentPage * this.itemsPerPage
-            );
+            this.currentPage = 1; // Reset pagination
         },
         prevPage() {
             if (this.currentPage > 1) {
@@ -200,6 +217,7 @@ export default {
     },
     created() {
         this.fetchData();
+        this.fetchKategori();
     },
 };
 </script>

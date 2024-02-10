@@ -24,6 +24,11 @@
                     <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3"
                         placeholder="Search...">
                 </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-success btn-tambah my-2">
+                        <router-link to="/pemerintahan/tambah-kepala-desa" class="nav-link router-link-underline">+ Tambah Data</router-link>
+                    </button>
+                </div>
             </div>
 
             <!-- Tabel -->
@@ -37,7 +42,6 @@
                                 <th>Foto Kepala Desa</th>
                                 <th>Jabatan Dimulai</th>
                                 <th>Jabatan Berakhir</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,18 +50,10 @@
                                 <td>{{ item.nama }}</td>
                                 <td>
                                     <img class="td-foto" :src="getImageSource(item.foto_kepala_desa)" alt="foto kepala desa"
-                                        height="75" width="100" />
+                                         />
                                 </td>
                                 <td>{{ item.jabatan_dimulai }}</td>
                                 <td>{{ item.jabatan_berakhir }}</td>
-                                <td>
-                                    <router-link :to="`/update-kreatifitas/${item.id_kepala_desa}`">
-                                        <button type="button" class="btn btn-warning m-1">
-                                            <!-- edit button -->
-                                            <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
-                                        </button>
-                                    </router-link>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -201,6 +197,12 @@ select {
 
 h3 {
     font-weight: bold;
+}
+
+.td-foto {
+  max-width: 100%;
+  height: auto;
+  margin: 10px;
 }
 </style>
   
