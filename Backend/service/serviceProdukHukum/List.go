@@ -11,11 +11,12 @@ import (
 
 func List(c *gin.Context) {
 	type Data_kontainer struct {
-		ID       int    `json:"id_hukum"`
-		Nama     string `json:"nama_produk"`
-		Kategori string `json:"nama_kategori"`
-		File     string `json:"file"`
-		Terbit   string `json:"terbit"`
+		ID         int    `json:"id_hukum"`
+		Nama       string `json:"nama_produk"`
+		Kategori   string `json:"nama_kategori"`
+		IDKategori int    `json:"id-kategori"`
+		File       string `json:"file"`
+		Terbit     string `json:"terbit"`
 	}
 
 	type Request struct {
@@ -48,7 +49,7 @@ func List(c *gin.Context) {
 	defer tx.Rollback(context.Background())
 
 	umkm := `
-	select a.id, a.nama_produk, TO_CHAR(a.tanggal_terbit, 'DD-MM-YYYY') AS tahun_terbit, b.nama_kategori , a.file
+	select a.id, a.nama_produk, TO_CHAR(a.tanggal_terbit, 'DD-MM-YYYY') AS tahun_terbit, b.nama_kategori, b.id , a.file
 	from dev.produk_hukum a, dev.kategori_jenis_hukum b, dev.desa c 
 	where a.desa_id = c.id_desa
 	and a.kategori_id = b.id
@@ -78,6 +79,7 @@ func List(c *gin.Context) {
 			&ambil.Nama,
 			&ambil.Terbit,
 			&ambil.Kategori,
+			&ambil.IDKategori,
 			&ambil.File,
 		)
 
