@@ -45,7 +45,7 @@
                                         height="75" width="100" />
                                 </td>
                                 <td>
-                                    <router-link :to="`/update-kreatifitas/${item.id_kreatifitas}`">
+                                    <router-link :to="`/pemerintahan/update-struktur-organisasi/1`">
                                         <button type="button" class="btn btn-warning m-1">
                                             <!-- edit button -->
                                             <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
