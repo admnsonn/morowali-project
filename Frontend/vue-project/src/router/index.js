@@ -96,6 +96,7 @@ const routes = [
   { path: '/pemerintahan/update-peraturan/:id', component: import('../views/AdminLogin/pemerintah/updateperaturan.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/struktur-organisasi', component: import('../views/AdminLogin/pemerintah/struktur.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/pemerintahan/pegawai', component: import('../views/AdminLogin/pemerintah/pegawai.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/pemerintahan/tambah-pegawai', component: import('../views/AdminLogin/pemerintah/tambahpegawai.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   // Dropdown Informasi
   { path: '/informasi/produk-hukum', component: import('../views/AdminLogin/informasi/produk_hukum.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 

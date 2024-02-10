@@ -26,7 +26,8 @@
                 </div>
                 <div class="col-auto">
                     <button type="button" class="btn btn-success btn-tambah my-2">
-                        <router-link to="#" class="nav-link router-link-underline">+ Tambah Data</router-link>
+                        <router-link to="/pemerintahan/tambah-pegawai" class="nav-link router-link-underline">+ Tambah
+                            Data</router-link>
                     </button>
                 </div>
             </div>
@@ -49,13 +50,11 @@
                                 <td>{{ item.jabatan }}</td>
                                 <td>{{ item.nama_umkm }}</td>
                                 <td>
-                                    <router-link :to="`/update-kreatifitas/${item.id_kepala_desa}`">
                                         <button type="button"
-                                            @click.prevent="deleteData(item.id_pengguna, item.nama_lengkap)"
+                                            @click.prevent="deleteData(item.id_pegawai, item.nama_umkm)"
                                             class="btn btn-danger m-1">
                                             <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
                                         </button>
-                                    </router-link>
                                 </td>
                             </tr>
                         </tbody>
@@ -112,6 +111,40 @@ export default {
                 .catch((error) => {
                     console.error("Error in Axios POST request:", error);
                 });
+        },
+        async deleteData(id, nama_umkm) {
+            try {
+                const result = await Swal.fire({
+                    title: `Hapus data ${nama_umkm}?`,
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan lagi.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#C03221",
+                    cancelButtonColor: "#4F4F4F",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                });
+
+                if (result.isConfirmed) {
+                    const response = await axios.delete(`http://localhost:8080/pegawai/delete/${id}`);
+                    if (response.data.status) {
+                        await Swal.fire(
+                            "Data berhasil dihapus!",
+                            response.data.message,
+                            "success"
+                        );
+                        this.fetchData();
+                    } else {
+                        await Swal.fire(
+                            "Data gagal dihapus.",
+                            response.data.message,
+                            "error"
+                        );
+                    }
+                }
+            } catch (error) {
+                console.error("Error in Axios DELETE request:", error);
+            }
         },
         nextPage() {
             if (this.currentPage < this.totalPages) {
