@@ -4,13 +4,8 @@
         <div class="container-lg mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <img
-                    class="rounded mx-auto d-block custom-ukuran"
-                    :src="`data:image/png;base64,${this.imageUrl}`"
-                    alt="Desa"
-                    height="75"
-                    width="100"
-                  />
+                    <img class="rounded mx-auto d-block custom-ukuran" :src="`data:image/png;base64,${this.imageUrl}`"
+                        alt="Desa" height="75" width="100" />
                 </div>
                 <div class="col-md-6">
                     <p class="penjelasan-title">{{ this.sambutan }}</p>
@@ -43,7 +38,6 @@
             <p class="penjelasan-subtitle">{{ this.peraturan }}</p>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -53,7 +47,7 @@ export default {
     data() {
         return {
             imageUrl: "",
-            id_desa: "", 
+            id_desa: "",
             sambutan: "",
             visi: "",
             misi: "",
@@ -61,11 +55,12 @@ export default {
             peraturan: "",
         };
     },
+
     methods: {
-        async kepaladesa() {
+        async fetchKepalaDesa() {
             try {
-                const response = await axios.get(`http://localhost:8080/pemerintah/kepdes/${this.id_desa}`, {});
-                if (response.data.status) { 
+                const response = await axios.get(`http://localhost:8080/pemerintah/kepdes/${this.id_desa}`);
+                if (response.data.status) {
                     this.imageUrl = response.data.kepala_desa_saat_ini[0].foto_kepala_desa
                 } else {
                     console.log("Data Kosong atau Terjadi Kesalahan")
@@ -74,11 +69,10 @@ export default {
                 console.error('Error fetching data:', error);
             }
         },
-
-        async katasambutan() {
+        async fetchKataSambutan() {
             try {
-                const response = await axios.get(`http://localhost:8080/pemerintah/sambutan/${this.id_desa}`, {});
-                if (response.data.status) { 
+                const response = await axios.get(`http://localhost:8080/pemerintah/sambutan/${this.id_desa}`);
+                if (response.data.status) {
                     this.sambutan = response.data.data[0].sambutan
                 } else {
                     console.log("Data Kosong atau Terjadi Kesalahan")
@@ -87,11 +81,10 @@ export default {
                 console.error('Error fetching data:', error);
             }
         },
-
-        async visimisi() {
+        async fetchVisiMisi() {
             try {
-                const response = await axios.get(`http://localhost:8080/pemerintah/visi-misi/${this.id_desa}`, {});
-                if (response.data.status) { 
+                const response = await axios.get(`http://localhost:8080/pemerintah/visi-misi/${this.id_desa}`);
+                if (response.data.status) {
                     this.visi = response.data.data[0].visi_desa
                     this.misi = response.data.data[0].misi_desa
                 } else {
@@ -101,11 +94,10 @@ export default {
                 console.error('Error fetching data:', error);
             }
         },
-
-        async proker() {
+        async fetchProker() {
             try {
-                const response = await axios.get(`http://localhost:8080/pemerintah/proker/${this.id_desa}`, {});
-                if (response.data.status) { 
+                const response = await axios.get(`http://localhost:8080/pemerintah/proker/${this.id_desa}`);
+                if (response.data.status) {
                     this.proker_desa = response.data.data[0].proker
                 } else {
                     console.log("Data Kosong atau Terjadi Kesalahan")
@@ -114,11 +106,10 @@ export default {
                 console.error('Error fetching data:', error);
             }
         },
-
-        async peraturanDesa() {
+        async fetchPeraturanDesa() {
             try {
-                const response = await axios.get(`http://localhost:8080/pemerintah/peraturan/${this.id_desa}`, {});
-                if (response.data.status) { 
+                const response = await axios.get(`http://localhost:8080/pemerintah/peraturan/${this.id_desa}`);
+                if (response.data.status) {
                     this.peraturan = response.data.data[0].peraturan
                 } else {
                     console.log("Data Kosong atau Terjadi Kesalahan")
@@ -128,13 +119,14 @@ export default {
             }
         }
     },
+
     created() {
         this.id_desa = localStorage.getItem("id_desa");
-        this.kepaladesa();
-        this.katasambutan();
-        this.visimisi();
-        this.proker();
-        this.peraturanDesa();
+        this.fetchKepalaDesa();
+        this.fetchKataSambutan();
+        this.fetchVisiMisi();
+        this.fetchProker();
+        this.fetchPeraturanDesa();
     },
 };
 </script>
@@ -224,7 +216,7 @@ export default {
     box-shadow: 0 0 10px 0 rgba(0, 51, 102, 0.5);
 }
 
-.text-center{
+.text-center {
     margin-left: 3px;
 }
 </style>

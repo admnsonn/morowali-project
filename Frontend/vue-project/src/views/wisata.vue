@@ -57,9 +57,9 @@
 
       <!-- wisata Cards Section -->
       <div class="wisata-cards-section row mx-0">
-        <div v-for="wisata in pagedwisatas" :key="wisata.id" class="col-md-6 mb-4">
+        <div v-for="wisata in pagedwisatas" :key="wisata.id_wisata" class="col-md-6 mb-4">
           <div class="wisata-card">
-            <img :src="wisata.foto_wisata" alt="wisata image" class="img-fluid" />
+            <img :src="`data:image/png;base64,${wisata.foto_wisata}`" alt="wisata image" class="img-fluid" />
             <h2 class="wisata-title">{{ wisata.nama_wisata }}</h2>
             <p class="wisata-address">{{ wisata.alamat }}</p>
             <p class="wisata-phone">{{ wisata.no_telp }}</p>
@@ -81,9 +81,9 @@ import axios from "axios";
 export default {
   data() {
     return {
+      id_desa: "",
       imageUrl: "",
-      wisatas: [],
-      secondColumnwisatas: [],
+      wisataData: [],
       dropdown1: '',
       dropdown2: '',
       dropdown3: '',
@@ -93,9 +93,10 @@ export default {
       perPage: 6,
     };
   },
+
   computed: {
     totalPages() {
-      return Math.ceil(this.wisatas.length / this.perPage);
+      return Math.ceil(this.wisataData.length / this.perPage);
     },
     startIndex() {
       return (this.currentPage - 1) * this.perPage;
@@ -104,9 +105,10 @@ export default {
       return this.currentPage * this.perPage;
     },
     pagedwisatas() {
-      return this.wisatas.slice(this.startIndex, this.endIndex);
+      return this.wisataData.slice(this.startIndex, this.endIndex);
     },
   },
+
   methods: {
     toggleFilter() {
       this.showFilter = !this.showFilter; // Toggle filter visibility
@@ -121,19 +123,23 @@ export default {
         this.currentPage -= 1;
       }
     },
-    fetchData() {
-      axios
-        .get("http://localhost:8080/wisata/list/1")
-        .then(({ data }) => {
-          this.wisatas = data.data;
-        })
-        .catch((error) => {
-          console.error("Error in Axios POST request:", error);
-        });
+    async fetchWisata() {
+      try {
+        const response = await axios.post("http://localhost:8080/wisata/list", { id_desa: this.id_desa });
+        if (response.data.status) {
+          this.wisataData = response.data.data;
+        } else {
+          console.log("Data Kosong atau Terjadi Kesalahan")
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     },
   },
-  mounted() {
-    this.fetchData();
+
+  created() {
+    this.id_desa = localStorage.getItem("id_desa");
+    this.fetchWisata();
   },
 };
 </script>

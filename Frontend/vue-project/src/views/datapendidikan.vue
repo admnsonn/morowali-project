@@ -10,9 +10,9 @@
         <div class="row justify-content-between">
             <div v-for="(item, index) in pendidikanData" :key="index" class="col-4 mb-4 ml-2 border rounded ">
                 <br>
-                <p class="pendidikan-description mb-2">{{ item.description }}</p>
+                <p class="pendidikan-description mb-2">{{ index.toUpperCase() }}</p>
                 <br>
-                <p class="pendidikan-number mb-4" :class="'color-' + (index % 3 + 1)">{{ item.number }}</p>
+                <p class="pendidikan-number mb-4" :class="'color-' + (index % 3 + 1)">{{ item }}</p>
 
                 <div class="mb-2 gambar-orang">
                     <img src="../../src/assets/img/orang.png" alt="Latest Image" class="img-fluid" />
@@ -25,6 +25,7 @@
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'vue-chartjs'
+import axios from 'axios'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -33,13 +34,14 @@ export default {
     components: { Pie },
     data() {
         return {
+            id_desa: "",
             pendidikanData: [],
             chartData: {
-                labels: ['SDN 04 Bungku', 'SDN 15 Bungku', 'SDN 1 Bahomoleo'],
+                labels: [],
                 datasets: [
                     {
                         backgroundColor: ['#CD8924', '#4F0F13', '#4C0266'],
-                        data: [40, 20, 80]
+                        data: []
                     }
                 ]
             },
@@ -49,63 +51,30 @@ export default {
             }
         };
     },
+
     methods: {
-        fetchData() {
-            const apiResponse = {
-                data:
-                    [
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                        {
-                            imageUrl: "src/assets/orang.png",
-                            number: 647,
-                            description: "Tidak/Belum Sekolah",
-                        },
-                    ],
-            };
-            this.pendidikanData = apiResponse.data;
-        }
+        async fetchPendidikan() {
+            try {
+                const response = await axios.post("http://localhost:8080/pendidikan", { id_desa: this.id_desa });
+                if (response.data.status) {
+                    this.pendidikanData = response.data.data[0]
+
+                    // Update chartData with fetched data (masih blm bisa)
+                    this.chartData.labels = Object.keys(response.data.data[0]);
+                    this.chartData.datasets[0].data = Object.values(response.data.data[0]);
+                    console.log(this.chartData)
+                } else {
+                    console.log("Data Kosong atau Terjadi Kesalahan")
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        },
     },
-    mounted() {
-        this.fetchData();
+
+    created() {
+        this.id_desa = localStorage.getItem("id_desa");
+        this.fetchPendidikan();
     },
 }
 </script>
@@ -158,12 +127,12 @@ export default {
     /* Ubah warna sesuai keinginan Anda */
 }
 
-.pendidikan-description{
+.pendidikan-description {
     color: #959595;
     font-weight: bold;
 }
 
-.pendidikan-number{
+.pendidikan-number {
     font-size: 30px;
     font-weight: bold;
 }

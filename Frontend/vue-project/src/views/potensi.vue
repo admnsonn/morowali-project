@@ -15,7 +15,7 @@
           <div class="row">
             <!-- INI UNTUK GAMBAR PADA MOBILE -->
             <div class="col-12 d-md-none mb-4">
-              <img :src="item.foto_potensi_desa" alt="Latest Image" class="img-fluid" />
+              <img :src="`data:image/png;base64,${item.foto_potensi_desa}`" alt="Latest Image" class="img-fluid" />
             </div>
 
             <!-- Kolom untuk teks pada kedua ukuran layar -->
@@ -96,6 +96,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      id_desa: "",
       showLatestData: false,
       latestData: [], // Data fetched from API will be stored here
       paginatedData: [], // Data to be displayed for the current page
@@ -116,22 +117,18 @@ export default {
       this.currentPage = pageNumber;
       this.updatePaginatedData();
     },
-
-    // Metode prevPage(), nextPage(), updatePaginatedData() dari sebelumnya tetap sama
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
         this.updatePaginatedData();
       }
     },
-
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
         this.updatePaginatedData();
       }
     },
-
     updatePaginatedData() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
@@ -139,25 +136,25 @@ export default {
       // Update paginatedData based on the selected page
       this.paginatedData = this.latestData.slice(startIndex, endIndex);
     },
-
     addShadow() {
       this.isHovered = true;
     },
     removeShadow() {
       this.isHovered = false;
     },
-    fetchData() {
-      axios
-        .get("http://localhost:8080/potensi_desa/list/1")
-        .then(({ data }) => {
-          this.latestData = data.data;
+    async fetchPotensi() {
+      try {
+        const response = await axios.get(`http://localhost:8080/potensi_desa/list/${this.id_desa}`);
+        if (response.data.status) {
+          this.latestData = response.data.data;
           this.showLatestData = true;
-          // Set halaman pertama ketika data diambil
           this.paginatedData = this.latestData.slice(0, this.itemsPerPage);
-        })
-        .catch((error) => {
-          console.error("Error in Axios POST request:", error);
-        });
+        } else {
+          console.log("Data Kosong atau Terjadi Kesalahan")
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     },
     handlePageChange(page) {
       this.currentPage = page;
@@ -171,8 +168,10 @@ export default {
       console.log("Menampilkan detail informasi:", data);
     },
   },
-  mounted() {
-    this.fetchData();
+
+  created() {
+    this.id_desa = localStorage.getItem("id_desa");
+    this.fetchPotensi();
   },
 };
 </script>
