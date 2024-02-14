@@ -1,121 +1,51 @@
 <template>
   <div class="wrapper-h1">
+    <div class="wrapper-button">
+      <router-link to="/tambah-idm" class="btn btn-success">
+        <div>Tambah Data</div>
+      </router-link>
+    </div>
     <div class="card" style="width: 100%">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+      <ul
+        class="list-group list-group-flush"
+        v-for="(item, index) in tableData"
+        :key="index"
+      >
+        <li class="list-group-item card-idm">
+          <div>IDM {{ item.tahun }}</div>
+          <div>detail</div>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import ExcelJS from "exceljs";
+import axios from "axios";
 
 export default {
-  name: "exceljsTest",
   data() {
     return {
-      tableDataIDM: [],
-      tableDataIKE: [],
-      tableDataIKS: [],
+      tableData: [],
     };
   },
   methods: {
-    async inputXLSX(event) {
-      const selectedFile = event.target.files[0];
-
-      if (!selectedFile) {
-        return;
-      }
-
-      const workbook = new ExcelJS.Workbook();
-
-      try {
-        await workbook.xlsx.load(selectedFile);
-
-        const worksheetIDM = workbook.getWorksheet("idm");
-        const worksheetIKE = workbook.getWorksheet("ike");
-        const worksheetIKS = workbook.getWorksheet("iks");
-
-        const tableDataIDM = [];
-        const tableDataIKE = [];
-        const tableDataIKS = [];
-
-        worksheetIDM.eachRow((row, index) => {
-          if (index === 1) {
-            return;
-          }
-
-          const data = {
-            tahun: row.getCell(1).value,
-            indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
-            keterangan: row.getCell(4).value,
-            kegiatan: row.getCell(5).value,
-            nilai: row.getCell(6).value,
-            pusat: row.getCell(7).value,
-            provinsi: row.getCell(8).value,
-            kabupaten: row.getCell(9).value,
-            desa: row.getCell(10).value,
-            csr: row.getCell(11).value,
-            lainnya: row.getCell(12).value,
-          };
-          tableDataIDM.push(data);
+    fetchData() {
+      const payload = { desa_id: localStorage.getItem("desa_id") };
+      axios
+        .post("http://localhost:8080/idmiksike/list", payload)
+        .then(({ data }) => {
+          this.tableData = data.idm;
+          console.log(data.idm[0].tahun);
+        })
+        .catch((error) => {
+          console.error("Error in Axios POST request:", error);
         });
-
-        worksheetIKE.eachRow((row, index) => {
-          if (index === 1) {
-            return;
-          }
-
-          const data = {
-            tahun: row.getCell(1).value,
-            indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
-            keterangan: row.getCell(4).value,
-            kegiatan: row.getCell(5).value,
-            nilai: row.getCell(6).value,
-            pusat: row.getCell(7).value,
-            provinsi: row.getCell(8).value,
-            kabupaten: row.getCell(9).value,
-            desa: row.getCell(10).value,
-            csr: row.getCell(11).value,
-            lainnya: row.getCell(12).value,
-          };
-          tableDataIKE.push(data);
-        });
-
-        worksheetIKS.eachRow((row, index) => {
-          if (index === 1) {
-            return;
-          }
-
-          const data = {
-            tahun: row.getCell(1).value,
-            indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
-            keterangan: row.getCell(4).value,
-            kegiatan: row.getCell(5).value,
-            nilai: row.getCell(6).value,
-            pusat: row.getCell(7).value,
-            provinsi: row.getCell(8).value,
-            kabupaten: row.getCell(9).value,
-            desa: row.getCell(10).value,
-            csr: row.getCell(11).value,
-            lainnya: row.getCell(12).value,
-          };
-          tableDataIKS.push(data);
-        });
-
-        this.tableDataIDM = tableDataIDM;
-        this.tableDataIKE = tableDataIKE;
-        this.tableDataIKS = tableDataIKS;
-      } catch (error) {
-        console.error("Error reading Excel file: ", error);
-      }
     },
+  },
+
+  created() {
+    this.fetchData(); // Get original data
   },
 };
 </script>
@@ -123,6 +53,23 @@ export default {
 <style>
 .wrapper-h1 {
   padding: 100px;
+}
+
+.wrapper-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.card-idm {
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+  align-items: center;
+  border: solid;
+  border-color: black;
 }
 
 .excelbutton-wrapper {

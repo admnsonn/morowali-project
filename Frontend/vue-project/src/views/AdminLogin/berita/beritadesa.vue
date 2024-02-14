@@ -196,6 +196,7 @@ export default {
           console.error("Error in Axios POST request:", error);
         });
     },
+
     async deleteData(id, judul) {
       try {
         const result = await Swal.fire({

@@ -129,9 +129,7 @@
               >Layanan Desa</router-link
             >
 
-            <router-link to="/idm-management" class="menu-item"
-              >IDM</router-link
-            >
+            <router-link to="/idm-beranda" class="menu-item">IDM</router-link>
           </li>
         </ul>
 
