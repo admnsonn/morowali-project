@@ -47,7 +47,8 @@ func List(c *gin.Context) {
 	SELECT MIN(tahun) AS tahun
 	FROM dev.idm
 	WHERE desa_id = $1
-	GROUP BY tahun;
+	GROUP BY tahun
+	ORDER BY tahun DESC;
 	`
 
 	row, err := tx.Query(ctx, query1, input.IDDesa)

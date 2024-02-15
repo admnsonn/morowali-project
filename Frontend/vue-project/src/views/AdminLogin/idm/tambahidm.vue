@@ -167,7 +167,7 @@ export default {
       tableDataIDM: [],
       tableDataIKE: [],
       tableDataIKS: [],
-      desa_id: "123",
+      desa_id: localStorage.getItem("desa_id"),
       fileInputKey: 0, // Initialize the key
       fileInputValue: {}, // Initially empty object
     };
@@ -196,12 +196,13 @@ export default {
           desa_id: this.desa_id,
           data: [
             {
-              data_idm: this.tableIDM,
-              data_iks: this.tableIKS,
-              data_ike: this.tableIKE,
+              data_idm: this.tableDataIDM,
+              data_iks: this.tableDataIKS,
+              data_ike: this.tableDataIKE,
             },
           ],
         };
+        console.log(payload);
 
         axios
           .post("http://localhost:8080/idmiksike/input", payload)
@@ -225,13 +226,18 @@ export default {
             console.error(error);
             // Handle error, e.g., show an error message
           });
+      } else {
+        Swal.fire(
+          "Data tidak ditambahkan.",
+          "Data tidak jadi ditambahkan",
+          "info"
+        );
       }
     },
 
     async inputXLSX(event) {
       const selectedFile = event.target.files[0];
       if (!selectedFile) {
-        console.log("gaada file");
         return;
       }
 
@@ -254,9 +260,9 @@ export default {
           }
 
           const data = {
-            tahun: row.getCell(1).value,
+            tahun: row.getCell(1).value.toString(),
             indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
+            skor: row.getCell(3).value.toString(),
             keterangan: row.getCell(4).value,
             kegiatan: row.getCell(5).value,
             nilai: row.getCell(6).value,
@@ -277,9 +283,9 @@ export default {
           }
 
           const data = {
-            tahun: row.getCell(1).value,
+            tahun: row.getCell(1).value.toString(),
             indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
+            skor: row.getCell(3).value.toString(),
             keterangan: row.getCell(4).value,
             kegiatan: row.getCell(5).value,
             nilai: row.getCell(6).value,
@@ -299,9 +305,9 @@ export default {
           }
 
           const data = {
-            tahun: row.getCell(1).value,
+            tahun: row.getCell(1).value.toString(),
             indikator: row.getCell(2).value,
-            skor: row.getCell(3).value,
+            skor: row.getCell(3).value.toString(),
             keterangan: row.getCell(4).value,
             kegiatan: row.getCell(5).value,
             nilai: row.getCell(6).value,
@@ -318,7 +324,6 @@ export default {
         this.tableDataIDM = tableDataIDM;
         this.tableDataIKE = tableDataIKE;
         this.tableDataIKS = tableDataIKS;
-        console.log(this.tableDataIDM);
       } catch (error) {
         console.error("Error reading Excel file: ", error);
       }

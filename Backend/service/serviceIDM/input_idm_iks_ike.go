@@ -3,8 +3,6 @@ package serviceidm
 import (
 	"context"
 	"net/http"
-	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
@@ -90,7 +88,7 @@ func Input(c *gin.Context) {
 	}
 	defer tx.Rollback(context.Background())
 
-	year := strconv.Itoa(time.Now().Year())
+	year := input.Data[0].IDMinput[0].Tahun
 
 	if len(input.Data) != 0 {
 
