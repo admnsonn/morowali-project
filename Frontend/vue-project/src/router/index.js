@@ -104,6 +104,7 @@ const routes = [
   // Admin: IDM
   { path: '/idm-beranda', component: import('../views/AdminLogin/idm/idm-beranda.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
   { path: '/tambah-idm', component: import('../views/AdminLogin/idm/tambahidm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
+  { path: '/detail-idm/:tahun', component: import('../views/AdminLogin/idm/detailidm.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardAdmin },
 
   // Buat Warga
   { path: '/beranda-warga', component: () => import('../views/WargaLogin/beranda/berandawarga.vue'), meta: { requiresAuth: true }, beforeEnter: authGuardWarga },

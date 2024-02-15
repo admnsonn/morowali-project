@@ -1,4 +1,14 @@
 <template>
+  <div class="kontainer-admin">
+    <div class="kontainer">
+      <div class="bartipis" />
+      <div class="">
+        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
+        <p class="teks-kabupaten">Kabupaten, Morowali</p>
+      </div>
+    </div>
+  </div>
+
   <div class="wrapper-h1">
     <div class="wrapper-button">
       <router-link to="/tambah-idm" class="btn btn-success">
@@ -13,7 +23,14 @@
       >
         <li class="list-group-item card-idm">
           <div>IDM {{ item.tahun }}</div>
-          <div>detail</div>
+          <div>
+            <router-link
+              :to="`/detail-idm/${item.tahun}`"
+              class="btn btn-primary"
+            >
+              Detail
+            </router-link>
+          </div>
         </li>
       </ul>
     </div>

@@ -1,5 +1,18 @@
 <template>
+  <div class="kontainer-admin">
+    <div class="kontainer">
+      <div class="bartipis" />
+      <div class="">
+        <h1 class="teks-admin">Admin desa Bahomoleo</h1>
+        <p class="teks-kabupaten">Kabupaten, Morowali</p>
+      </div>
+    </div>
+  </div>
+
   <div class="wrapper-h1">
+    <router-link to="/idm-beranda" class="btn btn-warning back-button"
+      >Kembali</router-link
+    >
     <ul class="list-group list-group-flush">
       <li class="list-group-item card-idm">
         <div>
@@ -145,8 +158,6 @@
         <button @click="clearData" type="button" class="btn btn-danger">
           Clear data
         </button>
-      </div>
-      <div>
         <button @click="submitData" type="button" class="btn btn-success">
           Submit Data
         </button>
@@ -202,7 +213,6 @@ export default {
             },
           ],
         };
-        console.log(payload);
 
         axios
           .post("http://localhost:8080/idmiksike/input", payload)
@@ -224,7 +234,6 @@ export default {
           })
           .catch((error) => {
             console.error(error);
-            // Handle error, e.g., show an error message
           });
       } else {
         Swal.fire(
@@ -333,6 +342,11 @@ export default {
 </script>
 
 <style>
+.back-button {
+  color: black;
+  margin-bottom: 10px;
+}
+
 .wrapper-h1 {
   padding: 100px;
 }
