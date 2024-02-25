@@ -442,7 +442,7 @@ export default {
   background-color: #003366;
   margin-left: -1%;
   padding: 0px 30px;
-  overflow: auto;
+  overflow-y: scroll;
 }
 
 .sidebar-top {

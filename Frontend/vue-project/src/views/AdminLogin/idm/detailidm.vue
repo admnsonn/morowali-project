@@ -9,11 +9,18 @@
     </div>
   </div>
 
-  <div class="wrapper-h1">
+  <div class="wrapper-detail">
+    <div class="wrapper-header">
+      <h3 class="title-warga">Data Indeks Desa Membangun (IDM)</h3>
+      <p class="subtitle-warga">
+        Management Content dan Data IDM Tahun {{ tableDataIDM[0].tahun }}
+      </p>
+    </div>
+
     <ul class="list-group list-group-flush">
       <li class="list-group-item card-idm">
         <div>
-          <h1>IDM</h1>
+          <h3>IDM</h3>
           <table class="tabel">
             <thead>
               <tr>
@@ -54,7 +61,7 @@
       </li>
       <li class="list-group-item card-idm">
         <div>
-          <h1>IKE</h1>
+          <h3>IKE</h3>
           <table class="tabel">
             <thead>
               <tr>
@@ -95,7 +102,7 @@
       </li>
       <li class="list-group-item card-idm">
         <div>
-          <h1>IKS</h1>
+          <h3>IKS</h3>
           <table class="tabel">
             <thead>
               <tr>
@@ -192,6 +199,20 @@ td {
   font-size: small;
 }
 
+h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+h3.title-warga {
+  font-size: 20px;
+}
+
+p.subtitle-warga {
+  font-size: 15px;
+}
+
 .excelbutton-wrapper {
   display: flex;
   width: 100%;
@@ -211,5 +232,17 @@ td {
   flex-direction: column;
   max-width: fit-content;
   gap: 10px;
+}
+
+.wrapper-detail {
+  display: flex;
+  flex-direction: column;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 10px;
+}
+
+.wrapper-header {
+  margin-bottom: 20px;
 }
 </style>

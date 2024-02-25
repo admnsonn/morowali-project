@@ -16,7 +16,11 @@
         <p class="subtitle-warga">Management Content dan Layanan Warga</p>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-light btn-excel my-2" @click="exportToExcel">
+        <button
+          type="button"
+          class="btn btn-light btn-excel my-2"
+          @click="exportToExcel"
+        >
           Export Excel
         </button>
       </div>
@@ -25,11 +29,21 @@
     <div class="bungkus-tabel">
       <div class="row">
         <div class="col">
-          <input v-model="searchKeyword" @input="filterData" type="text" class="form-control w-100 my-3" placeholder="Search...">
+          <input
+            v-model="searchKeyword"
+            @input="filterData"
+            type="text"
+            class="form-control w-100 my-3"
+            placeholder="Search..."
+          />
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-success btn-tambah my-2">
-            <router-link to="/tambah-warga" class="nav-link router-link-underline">+ Tambah Data</router-link>
+            <router-link
+              to="/tambah-warga"
+              class="nav-link router-link-underline"
+              >+ Tambah Data</router-link
+            >
           </button>
         </div>
       </div>
@@ -40,12 +54,14 @@
           <table class="tabel">
             <thead>
               <tr>
-                <th>
-                  No.
-                </th>
+                <th>No.</th>
                 <th>
                   NIK
-                  <button type="button" class="btn btn-link" @click="sortByNIK()">
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    @click="sortByNIK()"
+                  >
                     <img src="../../../../src/assets/img/sort.svg" />
                   </button>
                 </th>
@@ -55,34 +71,63 @@
                 <th>Kartu Keluarga</th>
                 <th>
                   Jenis Kelamin
-                  <select v-model.number="selectedKategorijk" @change="filterByKategorijk" class="btn btn-light p-1 my-1">
+                  <select
+                    v-model.number="selectedKategorijk"
+                    @change="filterByKategorijk"
+                    class="btn btn-light p-1 my-1"
+                  >
                     <option value="0">All</option>
-                    <option v-for="item in kategoriJK" :value="item.id_jenis_kelamin">
-                      {{ item.jenis_kelamin }}</option>
+                    <option
+                      v-for="item in kategoriJK"
+                      :value="item.id_jenis_kelamin"
+                    >
+                      {{ item.jenis_kelamin }}
+                    </option>
                   </select>
                 </th>
                 <th>
                   Agama
-                  <select v-model.number="selectedKategoriag" @change="filterByKategoriag" class="btn btn-light p-1 my-1">
+                  <select
+                    v-model.number="selectedKategoriag"
+                    @change="filterByKategoriag"
+                    class="btn btn-light p-1 my-1"
+                  >
                     <option value="0">All</option>
                     <option v-for="item in kategoriAG" :value="item.id_agama">
-                      {{ item.Agama }}</option>
+                      {{ item.Agama }}
+                    </option>
                   </select>
                 </th>
                 <th>
                   Pendidikan
-                  <select v-model.number="selectedKategoripn" @change="filterByKategoripn" class="btn btn-light p-1 my-1">
+                  <select
+                    v-model.number="selectedKategoripn"
+                    @change="filterByKategoripn"
+                    class="btn btn-light p-1 my-1"
+                  >
                     <option value="0">All</option>
-                    <option v-for="item in kategoriPN" :value="item.id_pendidikan">
-                      {{ item.kategori_pendidikan }}</option>
+                    <option
+                      v-for="item in kategoriPN"
+                      :value="item.id_pendidikan"
+                    >
+                      {{ item.kategori_pendidikan }}
+                    </option>
                   </select>
                 </th>
                 <th>
                   Finansial
-                  <select v-model.number="selectedKategorifn" @change="filterByKategorifn" class="btn btn-light p-1 my-1">
+                  <select
+                    v-model.number="selectedKategorifn"
+                    @change="filterByKategorifn"
+                    class="btn btn-light p-1 my-1"
+                  >
                     <option value="0">All</option>
-                    <option v-for="item in kategoriFN" :value="item.id_financial">
-                      {{ item.financial }}</option>
+                    <option
+                      v-for="item in kategoriFN"
+                      :value="item.id_financial"
+                    >
+                      {{ item.financial }}
+                    </option>
                   </select>
                 </th>
                 <th>Umur</th>
@@ -105,18 +150,31 @@
                 <td>
                   <router-link :to="`/detail-warga/${item.id_pengguna}`">
                     <button class="btn btn-info m-1">
-                      <img src="../../../../src/assets/img/view.svg" class="custom-icon" />
+                      <img
+                        src="../../../../src/assets/img/view.svg"
+                        class="custom-icon"
+                      />
                     </button>
                   </router-link>
                   <router-link :to="`/update-warga/${item.id_pengguna}`">
                     <button class="btn btn-warning m-1">
-                      <img src="../../../../src/assets/img/edit.svg" class="custom-icon" />
+                      <img
+                        src="../../../../src/assets/img/edit.svg"
+                        class="custom-icon"
+                      />
                     </button>
                   </router-link>
-                  <button type="button" @click.prevent="
-                    deleteData(item.id_pengguna, item.nama_lengkap)
-                    " class="btn btn-danger m-1">
-                    <img src="../../../../src/assets/img/delete.svg" class="custom-icon" />
+                  <button
+                    type="button"
+                    @click.prevent="
+                      deleteData(item.id_pengguna, item.nama_lengkap)
+                    "
+                    class="btn btn-danger m-1"
+                  >
+                    <img
+                      src="../../../../src/assets/img/delete.svg"
+                      class="custom-icon"
+                    />
                   </button>
                 </td>
               </tr>
@@ -285,14 +343,28 @@ export default {
           item.niK.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
           item.kk.toString().includes(this.searchKeyword) ||
           item.jenis_kelamin.toString().includes(this.searchKeyword) ||
-          item.alamat_pengguna.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.nama_lengkap.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+          item.alamat_pengguna
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_lengkap
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
           item.umur.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.no_telp.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.kategori_financial.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.nama_agama.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.nama_pendidikan.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-          item.status_pernikahan.toLowerCase().includes(this.searchKeyword.toLowerCase())
+          item.no_telp
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
+          item.kategori_financial
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_agama
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
+          item.nama_pendidikan
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase()) ||
+          item.status_pernikahan
+            .toLowerCase()
+            .includes(this.searchKeyword.toLowerCase())
         );
       });
       this.currentPage = 1; // Reset halaman ke 1 setiap kali pencarian berubah
