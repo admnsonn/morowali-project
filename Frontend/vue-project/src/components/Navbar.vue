@@ -147,7 +147,7 @@
     </nav>
   </div>
 
-  <div v-else-if="userRole === 'Warga'">
+  <div v-else-if="userRole === 'Warga'" class="">
     <nav class="sidebar">
       <br />
       <router-link to="/beranda-warga">
@@ -259,7 +259,7 @@
     </nav>
   </div>
 
-  <div v-else>
+  <div v-else class="">
     <nav class="menu">
       <div class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div className="container">
@@ -303,6 +303,9 @@
             <Dropdown title="Destinasi" :items="destinasi" />
             <div class="menu-item"><a href="/idm">IDM</a></div>
             <div class="menu-item"><a href="/data-desa">Data Desa</a></div>
+            <div class="menu-item">
+              <a href="/layanan-desa">Layanan Desa</a>
+            </div>
           </div>
 
           <div
@@ -431,6 +434,11 @@ export default {
 </script>
 
 <style>
+
+Dropdown {
+  z-index: 2;
+}
+
 .sidebar {
   width: 285px;
   height: 100vh;
@@ -608,6 +616,7 @@ hr {
 .menu-item1.dropdown {
   position: relative;
   display: inline-block;
+  z-index: 9;
 }
 
 .menu-item1.dropdown button {
@@ -635,7 +644,7 @@ hr {
   background-color: #003366;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 9;
   border-radius: 15px;
   font-size: 14px;
 }
@@ -655,6 +664,7 @@ hr {
 
 .menu-item1.dropdown:hover .dropdown-menu {
   display: block;
+  z-index: 2;
 }
 
 .dropdown-toggle {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar class="navbar-z" />
   </div>
 
   <div
@@ -9,6 +9,7 @@
       backgroundColor: '#EEF1F3',
       marginLeft: posisi !== 0 ? '268px' : '0',
       paddingBottom: posisi !== 0 ? '15%' : '15%',
+      width: '100%',
     }"
   >
     <RouterView />
@@ -186,5 +187,9 @@ h3 {
 .form-group-foto {
   display: flex;
   flex-direction: column;
+}
+
+.navbar-z {
+  z-index: 100;
 }
 </style>

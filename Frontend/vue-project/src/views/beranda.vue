@@ -1,52 +1,28 @@
 <template>
   <div class="gambar">
-    <img src="../assets/img/desa.png" alt="Gambar Berita" class="img-fluid gambar" width="2000" />
+    <img
+      src="../assets/img/desa.png"
+      alt="Gambar Berita"
+      class="img-fluid absolute-image"
+      width="2000"
+    />
     <h1 class="text_tt text-start">{{ title }}</h1>
     <h4 class="text_st text-start">{{ subtitle }}</h4>
   </div>
 
-  <div class="container py-5">
-    <div v-for="(potensi, id_potensi) in potensiData" :key="id_potensi"
-      class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
-      @mouseenter="addShadow" @mouseleave="removeShadow">
-      <div class="container mt-4">
-        <div class="row">
-          <div class="col-12 d-md-none mb-4">
-            <img src="../../src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
-          </div>
-
-          <div class="col-md-6 order-md-2 d-none d-md-block">
-            <img src="../../src/assets/img/Artikel.png" alt="Gambar Berita" class="img-fluid" />
-          </div>
-
-          <div class="col-md-6 order-md-1">
-            <div class="text-center text-md-start">
-              <h2 class="mb-3 d-md-none warna-judul-artikel">
-                {{ potensi.judul_potensi }}
-              </h2>
-              <div class="d-none d-md-block">
-                <h2 class="mb-2 warna-judul-artikel">
-                  {{ potensi.judul_potensi }}
-                </h2>
-                <br />
-              </div>
-              <p class="mb-4 sub-berita">{{ potensi.deskripsi }}</p>
-              <a href="/sejarah">
-                <button class="btn btn-secondary" @click="showDetail(item)">
-                  Selengkapnya
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div v-for="(idm, index) in idmData" :key="index" class="container-lg mt-2">
+  <div
+    v-for="(idm, index) in idmData"
+    :key="index"
+    class="container-lg wrapper-idm"
+  >
     <h2 class="text-idm mb-4">Index Desa Membangun</h2>
     <p class="text-sidm mb-4">Lihat total index desa</p>
-    <img src="../assets/img/Idm.png" alt="Gambar Berita" class="img-fluid gambar" width="2000" />
+    <img
+      src="../assets/img/Idm.png"
+      alt="Gambar Berita"
+      class="img-fluid"
+      width="2000"
+    />
     <p class="text-ssidm mt-3">{{ idm.teks }}</p>
     <a href="/idm">
       <button class="btn1 btn btn-secondary mt-4" @click="showDetail(item)">
@@ -55,16 +31,26 @@
     </a>
   </div>
 
-  <div class="container-lg mt-5 py-5">
+  <div class="container-lg mt-5 py-5 tengahin">
     <h2 class="text-idm mb-4">Struktur Organisasi</h2>
     <p class="text-sidm mb-4">Lihat total struktur organisasi</p>
     <div class="row">
-      <div v-for="(kepala_desa, id_kepala_desa) in kepalaDesaData" :key="id_kepala_desa" class="col-md-4 mb-4">
-        <img :src="`data:image/png;base64,${kepala_desa.foto_kepala_desa}`" :alt="kepala_desa.name"
-          class="img-fluid foto-kepdes" />
+      <div
+        v-for="(kepala_desa, id_kepala_desa) in kepalaDesaData"
+        :key="id_kepala_desa"
+        class="container-kepdes"
+      >
+        <img
+          :src="`data:image/png;base64,${kepala_desa.foto_kepala_desa}`"
+          :alt="kepala_desa.name"
+          class="img-fluid foto-kepdes"
+        />
         <div class="text-center mt-2">
           <p class="font-weight-bold nama-kepdes">{{ kepala_desa.nama }}</p>
-          <p class="periode-kepdes">{{ kepala_desa.jabatan_dimulai }} - {{ kepala_desa.jabatan_berakhir }}</p>
+          <p class="periode-kepdes">
+            {{ kepala_desa.jabatan_dimulai }} -
+            {{ kepala_desa.jabatan_berakhir }}
+          </p>
         </div>
       </div>
     </div>
@@ -75,40 +61,44 @@
     </a>
   </div>
 
-  <div class="container-lg mt-5">
+  <div class="container-lg mt-5 paddingx-disini">
     <h2 class="text-idm mb-4">Arsip Berita dan Artikel</h2>
     <p class="text-sidm mb-4">Berita terbaru dari desa Bahomoleo</p>
-    <div class="container py-2">
-      <div v-for="(berita, id_berita) in beritaData" :key="id_berita"
-        class="border rounded row align-items-center pt-3 pb-3 mb-4 with-shadow" :class="{ 'with-shadow': isHovered }"
-        @mouseenter="addShadow" @mouseleave="removeShadow">
-        <div class="container mt-4">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="/src/assets/img/Artikel.png" alt="Latest Image" class="img-fluid" />
-            </div>
+    <div class="berita-container">
+      <div
+        v-for="(berita, id_berita) in beritaData"
+        :key="id_berita"
+        class="card-berita with-shadow"
+        :class="{ 'with-shadow': isHovered }"
+        @mouseenter="addShadow"
+        @mouseleave="removeShadow"
+      >
+        <div class="card-kiri">
+          <img
+            src="/src/assets/img/Artikel.png"
+            alt="Latest Image"
+            class="img-fluid responsifkan"
+          />
+        </div>
 
-            <div class="col-md-6 order-md-1">
-              <div class="text-center text-md-start">
-                <h2 class="mb-3 d-md-none warna-judul-artikel">
-                  {{ berita.judul }}
-                </h2>
-                <div class="d-none d-md-block">
-                  <h2 class="mb-2 warna-judul-artikel">
-                    {{ berita.judul }}
-                  </h2>
-                  <br />
-                </div>
-              </div>
-              <h5 class="mb-4 sub-berita">{{ berita.sub_judul }}</h5>
-              <p class="mb-4 sub-berita">{{ berita.deskripsi }}</p>
-              <a href="/berita">
-                <button class="btn btn-secondary" @click="showDetail(berita)">
-                  Selengkapnya
-                </button>
-              </a>
+        <div class="card-kanan">
+          <div class="align-ini">
+            <div>
+              <h2 class="mb-2 warna-judul-artikel">
+                {{ berita.judul }}
+              </h2>
             </div>
+            <h5 class="sub-berita">{{ berita.sub_judul }}</h5>
+            <p class="mb-4 sub-berita" v-html="berita.deskripsi" />
           </div>
+          <a href="/berita" class="anchor-berita">
+            <button
+              class="btn btn-secondary button-berita"
+              @click="showDetail(berita)"
+            >
+              Selengkapnya
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -120,12 +110,22 @@
     <a href="/galeri-foto">
       <p class="text-galeri mb-4">Lihat semua</p>
     </a>
-    <div class="container mt-4">
-      <div class="row justify-content-between">
-        <div v-for="(galeri, index) in galeriData" :key="index" class="col-4 mb-4 ml-2 border rounded with-shadow"
-          :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
+    <div class="container mt-">
+      <div class="container-galeri">
+        <div
+          v-for="(galeri, index) in galeriData"
+          :key="index"
+          class="col-4 mb-4 ml-2 border rounded min-lebar with-shadow"
+          :class="{ 'with-shadow': isHovered }"
+          @mouseenter="addShadow"
+          @mouseleave="removeShadow"
+        >
           <div class="mb-4 mt-2 gambar-orang">
-            <img :src="`data:image/png;base64,${galeri.nama}`" :alt="galeri.foto" class="img-fluid" />
+            <img
+              :src="`data:image/png;base64,${galeri.nama}`"
+              :alt="galeri.foto"
+              class="img-fluid foto-galeri"
+            />
           </div>
           <p class="mb-2 mt-2 text-center galeri-description">
             {{ galeri.foto }}
@@ -149,7 +149,7 @@ export default {
       kepalaDesaData: [],
       potensiData: [],
       idmData: [],
-      // 
+      //
       title: "",
       subtitle: "",
       isHovered: false,
@@ -201,72 +201,83 @@ export default {
     },
     async fetchPotensi() {
       try {
-        const response = await axios.get(`http://localhost:8080/potensi_desa/list/${this.id_desa}`, {});
+        const response = await axios.get(
+          `http://localhost:8080/potensi_desa/list/${this.id_desa}`,
+          {}
+        );
         if (response.data.status) {
           this.potensiData = response.data.data
             .sort((a, b) => b.id_potensi - a.id_potensi)
             .slice(0, 1);
         } else {
-          console.log("Data Kosong atau Terjadi Kesalahan")
+          console.log("Data Kosong atau Terjadi Kesalahan");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     async fetchIdm() {
       try {
-        const response = await axios.get(`http://localhost:8080/idm/${this.id_desa}`);
+        const response = await axios.get(
+          `http://localhost:8080/idm/${this.id_desa}`
+        );
         if (response.data.status) {
           this.idmData = response.data.data;
         } else {
-          console.log("Data Kosong atau Terjadi Kesalahan")
+          console.log("Data Kosong atau Terjadi Kesalahan");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     async fetchKepalaDesa() {
       try {
-        const response = await axios.get(`http://localhost:8080/pemerintah/kepdes/${this.id_desa}`);
+        const response = await axios.get(
+          `http://localhost:8080/pemerintah/kepdes/${this.id_desa}`
+        );
         if (response.data.status) {
           this.kepalaDesaData = response.data.data
             .map((item, index) => ({ ...item, index }))
             .sort((a, b) => b.index - a.index)
             .slice(0, 3);
         } else {
-          console.log("Data Kosong atau Terjadi Kesalahan")
+          console.log("Data Kosong atau Terjadi Kesalahan");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     async fetchBerita() {
       try {
-        const response = await axios.post("http://localhost:8080/berita/list", { id_desa: this.id_desa });
+        const response = await axios.post("http://localhost:8080/berita/list", {
+          id_desa: this.id_desa,
+        });
         if (response.data.status) {
           this.beritaData = response.data.data
             .sort((a, b) => b.id_berita - a.id_berita)
             .slice(0, 2);
         } else {
-          console.log("Data Kosong atau Terjadi Kesalahan")
+          console.log("Data Kosong atau Terjadi Kesalahan");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     async fetchGaleri() {
       try {
-        const response = await axios.get(`http://localhost:8080/galeri/${this.id_desa}`);
+        const response = await axios.get(
+          `http://localhost:8080/galeri/${this.id_desa}`
+        );
         if (response.data.status) {
           this.galeriData = response.data.data
             .map((item, index) => ({ ...item, index }))
             .sort((a, b) => b.index - a.index)
             .slice(0, 3);
         } else {
-          console.log("Data Kosong atau Terjadi Kesalahan")
+          console.log("Data Kosong atau Terjadi Kesalahan");
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     },
     addShadow() {
@@ -291,27 +302,40 @@ export default {
 </script>
 
 <style scoped>
+.absolute-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
 .gambar {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: center;
   margin: auto;
+  position: relative;
+  min-height: 200px;
+  height: 400px;
+  width: 100%;
 }
 
 .text_tt {
+  z-index: 1;
   color: aliceblue;
-  position: absolute;
-  left: 20%;
-  top: 40%;
-  transform: translate(-40%, -50%);
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .text_st {
+  z-index: 1;
   color: aliceblue;
-  position: absolute;
-  margin-left: 15%;
-  top: 50%;
-  transform: translate(-41%, -50%);
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .btn1 {
@@ -334,6 +358,7 @@ export default {
 .warna-judul-artikel {
   font-weight: bold;
   color: #003366 !important;
+  text-align: end;
 }
 
 .with-shadow {
@@ -399,67 +424,204 @@ export default {
   font-weight: bold;
 }
 
-@media only screen and (max-width: 768px) {
-
-  /* For mobile phones: */
-  [class*="col-"] {
-    width: 100%;
-  }
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-@media only screen and (max-width: 1200px) {
-
-  /* For medium-sized screens: */
-  .text_tt {
-    left: 10%;
-    top: 40%;
-    transform: translate(-10%, -50%);
-  }
-
-  .text_st {
-    margin-left: 10%;
-    top: 50%;
-    transform: translate(-11%, -50%);
-  }
+.container-kepdes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
 }
 
-@media only screen and (max-width: 992px) {
+.foto-kepdes {
+  width: 300px;
+  height: 400px;
+}
 
+.berita-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.card-berita {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  border: solid;
+  border-width: 1px;
+  border-color: #c4c4c4;
+  border-radius: 10px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.wrapper-atas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tengahin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto-galeri {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.min-lebar {
+  min-width: 200px;
+}
+
+.container-galeri {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-kanan {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  width: 100%;
+}
+
+.card-kiri {
+  border-radius: 0%;
+}
+
+.align-ini {
+  text-align: end;
+}
+
+.wrapper-idm {
+  margin-top: 60px;
+}
+
+@media (max-width: 425px) {
   /* For small-sized screens: */
+
+  .berita-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+
   .text_tt {
-    left: 5%;
-    top: 40%;
-    transform: translate(-5%, -50%);
+    z-index: 1;
+    color: aliceblue;
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 1rem;
   }
 
   .text_st {
-    margin-left: 5%;
-    top: 50%;
-    transform: translate(-6%, -50%);
+    z-index: 1;
+    color: aliceblue;
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 1rem;
   }
-}
-
-@media only screen and (max-width: 768px) {
-
-  /* For mobile phones: */
-  .text_tt {
-    position: absolute;
-    left: 40%;
-    font-size: 27px;
-    top: 11%;
-    transform: translate(-50%, 0);
+  .text-ssidm {
     text-align: center;
-    margin: 0;
+    font-size: small;
   }
 
-  .text_st {
-    position: absolute;
-    font-size: 15px;
-    left: 40%;
-    top: 19%;
-    transform: translate(-50%, 0);
+  .paddingx-disini {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .responsifkan {
+    min-height: 131px;
+    object-fit: cover;
+  }
+
+  .warna-judul-artikel {
+    font-weight: bold;
+    font-size: large;
+    color: #003366 !important;
+    text-align: start;
+  }
+
+  .sub-berita {
+    font-weight: bold;
+    font-size: small;
+  }
+
+  .container-galeri {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .text-galeri {
+    color: black;
     text-align: center;
-    margin: 0;
+    text-decoration: dashed;
+  }
+  .card-berita {
+    border: solid;
+    border-width: 1px;
+    border-color: #c4c4c4;
+    border-radius: 10px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .button-berita {
+    max-width: fit-content;
+    padding: 10px;
+  }
+
+  .anchor-berita {
+    display: flex;
+    justify-content: end;
+  }
+  .card-kanan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+  .align-ini {
+    text-align: start;
   }
 }
 </style>

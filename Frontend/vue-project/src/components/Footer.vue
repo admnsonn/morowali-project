@@ -201,4 +201,19 @@ a:hover {
     margin-right: 0;
   }
 }
+
+@media (max-width: 425px) {
+  .footer {
+    padding: 10px;
+    margin-right: 10px;
+  }
+
+  .jarak {
+    margin-right: 0;
+  }
+
+  .justify-content-end {
+    justify-content: start !important;
+  }
+}
 </style>
