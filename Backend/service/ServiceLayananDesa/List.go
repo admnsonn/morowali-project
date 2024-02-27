@@ -17,6 +17,7 @@ func List(c *gin.Context) {
 		Alamat  string `json:"alamat"`
 		Layanan string `json:"layanan"`
 		Status  string `json:"status"`
+		NIK     string `json:"nik"`
 	}
 
 	type Request struct {
@@ -51,6 +52,7 @@ func List(c *gin.Context) {
 	umkm := `
 	select 
 	a.id      ,
+	a.nik     ,
 	a.nama    ,
 	a.nomor_hp,
 	a.alamat  ,
@@ -80,6 +82,7 @@ func List(c *gin.Context) {
 		var ambil Data_kontainer
 		err := row.Scan(
 			&ambil.ID,
+			&ambil.NIK,
 			&ambil.Nama,
 			&ambil.NomorHP,
 			&ambil.Alamat,
