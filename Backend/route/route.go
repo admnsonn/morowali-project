@@ -1,6 +1,7 @@
 package route
 
 import (
+	servicelayanandesa "main/service/ServiceLayananDesa"
 	servicepemerintahgo "main/service/ServicePemerintah.go"
 	serviceproduksi "main/service/ServiceProduksi"
 	serviceberita "main/service/serviceBerita"
@@ -157,6 +158,13 @@ func Routes(router *gin.Engine) {
 		idmiksike.POST("/input", serviceidm.Input)
 		idmiksike.POST("/detail", serviceidm.Detail)
 		idmiksike.POST("/list", serviceidm.List)
+	}
+
+	layanan := router.Group("/layanan")
+	{
+		layanan.POST("/input", servicelayanandesa.Input)
+		layanan.POST("/list", servicelayanandesa.List)
+		layanan.POST("/ubah-status", servicelayanandesa.UbahStatus)
 	}
 
 }
