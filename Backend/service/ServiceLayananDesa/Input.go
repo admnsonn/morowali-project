@@ -53,12 +53,7 @@ func Input(c *gin.Context) {
 	err = tx.QueryRow(ctx, cek_NIK, input.NIK).Scan(&nikcek)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": err.Error()})
-		return
-	}
-
-	if nikcek == "" {
-		c.JSON(http.StatusOK, gin.H{"status": false, "message": "NIK tidak terdaftar dalam desa"})
+		c.JSON(http.StatusInternalServerError, gin.H{"status": false, "message": "NIK tidak terdaftar dalam desa ini!"})
 		return
 	}
 
