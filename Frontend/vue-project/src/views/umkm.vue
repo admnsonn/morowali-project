@@ -57,12 +57,12 @@
 
       <!-- UMKM Cards Section -->
       <div class="umkm-cards-section row mx-0">
-        <div v-for="umkm in pagedUmkms" :key="umkm.id" class="col-md-6 mb-4">
+        <div v-for="umkm in pagedUmkms" :key="umkm.id_umkm" class="col-md-6 mb-4">
           <div class="umkm-card">
-            <img :src="umkm.imageUrl" alt="umkm image" class="img-fluid" />
-            <h2 class="umkm-title">{{ umkm.title }}</h2>
-            <p class="umkm-address">{{ umkm.address }}</p>
-            <p class="umkm-phone">{{ umkm.phoneNumber }}</p>
+            <img :src="`data:image/png;base64,${umkm.foto_umkm}`" alt="umkm image" class="img-fluid foto-umkm" />
+            <h2 class="umkm-title">{{ umkm.nama_umkm }}</h2>
+            <p class="umkm-address">{{ umkm.alamat }}</p>
+            <p class="umkm-phone">{{ umkm.no_telp_umkm }}</p>
           </div>
         </div>
       </div>
@@ -76,12 +76,14 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
+      id_desa: "",
       imageUrl: "",
-      umkms: [],
-      secondColumnUmkms: [],
+      umkmData: [],
       dropdown1: '',
       dropdown2: '',
       dropdown3: '',
@@ -91,9 +93,10 @@ export default {
       perPage: 6,
     };
   },
+
   computed: {
     totalPages() {
-      return Math.ceil(this.umkms.length / this.perPage);
+      return Math.ceil(this.umkmData.length / this.perPage);
     },
     startIndex() {
       return (this.currentPage - 1) * this.perPage;
@@ -102,24 +105,10 @@ export default {
       return this.currentPage * this.perPage;
     },
     pagedUmkms() {
-      return this.umkms.slice(this.startIndex, this.endIndex);
+      return this.umkmData.slice(this.startIndex, this.endIndex);
     },
   },
-  mounted() {
 
-    setTimeout(() => {
-      this.umkms = [
-        { id: 1, name: 'UMKM 1', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 2, name: 'UMKM 2', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 3, name: 'UMKM 3', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 4, name: 'UMKM 4', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 5, name: 'UMKM 5', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 6, name: 'UMKM 6', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-        { id: 7, name: 'UMKM 7', imageUrl: '../../src/assets/img/Artikel.png', title: 'Mancing Mania Mantap', address: '633R+88F, Unnamed Road, Lalampu, Kec. Bahodopi, Kabupaten Morowali, Sulawesi Tengah 94974 ', phoneNumber: '+123456789' },
-      ];
-    }, 100);
-
-  },
   methods: {
     toggleFilter() {
       this.showFilter = !this.showFilter; // Toggle filter visibility
@@ -134,167 +123,188 @@ export default {
         this.currentPage -= 1;
       }
     },
+    async fetchUmkm() {
+      try {
+        const response = await axios.post("http://localhost:8080/umkm/list", { id_desa: this.id_desa });
+        if (response.data.status) {
+          this.umkmData = response.data.data;
+          console.log(this.umkmData)
+        } else {
+          console.log("Data Kosong atau Terjadi Kesalahan")
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
   },
-  };
+
+  created() {
+    this.id_desa = localStorage.getItem("id_desa");
+    this.fetchUmkm();
+  },
+};
 </script>
 
 <style scoped>
-  .bg-hero {
-    background-color: #003366;
-  }
+.bg-hero {
+  background-color: #003366;
+}
 
-  .text-white {
-    color: white;
-    font-weight: bold;
-    text-shadow: 2px 2px #252525;
-  }
+.text-white {
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px #252525;
+}
 
-  .text-blue {
-    color: #003366 !important;
-  }
+.text-blue {
+  color: #003366 !important;
+}
 
-  .btn-primary {
-    background-color: white;
-    color: #003366;
-    font-weight: bold;
-    border: none;
-    padding: 10px 30px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 30px;
-  }
+.btn-primary {
+  background-color: white;
+  color: #003366;
+  font-weight: bold;
+  border: none;
+  padding: 10px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 30px;
+}
 
+.filter-section {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.filter-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.dropdown {
+  margin: 0 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the UMKM Cards Section */
+.umkm-cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-x: auto;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.umkm-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #D9D9D9;
+  width: 100%;
+  /* Make cards take full width on mobile */
+}
+
+/* Style for UMKM Card Images */
+.foto-umkm {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.umkm-title {
+  font-family: 'Poppins', sans-serif;
+  color: #003366;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.umkm-address,
+.umkm-phone {
+  font-family: 'Poppins', sans-serif;
+  color: #003366;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.phone-info {
+  display: flex;
+  align-items: center;
+  color: #555;
+  /* Adjust the color as needed */
+}
+
+.pagination-controls {
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #003366;
+}
+
+@media (max-width: 767px) {
   .filter-section {
     margin-left: 5px;
-    margin-right: 15px;
+    margin-right: 5px;
   }
 
-  .filter-icon {
-    cursor: pointer;
-    font-size: 20px;
+  .col-md-11 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
-  .dropdown {
-    margin: 0 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  /* Style for the UMKM Cards Section */
-  .umkm-cards-section {
+  .filter-section .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    overflow-x: auto;
-    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .filter-section .dropdown {
+    margin-bottom: 10px;
+    flex: 0 0 48%;
+    /* Two dropdowns per row on mobile */
+    max-width: 48%;
+  }
+
+  .umkm-cards-section {
     margin-left: 5px;
     margin-right: 5px;
   }
 
   .umkm-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #D9D9D9;
-    width: 100%; /* Make cards take full width on mobile */
-  }
-
-  /* Style for UMKM Card Images */
-  .umkm-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 8px;
-  }
-
-  .umkm-title {
-    font-family: 'Poppins', sans-serif;
-    color: #003366;
-    font-size: 24px;
-    font-weight: 500;
-  }
-
-  .umkm-address,
-  .umkm-phone {
-    font-family: 'Poppins', sans-serif;
-    color: #003366;
-    font-size: 15px;
-    font-weight: 500;
-  }
-
-  .phone-info {
-    display: flex;
-    align-items: center;
-    color: #555;
-    /* Adjust the color as needed */
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
   .pagination-controls {
-    margin-top: 20px;
+    margin-top: 10px;
   }
-
-  .pagination-controls button {
-    background-color: #003366;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  .pagination-controls button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-
-  .pagination-controls span {
-    margin: 0 10px;
-    font-weight: bold;
-    color: #003366;
-  }
-
-  @media (max-width: 767px) {
-    .filter-section {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-
-    .col-md-11 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-
-    .filter-section .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-
-    .filter-section .dropdown {
-      margin-bottom: 10px;
-      flex: 0 0 48%; /* Two dropdowns per row on mobile */
-      max-width: 48%;
-    }
-
-    .umkm-cards-section {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-
-    .umkm-card {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-
-    .pagination-controls {
-      margin-top: 10px;
-    }
-  }
+}
 </style>
 

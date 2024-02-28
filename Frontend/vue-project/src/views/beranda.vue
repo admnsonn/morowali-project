@@ -1,28 +1,14 @@
 <template>
   <div class="gambar">
-    <img
-      src="../assets/img/desa.png"
-      alt="Gambar Berita"
-      class="img-fluid absolute-image"
-      width="2000"
-    />
+    <img src="../assets/img/desa.png" alt="Gambar Berita" class="img-fluid absolute-image" width="2000" />
     <h1 class="text_tt text-start">{{ title }}</h1>
     <h4 class="text_st text-start">{{ subtitle }}</h4>
   </div>
 
-  <div
-    v-for="(idm, index) in idmData"
-    :key="index"
-    class="container-lg wrapper-idm"
-  >
+  <div v-for="(idm, index) in idmData" :key="index" class="container-lg wrapper-idm">
     <h2 class="text-idm mb-4">Index Desa Membangun</h2>
     <p class="text-sidm mb-4">Lihat total index desa</p>
-    <img
-      src="../assets/img/Idm.png"
-      alt="Gambar Berita"
-      class="img-fluid"
-      width="2000"
-    />
+    <img src="../assets/img/Idm.png" alt="Gambar Berita" class="img-fluid" width="2000" />
     <p class="text-ssidm mt-3">{{ idm.teks }}</p>
     <a href="/idm">
       <button class="btn1 btn btn-secondary mt-4" @click="showDetail(item)">
@@ -35,16 +21,9 @@
     <h2 class="text-idm mb-4">Struktur Organisasi</h2>
     <p class="text-sidm mb-4">Lihat total struktur organisasi</p>
     <div class="row">
-      <div
-        v-for="(kepala_desa, id_kepala_desa) in kepalaDesaData"
-        :key="id_kepala_desa"
-        class="container-kepdes"
-      >
-        <img
-          :src="`data:image/png;base64,${kepala_desa.foto_kepala_desa}`"
-          :alt="kepala_desa.name"
-          class="img-fluid foto-kepdes"
-        />
+      <div v-for="(kepala_desa, id_kepala_desa) in kepalaDesaData" :key="id_kepala_desa" class="container-kepdes">
+        <img :src="`data:image/png;base64,${kepala_desa.foto_kepala_desa}`" :alt="kepala_desa.name"
+          class="img-fluid foto-kepdes" />
         <div class="text-center mt-2">
           <p class="font-weight-bold nama-kepdes">{{ kepala_desa.nama }}</p>
           <p class="periode-kepdes">
@@ -64,21 +43,12 @@
   <div class="container-lg mt-5 paddingx-disini">
     <h2 class="text-idm mb-4">Arsip Berita dan Artikel</h2>
     <p class="text-sidm mb-4">Berita terbaru dari desa Bahomoleo</p>
+    
     <div class="berita-container">
-      <div
-        v-for="(berita, id_berita) in beritaData"
-        :key="id_berita"
-        class="card-berita with-shadow"
-        :class="{ 'with-shadow': isHovered }"
-        @mouseenter="addShadow"
-        @mouseleave="removeShadow"
-      >
+      <div v-for="(berita, id_berita) in beritaData" :key="id_berita" class="card-berita with-shadow"
+        :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
         <div class="card-kiri">
-          <img
-            src="/src/assets/img/Artikel.png"
-            alt="Latest Image"
-            class="img-fluid responsifkan"
-          />
+          <img :src="`data:image/png;base64,${berita.foto_berita}`" alt="Latest Image" class="img-fluid foto-berita" />
         </div>
 
         <div class="card-kanan">
@@ -92,10 +62,7 @@
             <p class="mb-4 sub-berita" v-html="berita.deskripsi" />
           </div>
           <a href="/berita" class="anchor-berita">
-            <button
-              class="btn btn-secondary button-berita"
-              @click="showDetail(berita)"
-            >
+            <button class="btn btn-secondary button-berita" @click="showDetail(berita)">
               Selengkapnya
             </button>
           </a>
@@ -112,20 +79,11 @@
     </a>
     <div class="container mt-">
       <div class="container-galeri">
-        <div
-          v-for="(galeri, index) in galeriData"
-          :key="index"
-          class="col-4 mb-4 ml-2 border rounded min-lebar with-shadow"
-          :class="{ 'with-shadow': isHovered }"
-          @mouseenter="addShadow"
-          @mouseleave="removeShadow"
-        >
-          <div class="mb-4 mt-2 gambar-orang">
-            <img
-              :src="`data:image/png;base64,${galeri.nama}`"
-              :alt="galeri.foto"
-              class="img-fluid foto-galeri"
-            />
+        <div v-for="(galeri, index) in galeriData" :key="index"
+          class="col-4 mb-4 ml-2 border rounded min-lebar with-shadow" :class="{ 'with-shadow': isHovered }"
+          @mouseenter="addShadow" @mouseleave="removeShadow">
+          <div class="mb-4 gambar-orang">
+            <img :src="`data:image/png;base64,${galeri.nama}`" :alt="galeri.foto" class="img-fluid foto-galeri" />
           </div>
           <p class="mb-2 mt-2 text-center galeri-description">
             {{ galeri.foto }}
@@ -312,6 +270,7 @@ export default {
   object-position: center;
   z-index: 0;
 }
+
 .gambar {
   display: flex;
   flex-direction: column;
@@ -448,14 +407,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 40px;
 }
 
 .card-berita {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   border: solid;
   border-width: 1px;
   border-color: #c4c4c4;
@@ -465,8 +424,8 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .wrapper-atas {
@@ -484,7 +443,7 @@ export default {
 }
 
 .foto-galeri {
-  width: 300px;
+  width: 100%;
   height: 300px;
   object-fit: cover;
 }
@@ -548,6 +507,7 @@ export default {
     margin-left: 20px;
     font-size: 1rem;
   }
+
   .text-ssidm {
     text-align: center;
     font-size: small;
@@ -558,9 +518,12 @@ export default {
     padding-right: 20px;
   }
 
-  .responsifkan {
-    min-height: 131px;
+  .foto-berita {
+    width: 100%;
+    height: 300px;
     object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 8px;
   }
 
   .warna-judul-artikel {
@@ -582,11 +545,13 @@ export default {
     align-items: center;
     gap: 10px;
   }
+
   .text-galeri {
     color: black;
     text-align: center;
     text-decoration: dashed;
   }
+
   .card-berita {
     border: solid;
     border-width: 1px;
@@ -610,6 +575,7 @@ export default {
     display: flex;
     justify-content: end;
   }
+
   .card-kanan {
     display: flex;
     flex-direction: column;
@@ -620,6 +586,7 @@ export default {
     height: 100%;
     padding: 20px;
   }
+
   .align-ini {
     text-align: start;
   }

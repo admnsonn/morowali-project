@@ -14,21 +14,21 @@
                     :class="{ 'with-shadow': isHovered }" @mouseenter="addShadow" @mouseleave="removeShadow">
                     <!-- Display the data here -->
 
-                    <div class="container mt-4">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- Gambar berita -->
                                 <img :src="`data:image/png;base64,${item.foto_berita}`" alt="Gambar Berita"
-                                    class="img-fluid">
+                                    class="img-fluid foto-berita">
                             </div>
                             <div class="col-md-6">
                                 <div class="d-none d-md-block">
-                                    <h2 class="mb-2 warna-judul-berita">
+                                    <h2 class="warna-judul-berita">
                                         {{ item.judul }}
                                     </h2>
                                     <br>
                                 </div>
-                                <h5 class="mb-4 sub-berita">{{ item.sub_judul }}</h5>
+                                <h5 class="mb-4 mt-2 sub-berita">{{ item.sub_judul }}</h5>
                                 <!-- <h5 class="mb-4 item-berita">{{ item.date }}</h5> -->
                                 <p class="mb-4">{{ item.deskripsi }}</p>
                                 <a href="/contentberita">
@@ -218,6 +218,14 @@ export default {
     font-size: 18px;
     font-weight: bold;
 }
+
+.foto-berita {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
 
 .warna-judul-berita {
     font-weight: bold;

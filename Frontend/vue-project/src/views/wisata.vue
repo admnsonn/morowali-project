@@ -59,7 +59,7 @@
       <div class="wisata-cards-section row mx-0">
         <div v-for="wisata in pagedwisatas" :key="wisata.id_wisata" class="col-md-6 mb-4">
           <div class="wisata-card">
-            <img :src="`data:image/png;base64,${wisata.foto_wisata}`" alt="wisata image" class="img-fluid" />
+            <img :src="`data:image/png;base64,${wisata.foto_wisata}`" alt="wisata image" class="img-fluid foto-wisata" />
             <h2 class="wisata-title">{{ wisata.nama_wisata }}</h2>
             <p class="wisata-address">{{ wisata.alamat }}</p>
             <p class="wisata-phone">{{ wisata.no_telp }}</p>
@@ -211,9 +211,10 @@ export default {
 }
 
 /* Style for wisata Card Images */
-.wisata-card img {
+.foto-wisata {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
   border-radius: 5px;
   margin-bottom: 8px;
 }
