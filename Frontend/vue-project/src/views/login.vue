@@ -1,170 +1,208 @@
 <template>
-    <div class="centered-form">
-      <div class="form-container">
-        <form class="form" @submit.prevent="submitForm">
-          <p class="form-title">Login</p>
-          <div class="input-container">
-            <input type="text" placeholder="Enter Username" v-model="formData.username" />
-          </div>
-          <div class="input-container">
-            <input type="password" placeholder="Enter Password" autocomplete="new-password" v-model="formData.password" />
-          </div>
-          <button type="submit" class="submit">Login</button>
-        </form>
-      </div>
+  <div class="centered-form">
+    <div class="form-container">
+      <form class="form" @submit.prevent="submitForm">
+        <p class="form-title">Login</p>
+        <div class="input-container">
+          <input
+            type="text"
+            placeholder="Enter Username"
+            v-model="formData.username"
+            class="data-input"
+          />
+        </div>
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="Enter Password"
+            autocomplete="new-password"
+            v-model="formData.password"
+            class="data-input"
+          />
+        </div>
+        <button type="submit" class="submit">Login</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        formData: {
-          username: '',
-          password: ''
-        }
-      };
-    },
+  </div>
+</template>
 
-    methods: {
-      submitForm() {
-        axios.post('http://localhost:8080/login', {
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      formData: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+
+  methods: {
+    submitForm() {
+      axios
+        .post("http://localhost:8080/login", {
           username: this.formData.username,
-          password: this.formData.password
+          password: this.formData.password,
         })
-        .then(response => {
+        .then((response) => {
           if (response.data.status === true && response.data.data.length > 0) {
             const userData = response.data.data[0];
             if (userData.token) {
-
               this.setToken(userData.token);
               this.setRole_id(userData.role_id);
               this.setDesa_id(userData.desa_id);
               this.setRole_pengguna(userData.role_pengguna);
               this.setID_pengguna(userData.id_pengguna);
-              localStorage.setItem('isLoggedIn', 'true')
+              localStorage.setItem("isLoggedIn", "true");
 
-              window.location.reload()
+              window.location.reload();
             } else {
-              alert('Token not found in response.'); 
+              alert("Token not found in response.");
             }
           } else {
-            alert('Login failed. Invalid credentials.'); 
+            alert("Login failed. Invalid credentials.");
           }
         })
-        .catch(error => {
-          console.error('Error occurred while logging in:', error);
-          alert('Login failed! Please try again.'); 
+        .catch((error) => {
+          console.error("Error occurred while logging in:", error);
+          alert("Login failed! Please try again.");
         });
-      },
-      setToken(token) {
-        localStorage.setItem('token', token);
-      },
-      setRole_id(role_id) {
-        localStorage.setItem('role_id', role_id);
-      },
-      setDesa_id(desa_id) {
-        localStorage.setItem('desa_id', desa_id);
-      },
-      setRole_pengguna(role_pengguna) {
-        localStorage.setItem('role_pengguna', role_pengguna);
-      },
-      setID_pengguna(id_pengguna) {
-        localStorage.setItem('id_pengguna', id_pengguna);
-      },
-    }
-  };
-  </script>
-  
+    },
+    setToken(token) {
+      localStorage.setItem("token", token);
+    },
+    setRole_id(role_id) {
+      localStorage.setItem("role_id", role_id);
+    },
+    setDesa_id(desa_id) {
+      localStorage.setItem("desa_id", desa_id);
+    },
+    setRole_pengguna(role_pengguna) {
+      localStorage.setItem("role_pengguna", role_pengguna);
+    },
+    setID_pengguna(id_pengguna) {
+      localStorage.setItem("id_pengguna", id_pengguna);
+    },
+  },
+};
+</script>
+
 <style scoped>
 .form {
-    background-color: #fff;
-    display: block;
-    padding: 1rem;
-    max-width: 350px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  display: block;
+  padding: 1rem;
+  max-width: 350px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .template {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .centered-form {
-    text-align: center;
-    margin: 6%;
+  text-align: center;
+  margin: 6%;
+  overflow-x: hidden;
 }
-
 .form-container {
-    display: inline-block;
-    background-color: #fff;
-    max-width: 350px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  background-color: #fff;
+  max-width: 350px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .form-title {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    text-align: center;
-    color: #000;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
 }
 
 .input-container {
-    position: relative;
+  position: relative;
 }
 
 .input-container input,
 .form button {
-    outline: none;
-    border: 1px solid #e5e7eb;
-    margin: 8px 0;
+  outline: none;
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
 }
 
 .input-container input {
+  background-color: #fff;
+  padding: 1rem;
+  padding-right: 3rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 300px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submit {
+  display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: #003366;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+.signup-link {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.signup-link a {
+  text-decoration: underline;
+}
+
+@media (max-width: 425px) {
+  .centered-form {
+    text-align: center;
+    padding-top: 20px;
+    overflow-x: hidden;
+  }
+
+  .form-container {
+    width: 250px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .input-container input {
     background-color: #fff;
     padding: 1rem;
     padding-right: 3rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    width: 300px;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.submit {
-    display: block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    background-color: #003366;
-    color: #ffffff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
     width: 100%;
     border-radius: 0.5rem;
-    text-transform: uppercase;
-}
-
-.signup-link {
-    color: #6b7280;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    text-align: center;
-}
-
-.signup-link a {
-    text-decoration: underline;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
 }
 </style>

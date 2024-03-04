@@ -1,27 +1,26 @@
 <template>
-  <div>
-    <Navbar class="navbar-z" />
-  </div>
+  <div class="parent">
+    <div
+      :style="{
+        height: 'fit-content',
+      }"
+    >
+      <Navbar class="navbar-z" />
+    </div>
 
-  <div
-    class="main"
-    :style="{
-      backgroundColor: '#EEF1F3',
-      marginLeft: posisi !== 0 ? '268px' : '0',
-      paddingBottom: posisi !== 0 ? '15%' : '15%',
-      width: '100%',
-    }"
-  >
-    <RouterView />
-  </div>
+    <div
+      class="main"
+      :style="{
+        backgroundColor: '#EEF1F3',
+        marginLeft: posisi !== 0 ? '268px' : '0',
+        height: '100%',
+        paddingBottom: '40px',
+        flexGrow: 1,
+      }"
+    >
+      <RouterView />
+    </div>
 
-  <div
-    class="kaki"
-    :style="{
-      backgroundColor: '#EEF1F3',
-      marginLeft: posisi !== 0 ? '260px' : '0',
-    }"
-  >
     <footerComponent />
   </div>
 </template>
@@ -62,6 +61,14 @@ export default {
 </script>
 
 <style>
+.parent {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
 /* admin */
 .custom-icon {
   width: 18px;
